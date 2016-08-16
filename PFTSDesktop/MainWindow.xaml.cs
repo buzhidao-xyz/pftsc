@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PFTSModel;
 
-namespace pftsc_desktop
+namespace PFTSDesktop
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -23,6 +24,24 @@ namespace pftsc_desktop
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var service = new Service<Officer>();
+            var officer = new Officer();
+            officer.name = "警官陈";
+            officer.no = "J009231";
+            officer.sex = "男";
+            var b = service.Insert(officer);
+            if (b)
+            {
+                MessageBox.Show("插入成功");
+            }
+            else
+            {
+                MessageBox.Show("插入失败");
+            }
         }
     }
 }

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="PFTSDb">
+  <DataContextMoniker Name="/PFTSDbDataContext" />
+  <nestedChildShapes>
+    <classShape Id="c0e52a67-5362-44cd-8317-c105386745c8" absoluteBounds="0.75, 0.75, 2, 1.9068933105468751">
+      <DataClassMoniker Name="/PFTSDbDataContext/Officer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ed06868d-1e17-46a9-8697-1d94d857074c" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a0323907-a543-486d-8bec-c6931d9fa7e3" absoluteBounds="3.75, 0.75, 2, 1.7220992024739581">
+      <DataClassMoniker Name="/PFTSDbDataContext/Operator" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c6caea33-fb31-43ae-8dd2-3bcf5c823645" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pftsc-desktop", "pftsc-desktop\pftsc-desktop.csproj", "{EAC1FC54-4FFD-4ED7-8B54-0A1ADAD664BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFTSDesktop", "PFTSDesktop\PFTSDesktop.csproj", "{AA233852-7600-429C-84C6-2F70CB171ADB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFTSModel", "PFTSModel\PFTSModel.csproj", "{EC79570A-25A6-4BCB-A828-CE04B0269919}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EAC1FC54-4FFD-4ED7-8B54-0A1ADAD664BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAC1FC54-4FFD-4ED7-8B54-0A1ADAD664BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAC1FC54-4FFD-4ED7-8B54-0A1ADAD664BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAC1FC54-4FFD-4ED7-8B54-0A1ADAD664BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA233852-7600-429C-84C6-2F70CB171ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA233852-7600-429C-84C6-2F70CB171ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA233852-7600-429C-84C6-2F70CB171ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA233852-7600-429C-84C6-2F70CB171ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC79570A-25A6-4BCB-A828-CE04B0269919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC79570A-25A6-4BCB-A828-CE04B0269919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC79570A-25A6-4BCB-A828-CE04B0269919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC79570A-25A6-4BCB-A828-CE04B0269919}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

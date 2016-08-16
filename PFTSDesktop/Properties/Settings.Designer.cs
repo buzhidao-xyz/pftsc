@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace pftsc_desktop.Properties
+namespace PFTSDesktop.Properties
 {
 
 
