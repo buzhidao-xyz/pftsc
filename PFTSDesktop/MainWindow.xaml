@@ -1,9 +1,97 @@
-﻿<Window x:Class="PFTSDesktop.MainWindow"
+﻿<tmp:WindowTemplet x:Class="PFTSDesktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:tmp="clr-namespace:PftcsUITemplate.Controls;assembly=PftcsUITemplate"
+        MouseDoubleClick="MainWindow_OnMouseDoubleClick"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" BorderBrush="{DynamicResource windowStyle}" BorderThickness="1"
+        MinHeight="670" MinWidth="950" Height="670" Width="950"
+        MoveHeight="80">
     <Grid>
-        <Button Content="test&#xD;&#xA;" HorizontalAlignment="Left" Margin="160,97,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24" />
+            <RowDefinition Height="56" />
+            <RowDefinition/>
+            <RowDefinition Height="27"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="gridTitleBar" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+            <Label  Grid.Column="0"  Name="TilteName" Width="120" HorizontalAlignment="Left" Content="涉案人员管理系统" FontFamily="宋体" Foreground="AliceBlue" Margin="5,0,0,0"/>
+           
+            <tmp:ButtonTemplet  Grid.Column="2" x:Name="btnMin" IsTabStop="False" VerticalAlignment="Top" Width="27" Height="22" Click="btnSysMin_Click">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mim.png"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+                <tmp:ButtonTemplet.MyEnterBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mie.png"/>
+                </tmp:ButtonTemplet.MyEnterBrush>
+                <tmp:ButtonTemplet.Background>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/min.png"/>
+                </tmp:ButtonTemplet.Background>
+            </tmp:ButtonTemplet>
 
+            <tmp:ButtonTemplet  Grid.Column="3" x:Name="btnNomalMax" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxm.png"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+                <tmp:ButtonTemplet.MyEnterBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxe.png"/>
+                </tmp:ButtonTemplet.MyEnterBrush>
+                <tmp:ButtonTemplet.Background>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxn.png"/>
+                </tmp:ButtonTemplet.Background>
+            </tmp:ButtonTemplet>
+            <tmp:ButtonTemplet  Grid.Column="3" x:Name="btnMax" Visibility="Hidden" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/maa.png"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+                <tmp:ButtonTemplet.MyEnterBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxx.png"/>
+                </tmp:ButtonTemplet.MyEnterBrush>
+                <tmp:ButtonTemplet.Background>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/max.png"/>
+                </tmp:ButtonTemplet.Background>
+            </tmp:ButtonTemplet>
+            <tmp:ButtonTemplet  Grid.Column="4" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysExit_Click">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xm.png" />
+                </tmp:ButtonTemplet.MyMoverBrush>
+                <tmp:ButtonTemplet.MyEnterBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xe.png"/>
+                </tmp:ButtonTemplet.MyEnterBrush>
+                <tmp:ButtonTemplet.Background>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xn.png"/>
+                </tmp:ButtonTemplet.Background>
+            </tmp:ButtonTemplet>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Background="#f7f7f7">
+                <tmp:FButton FIcon="&#xe60e;" SelectEd="True" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">实时监控</tmp:FButton>
+                <Rectangle Height="1" Margin="5,0,5,0"  HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
+                <tmp:FButton FIcon="&#xe60e;" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">嫌疑人管理</tmp:FButton>
+                <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
+                <tmp:FButton FIcon="&#xe60e;" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">警员管理</tmp:FButton>
+                <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
+                <tmp:FButton FIcon="&#xe60e;" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">设备管理</tmp:FButton>
+                <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
+                <tmp:FButton FIcon="&#xe60e;" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">操作员管理</tmp:FButton>
+                <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
-</Window>
+</tmp:WindowTemplet>

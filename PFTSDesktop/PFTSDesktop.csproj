@@ -94,10 +94,38 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\PftcsUITemplate\PftcsUITemplate.csproj">
+      <Project>{9e33c2ae-36d8-4022-bf77-ff6f012c9852}</Project>
+      <Name>PftcsUITemplate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PFTSModel\PFTSModel.csproj">
       <Project>{ec79570a-25a6-4bcb-a828-ce04b0269919}</Project>
       <Name>PFTSModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\backGround.png" />
+    <Resource Include="Images\Button\maa.png" />
+    <Resource Include="Images\Button\max.png" />
+    <Resource Include="Images\Button\mie.png" />
+    <Resource Include="Images\Button\mim.png" />
+    <Resource Include="Images\Button\min.png" />
+    <Resource Include="Images\Button\mme.png" />
+    <Resource Include="Images\Button\mmm.png" />
+    <Resource Include="Images\Button\mmn.png" />
+    <Resource Include="Images\Button\mse.png" />
+    <Resource Include="Images\Button\msm.png" />
+    <Resource Include="Images\Button\msn.png" />
+    <Resource Include="Images\Button\mxe.png" />
+    <Resource Include="Images\Button\mxm.png" />
+    <Resource Include="Images\Button\mxn.png" />
+    <Resource Include="Images\Button\mxx.png" />
+    <Resource Include="Images\Button\ske.png" />
+    <Resource Include="Images\Button\skm.png" />
+    <Resource Include="Images\Button\skn.png" />
+    <Resource Include="Images\Button\xe.png" />
+    <Resource Include="Images\Button\xm.png" />
+    <Resource Include="Images\Button\xn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
