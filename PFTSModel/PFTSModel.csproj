@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OperatorService.cs" />
     <Compile Include="PFTSDb.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
