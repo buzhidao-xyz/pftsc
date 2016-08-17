@@ -53,6 +53,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\WorkspaceViewModel.cs" />
+    <Compile Include="View\Pages\DeviceManagerPage.xaml.cs">
+      <DependentUpon>DeviceManagerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\MonitoringPage.xaml.cs">
+      <DependentUpon>MonitoringPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\OperatorManangerPage.xaml.cs">
+      <DependentUpon>OperatorManangerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\PoliceManagerPage.xaml.cs">
+      <DependentUpon>PoliceManagerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\SuspectManagerPage.xaml.cs">
+      <DependentUpon>SuspectManagerPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -61,10 +79,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Pages\DeviceManagerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\MonitoringPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\OperatorManangerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\PoliceManagerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\SuspectManagerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -126,6 +165,9 @@
     <Resource Include="Images\Button\xe.png" />
     <Resource Include="Images\Button\xm.png" />
     <Resource Include="Images\Button\xn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

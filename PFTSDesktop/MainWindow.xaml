@@ -5,8 +5,13 @@
         MouseDoubleClick="MainWindow_OnMouseDoubleClick"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" BorderBrush="{DynamicResource windowStyle}" BorderThickness="1"
-        MinHeight="670" MinWidth="950" Height="670" Width="950"
+        MinHeight="670" MinWidth="950" Height="670" Width="950" x:Name="main"
         MoveHeight="80">
+    <Window.Resources>
+        <Style TargetType="{x:Type tmp:FButton}" BasedOn="{StaticResource FButton_Transparency}">
+            <Setter Property="Command" Value="{Binding OpenCommand,ElementName=main}"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24" />
@@ -59,7 +64,7 @@
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/max.png"/>
                 </tmp:ButtonTemplet.Background>
             </tmp:ButtonTemplet>
-            <tmp:ButtonTemplet  Grid.Column="4" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysExit_Click">
+            <tmp:ButtonTemplet  Grid.Column="4" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Command="{Binding Path=CloseCommand}">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xm.png" />
                 </tmp:ButtonTemplet.MyMoverBrush>
@@ -81,17 +86,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical" Background="#f7f7f7">
-                <tmp:FButton FIcon="&#xe60e;" SelectEd="True" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">实时监控</tmp:FButton>
+                <tmp:FButton Name="btnMonitoring" FIcon="&#xe60e;" Tag="View/Pages/MonitoringPage.xaml" SelectEd="True" Margin="13" HorizontalAlignment="Left">实时监控</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0"  HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton FIcon="&#xe60e;" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">嫌疑人管理</tmp:FButton>
+                <tmp:FButton FIcon="&#xe60e;" Tag="View/Pages/SuspectManagerPage.xaml" Margin="13" HorizontalAlignment="Left">嫌疑人管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton FIcon="&#xe60e;" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">警员管理</tmp:FButton>
+                <tmp:FButton FIcon="&#xe60e;" Tag="View/Pages/PoliceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">警员管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton FIcon="&#xe60e;" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">设备管理</tmp:FButton>
+                <tmp:FButton FIcon="&#xe60e;" Tag="View/Pages/DeviceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">设备管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton FIcon="&#xe60e;" Margin="13" Style="{StaticResource FButton_Transparency}" HorizontalAlignment="Left">操作员管理</tmp:FButton>
+                <tmp:FButton FIcon="&#xe60e;" Tag="View/Pages/OperatorManangerPage.xaml" Margin="13" HorizontalAlignment="Left">操作员管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
             </StackPanel>
+            <Frame Background="White" x:Name="PageContext" Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" NavigationUIVisibility="Visible"/>
         </Grid>
     </Grid>
 </tmp:WindowTemplet>

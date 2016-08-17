@@ -22,9 +22,34 @@ namespace PFTSDesktop
     /// </summary>
     public partial class MainWindow : WindowTemplet
     {
+        private FButton preBtn;
+        public static readonly DependencyProperty OpenCommandProperty =
+    DependencyProperty.Register("OpenCommand", typeof(RoutedCommand), typeof(MainWindow), new PropertyMetadata(null));
+
+        public RoutedCommand OpenCommand
+        {
+            get { return (RoutedCommand)GetValue(OpenCommandProperty); }
+            set { SetValue(OpenCommandProperty, value); }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            this.OpenCommand = new RoutedCommand();
+            var bin = new CommandBinding(this.OpenCommand);
+            bin.Executed += bin_Executed;
+            this.CommandBindings.Add(bin);
+
+            this.PageContext.Source = new Uri(btnMonitoring.Tag.ToString(), UriKind.Relative);
+            preBtn = btnMonitoring;
+        }
+        void bin_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var btn = e.Source as FButton;
+            this.PageContext.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            preBtn.SelectEd = false;
+            preBtn = btn;
+            btn.SelectEd = true;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -86,16 +111,6 @@ namespace PFTSDesktop
         private void btnSysMin_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
-        }
-
-        /// <summary>
-        /// 关闭当前程序
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnSysExit_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Application.Current.Shutdown();
         }
 
         /// <summary>
