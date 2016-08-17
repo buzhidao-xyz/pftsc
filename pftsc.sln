@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFTSModel", "PFTSModel\PFTS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFTSHwCtrl", "PFTSHwCtrl\PFTSHwCtrl.csproj", "{E1A1497F-CA0E-425C-8CF9-34F05CCCD231}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFTSUITemplate", "PFTSUITemplate\PFTSUITemplate.csproj", "{9E33C2AE-36D8-4022-BF77-FF6F012C9852}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E1A1497F-CA0E-425C-8CF9-34F05CCCD231}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1A1497F-CA0E-425C-8CF9-34F05CCCD231}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1A1497F-CA0E-425C-8CF9-34F05CCCD231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E33C2AE-36D8-4022-BF77-FF6F012C9852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E33C2AE-36D8-4022-BF77-FF6F012C9852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E33C2AE-36D8-4022-BF77-FF6F012C9852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E33C2AE-36D8-4022-BF77-FF6F012C9852}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

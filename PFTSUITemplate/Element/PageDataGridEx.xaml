@@ -1,0 +1,70 @@
+﻿<tmp:PagingDataGrid x:Class="PFTSUITemplate.Element.PageDataGridEx"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tmp="clr-namespace:PFTSUITemplate.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             GridLinesVisibility="Horizontal"
+             IsReadOnly="True" AutoGenerateColumns="False"
+             ItemsSource="{Binding DataSourceList,ElementName=self}" 
+             Total="{Binding DataSourceCount,ElementName=self}"
+             PagingChanged="PagingDataGrid_PagingChanged" CellStyle="{DynamicResource DataGridCellstyle}">
+    <tmp:PagingDataGrid.ColumnHeaderStyle>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridColumnHeader">
+                        <Grid Name="Root">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle x:Name="BackgroundRectangle" Stretch="Fill" Grid.ColumnSpan="3" Grid.RowSpan="3"  >
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="{DynamicResource CloumnUpColor}" Offset="0.5"/>
+                                        <GradientStop Color="{DynamicResource CloumnDownColor}" Offset="1"/>
+                          </LinearGradientBrush>
+                                </Rectangle.Fill>
+                                </Rectangle>
+                            <ContentPresenter x:Name="HeaderText" Grid.RowSpan="2" Grid.Column="1"       Content="{TemplateBinding Content}"      HorizontalAlignment="Center"       VerticalAlignment="Center" />
+                            <Rectangle Name="VerticalSeparator" Grid.RowSpan="2"      Grid.Column="2" Width="1" VerticalAlignment="Stretch"  >
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="{DynamicResource LineColor}" Offset="0.5"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                                </Rectangle>
+                            <!--这里的Fill就可以设置分隔线的颜色-->
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#827e7e"/>
+            <Setter Property="FontFamily" Value="黑体"></Setter>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        </Style>
+    </tmp:PagingDataGrid.ColumnHeaderStyle>
+    <tmp:PagingDataGrid.RowStyle>
+        <Style TargetType="DataGridRow">
+            <Setter Property="Height" Value="28"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#efefef"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </tmp:PagingDataGrid.RowStyle>   
+</tmp:PagingDataGrid>

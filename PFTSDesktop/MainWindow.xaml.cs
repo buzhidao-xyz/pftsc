@@ -13,133 +13,111 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PFTSModel;
+using PFTSUITemplate.Controls;
 
 namespace PFTSDesktop
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : WindowTemplet
     {
-        //private bool m_bInitSDK = false;
-        //private string m_dvrIPAddress = "192.168.10.164";
-        //private Int16 m_dvrPortNumber = 8000;
-        //private string m_dvrUserName = "admin";
-        //private string m_dvrPassword = "Gt123456";
-        //// >0 登录
-        //private Int32 m_lUserID = -1;
-        //// >0 获取实时画面
-        //private Int32 m_lRealHandle = -1;
-
-        //private uint iLastErr = 0;
-        //private uint dwAChanTotalNum = 0;
-        //private uint dwDChanTotalNum = 0;
-        //public CHCNetSDK.NET_DVR_DEVICEINFO_V30 DeviceInfo;
         public MainWindow()
         {
             InitializeComponent();
-            //try
-            //{
-            //    m_bInitSDK = CHCNetSDK.NET_DVR_Init();
-            //    if (m_bInitSDK == false)
-            //    {
-            //        MessageBox.Show("NET_DVR_Init error!");
-            //        return;
-            //    }
-            //    else
-            //    {
-            //        //保存SDK日志 To save the SDK log
-            //        //CHCNetSDK.NET_DVR_SetLogToFile(3, "C:\\SdkLog\\", true);
-            //        login();
-            //        if (m_lUserID >= 0)
-            //        {
-            //            preview();
-            //        }
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    MessageBox.Show(e.Message);
-            //}
         }
 
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var service = new Service<Officer>();
-        //    var officer = new Officer();
-        //    officer.name = "警官陈";
-        //    officer.no = "J009231";
-        //    officer.sex = "男";
-        //    var b = service.Insert(officer);
-        //    if (b)
-        //    {
-        //        MessageBox.Show("插入成功");
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("插入失败");
-        //    }
-        //}
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var service = new Service<Officer>();
+            var officer = new Officer();
+            officer.name = "警官陈";
+            officer.no = "J009231";
+            officer.sex = "男";
+            var b = service.Insert(officer);
+            if (b)
+            {
+                MessageBox.Show("插入成功");
+            }
+            else
+            {
+                MessageBox.Show("插入失败");
+            }
+        }
 
-        //private void login()
-        //{
-        //    //登录设备 Login the device
-        //    m_lUserID = CHCNetSDK.NET_DVR_Login_V30(m_dvrIPAddress, m_dvrPortNumber, m_dvrUserName, m_dvrPassword, ref DeviceInfo);
-        //    if (m_lUserID < 0)
-        //    {
-        //        iLastErr = CHCNetSDK.NET_DVR_GetLastError();
-        //        string str = "NET_DVR_Login_V30 failed, error code= " + iLastErr; //登录失败，输出错误号 Failed to login and output the error code
-        //        MessageBox.Show(str);
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        //登录成功
-        //        dwAChanTotalNum = (uint)DeviceInfo.byChanNum;
-        //        dwDChanTotalNum = (uint)DeviceInfo.byIPChanNum + 256 * (uint)DeviceInfo.byHighDChanNum;
-        //    }
-        //    return;
-        //}
+        private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != MouseButton.Left) return;
+            if (this.ResizeMode == ResizeMode.NoResize) return;
 
-        //private void preview()
-        //{
-        //    if (m_lRealHandle < 0)
-        //    {
-        //        CHCNetSDK.NET_DVR_PREVIEWINFO lpPreviewInfo = new CHCNetSDK.NET_DVR_PREVIEWINFO();
-        //        lpPreviewInfo.hPlayWnd = realPlayWnd.Handle; //    RealPlayWnd.Handle;//预览窗口 live view window
-        //        lpPreviewInfo.lChannel = (int)DeviceInfo.byStartChan;//预览的设备通道 the device channel number
-        //        lpPreviewInfo.dwStreamType = 0;//码流类型：0-主码流，1-子码流，2-码流3，3-码流4，以此类推
-        //        lpPreviewInfo.dwLinkMode = 0;//连接方式：0- TCP方式，1- UDP方式，2- 多播方式，3- RTP方式，4-RTP/RTSP，5-RSTP/HTTP 
-        //        lpPreviewInfo.bBlocked = true; //0- 非阻塞取流，1- 阻塞取流
-        //        lpPreviewInfo.dwDisplayBufNum = 15; //播放库显示缓冲区最大帧数
+            //判断点击的控件不是Grid类型，就可以双击
+            if (!(e.OriginalSource is System.Windows.Controls.Image))
+            {
+                return;
+            }
 
-        //        IntPtr pUser = IntPtr.Zero;//用户数据 user data 
 
-        //        //if (comboBoxView.SelectedIndex == 0)
-        //        //{
-        //        //打开预览 Start live view 
-        //        m_lRealHandle = CHCNetSDK.NET_DVR_RealPlay_V40(m_lUserID, ref lpPreviewInfo, null/*RealData*/, pUser);
-        //        //}
-        //        //else
-        //        //{
-        //        //    lpPreviewInfo.hPlayWnd = IntPtr.Zero;//预览窗口 live view window
-        //        //    m_ptrRealHandle = RealPlayWnd.Handle;
-        //        //    RealData = new CHCNetSDK.REALDATACALLBACK(RealDataCallBack);//预览实时流回调函数 real-time stream callback function 
-        //        //    m_lRealHandle = CHCNetSDK.NET_DVR_RealPlay_V40(m_lUserID, ref lpPreviewInfo, RealData, pUser);
-        //        //}
+            IInputElement feSource = e.MouseDevice.DirectlyOver;
 
-        //        if (m_lRealHandle < 0)
-        //        {
-        //            iLastErr = CHCNetSDK.NET_DVR_GetLastError();
-        //            string str = "NET_DVR_RealPlay_V40 failed, error code= " + iLastErr; //预览失败，输出错误号 failed to start live view, and output the error code.
-        //            MessageBox.Show(str);
-        //            return;
-        //        }
-        //        else
-        //        {
-        //            //预览成功
-        //        }
-        //    }
-        //}
+
+            Point pt = e.MouseDevice.GetPosition(this);
+            if (pt.Y < MoveHeight)
+            {
+                if (this.WindowState == WindowState.Normal)
+                {
+                    this.WindowState = WindowState.Maximized;
+                    this.btnNomalMax.Visibility = Visibility.Hidden;
+                    this.btnMax.Visibility = Visibility.Visible;
+                }
+                else if (this.WindowState == WindowState.Maximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.btnNomalMax.Visibility = Visibility.Visible;
+                    this.btnMax.Visibility = Visibility.Hidden;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 窗口最小化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSysMin_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        /// <summary>
+        /// 关闭当前程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSysExit_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// 窗口最大化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSysMax_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Normal)
+            {
+                this.WindowState = WindowState.Maximized;
+                this.btnNomalMax.Visibility = Visibility.Hidden;
+                this.btnMax.Visibility = Visibility.Visible;
+            }
+            else if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+                this.btnNomalMax.Visibility = Visibility.Visible;
+                this.btnMax.Visibility = Visibility.Hidden;
+            }
+
+        }
     }
 }
