@@ -53,6 +53,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Video.xaml.cs">
+      <DependentUpon>Video.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
@@ -84,6 +87,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Video.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Pages\DeviceManagerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,6 +130,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="lib\HCNetSDKCom\HCAlarm.lib" />
+    <None Include="lib\HCNetSDKCom\HCGeneralCfgMgr.lib" />
+    <None Include="lib\HCNetSDKCom\HCPreview.lib" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -133,13 +143,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PftcsUITemplate\PftcsUITemplate.csproj">
-      <Project>{9e33c2ae-36d8-4022-bf77-ff6f012c9852}</Project>
-      <Name>PftcsUITemplate</Name>
+    <ProjectReference Include="..\PFTSHwCtrl\PFTSHwCtrl.csproj">
+      <Project>{e1a1497f-ca0e-425c-8cf9-34f05cccd231}</Project>
+      <Name>PFTSHwCtrl</Name>
     </ProjectReference>
     <ProjectReference Include="..\PFTSModel\PFTSModel.csproj">
       <Project>{ec79570a-25a6-4bcb-a828-ce04b0269919}</Project>
       <Name>PFTSModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PFTSUITemplate\PFTSUITemplate.csproj">
+      <Project>{9e33c2ae-36d8-4022-bf77-ff6f012c9852}</Project>
+      <Name>PFTSUITemplate</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +183,38 @@
   <ItemGroup>
     <Folder Include="Model\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\AudioRender.dll" />
+    <Content Include="lib\HCCore.dll" />
+    <Content Include="lib\HCNetSDK.dll" />
+    <Content Include="lib\HCNetSDKCom\AnalyzeData.dll" />
+    <Content Include="lib\HCNetSDKCom\AudioIntercom.dll" />
+    <Content Include="lib\HCNetSDKCom\DsSdk.dll" />
+    <Content Include="lib\HCNetSDKCom\HCAlarm.dll" />
+    <Content Include="lib\HCNetSDKCom\HCCoreDevCfg.dll" />
+    <Content Include="lib\HCNetSDKCom\HCDisplay.dll" />
+    <Content Include="lib\HCNetSDKCom\HCGeneralCfgMgr.dll" />
+    <Content Include="lib\HCNetSDKCom\HCIndustry.dll" />
+    <Content Include="lib\HCNetSDKCom\HCPlayBack.dll" />
+    <Content Include="lib\HCNetSDKCom\HCPreview.dll" />
+    <Content Include="lib\HCNetSDKCom\HCVoiceTalk.dll" />
+    <Content Include="lib\HCNetSDKCom\libiconv2.dll" />
+    <Content Include="lib\HCNetSDKCom\msvcr90.dll" />
+    <Content Include="lib\HCNetSDKCom\OpenAL32.dll" />
+    <Content Include="lib\HCNetSDKCom\StreamTransClient.dll" />
+    <Content Include="lib\HCNetSDKCom\SystemTransform.dll" />
+    <Content Include="lib\PlayCtrl.dll" />
+    <Content Include="lib\SuperRender.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
+rd/s/q "$(ProjectDir)$(OutDir)\HCNetSDKCom"
+mkdir "$(ProjectDir)$(OutDir)\HCNetSDKCom"
+
+copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
+copy "$(ProjectDir)lib\HCNetSDKCom\*" "$(ProjectDir)$(OutDir)\HCNetSDKCom"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,122 +1,146 @@
 ﻿<Application x:Class="PFTSDesktop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             >
+             StartupUri="Video.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/PftcsUITemplate;component/Style/Colors.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/PftcsUITemplate;component/Themes/FButton.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Style/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/FButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush  x:Key="windowStyle" Color="#17b38e"></SolidColorBrush>
-            <Style TargetType="TextBlock" x:Key="dataGridStyle">
-                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <SolidColorBrush x:Key="windowStyle" Color="#17b38e" />
+            <Style x:Key="dataGridStyle" TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
-            <Style TargetType="CheckBox" x:Key="dataGridComStyle">
-                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Style x:Key="dataGridComStyle" TargetType="CheckBox">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="lableProStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="黑体" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Foreground" Value="#e77615" />
+            </Style>
+            <Style x:Key="lableNameStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="黑体" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="Foreground" Value="#827e7e" />
+            </Style>
+            <Style x:Key="checkBoxStyle" TargetType="CheckBox">
+                <Setter Property="FontFamily" Value="黑体" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="Foreground" Value="#827e7e" />
             </Style>
 
-            <Style TargetType="Label" x:Key="lableProStyle">
-                <Setter Property="FontFamily" Value="黑体"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
-                <Setter Property="Foreground" Value="#e77615"></Setter>
-            </Style>
-            <Style TargetType="Label" x:Key="lableNameStyle">
-                <Setter Property="FontFamily" Value="黑体"></Setter>
-                <Setter Property="FontSize" Value="13"></Setter>
-                <Setter Property="Foreground" Value="#827e7e"></Setter>
-            </Style>
-            <Style TargetType="CheckBox" x:Key="checkBoxStyle">
-                <Setter Property="FontFamily" Value="黑体"></Setter>
-                <Setter Property="FontSize" Value="13"></Setter>
-                <Setter Property="Foreground" Value="#827e7e"></Setter>
-            </Style>
 
-
-            <Style TargetType="DatePicker" x:Key="dateStyle">
-                <Setter Property="BorderBrush" Value="#7debd2"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
-                <Setter Property="Foreground" Value="#17b38e"></Setter>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style x:Key="dateStyle" TargetType="DatePicker">
+                <Setter Property="BorderBrush" Value="#7debd2" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Foreground" Value="#17b38e" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
-            <Style TargetType="ComboBox" x:Key="comboxStyle">
-                <Setter Property="BorderBrush" Value="#7debd2"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
-                <Setter Property="Foreground" Value="#17b38e"></Setter>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style x:Key="comboxStyle" TargetType="ComboBox">
+                <Setter Property="BorderBrush" Value="#7debd2" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Foreground" Value="#17b38e" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
-            <Style TargetType="CheckBox" x:Key="ckStyle">
-                <Setter Property="BorderBrush" Value="#0aa783"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
-                <Setter Property="Foreground" Value="#17b38e"></Setter>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style x:Key="ckStyle" TargetType="CheckBox">
+                <Setter Property="BorderBrush" Value="#0aa783" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Foreground" Value="#17b38e" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
-            <Style TargetType="PasswordBox" x:Key="pwdStyle">
-                <Setter Property="BorderBrush" Value="#7debd2"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
-                <Setter Property="Foreground" Value="#17b38e"></Setter>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style x:Key="pwdStyle" TargetType="PasswordBox">
+                <Setter Property="BorderBrush" Value="#7debd2" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Foreground" Value="#17b38e" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
             <Style x:Key="ButtonControlTemplate" TargetType="{x:Type Button}">
-                <Setter Property="Foreground" Value="White"/>
-                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="Control.Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <ControlTemplate.Resources>
                                 <Storyboard x:Key="Storyboard1">
-                                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="glow" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                        <SplineDoubleKeyFrame KeyTime="00:00:00.0000000" Value="1"/>
+                                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                   Storyboard.TargetName="glow"
+                                                                   Storyboard.TargetProperty="(UIElement.Opacity)">
+                                        <SplineDoubleKeyFrame KeyTime="00:00:00.0000000" Value="1" />
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
                                 <Storyboard x:Key="Storyboard2">
-                                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="glow" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                        <SplineDoubleKeyFrame KeyTime="00:00:00.0000000" Value="0"/>
+                                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                   Storyboard.TargetName="glow"
+                                                                   Storyboard.TargetProperty="(UIElement.Opacity)">
+                                        <SplineDoubleKeyFrame KeyTime="00:00:00.0000000" Value="0" />
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
 
                             </ControlTemplate.Resources>
 
                             <Grid>
-                                <Border BorderBrush="White" BorderThickness="1" CornerRadius="8">
-                                    <Border x:Name="border" Background="#0aa783" BorderBrush="#0aa783" BorderThickness="1" CornerRadius="8">
+                                <Border BorderBrush="White"
+                                        BorderThickness="1"
+                                        CornerRadius="8">
+                                    <Border x:Name="border"
+                                            Background="#0aa783"
+                                            BorderBrush="#0aa783"
+                                            BorderThickness="1"
+                                            CornerRadius="8">
                                         <Grid Margin="-1,-1,-1,0">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="0.495*"/>
-                                                <RowDefinition Height="0.505*"/>
+                                                <RowDefinition Height="0.495*" />
+                                                <RowDefinition Height="0.505*" />
                                             </Grid.RowDefinitions>
-                                            <Border x:Name="glow" BorderBrush="{x:Null}" Margin="0" BorderThickness="1" CornerRadius="8" Grid.RowSpan="2" Opacity="0">
+                                            <Border x:Name="glow"
+                                                    Grid.RowSpan="2"
+                                                    Margin="0"
+                                                    BorderBrush="{x:Null}"
+                                                    BorderThickness="1"
+                                                    CornerRadius="8"
+                                                    Opacity="0">
                                                 <Border.Background>
                                                     <RadialGradientBrush Center="0.485,1.053" GradientOrigin="0.485,1.053" RadiusX="0.818" RadiusY="1.214">
                                                         <RadialGradientBrush.RelativeTransform>
                                                             <TransformGroup>
-                                                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="0.95"/>
-                                                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                                                <RotateTransform CenterX="0.5" CenterY="0.5"/>
-                                                                <TranslateTransform/>
+                                                                <ScaleTransform CenterX="0.5"
+                                                                                CenterY="0.5"
+                                                                                ScaleX="0.95" />
+                                                                <SkewTransform CenterX="0.5" CenterY="0.5" />
+                                                                <RotateTransform CenterX="0.5" CenterY="0.5" />
+                                                                <TranslateTransform />
                                                             </TransformGroup>
                                                         </RadialGradientBrush.RelativeTransform>
-                                                        <GradientStop Color="#CC15F9B3" Offset="0.003"/>
-                                                        <GradientStop Color="#0021F2EC" Offset="1"/>
+                                                        <GradientStop Offset="0.003" Color="#CC15F9B3" />
+                                                        <GradientStop Offset="1" Color="#0021F2EC" />
                                                     </RadialGradientBrush>
                                                 </Border.Background>
                                             </Border>
-                                            <ContentPresenter HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Grid.RowSpan="2"/>
-                                            <Border x:Name="shine" BorderBrush="{x:Null}" BorderThickness="1" CornerRadius="5,5,0,0" Margin="0,-0.667,0,0.667">
+                                            <ContentPresenter Grid.RowSpan="2"
+                                                              Margin="0"
+                                                              HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                            <Border x:Name="shine"
+                                                    Margin="0,-0.667,0,0.667"
+                                                    BorderBrush="{x:Null}"
+                                                    BorderThickness="1"
+                                                    CornerRadius="5,5,0,0">
                                                 <Border.Background>
-                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                                                         <LinearGradientBrush.RelativeTransform>
                                                             <TransformGroup>
-                                                                <ScaleTransform CenterX="0.5" CenterY="0.5"/>
-                                                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                                                <RotateTransform Angle="-6.513" CenterX="0.5" CenterY="0.5"/>
-                                                                <TranslateTransform/>
+                                                                <ScaleTransform CenterX="0.5" CenterY="0.5" />
+                                                                <SkewTransform CenterX="0.5" CenterY="0.5" />
+                                                                <RotateTransform Angle="-6.513" CenterX="0.5" CenterY="0.5" />
+                                                                <TranslateTransform />
                                                             </TransformGroup>
                                                         </LinearGradientBrush.RelativeTransform>
-                                                        <GradientStop Color="#99FFFFFF" Offset="0"/>
-                                                        <GradientStop Color="#33FFFFFF" Offset="0.991"/>
+                                                        <GradientStop Offset="0" Color="#99FFFFFF" />
+                                                        <GradientStop Offset="0.991" Color="#33FFFFFF" />
                                                     </LinearGradientBrush>
                                                 </Border.Background>
                                             </Border>
@@ -126,21 +150,21 @@
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Visibility" TargetName="glow" Value="Hidden"/>
-                                    <Setter Property="Opacity" TargetName="shine" Value="0.4"/>
-                                    <Setter Property="Background" TargetName="border" Value="#0a7c59"/>
+                                    <Setter TargetName="glow" Property="Visibility" Value="Hidden" />
+                                    <Setter TargetName="shine" Property="Opacity" Value="0.4" />
+                                    <Setter TargetName="border" Property="Background" Value="#0a7c59" />
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Visibility" TargetName="glow" Value="Hidden"/>
-                                    <Setter Property="Background" TargetName="border" Value="#82d1bf"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#82d1bf"></Setter>
+                                    <Setter TargetName="glow" Property="Visibility" Value="Hidden" />
+                                    <Setter TargetName="border" Property="Background" Value="#82d1bf" />
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#82d1bf" />
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Trigger.EnterActions>
-                                        <BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}"/>
+                                        <BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}" />
                                     </Trigger.EnterActions>
                                     <Trigger.ExitActions>
-                                        <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                                        <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}" />
                                     </Trigger.ExitActions>
                                 </Trigger>
                             </ControlTemplate.Triggers>
@@ -150,16 +174,28 @@
             </Style>
 
 
-            <Style TargetType="{x:Type Button}" x:Key="newsButtonStyle">
+            <Style x:Key="newsButtonStyle" TargetType="{x:Type Button}">
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Control.Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Name="Border" BorderThickness="0" CornerRadius="5"  Background="{TemplateBinding Background}" TextBlock.Foreground="White" TextBlock.FontSize="13"
-                TextBlock.TextAlignment="Center">
+                            <Border Name="Border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderThickness="0"
+                                    CornerRadius="5"
+                                    TextBlock.FontSize="13"
+                                    TextBlock.Foreground="White"
+                                    TextBlock.TextAlignment="Center">
                                 <Grid>
-                                    <Rectangle Name="FocusCue" Visibility="Hidden" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2" SnapsToDevicePixels="True" />
-                                    <ContentPresenter Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" VerticalAlignment="Center"/>
+                                    <Rectangle Name="FocusCue"
+                                               SnapsToDevicePixels="True"
+                                               Stroke="Black"
+                                               StrokeDashArray="1 2"
+                                               StrokeThickness="1"
+                                               Visibility="Hidden" />
+                                    <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                      VerticalAlignment="Center"
+                                                      RecognizesAccessKey="True" />
                                 </Grid>
                             </Border>
                             <ControlTemplate.Triggers>
@@ -167,7 +203,7 @@
                                     <Setter TargetName="Border" Property="Background" Value="#ffb7a83b" />
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="Border" Property="Background" Value="#ff5bbb45"/>
+                                    <Setter TargetName="Border" Property="Background" Value="#ff5bbb45" />
                                 </Trigger>
                                 <Trigger Property="IsKeyboardFocused" Value="True">
                                     <Setter TargetName="FocusCue" Property="Visibility" Value="Visible" />
@@ -184,58 +220,77 @@
             <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
                 <ControlTemplate.Resources>
                     <Storyboard x:Key="Storyboard1">
-                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="glow" Storyboard.TargetProperty="(UIElement.Opacity)">
-                            <SplineDoubleKeyFrame KeyTime="00:00:00.0000000" Value="1"/>
+                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                       Storyboard.TargetName="glow"
+                                                       Storyboard.TargetProperty="(UIElement.Opacity)">
+                            <SplineDoubleKeyFrame KeyTime="00:00:00.0000000" Value="1" />
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                     <Storyboard x:Key="Storyboard2">
-                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="glow" Storyboard.TargetProperty="(UIElement.Opacity)">
-                            <SplineDoubleKeyFrame KeyTime="00:00:00.0000000" Value="0"/>
+                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                       Storyboard.TargetName="glow"
+                                                       Storyboard.TargetProperty="(UIElement.Opacity)">
+                            <SplineDoubleKeyFrame KeyTime="00:00:00.0000000" Value="0" />
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                 </ControlTemplate.Resources>
                 <Grid>
-                    <Border x:Name="border" Background="#0aa783" BorderBrush="#0aa783" BorderThickness="1" CornerRadius="8">
+                    <Border x:Name="border"
+                            Background="#0aa783"
+                            BorderBrush="#0aa783"
+                            BorderThickness="1"
+                            CornerRadius="8">
                         <Grid Margin="-1,-1,-1,0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="0.495*"/>
-                                <RowDefinition Height="0.505*"/>
+                                <RowDefinition Height="0.495*" />
+                                <RowDefinition Height="0.505*" />
                             </Grid.RowDefinitions>
-                            <Border x:Name="glow" BorderBrush="{x:Null}" Margin="0" BorderThickness="1" CornerRadius="8" Grid.RowSpan="2" Opacity="0">
+                            <Border x:Name="glow"
+                                    Grid.RowSpan="2"
+                                    Margin="0"
+                                    BorderBrush="{x:Null}"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Opacity="0">
                                 <Border.Background>
                                     <RadialGradientBrush Center="0.485,1.053" GradientOrigin="0.485,1.053" RadiusX="0.818" RadiusY="1.214">
                                         <RadialGradientBrush.RelativeTransform>
                                             <TransformGroup>
-                                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="0.95"/>
-                                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                                <RotateTransform CenterX="0.5" CenterY="0.5"/>
-                                                <TranslateTransform/>
+                                                <ScaleTransform CenterX="0.5"
+                                                                CenterY="0.5"
+                                                                ScaleX="0.95" />
+                                                <SkewTransform CenterX="0.5" CenterY="0.5" />
+                                                <RotateTransform CenterX="0.5" CenterY="0.5" />
+                                                <TranslateTransform />
                                             </TransformGroup>
                                         </RadialGradientBrush.RelativeTransform>
-                                        <GradientStop Color="#CC15F9B3" Offset="0.003"/>
-                                        <GradientStop Color="#0021F2EC" Offset="1"/>
+                                        <GradientStop Offset="0.003" Color="#CC15F9B3" />
+                                        <GradientStop Offset="1" Color="#0021F2EC" />
                                     </RadialGradientBrush>
                                 </Border.Background>
                             </Border>
-                            <ContentPresenter HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Grid.RowSpan="2"/>
+                            <ContentPresenter Grid.RowSpan="2"
+                                              Margin="0"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
                         </Grid>
                     </Border>
                 </Grid>
                 <ControlTemplate.Triggers>
                     <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Visibility" TargetName="glow" Value="Hidden"/>
-                        <Setter Property="Background" TargetName="border" Value="#0aa783"/>
+                        <Setter TargetName="glow" Property="Visibility" Value="Hidden" />
+                        <Setter TargetName="border" Property="Background" Value="#0aa783" />
                     </Trigger>
                     <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Visibility" TargetName="glow" Value="Hidden"/>
-                        <Setter Property="Background" TargetName="border" Value="#82d1bf"/>
+                        <Setter TargetName="glow" Property="Visibility" Value="Hidden" />
+                        <Setter TargetName="border" Property="Background" Value="#82d1bf" />
                     </Trigger>
                     <Trigger Property="IsMouseOver" Value="True">
                         <Trigger.EnterActions>
-                            <BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}"/>
+                            <BeginStoryboard x:Name="Storyboard1_BeginStoryboard" Storyboard="{StaticResource Storyboard1}" />
                         </Trigger.EnterActions>
                         <Trigger.ExitActions>
-                            <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                            <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}" />
                         </Trigger.ExitActions>
                     </Trigger>
                 </ControlTemplate.Triggers>
@@ -244,17 +299,16 @@
             <Color x:Key="CloumnUpColor">#effcf9</Color>
             <ImageSource x:Key="BackGroudImage">/PFTSDesktop;component/Images/backGround.png</ImageSource>
             <Color x:Key="CloumnDownColor">#e9f2f1</Color>
-            <Style TargetType="DataGridCell" x:Key="DataGridCellstyle">
-                <Setter Property="ToolTipService.ToolTip" 
-            Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Content.Text}" />
+            <Style x:Key="DataGridCellstyle" TargetType="DataGridCell">
+                <Setter Property="ToolTipService.ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent" />
                     </Trigger>
                     <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="Background" Value="#0ba984"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="BorderBrush" Value="#0ba984"></Setter>
+                        <Setter Property="Background" Value="#0ba984" />
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="BorderBrush" Value="#0ba984" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -262,29 +316,34 @@
             <Visibility x:Key="Image_ImageOrColor">Visible</Visibility>
 
             <Color x:Key="BackGroudColor">red</Color>
-            <SolidColorBrush x:Key="gridStyle" Color="#e3f3ef"/>
-            <SolidColorBrush x:Key="rectStyle" Color="#cdcdcd"/>
-            <SolidColorBrush x:Key="treeStyle" Color="#cbe7e0"/>
+            <SolidColorBrush x:Key="gridStyle" Color="#e3f3ef" />
+            <SolidColorBrush x:Key="rectStyle" Color="#cdcdcd" />
+            <SolidColorBrush x:Key="treeStyle" Color="#cbe7e0" />
             <SolidColorBrush x:Key="dataGridBobrush" Color="LightBlue" />
-            <SolidColorBrush x:Key="winGridStyle" Color="#0caf88"></SolidColorBrush>
-            <SolidColorBrush x:Key="winConStyle" Color="#e6faf5"></SolidColorBrush>
+            <SolidColorBrush x:Key="winGridStyle" Color="#0caf88" />
+            <SolidColorBrush x:Key="winConStyle" Color="#e6faf5" />
             <Color x:Key="solidColorStyle">#cbe7e0</Color>
             <Style x:Key="btnStyle" TargetType="Button">
-                <Setter Property="Margin" Value="5,5,5,5"></Setter>
-                <Setter Property="Cursor" Value="Hand"></Setter>
+                <Setter Property="Margin" Value="5,5,5,5" />
+                <Setter Property="Cursor" Value="Hand" />
 
-                <Setter Property="FontSize" Value="13"/>
-                <Setter Property="FontFamily" Value="黑体"/>
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontFamily" Value="黑体" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Grid>
-                                <Border BorderThickness="1" HorizontalAlignment="Center" Background="Transparent" Width="{TemplateBinding Width}">
-                                    <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" Margin="3 0 3 0"></TextBlock>
+                                <Border Width="{TemplateBinding Width}"
+                                        HorizontalAlignment="Center"
+                                        Background="Transparent"
+                                        BorderThickness="1">
+                                    <TextBlock Margin="3 0 3 0"
+                                               HorizontalAlignment="Center"
+                                               Text="{TemplateBinding Content}" />
                                 </Border>
                             </Grid>
                             <ControlTemplate.Triggers>
-                                <Trigger Property="Button.IsMouseOver"  Value="True">
+                                <Trigger Property="Button.IsMouseOver" Value="True">
                                     <Setter Property="Foreground" Value="#89ffe3" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
@@ -307,35 +366,47 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Rectangle x:Name="BackgroundRectangle" Stretch="Fill" Grid.ColumnSpan="3" Grid.RowSpan="3"  >
+                                <Rectangle x:Name="BackgroundRectangle"
+                                           Grid.RowSpan="3"
+                                           Grid.ColumnSpan="3"
+                                           Stretch="Fill">
                                     <Rectangle.Fill>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                            <GradientStop Color="#effcf9" Offset="0.5"/>
-                                            <GradientStop Color="#e9f2f1" Offset="1"/>
+                                            <GradientStop Offset="0.5" Color="#effcf9" />
+                                            <GradientStop Offset="1" Color="#e9f2f1" />
 
                                         </LinearGradientBrush>
                                     </Rectangle.Fill>
                                 </Rectangle>
-                                <ContentPresenter x:Name="HeaderText" Grid.RowSpan="2" Grid.Column="1"       Content="{TemplateBinding Content}"      HorizontalAlignment="Center"       VerticalAlignment="Center" />
-                                <Rectangle Name="VerticalSeparator" Grid.RowSpan="2"      Grid.Column="2" Width="1" VerticalAlignment="Stretch"  >
+                                <ContentPresenter x:Name="HeaderText"
+                                                  Grid.RowSpan="2"
+                                                  Grid.Column="1"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Content="{TemplateBinding Content}" />
+                                <Rectangle Name="VerticalSeparator"
+                                           Grid.RowSpan="2"
+                                           Grid.Column="2"
+                                           Width="1"
+                                           VerticalAlignment="Stretch">
                                     <Rectangle.Fill>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                            <GradientStop Color="White" Offset="0"/>
-                                            <GradientStop Color="SkyBlue" Offset="0.5"/>
-                                            <GradientStop Color="White" Offset="1"/>
+                                            <GradientStop Offset="0" Color="White" />
+                                            <GradientStop Offset="0.5" Color="SkyBlue" />
+                                            <GradientStop Offset="1" Color="White" />
                                         </LinearGradientBrush>
                                     </Rectangle.Fill>
                                 </Rectangle>
-                                <!--这里的Fill就可以设置分隔线的颜色-->
+                                <!--  这里的Fill就可以设置分隔线的颜色  -->
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Foreground" Value="#827e7e"/>
-                <Setter Property="FontFamily" Value="黑体"></Setter>
+                <Setter Property="Foreground" Value="#827e7e" />
+                <Setter Property="FontFamily" Value="黑体" />
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                <Setter Property="Height" Value="40"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Height" Value="40" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

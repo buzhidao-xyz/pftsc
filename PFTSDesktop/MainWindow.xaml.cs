@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PFTSModel;
-using PftcsUITemplate.Controls;
+using PFTSUITemplate.Controls;
 
 namespace PFTSDesktop
 {
@@ -50,24 +50,6 @@ namespace PFTSDesktop
             preBtn.SelectEd = false;
             preBtn = btn;
             btn.SelectEd = true;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var service = new Service<Officer>();
-            var officer = new Officer();
-            officer.name = "警官陈";
-            officer.no = "J009231";
-            officer.sex = "男";
-            var b = service.Insert(officer);
-            if (b)
-            {
-                MessageBox.Show("插入成功");
-            }
-            else
-            {
-                MessageBox.Show("插入失败");
-            }
         }
 
         private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)

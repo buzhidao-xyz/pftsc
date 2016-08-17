@@ -30,5 +30,34 @@ namespace PFTSModel
             }
             return false;
         }
+
+
+        /// <summary>
+        /// 获取所有值
+        /// </summary>
+        /// <returns></returns>
+        public List<TEntity> GetAll()
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<TEntity> table = db.GetTable<TEntity>();
+                    var query = from q in table
+                                select q;
+                    List<TEntity> retList = new List<TEntity>();
+                    foreach (TEntity entity in query)
+                    {
+                        retList.Add(entity);
+                    }
+                    return retList;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
+        }
     }
 }

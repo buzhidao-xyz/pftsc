@@ -30,12 +30,48 @@ namespace PFTSModel
 		
     #region 可扩展性方法定义
     partial void OnCreated();
-    partial void InsertOfficer(Officer instance);
-    partial void UpdateOfficer(Officer instance);
-    partial void DeleteOfficer(Officer instance);
-    partial void InsertOperator(Operator instance);
-    partial void UpdateOperator(Operator instance);
-    partial void DeleteOperator(Operator instance);
+    partial void Insertbtracker(btracker instance);
+    partial void Updatebtracker(btracker instance);
+    partial void Deletebtracker(btracker instance);
+    partial void Insertvideo_btracker_r(video_btracker_r instance);
+    partial void Updatevideo_btracker_r(video_btracker_r instance);
+    partial void Deletevideo_btracker_r(video_btracker_r instance);
+    partial void Insertbtracker_path(btracker_path instance);
+    partial void Updatebtracker_path(btracker_path instance);
+    partial void Deletebtracker_path(btracker_path instance);
+    partial void Insertdev_camera(dev_camera instance);
+    partial void Updatedev_camera(dev_camera instance);
+    partial void Deletedev_camera(dev_camera instance);
+    partial void Insertdev_lockers(dev_lockers instance);
+    partial void Updatedev_lockers(dev_lockers instance);
+    partial void Deletedev_lockers(dev_lockers instance);
+    partial void Insertdev_rfid(dev_rfid instance);
+    partial void Updatedev_rfid(dev_rfid instance);
+    partial void Deletedev_rfid(dev_rfid instance);
+    partial void Insertdev_vest(dev_vest instance);
+    partial void Updatedev_vest(dev_vest instance);
+    partial void Deletedev_vest(dev_vest instance);
+    partial void Insertofficer(officer instance);
+    partial void Updateofficer(officer instance);
+    partial void Deleteofficer(officer instance);
+    partial void Insertoperator(@operator instance);
+    partial void Updateoperator(@operator instance);
+    partial void Deleteoperator(@operator instance);
+    partial void Insertpath_rfid(path_rfid instance);
+    partial void Updatepath_rfid(path_rfid instance);
+    partial void Deletepath_rfid(path_rfid instance);
+    partial void Insertposition_camera(position_camera instance);
+    partial void Updateposition_camera(position_camera instance);
+    partial void Deleteposition_camera(position_camera instance);
+    partial void Insertposition_rfid(position_rfid instance);
+    partial void Updateposition_rfid(position_rfid instance);
+    partial void Deleteposition_rfid(position_rfid instance);
+    partial void Insertroom(room instance);
+    partial void Updateroom(room instance);
+    partial void Deleteroom(room instance);
+    partial void Insertvideo(video instance);
+    partial void Updatevideo(video instance);
+    partial void Deletevideo(video instance);
     #endregion
 		
 		public PFTSDbDataContext() : 
@@ -68,25 +104,2077 @@ namespace PFTSModel
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Officer> Officer
+		public System.Data.Linq.Table<btracker> btracker
 		{
 			get
 			{
-				return this.GetTable<Officer>();
+				return this.GetTable<btracker>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Operator> Operator
+		public System.Data.Linq.Table<video_btracker_r> video_btracker_r
 		{
 			get
 			{
-				return this.GetTable<Operator>();
+				return this.GetTable<video_btracker_r>();
+			}
+		}
+		
+		public System.Data.Linq.Table<btracker_path> btracker_path
+		{
+			get
+			{
+				return this.GetTable<btracker_path>();
+			}
+		}
+		
+		public System.Data.Linq.Table<dev_camera> dev_camera
+		{
+			get
+			{
+				return this.GetTable<dev_camera>();
+			}
+		}
+		
+		public System.Data.Linq.Table<dev_lockers> dev_lockers
+		{
+			get
+			{
+				return this.GetTable<dev_lockers>();
+			}
+		}
+		
+		public System.Data.Linq.Table<dev_rfid> dev_rfid
+		{
+			get
+			{
+				return this.GetTable<dev_rfid>();
+			}
+		}
+		
+		public System.Data.Linq.Table<dev_vest> dev_vest
+		{
+			get
+			{
+				return this.GetTable<dev_vest>();
+			}
+		}
+		
+		public System.Data.Linq.Table<officer> officer
+		{
+			get
+			{
+				return this.GetTable<officer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<@operator> @operator
+		{
+			get
+			{
+				return this.GetTable<@operator>();
+			}
+		}
+		
+		public System.Data.Linq.Table<path_rfid> path_rfid
+		{
+			get
+			{
+				return this.GetTable<path_rfid>();
+			}
+		}
+		
+		public System.Data.Linq.Table<position_camera> position_camera
+		{
+			get
+			{
+				return this.GetTable<position_camera>();
+			}
+		}
+		
+		public System.Data.Linq.Table<position_rfid> position_rfid
+		{
+			get
+			{
+				return this.GetTable<position_rfid>();
+			}
+		}
+		
+		public System.Data.Linq.Table<room> room
+		{
+			get
+			{
+				return this.GetTable<room>();
+			}
+		}
+		
+		public System.Data.Linq.Table<video> video
+		{
+			get
+			{
+				return this.GetTable<video>();
 			}
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.btracker")]
+	public partial class btracker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private string _number;
+		
+		private string _sex;
+		
+		private int _vest_id;
+		
+		private System.Nullable<int> _locker_id;
+		
+		private System.DateTime _in_time;
+		
+		private System.Nullable<System.DateTime> _out_time;
+		
+		private int _status;
+		
+		private System.Nullable<bool> _recover;
+		
+		private EntitySet<video_btracker_r> _video_btracker_r;
+		
+		private EntitySet<dev_lockers> _dev_lockers1;
+		
+		private EntitySet<dev_vest> _dev_vest1;
+		
+		private EntityRef<dev_lockers> _dev_lockers;
+		
+		private EntityRef<dev_vest> _dev_vest;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnoChanging(string value);
+    partial void OnnoChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnnumberChanging(string value);
+    partial void OnnumberChanged();
+    partial void OnsexChanging(string value);
+    partial void OnsexChanged();
+    partial void Onvest_idChanging(int value);
+    partial void Onvest_idChanged();
+    partial void Onlocker_idChanging(System.Nullable<int> value);
+    partial void Onlocker_idChanged();
+    partial void Onin_timeChanging(System.DateTime value);
+    partial void Onin_timeChanged();
+    partial void Onout_timeChanging(System.Nullable<System.DateTime> value);
+    partial void Onout_timeChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void OnrecoverChanging(System.Nullable<bool> value);
+    partial void OnrecoverChanged();
+    #endregion
+		
+		public btracker()
+		{
+			this._video_btracker_r = new EntitySet<video_btracker_r>(new Action<video_btracker_r>(this.attach_video_btracker_r), new Action<video_btracker_r>(this.detach_video_btracker_r));
+			this._dev_lockers1 = new EntitySet<dev_lockers>(new Action<dev_lockers>(this.attach_dev_lockers1), new Action<dev_lockers>(this.detach_dev_lockers1));
+			this._dev_vest1 = new EntitySet<dev_vest>(new Action<dev_vest>(this.attach_dev_vest1), new Action<dev_vest>(this.detach_dev_vest1));
+			this._dev_lockers = default(EntityRef<dev_lockers>);
+			this._dev_vest = default(EntityRef<dev_vest>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="NChar(36)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this.OnnoChanging(value);
+					this.SendPropertyChanging();
+					this._no = value;
+					this.SendPropertyChanged("no");
+					this.OnnoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="NChar(32)")]
+		public string number
+		{
+			get
+			{
+				return this._number;
+			}
+			set
+			{
+				if ((this._number != value))
+				{
+					this.OnnumberChanging(value);
+					this.SendPropertyChanging();
+					this._number = value;
+					this.SendPropertyChanged("number");
+					this.OnnumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="NChar(8)")]
+		public string sex
+		{
+			get
+			{
+				return this._sex;
+			}
+			set
+			{
+				if ((this._sex != value))
+				{
+					this.OnsexChanging(value);
+					this.SendPropertyChanging();
+					this._sex = value;
+					this.SendPropertyChanged("sex");
+					this.OnsexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int NOT NULL")]
+		public int vest_id
+		{
+			get
+			{
+				return this._vest_id;
+			}
+			set
+			{
+				if ((this._vest_id != value))
+				{
+					if (this._dev_vest.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onvest_idChanging(value);
+					this.SendPropertyChanging();
+					this._vest_id = value;
+					this.SendPropertyChanged("vest_id");
+					this.Onvest_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_locker_id", DbType="Int")]
+		public System.Nullable<int> locker_id
+		{
+			get
+			{
+				return this._locker_id;
+			}
+			set
+			{
+				if ((this._locker_id != value))
+				{
+					if (this._dev_lockers.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onlocker_idChanging(value);
+					this.SendPropertyChanging();
+					this._locker_id = value;
+					this.SendPropertyChanged("locker_id");
+					this.Onlocker_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_time", DbType="DateTime NOT NULL")]
+		public System.DateTime in_time
+		{
+			get
+			{
+				return this._in_time;
+			}
+			set
+			{
+				if ((this._in_time != value))
+				{
+					this.Onin_timeChanging(value);
+					this.SendPropertyChanging();
+					this._in_time = value;
+					this.SendPropertyChanged("in_time");
+					this.Onin_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_out_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> out_time
+		{
+			get
+			{
+				return this._out_time;
+			}
+			set
+			{
+				if ((this._out_time != value))
+				{
+					this.Onout_timeChanging(value);
+					this.SendPropertyChanging();
+					this._out_time = value;
+					this.SendPropertyChanged("out_time");
+					this.Onout_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
+		public System.Nullable<bool> recover
+		{
+			get
+			{
+				return this._recover;
+			}
+			set
+			{
+				if ((this._recover != value))
+				{
+					this.OnrecoverChanging(value);
+					this.SendPropertyChanging();
+					this._recover = value;
+					this.SendPropertyChanged("recover");
+					this.OnrecoverChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_video_btracker_r", Storage="_video_btracker_r", ThisKey="id", OtherKey="btracker_id")]
+		public EntitySet<video_btracker_r> video_btracker_r
+		{
+			get
+			{
+				return this._video_btracker_r;
+			}
+			set
+			{
+				this._video_btracker_r.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_lockers", Storage="_dev_lockers1", ThisKey="id", OtherKey="btracker_id")]
+		public EntitySet<dev_lockers> dev_lockers1
+		{
+			get
+			{
+				return this._dev_lockers1;
+			}
+			set
+			{
+				this._dev_lockers1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_vest", Storage="_dev_vest1", ThisKey="id", OtherKey="btracker_id")]
+		public EntitySet<dev_vest> dev_vest1
+		{
+			get
+			{
+				return this._dev_vest1;
+			}
+			set
+			{
+				this._dev_vest1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_lockers_btracker", Storage="_dev_lockers", ThisKey="locker_id", OtherKey="id", IsForeignKey=true)]
+		public dev_lockers dev_lockers
+		{
+			get
+			{
+				return this._dev_lockers.Entity;
+			}
+			set
+			{
+				dev_lockers previousValue = this._dev_lockers.Entity;
+				if (((previousValue != value) 
+							|| (this._dev_lockers.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._dev_lockers.Entity = null;
+						previousValue.btracker.Remove(this);
+					}
+					this._dev_lockers.Entity = value;
+					if ((value != null))
+					{
+						value.btracker.Add(this);
+						this._locker_id = value.id;
+					}
+					else
+					{
+						this._locker_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("dev_lockers");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_vest_btracker", Storage="_dev_vest", ThisKey="vest_id", OtherKey="id", IsForeignKey=true)]
+		public dev_vest dev_vest
+		{
+			get
+			{
+				return this._dev_vest.Entity;
+			}
+			set
+			{
+				dev_vest previousValue = this._dev_vest.Entity;
+				if (((previousValue != value) 
+							|| (this._dev_vest.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._dev_vest.Entity = null;
+						previousValue.btracker.Remove(this);
+					}
+					this._dev_vest.Entity = value;
+					if ((value != null))
+					{
+						value.btracker.Add(this);
+						this._vest_id = value.id;
+					}
+					else
+					{
+						this._vest_id = default(int);
+					}
+					this.SendPropertyChanged("dev_vest");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_video_btracker_r(video_btracker_r entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker = this;
+		}
+		
+		private void detach_video_btracker_r(video_btracker_r entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker = null;
+		}
+		
+		private void attach_dev_lockers1(dev_lockers entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker1 = this;
+		}
+		
+		private void detach_dev_lockers1(dev_lockers entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker1 = null;
+		}
+		
+		private void attach_dev_vest1(dev_vest entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker1 = this;
+		}
+		
+		private void detach_dev_vest1(dev_vest entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.video_btracker_r")]
+	public partial class video_btracker_r : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _video_id;
+		
+		private int _btracker_id;
+		
+		private EntityRef<btracker> _btracker;
+		
+		private EntityRef<video> _video;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onvideo_idChanging(int value);
+    partial void Onvideo_idChanged();
+    partial void Onbtracker_idChanging(int value);
+    partial void Onbtracker_idChanged();
+    #endregion
+		
+		public video_btracker_r()
+		{
+			this._btracker = default(EntityRef<btracker>);
+			this._video = default(EntityRef<video>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_video_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int video_id
+		{
+			get
+			{
+				return this._video_id;
+			}
+			set
+			{
+				if ((this._video_id != value))
+				{
+					if (this._video.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onvideo_idChanging(value);
+					this.SendPropertyChanging();
+					this._video_id = value;
+					this.SendPropertyChanged("video_id");
+					this.Onvideo_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int btracker_id
+		{
+			get
+			{
+				return this._btracker_id;
+			}
+			set
+			{
+				if ((this._btracker_id != value))
+				{
+					if (this._btracker.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onbtracker_idChanging(value);
+					this.SendPropertyChanging();
+					this._btracker_id = value;
+					this.SendPropertyChanged("btracker_id");
+					this.Onbtracker_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_video_btracker_r", Storage="_btracker", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
+		public btracker btracker
+		{
+			get
+			{
+				return this._btracker.Entity;
+			}
+			set
+			{
+				btracker previousValue = this._btracker.Entity;
+				if (((previousValue != value) 
+							|| (this._btracker.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._btracker.Entity = null;
+						previousValue.video_btracker_r.Remove(this);
+					}
+					this._btracker.Entity = value;
+					if ((value != null))
+					{
+						value.video_btracker_r.Add(this);
+						this._btracker_id = value.id;
+					}
+					else
+					{
+						this._btracker_id = default(int);
+					}
+					this.SendPropertyChanged("btracker");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="video_video_btracker_r", Storage="_video", ThisKey="video_id", OtherKey="id", IsForeignKey=true)]
+		public video video
+		{
+			get
+			{
+				return this._video.Entity;
+			}
+			set
+			{
+				video previousValue = this._video.Entity;
+				if (((previousValue != value) 
+							|| (this._video.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._video.Entity = null;
+						previousValue.video_btracker_r.Remove(this);
+					}
+					this._video.Entity = value;
+					if ((value != null))
+					{
+						value.video_btracker_r.Add(this);
+						this._video_id = value.id;
+					}
+					else
+					{
+						this._video_id = default(int);
+					}
+					this.SendPropertyChanged("video");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.btracker_path")]
+	public partial class btracker_path : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _path_id;
+		
+		private System.DateTime _start_time;
+		
+		private System.DateTime _end_time;
+		
+		private EntityRef<path_rfid> _path_rfid;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onpath_idChanging(int value);
+    partial void Onpath_idChanged();
+    partial void Onstart_timeChanging(System.DateTime value);
+    partial void Onstart_timeChanged();
+    partial void Onend_timeChanging(System.DateTime value);
+    partial void Onend_timeChanged();
+    #endregion
+		
+		public btracker_path()
+		{
+			this._path_rfid = default(EntityRef<path_rfid>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_path_id", DbType="Int NOT NULL")]
+		public int path_id
+		{
+			get
+			{
+				return this._path_id;
+			}
+			set
+			{
+				if ((this._path_id != value))
+				{
+					if (this._path_rfid.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onpath_idChanging(value);
+					this.SendPropertyChanging();
+					this._path_id = value;
+					this.SendPropertyChanged("path_id");
+					this.Onpath_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_time", DbType="DateTime NOT NULL")]
+		public System.DateTime start_time
+		{
+			get
+			{
+				return this._start_time;
+			}
+			set
+			{
+				if ((this._start_time != value))
+				{
+					this.Onstart_timeChanging(value);
+					this.SendPropertyChanging();
+					this._start_time = value;
+					this.SendPropertyChanged("start_time");
+					this.Onstart_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_time", DbType="DateTime NOT NULL")]
+		public System.DateTime end_time
+		{
+			get
+			{
+				return this._end_time;
+			}
+			set
+			{
+				if ((this._end_time != value))
+				{
+					this.Onend_timeChanging(value);
+					this.SendPropertyChanging();
+					this._end_time = value;
+					this.SendPropertyChanged("end_time");
+					this.Onend_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="path_rfid_btracker_path", Storage="_path_rfid", ThisKey="path_id", OtherKey="id", IsForeignKey=true)]
+		public path_rfid path_rfid
+		{
+			get
+			{
+				return this._path_rfid.Entity;
+			}
+			set
+			{
+				path_rfid previousValue = this._path_rfid.Entity;
+				if (((previousValue != value) 
+							|| (this._path_rfid.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._path_rfid.Entity = null;
+						previousValue.btracker_path.Remove(this);
+					}
+					this._path_rfid.Entity = value;
+					if ((value != null))
+					{
+						value.btracker_path.Add(this);
+						this._path_id = value.id;
+					}
+					else
+					{
+						this._path_id = default(int);
+					}
+					this.SendPropertyChanged("path_rfid");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.dev_camera")]
+	public partial class dev_camera : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private int _status;
+		
+		private System.Nullable<int> _position_id;
+		
+		private string _ip;
+		
+		private System.Nullable<int> _port;
+		
+		private System.Nullable<System.DateTime> _create_time;
+		
+		private EntitySet<position_camera> _position_camera1;
+		
+		private EntitySet<video> _video;
+		
+		private EntityRef<position_camera> _position_camera;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnoChanging(string value);
+    partial void OnnoChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void Onposition_idChanging(System.Nullable<int> value);
+    partial void Onposition_idChanged();
+    partial void OnipChanging(string value);
+    partial void OnipChanged();
+    partial void OnportChanging(System.Nullable<int> value);
+    partial void OnportChanged();
+    partial void Oncreate_timeChanging(System.Nullable<System.DateTime> value);
+    partial void Oncreate_timeChanged();
+    #endregion
+		
+		public dev_camera()
+		{
+			this._position_camera1 = new EntitySet<position_camera>(new Action<position_camera>(this.attach_position_camera1), new Action<position_camera>(this.detach_position_camera1));
+			this._video = new EntitySet<video>(new Action<video>(this.attach_video), new Action<video>(this.detach_video));
+			this._position_camera = default(EntityRef<position_camera>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="NChar(128)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this.OnnoChanging(value);
+					this.SendPropertyChanging();
+					this._no = value;
+					this.SendPropertyChanged("no");
+					this.OnnoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_position_id", DbType="Int")]
+		public System.Nullable<int> position_id
+		{
+			get
+			{
+				return this._position_id;
+			}
+			set
+			{
+				if ((this._position_id != value))
+				{
+					if (this._position_camera.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onposition_idChanging(value);
+					this.SendPropertyChanging();
+					this._position_id = value;
+					this.SendPropertyChanged("position_id");
+					this.Onposition_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ip", DbType="NChar(32)")]
+		public string ip
+		{
+			get
+			{
+				return this._ip;
+			}
+			set
+			{
+				if ((this._ip != value))
+				{
+					this.OnipChanging(value);
+					this.SendPropertyChanging();
+					this._ip = value;
+					this.SendPropertyChanged("ip");
+					this.OnipChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_port", DbType="Int")]
+		public System.Nullable<int> port
+		{
+			get
+			{
+				return this._port;
+			}
+			set
+			{
+				if ((this._port != value))
+				{
+					this.OnportChanging(value);
+					this.SendPropertyChanging();
+					this._port = value;
+					this.SendPropertyChanged("port");
+					this.OnportChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_time
+		{
+			get
+			{
+				return this._create_time;
+			}
+			set
+			{
+				if ((this._create_time != value))
+				{
+					this.Oncreate_timeChanging(value);
+					this.SendPropertyChanging();
+					this._create_time = value;
+					this.SendPropertyChanged("create_time");
+					this.Oncreate_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_camera_position_camera", Storage="_position_camera1", ThisKey="id", OtherKey="camera_id")]
+		public EntitySet<position_camera> position_camera1
+		{
+			get
+			{
+				return this._position_camera1;
+			}
+			set
+			{
+				this._position_camera1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_camera_video", Storage="_video", ThisKey="id", OtherKey="camera_id")]
+		public EntitySet<video> video
+		{
+			get
+			{
+				return this._video;
+			}
+			set
+			{
+				this._video.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_camera_dev_camera", Storage="_position_camera", ThisKey="position_id", OtherKey="id", IsForeignKey=true)]
+		public position_camera position_camera
+		{
+			get
+			{
+				return this._position_camera.Entity;
+			}
+			set
+			{
+				position_camera previousValue = this._position_camera.Entity;
+				if (((previousValue != value) 
+							|| (this._position_camera.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._position_camera.Entity = null;
+						previousValue.dev_camera.Remove(this);
+					}
+					this._position_camera.Entity = value;
+					if ((value != null))
+					{
+						value.dev_camera.Add(this);
+						this._position_id = value.id;
+					}
+					else
+					{
+						this._position_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("position_camera");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_position_camera1(position_camera entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_camera1 = this;
+		}
+		
+		private void detach_position_camera1(position_camera entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_camera1 = null;
+		}
+		
+		private void attach_video(video entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_camera = this;
+		}
+		
+		private void detach_video(video entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_camera = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.dev_lockers")]
+	public partial class dev_lockers : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private int _status;
+		
+		private System.Nullable<int> _btracker_id;
+		
+		private System.Nullable<int> _officer_id;
+		
+		private System.Nullable<System.DateTime> _create_time;
+		
+		private EntitySet<btracker> _btracker;
+		
+		private EntityRef<btracker> _btracker1;
+		
+		private EntityRef<officer> _officer;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnoChanging(string value);
+    partial void OnnoChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void Onbtracker_idChanging(System.Nullable<int> value);
+    partial void Onbtracker_idChanged();
+    partial void Onofficer_idChanging(System.Nullable<int> value);
+    partial void Onofficer_idChanged();
+    partial void Oncreate_timeChanging(System.Nullable<System.DateTime> value);
+    partial void Oncreate_timeChanged();
+    #endregion
+		
+		public dev_lockers()
+		{
+			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
+			this._btracker1 = default(EntityRef<btracker>);
+			this._officer = default(EntityRef<officer>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="NChar(128)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this.OnnoChanging(value);
+					this.SendPropertyChanging();
+					this._no = value;
+					this.SendPropertyChanged("no");
+					this.OnnoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_id", DbType="Int")]
+		public System.Nullable<int> btracker_id
+		{
+			get
+			{
+				return this._btracker_id;
+			}
+			set
+			{
+				if ((this._btracker_id != value))
+				{
+					if (this._btracker1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onbtracker_idChanging(value);
+					this.SendPropertyChanging();
+					this._btracker_id = value;
+					this.SendPropertyChanged("btracker_id");
+					this.Onbtracker_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_id", DbType="Int")]
+		public System.Nullable<int> officer_id
+		{
+			get
+			{
+				return this._officer_id;
+			}
+			set
+			{
+				if ((this._officer_id != value))
+				{
+					if (this._officer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onofficer_idChanging(value);
+					this.SendPropertyChanging();
+					this._officer_id = value;
+					this.SendPropertyChanged("officer_id");
+					this.Onofficer_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_time
+		{
+			get
+			{
+				return this._create_time;
+			}
+			set
+			{
+				if ((this._create_time != value))
+				{
+					this.Oncreate_timeChanging(value);
+					this.SendPropertyChanging();
+					this._create_time = value;
+					this.SendPropertyChanged("create_time");
+					this.Oncreate_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_lockers_btracker", Storage="_btracker", ThisKey="id", OtherKey="locker_id")]
+		public EntitySet<btracker> btracker
+		{
+			get
+			{
+				return this._btracker;
+			}
+			set
+			{
+				this._btracker.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_lockers", Storage="_btracker1", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
+		public btracker btracker1
+		{
+			get
+			{
+				return this._btracker1.Entity;
+			}
+			set
+			{
+				btracker previousValue = this._btracker1.Entity;
+				if (((previousValue != value) 
+							|| (this._btracker1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._btracker1.Entity = null;
+						previousValue.dev_lockers1.Remove(this);
+					}
+					this._btracker1.Entity = value;
+					if ((value != null))
+					{
+						value.dev_lockers1.Add(this);
+						this._btracker_id = value.id;
+					}
+					else
+					{
+						this._btracker_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("btracker1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_dev_lockers", Storage="_officer", ThisKey="officer_id", OtherKey="id", IsForeignKey=true)]
+		public officer officer
+		{
+			get
+			{
+				return this._officer.Entity;
+			}
+			set
+			{
+				officer previousValue = this._officer.Entity;
+				if (((previousValue != value) 
+							|| (this._officer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._officer.Entity = null;
+						previousValue.dev_lockers.Remove(this);
+					}
+					this._officer.Entity = value;
+					if ((value != null))
+					{
+						value.dev_lockers.Add(this);
+						this._officer_id = value.id;
+					}
+					else
+					{
+						this._officer_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("officer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_btracker(btracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_lockers = this;
+		}
+		
+		private void detach_btracker(btracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_lockers = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.dev_rfid")]
+	public partial class dev_rfid : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private int _status;
+		
+		private System.Nullable<int> _position_id;
+		
+		private System.Nullable<System.DateTime> _create_time;
+		
+		private EntitySet<position_rfid> _position_rfid1;
+		
+		private EntityRef<position_rfid> _position_rfid;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnoChanging(string value);
+    partial void OnnoChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void Onposition_idChanging(System.Nullable<int> value);
+    partial void Onposition_idChanged();
+    partial void Oncreate_timeChanging(System.Nullable<System.DateTime> value);
+    partial void Oncreate_timeChanged();
+    #endregion
+		
+		public dev_rfid()
+		{
+			this._position_rfid1 = new EntitySet<position_rfid>(new Action<position_rfid>(this.attach_position_rfid1), new Action<position_rfid>(this.detach_position_rfid1));
+			this._position_rfid = default(EntityRef<position_rfid>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="NChar(128)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this.OnnoChanging(value);
+					this.SendPropertyChanging();
+					this._no = value;
+					this.SendPropertyChanged("no");
+					this.OnnoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_position_id", DbType="Int")]
+		public System.Nullable<int> position_id
+		{
+			get
+			{
+				return this._position_id;
+			}
+			set
+			{
+				if ((this._position_id != value))
+				{
+					if (this._position_rfid.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onposition_idChanging(value);
+					this.SendPropertyChanging();
+					this._position_id = value;
+					this.SendPropertyChanged("position_id");
+					this.Onposition_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_time
+		{
+			get
+			{
+				return this._create_time;
+			}
+			set
+			{
+				if ((this._create_time != value))
+				{
+					this.Oncreate_timeChanging(value);
+					this.SendPropertyChanging();
+					this._create_time = value;
+					this.SendPropertyChanged("create_time");
+					this.Oncreate_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_rfid_position_rfid", Storage="_position_rfid1", ThisKey="id", OtherKey="rfid_id")]
+		public EntitySet<position_rfid> position_rfid1
+		{
+			get
+			{
+				return this._position_rfid1;
+			}
+			set
+			{
+				this._position_rfid1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_rfid_dev_rfid", Storage="_position_rfid", ThisKey="position_id", OtherKey="id", IsForeignKey=true)]
+		public position_rfid position_rfid
+		{
+			get
+			{
+				return this._position_rfid.Entity;
+			}
+			set
+			{
+				position_rfid previousValue = this._position_rfid.Entity;
+				if (((previousValue != value) 
+							|| (this._position_rfid.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._position_rfid.Entity = null;
+						previousValue.dev_rfid.Remove(this);
+					}
+					this._position_rfid.Entity = value;
+					if ((value != null))
+					{
+						value.dev_rfid.Add(this);
+						this._position_id = value.id;
+					}
+					else
+					{
+						this._position_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("position_rfid");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_position_rfid1(position_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_rfid1 = this;
+		}
+		
+		private void detach_position_rfid1(position_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_rfid1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.dev_vest")]
+	public partial class dev_vest : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private int _status;
+		
+		private System.Nullable<int> _btracker_id;
+		
+		private System.Nullable<System.DateTime> _create_time;
+		
+		private EntitySet<btracker> _btracker;
+		
+		private EntityRef<btracker> _btracker1;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnoChanging(string value);
+    partial void OnnoChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void Onbtracker_idChanging(System.Nullable<int> value);
+    partial void Onbtracker_idChanged();
+    partial void Oncreate_timeChanging(System.Nullable<System.DateTime> value);
+    partial void Oncreate_timeChanged();
+    #endregion
+		
+		public dev_vest()
+		{
+			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
+			this._btracker1 = default(EntityRef<btracker>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="NChar(128)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this.OnnoChanging(value);
+					this.SendPropertyChanging();
+					this._no = value;
+					this.SendPropertyChanged("no");
+					this.OnnoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_id", DbType="Int")]
+		public System.Nullable<int> btracker_id
+		{
+			get
+			{
+				return this._btracker_id;
+			}
+			set
+			{
+				if ((this._btracker_id != value))
+				{
+					if (this._btracker1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onbtracker_idChanging(value);
+					this.SendPropertyChanging();
+					this._btracker_id = value;
+					this.SendPropertyChanged("btracker_id");
+					this.Onbtracker_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_time
+		{
+			get
+			{
+				return this._create_time;
+			}
+			set
+			{
+				if ((this._create_time != value))
+				{
+					this.Oncreate_timeChanging(value);
+					this.SendPropertyChanging();
+					this._create_time = value;
+					this.SendPropertyChanged("create_time");
+					this.Oncreate_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_vest_btracker", Storage="_btracker", ThisKey="id", OtherKey="vest_id")]
+		public EntitySet<btracker> btracker
+		{
+			get
+			{
+				return this._btracker;
+			}
+			set
+			{
+				this._btracker.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_vest", Storage="_btracker1", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
+		public btracker btracker1
+		{
+			get
+			{
+				return this._btracker1.Entity;
+			}
+			set
+			{
+				btracker previousValue = this._btracker1.Entity;
+				if (((previousValue != value) 
+							|| (this._btracker1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._btracker1.Entity = null;
+						previousValue.dev_vest1.Remove(this);
+					}
+					this._btracker1.Entity = value;
+					if ((value != null))
+					{
+						value.dev_vest1.Add(this);
+						this._btracker_id = value.id;
+					}
+					else
+					{
+						this._btracker_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("btracker1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_btracker(btracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_vest = this;
+		}
+		
+		private void detach_btracker(btracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.dev_vest = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.officer")]
-	public partial class Officer : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class officer : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -102,6 +2190,8 @@ namespace PFTSModel
 		private System.Data.Linq.Binary _fingerprint;
 		
 		private System.Nullable<System.DateTime> _create_time;
+		
+		private EntitySet<dev_lockers> _dev_lockers;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -121,8 +2211,9 @@ namespace PFTSModel
     partial void Oncreate_timeChanged();
     #endregion
 		
-		public Officer()
+		public officer()
 		{
+			this._dev_lockers = new EntitySet<dev_lockers>(new Action<dev_lockers>(this.attach_dev_lockers), new Action<dev_lockers>(this.detach_dev_lockers));
 			OnCreated();
 		}
 		
@@ -246,6 +2337,19 @@ namespace PFTSModel
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_dev_lockers", Storage="_dev_lockers", ThisKey="id", OtherKey="officer_id")]
+		public EntitySet<dev_lockers> dev_lockers
+		{
+			get
+			{
+				return this._dev_lockers;
+			}
+			set
+			{
+				this._dev_lockers.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -265,10 +2369,22 @@ namespace PFTSModel
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_dev_lockers(dev_lockers entity)
+		{
+			this.SendPropertyChanging();
+			entity.officer = this;
+		}
+		
+		private void detach_dev_lockers(dev_lockers entity)
+		{
+			this.SendPropertyChanging();
+			entity.officer = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.operator")]
-	public partial class Operator : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class @operator : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -299,7 +2415,7 @@ namespace PFTSModel
     partial void Onlast_login_timeChanged();
     #endregion
 		
-		public Operator()
+		public @operator()
 		{
 			OnCreated();
 		}
@@ -422,6 +2538,1256 @@ namespace PFTSModel
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.path_rfid")]
+	public partial class path_rfid : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _start_position_id;
+		
+		private int _end_position_id;
+		
+		private EntitySet<btracker_path> _btracker_path;
+		
+		private EntityRef<position_rfid> _position_rfid;
+		
+		private EntityRef<position_rfid> _position_rfid1;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onstart_position_idChanging(int value);
+    partial void Onstart_position_idChanged();
+    partial void Onend_position_idChanging(int value);
+    partial void Onend_position_idChanged();
+    #endregion
+		
+		public path_rfid()
+		{
+			this._btracker_path = new EntitySet<btracker_path>(new Action<btracker_path>(this.attach_btracker_path), new Action<btracker_path>(this.detach_btracker_path));
+			this._position_rfid = default(EntityRef<position_rfid>);
+			this._position_rfid1 = default(EntityRef<position_rfid>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_position_id", DbType="Int NOT NULL")]
+		public int start_position_id
+		{
+			get
+			{
+				return this._start_position_id;
+			}
+			set
+			{
+				if ((this._start_position_id != value))
+				{
+					if (this._position_rfid1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onstart_position_idChanging(value);
+					this.SendPropertyChanging();
+					this._start_position_id = value;
+					this.SendPropertyChanged("start_position_id");
+					this.Onstart_position_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_position_id", DbType="Int NOT NULL")]
+		public int end_position_id
+		{
+			get
+			{
+				return this._end_position_id;
+			}
+			set
+			{
+				if ((this._end_position_id != value))
+				{
+					if (this._position_rfid.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onend_position_idChanging(value);
+					this.SendPropertyChanging();
+					this._end_position_id = value;
+					this.SendPropertyChanged("end_position_id");
+					this.Onend_position_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="path_rfid_btracker_path", Storage="_btracker_path", ThisKey="id", OtherKey="path_id")]
+		public EntitySet<btracker_path> btracker_path
+		{
+			get
+			{
+				return this._btracker_path;
+			}
+			set
+			{
+				this._btracker_path.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_rfid_path_rfid", Storage="_position_rfid", ThisKey="end_position_id", OtherKey="id", IsForeignKey=true)]
+		public position_rfid position_rfid
+		{
+			get
+			{
+				return this._position_rfid.Entity;
+			}
+			set
+			{
+				position_rfid previousValue = this._position_rfid.Entity;
+				if (((previousValue != value) 
+							|| (this._position_rfid.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._position_rfid.Entity = null;
+						previousValue.path_rfid.Remove(this);
+					}
+					this._position_rfid.Entity = value;
+					if ((value != null))
+					{
+						value.path_rfid.Add(this);
+						this._end_position_id = value.id;
+					}
+					else
+					{
+						this._end_position_id = default(int);
+					}
+					this.SendPropertyChanged("position_rfid");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_rfid_path_rfid1", Storage="_position_rfid1", ThisKey="start_position_id", OtherKey="id", IsForeignKey=true)]
+		public position_rfid position_rfid1
+		{
+			get
+			{
+				return this._position_rfid1.Entity;
+			}
+			set
+			{
+				position_rfid previousValue = this._position_rfid1.Entity;
+				if (((previousValue != value) 
+							|| (this._position_rfid1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._position_rfid1.Entity = null;
+						previousValue.path_rfid1.Remove(this);
+					}
+					this._position_rfid1.Entity = value;
+					if ((value != null))
+					{
+						value.path_rfid1.Add(this);
+						this._start_position_id = value.id;
+					}
+					else
+					{
+						this._start_position_id = default(int);
+					}
+					this.SendPropertyChanged("position_rfid1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_btracker_path(btracker_path entity)
+		{
+			this.SendPropertyChanging();
+			entity.path_rfid = this;
+		}
+		
+		private void detach_btracker_path(btracker_path entity)
+		{
+			this.SendPropertyChanging();
+			entity.path_rfid = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.position_camera")]
+	public partial class position_camera : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _room_id;
+		
+		private int _status;
+		
+		private System.Nullable<int> _camera_id;
+		
+		private EntitySet<dev_camera> _dev_camera;
+		
+		private EntitySet<video> _video;
+		
+		private EntityRef<dev_camera> _dev_camera1;
+		
+		private EntityRef<room> _room;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onroom_idChanging(int value);
+    partial void Onroom_idChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void Oncamera_idChanging(System.Nullable<int> value);
+    partial void Oncamera_idChanged();
+    #endregion
+		
+		public position_camera()
+		{
+			this._dev_camera = new EntitySet<dev_camera>(new Action<dev_camera>(this.attach_dev_camera), new Action<dev_camera>(this.detach_dev_camera));
+			this._video = new EntitySet<video>(new Action<video>(this.attach_video), new Action<video>(this.detach_video));
+			this._dev_camera1 = default(EntityRef<dev_camera>);
+			this._room = default(EntityRef<room>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_id", DbType="Int NOT NULL")]
+		public int room_id
+		{
+			get
+			{
+				return this._room_id;
+			}
+			set
+			{
+				if ((this._room_id != value))
+				{
+					if (this._room.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onroom_idChanging(value);
+					this.SendPropertyChanging();
+					this._room_id = value;
+					this.SendPropertyChanged("room_id");
+					this.Onroom_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_camera_id", DbType="Int")]
+		public System.Nullable<int> camera_id
+		{
+			get
+			{
+				return this._camera_id;
+			}
+			set
+			{
+				if ((this._camera_id != value))
+				{
+					if (this._dev_camera1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncamera_idChanging(value);
+					this.SendPropertyChanging();
+					this._camera_id = value;
+					this.SendPropertyChanged("camera_id");
+					this.Oncamera_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_camera_dev_camera", Storage="_dev_camera", ThisKey="id", OtherKey="position_id")]
+		public EntitySet<dev_camera> dev_camera
+		{
+			get
+			{
+				return this._dev_camera;
+			}
+			set
+			{
+				this._dev_camera.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_camera_video", Storage="_video", ThisKey="id", OtherKey="position_id")]
+		public EntitySet<video> video
+		{
+			get
+			{
+				return this._video;
+			}
+			set
+			{
+				this._video.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_camera_position_camera", Storage="_dev_camera1", ThisKey="camera_id", OtherKey="id", IsForeignKey=true)]
+		public dev_camera dev_camera1
+		{
+			get
+			{
+				return this._dev_camera1.Entity;
+			}
+			set
+			{
+				dev_camera previousValue = this._dev_camera1.Entity;
+				if (((previousValue != value) 
+							|| (this._dev_camera1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._dev_camera1.Entity = null;
+						previousValue.position_camera1.Remove(this);
+					}
+					this._dev_camera1.Entity = value;
+					if ((value != null))
+					{
+						value.position_camera1.Add(this);
+						this._camera_id = value.id;
+					}
+					else
+					{
+						this._camera_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("dev_camera1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="room_position_camera", Storage="_room", ThisKey="room_id", OtherKey="id", IsForeignKey=true)]
+		public room room
+		{
+			get
+			{
+				return this._room.Entity;
+			}
+			set
+			{
+				room previousValue = this._room.Entity;
+				if (((previousValue != value) 
+							|| (this._room.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._room.Entity = null;
+						previousValue.position_camera.Remove(this);
+					}
+					this._room.Entity = value;
+					if ((value != null))
+					{
+						value.position_camera.Add(this);
+						this._room_id = value.id;
+					}
+					else
+					{
+						this._room_id = default(int);
+					}
+					this.SendPropertyChanged("room");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_dev_camera(dev_camera entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_camera = this;
+		}
+		
+		private void detach_dev_camera(dev_camera entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_camera = null;
+		}
+		
+		private void attach_video(video entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_camera = this;
+		}
+		
+		private void detach_video(video entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_camera = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.position_rfid")]
+	public partial class position_rfid : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _room_id;
+		
+		private int _status;
+		
+		private System.Nullable<int> _rfid_id;
+		
+		private EntitySet<dev_rfid> _dev_rfid;
+		
+		private EntitySet<path_rfid> _path_rfid;
+		
+		private EntitySet<path_rfid> _path_rfid1;
+		
+		private EntityRef<dev_rfid> _dev_rfid1;
+		
+		private EntityRef<room> _room;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onroom_idChanging(int value);
+    partial void Onroom_idChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void Onrfid_idChanging(System.Nullable<int> value);
+    partial void Onrfid_idChanged();
+    #endregion
+		
+		public position_rfid()
+		{
+			this._dev_rfid = new EntitySet<dev_rfid>(new Action<dev_rfid>(this.attach_dev_rfid), new Action<dev_rfid>(this.detach_dev_rfid));
+			this._path_rfid = new EntitySet<path_rfid>(new Action<path_rfid>(this.attach_path_rfid), new Action<path_rfid>(this.detach_path_rfid));
+			this._path_rfid1 = new EntitySet<path_rfid>(new Action<path_rfid>(this.attach_path_rfid1), new Action<path_rfid>(this.detach_path_rfid1));
+			this._dev_rfid1 = default(EntityRef<dev_rfid>);
+			this._room = default(EntityRef<room>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_id", DbType="Int NOT NULL")]
+		public int room_id
+		{
+			get
+			{
+				return this._room_id;
+			}
+			set
+			{
+				if ((this._room_id != value))
+				{
+					if (this._room.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onroom_idChanging(value);
+					this.SendPropertyChanging();
+					this._room_id = value;
+					this.SendPropertyChanged("room_id");
+					this.Onroom_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rfid_id", DbType="Int")]
+		public System.Nullable<int> rfid_id
+		{
+			get
+			{
+				return this._rfid_id;
+			}
+			set
+			{
+				if ((this._rfid_id != value))
+				{
+					if (this._dev_rfid1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onrfid_idChanging(value);
+					this.SendPropertyChanging();
+					this._rfid_id = value;
+					this.SendPropertyChanged("rfid_id");
+					this.Onrfid_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_rfid_dev_rfid", Storage="_dev_rfid", ThisKey="id", OtherKey="position_id")]
+		public EntitySet<dev_rfid> dev_rfid
+		{
+			get
+			{
+				return this._dev_rfid;
+			}
+			set
+			{
+				this._dev_rfid.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_rfid_path_rfid", Storage="_path_rfid", ThisKey="id", OtherKey="end_position_id")]
+		public EntitySet<path_rfid> path_rfid
+		{
+			get
+			{
+				return this._path_rfid;
+			}
+			set
+			{
+				this._path_rfid.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_rfid_path_rfid1", Storage="_path_rfid1", ThisKey="id", OtherKey="start_position_id")]
+		public EntitySet<path_rfid> path_rfid1
+		{
+			get
+			{
+				return this._path_rfid1;
+			}
+			set
+			{
+				this._path_rfid1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_rfid_position_rfid", Storage="_dev_rfid1", ThisKey="rfid_id", OtherKey="id", IsForeignKey=true)]
+		public dev_rfid dev_rfid1
+		{
+			get
+			{
+				return this._dev_rfid1.Entity;
+			}
+			set
+			{
+				dev_rfid previousValue = this._dev_rfid1.Entity;
+				if (((previousValue != value) 
+							|| (this._dev_rfid1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._dev_rfid1.Entity = null;
+						previousValue.position_rfid1.Remove(this);
+					}
+					this._dev_rfid1.Entity = value;
+					if ((value != null))
+					{
+						value.position_rfid1.Add(this);
+						this._rfid_id = value.id;
+					}
+					else
+					{
+						this._rfid_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("dev_rfid1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="room_position_rfid", Storage="_room", ThisKey="room_id", OtherKey="id", IsForeignKey=true)]
+		public room room
+		{
+			get
+			{
+				return this._room.Entity;
+			}
+			set
+			{
+				room previousValue = this._room.Entity;
+				if (((previousValue != value) 
+							|| (this._room.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._room.Entity = null;
+						previousValue.position_rfid.Remove(this);
+					}
+					this._room.Entity = value;
+					if ((value != null))
+					{
+						value.position_rfid.Add(this);
+						this._room_id = value.id;
+					}
+					else
+					{
+						this._room_id = default(int);
+					}
+					this.SendPropertyChanged("room");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_dev_rfid(dev_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_rfid = this;
+		}
+		
+		private void detach_dev_rfid(dev_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_rfid = null;
+		}
+		
+		private void attach_path_rfid(path_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_rfid = this;
+		}
+		
+		private void detach_path_rfid(path_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_rfid = null;
+		}
+		
+		private void attach_path_rfid1(path_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_rfid1 = this;
+		}
+		
+		private void detach_path_rfid1(path_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_rfid1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.room")]
+	public partial class room : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _name;
+		
+		private bool _map_inout;
+		
+		private EntitySet<position_camera> _position_camera;
+		
+		private EntitySet<position_rfid> _position_rfid;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void Onmap_inoutChanging(bool value);
+    partial void Onmap_inoutChanged();
+    #endregion
+		
+		public room()
+		{
+			this._position_camera = new EntitySet<position_camera>(new Action<position_camera>(this.attach_position_camera), new Action<position_camera>(this.detach_position_camera));
+			this._position_rfid = new EntitySet<position_rfid>(new Action<position_rfid>(this.attach_position_rfid), new Action<position_rfid>(this.detach_position_rfid));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_map_inout", DbType="Bit NOT NULL")]
+		public bool map_inout
+		{
+			get
+			{
+				return this._map_inout;
+			}
+			set
+			{
+				if ((this._map_inout != value))
+				{
+					this.Onmap_inoutChanging(value);
+					this.SendPropertyChanging();
+					this._map_inout = value;
+					this.SendPropertyChanged("map_inout");
+					this.Onmap_inoutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="room_position_camera", Storage="_position_camera", ThisKey="id", OtherKey="room_id")]
+		public EntitySet<position_camera> position_camera
+		{
+			get
+			{
+				return this._position_camera;
+			}
+			set
+			{
+				this._position_camera.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="room_position_rfid", Storage="_position_rfid", ThisKey="id", OtherKey="room_id")]
+		public EntitySet<position_rfid> position_rfid
+		{
+			get
+			{
+				return this._position_rfid;
+			}
+			set
+			{
+				this._position_rfid.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_position_camera(position_camera entity)
+		{
+			this.SendPropertyChanging();
+			entity.room = this;
+		}
+		
+		private void detach_position_camera(position_camera entity)
+		{
+			this.SendPropertyChanging();
+			entity.room = null;
+		}
+		
+		private void attach_position_rfid(position_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.room = this;
+		}
+		
+		private void detach_position_rfid(position_rfid entity)
+		{
+			this.SendPropertyChanging();
+			entity.room = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.video")]
+	public partial class video : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _position_id;
+		
+		private int _camera_id;
+		
+		private System.DateTime _start_time;
+		
+		private System.DateTime _end_time;
+		
+		private string _filename;
+		
+		private EntitySet<video_btracker_r> _video_btracker_r;
+		
+		private EntityRef<dev_camera> _dev_camera;
+		
+		private EntityRef<position_camera> _position_camera;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onposition_idChanging(int value);
+    partial void Onposition_idChanged();
+    partial void Oncamera_idChanging(int value);
+    partial void Oncamera_idChanged();
+    partial void Onstart_timeChanging(System.DateTime value);
+    partial void Onstart_timeChanged();
+    partial void Onend_timeChanging(System.DateTime value);
+    partial void Onend_timeChanged();
+    partial void OnfilenameChanging(string value);
+    partial void OnfilenameChanged();
+    #endregion
+		
+		public video()
+		{
+			this._video_btracker_r = new EntitySet<video_btracker_r>(new Action<video_btracker_r>(this.attach_video_btracker_r), new Action<video_btracker_r>(this.detach_video_btracker_r));
+			this._dev_camera = default(EntityRef<dev_camera>);
+			this._position_camera = default(EntityRef<position_camera>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_position_id", DbType="Int NOT NULL")]
+		public int position_id
+		{
+			get
+			{
+				return this._position_id;
+			}
+			set
+			{
+				if ((this._position_id != value))
+				{
+					if (this._position_camera.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onposition_idChanging(value);
+					this.SendPropertyChanging();
+					this._position_id = value;
+					this.SendPropertyChanged("position_id");
+					this.Onposition_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_camera_id", DbType="Int NOT NULL")]
+		public int camera_id
+		{
+			get
+			{
+				return this._camera_id;
+			}
+			set
+			{
+				if ((this._camera_id != value))
+				{
+					if (this._dev_camera.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncamera_idChanging(value);
+					this.SendPropertyChanging();
+					this._camera_id = value;
+					this.SendPropertyChanged("camera_id");
+					this.Oncamera_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_time", DbType="DateTime NOT NULL")]
+		public System.DateTime start_time
+		{
+			get
+			{
+				return this._start_time;
+			}
+			set
+			{
+				if ((this._start_time != value))
+				{
+					this.Onstart_timeChanging(value);
+					this.SendPropertyChanging();
+					this._start_time = value;
+					this.SendPropertyChanged("start_time");
+					this.Onstart_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_time", DbType="DateTime NOT NULL")]
+		public System.DateTime end_time
+		{
+			get
+			{
+				return this._end_time;
+			}
+			set
+			{
+				if ((this._end_time != value))
+				{
+					this.Onend_timeChanging(value);
+					this.SendPropertyChanging();
+					this._end_time = value;
+					this.SendPropertyChanged("end_time");
+					this.Onend_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_filename", DbType="NChar(512) NOT NULL", CanBeNull=false)]
+		public string filename
+		{
+			get
+			{
+				return this._filename;
+			}
+			set
+			{
+				if ((this._filename != value))
+				{
+					this.OnfilenameChanging(value);
+					this.SendPropertyChanging();
+					this._filename = value;
+					this.SendPropertyChanged("filename");
+					this.OnfilenameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="video_video_btracker_r", Storage="_video_btracker_r", ThisKey="id", OtherKey="video_id")]
+		public EntitySet<video_btracker_r> video_btracker_r
+		{
+			get
+			{
+				return this._video_btracker_r;
+			}
+			set
+			{
+				this._video_btracker_r.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_camera_video", Storage="_dev_camera", ThisKey="camera_id", OtherKey="id", IsForeignKey=true)]
+		public dev_camera dev_camera
+		{
+			get
+			{
+				return this._dev_camera.Entity;
+			}
+			set
+			{
+				dev_camera previousValue = this._dev_camera.Entity;
+				if (((previousValue != value) 
+							|| (this._dev_camera.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._dev_camera.Entity = null;
+						previousValue.video.Remove(this);
+					}
+					this._dev_camera.Entity = value;
+					if ((value != null))
+					{
+						value.video.Add(this);
+						this._camera_id = value.id;
+					}
+					else
+					{
+						this._camera_id = default(int);
+					}
+					this.SendPropertyChanged("dev_camera");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_camera_video", Storage="_position_camera", ThisKey="position_id", OtherKey="id", IsForeignKey=true)]
+		public position_camera position_camera
+		{
+			get
+			{
+				return this._position_camera.Entity;
+			}
+			set
+			{
+				position_camera previousValue = this._position_camera.Entity;
+				if (((previousValue != value) 
+							|| (this._position_camera.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._position_camera.Entity = null;
+						previousValue.video.Remove(this);
+					}
+					this._position_camera.Entity = value;
+					if ((value != null))
+					{
+						value.video.Add(this);
+						this._position_id = value.id;
+					}
+					else
+					{
+						this._position_id = default(int);
+					}
+					this.SendPropertyChanged("position_camera");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_video_btracker_r(video_btracker_r entity)
+		{
+			this.SendPropertyChanging();
+			entity.video = this;
+		}
+		
+		private void detach_video_btracker_r(video_btracker_r entity)
+		{
+			this.SendPropertyChanging();
+			entity.video = null;
 		}
 	}
 }

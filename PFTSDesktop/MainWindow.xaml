@@ -1,13 +1,21 @@
 ﻿<tmp:WindowTemplet x:Class="PFTSDesktop.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:tmp="clr-namespace:PftcsUITemplate.Controls;assembly=PftcsUITemplate"
-        MouseDoubleClick="MainWindow_OnMouseDoubleClick"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" BorderBrush="{DynamicResource windowStyle}" BorderThickness="1"
-        MinHeight="670" MinWidth="950" Height="670" Width="950" x:Name="main"
-        MoveHeight="80">
-    <Window.Resources>
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+                   Width="950"
+                   Height="670"
+                   MinWidth="950"
+                   MinHeight="670"
+                   BorderBrush="{DynamicResource windowStyle}"
+                   BorderThickness="1"
+                   MouseDoubleClick="MainWindow_OnMouseDoubleClick"
+                   MoveHeight="80"
+                   WindowStartupLocation="CenterScreen"
+                   x:Name="main"
+                   mc:Ignorable="d">
+ <Window.Resources>
         <Style TargetType="{x:Type tmp:FButton}" BasedOn="{StaticResource FButton_Transparency}">
             <Setter Property="Command" Value="{Binding OpenCommand,ElementName=main}"/>
         </Style>
@@ -29,7 +37,7 @@
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
             <Label  Grid.Column="0"  Name="TilteName" Width="120" HorizontalAlignment="Left" Content="涉案人员管理系统" FontFamily="宋体" Foreground="AliceBlue" Margin="5,0,0,0"/>
-           
+         
             <tmp:ButtonTemplet  Grid.Column="2" x:Name="btnMin" IsTabStop="False" VerticalAlignment="Top" Width="27" Height="22" Click="btnSysMin_Click">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mim.png"/>

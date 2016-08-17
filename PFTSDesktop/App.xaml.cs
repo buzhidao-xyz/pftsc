@@ -34,30 +34,30 @@ namespace PFTSDesktop
         {
             base.OnStartup(e);
 
-            MainWindow window = new MainWindow();
+            //MainWindow window = new MainWindow();
 
-            // Create the ViewModel to which 
-            // the main window binds.
+            //// Create the ViewModel to which 
+            //// the main window binds.
      
-            var viewModel = new MainWindowViewModel();
+            //var viewModel = new MainWindowViewModel();
 
-            // When the ViewModel asks to be closed, 
-            // close the window.
-            EventHandler handler = null;
-            handler = delegate
-            {
-                viewModel.RequestClose -= handler;
-                window.Close();
-            };
-            viewModel.RequestClose += handler;
+            //// When the ViewModel asks to be closed, 
+            //// close the window.
+            //EventHandler handler = null;
+            //handler = delegate
+            //{
+            //    viewModel.RequestClose -= handler;
+            //    window.Close();
+            //};
+            //viewModel.RequestClose += handler;
 
-            // Allow all controls in the window to 
-            // bind to the ViewModel by setting the 
-            // DataContext, which propagates down 
-            // the element tree.
-            window.DataContext = viewModel;
+            //// Allow all controls in the window to 
+            //// bind to the ViewModel by setting the 
+            //// DataContext, which propagates down 
+            //// the element tree.
+            //window.DataContext = viewModel;
 
-            window.Show();
+            //window.Show();
         }
     }
 }
