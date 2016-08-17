@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>12.0.41002.1</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Video.xaml.cs">
+      <DependentUpon>Video.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -65,6 +69,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Video.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -84,6 +92,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="lib\HCNetSDKCom\HCAlarm.lib" />
+    <None Include="lib\HCNetSDKCom\HCGeneralCfgMgr.lib" />
+    <None Include="lib\HCNetSDKCom\HCPreview.lib" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,7 +142,37 @@
     <Resource Include="Images\Button\xm.png" />
     <Resource Include="Images\Button\xn.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\AudioRender.dll" />
+    <Content Include="lib\HCCore.dll" />
+    <Content Include="lib\HCNetSDK.dll" />
+    <Content Include="lib\HCNetSDKCom\AnalyzeData.dll" />
+    <Content Include="lib\HCNetSDKCom\AudioIntercom.dll" />
+    <Content Include="lib\HCNetSDKCom\DsSdk.dll" />
+    <Content Include="lib\HCNetSDKCom\HCAlarm.dll" />
+    <Content Include="lib\HCNetSDKCom\HCCoreDevCfg.dll" />
+    <Content Include="lib\HCNetSDKCom\HCDisplay.dll" />
+    <Content Include="lib\HCNetSDKCom\HCGeneralCfgMgr.dll" />
+    <Content Include="lib\HCNetSDKCom\HCIndustry.dll" />
+    <Content Include="lib\HCNetSDKCom\HCPlayBack.dll" />
+    <Content Include="lib\HCNetSDKCom\HCPreview.dll" />
+    <Content Include="lib\HCNetSDKCom\HCVoiceTalk.dll" />
+    <Content Include="lib\HCNetSDKCom\libiconv2.dll" />
+    <Content Include="lib\HCNetSDKCom\msvcr90.dll" />
+    <Content Include="lib\HCNetSDKCom\OpenAL32.dll" />
+    <Content Include="lib\HCNetSDKCom\StreamTransClient.dll" />
+    <Content Include="lib\HCNetSDKCom\SystemTransform.dll" />
+    <Content Include="lib\PlayCtrl.dll" />
+    <Content Include="lib\SuperRender.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
+rd/s/q "$(ProjectDir)$(OutDir)\HCNetSDKCom"
+mkdir "$(ProjectDir)$(OutDir)\HCNetSDKCom"
+copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
+copy "$(ProjectDir)lib\HCNetSDKCom\*" "$(ProjectDir)$(OutDir)\HCNetSDKCom"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
