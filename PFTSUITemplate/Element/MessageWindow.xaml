@@ -8,7 +8,7 @@
 	
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/MoollyClient;component/Images/MessageImage.png" />
+            <ImageBrush ImageSource="/PFTSUITemplate;component/Images/MessageImage.png" />
         </Grid.Background>
     	<Grid.RowDefinitions>
     		<RowDefinition Height="30"/>
@@ -25,32 +25,32 @@
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center">
                 <tmp:ButtonTemplet x:Name="btnMin" VerticalAlignment="Top" Width="27" Height="22" Click="btnMin_Click">
                     <tmp:ButtonTemplet.MyMoverBrush>
-                        <ImageBrush ImageSource="/MoollyClient;component/Images/Button/mim.png"/>
+                        <ImageBrush ImageSource="/PFTSUITemplate;component/Images/Button/mim.png"/>
                     </tmp:ButtonTemplet.MyMoverBrush>
                     <tmp:ButtonTemplet.MyEnterBrush>
-                        <ImageBrush ImageSource="/MoollyClient;component/Images/Button/mie.png"/>
+                        <ImageBrush ImageSource="/PFTSUITemplate;component/Images/Button/mie.png"/>
                     </tmp:ButtonTemplet.MyEnterBrush>
                     <tmp:ButtonTemplet.Background>
-                        <ImageBrush ImageSource="/MoollyClient;component/Images/Button/min.png"/>
+                        <ImageBrush ImageSource="/PFTSUITemplate;component/Images/Button/min.png"/>
                     </tmp:ButtonTemplet.Background>
                 </tmp:ButtonTemplet>
                 <tmp:ButtonTemplet x:Name="btnExit" VerticalAlignment="Top" Width="27" Height="22" Click="btnExit_Click">
                     <tmp:ButtonTemplet.MyMoverBrush>
-                        <ImageBrush ImageSource="/MoollyClient;component/Images/Button/xm.png" />
+                        <ImageBrush ImageSource="/PFTSUITemplate;component/Images/Button/xm.png" />
                     </tmp:ButtonTemplet.MyMoverBrush>
                     <tmp:ButtonTemplet.MyEnterBrush>
-                        <ImageBrush ImageSource="/MoollyClient;component/Images/Button/xe.png"/>
+                        <ImageBrush ImageSource="/PFTSUITemplate;component/Images/Button/xe.png"/>
                     </tmp:ButtonTemplet.MyEnterBrush>
                     <tmp:ButtonTemplet.Background>
-                        <ImageBrush ImageSource="/MoollyClient;component/Images/Button/xn.png"/>
+                        <ImageBrush ImageSource="/PFTSUITemplate;component/Images/Button/xn.png"/>
                     </tmp:ButtonTemplet.Background>
                 </tmp:ButtonTemplet>
             </StackPanel>
         </Grid>
-        <Image Grid.Row="1" Height="32" HorizontalAlignment="Left" Margin="8,20,0,0" Name="imageError" Stretch="Fill" VerticalAlignment="Center" Width="32" Source="/MoollyClient;component/Images/Messsage/Error.ico" Visibility="Hidden"/>
-        <Image Grid.Row="1" Height="32" HorizontalAlignment="Left" Margin="8,20,0,0" Name="imageOk" Stretch="Fill" VerticalAlignment="Center" Width="32" Source="/MoollyClient;component/Images/Messsage/Ok.ico" Visibility="Hidden"/>
-        <Image Grid.Row="1" Height="32" HorizontalAlignment="Left" Margin="8,20,0,0" Name="imageWaring" Stretch="Fill" VerticalAlignment="Center" Width="32" Source="/MoollyClient;component/Images/Messsage/Waring.ico" Visibility="Hidden"/>
-        <Image Grid.Row="1" Height="32" HorizontalAlignment="Left" Margin="8,20,0,0" Name="imageDoubt" Stretch="Fill" VerticalAlignment="Center" Width="32" Source="/MoollyClient;component/Images/Messsage/Doubt.ico" Visibility="Hidden" />
+        <Image Grid.Row="1" Height="32" HorizontalAlignment="Left" Margin="8,20,0,0" Name="imageError" Stretch="Fill" VerticalAlignment="Center" Width="32" Source="/PFTSUITemplate;component/Images/Messsage/Error.ico" Visibility="Hidden"/>
+        <Image Grid.Row="1" Height="32" HorizontalAlignment="Left" Margin="8,20,0,0" Name="imageOk" Stretch="Fill" VerticalAlignment="Center" Width="32" Source="/PFTSUITemplate;component/Images/Messsage/Ok.ico" Visibility="Hidden"/>
+        <Image Grid.Row="1" Height="32" HorizontalAlignment="Left" Margin="8,20,0,0" Name="imageWaring" Stretch="Fill" VerticalAlignment="Center" Width="32" Source="/PFTSUITemplate;component/Images/Messsage/Waring.ico" Visibility="Hidden"/>
+        <Image Grid.Row="1" Height="32" HorizontalAlignment="Left" Margin="8,20,0,0" Name="imageDoubt" Stretch="Fill" VerticalAlignment="Center" Width="32" Source="/PFTSUITemplate;component/Images/Messsage/Doubt.ico" Visibility="Hidden" />
         <Label Name="lbCaption" FontFamily="黑体"  Content="Label" Grid.Row="1" HorizontalAlignment="Left" Margin="45,24,0,38" VerticalAlignment="Center" FontSize="15" Foreground="#ab5838" Grid.RowSpan="2" />
         <tmp:ButtonEX Content="确定" FontFamily="黑体" Grid.Row="2" Height="23" Margin="0,0,120,0"  x:Name="btnOk" VerticalAlignment="Center" Click="btnOk_Click" HorizontalAlignment="Right" Width="68" IsDefault="True" Grid.RowSpan="2" />
         <tmp:ButtonEX Content="取消" FontFamily="黑体" Grid.Row="2" Height="23" Margin="0,0,30,0" x:Name="btnCancel" VerticalAlignment="Center" Click="btnCancel_Click" HorizontalAlignment="Right" Width="68" IsCancel="True" Grid.RowSpan="2" />

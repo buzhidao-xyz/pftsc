@@ -5,10 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate" BorderBrush="LightGray" BorderThickness="1"
+        xmlns:tool="clr-namespace:PFTSTools;assembly=PFTSTools"
         Height="500" Width="800" ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None"
         x:Name="main"
+        FocusManager.FocusedElement="{Binding ElementName=txtUserName}"
         ShowInTaskbar="True" AllowsTransparency="True">
 
     <Grid>
@@ -48,7 +50,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--<Image Grid.Column="0" HorizontalAlignment="Left" Source="/MoollyClient;component/Images/logo.ico" Margin="5,5,0,5"/>-->
-            <Label Grid.Column="1" Name="NameAndVis"  Content="嫌疑犯管理系统" VerticalAlignment="Center"/>
+            <Label Grid.Column="1" Name="NameAndVis"  Content="涉案人员管理系统" VerticalAlignment="Center"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
                 <tmp:ButtonTemplet x:Name="btnMin" VerticalAlignment="Top" Width="27" Height="22" Focusable="False" 
                                    Command="{Binding WindowMinCommand}" CommandParameter="{Binding ElementName=main}" >
@@ -97,6 +99,7 @@
         <ContentPresenter Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="150,0,0,5" 
                           VerticalAlignment="Bottom" Content="{Binding ElementName=txtUserName, Path=(Validation.Errors).CurrentItem}"/>
         <PasswordBox Grid.Row="4" Background="Transparent" BorderThickness="0"  Name="txtPassword"
+                     tool:PasswordBoxHelper.Attach="True" tool:PasswordBoxHelper.Password="{Binding Path=Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                      Grid.Column="1" Margin="0,69,155,63" HorizontalAlignment="Right" Width="180" Grid.RowSpan="2" VerticalContentAlignment="Bottom"/>
         <TextBlock Grid.Row="5" Text="------------------------------------------" Grid.Column="1" Foreground="#6c5335" Height="9" HorizontalAlignment="Left" Margin="150,0,0,48" Width="220"/>
         <ContentPresenter Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="150,0,0,5" 

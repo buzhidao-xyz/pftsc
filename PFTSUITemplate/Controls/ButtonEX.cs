@@ -11,7 +11,7 @@ namespace PFTSUITemplate.Controls
     {
         static ButtonEX()
 		{
-            FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(Button), new FrameworkPropertyMetadata(typeof(Button)));
+            FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(ButtonEX), new FrameworkPropertyMetadata(typeof(ButtonEX)));
 		}
     }
 }

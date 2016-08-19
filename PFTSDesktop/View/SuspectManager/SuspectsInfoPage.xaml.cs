@@ -1,5 +1,4 @@
-﻿using PFTSDesktop.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PFTSDesktop.View.Pages
+namespace PFTSDesktop.View.SuspectManager
 {
     /// <summary>
-    /// SuspectManagerPage.xaml 的交互逻辑
+    /// SuspectsInfoPage.xaml 的交互逻辑
     /// </summary>
-    public partial class SuspectManagerPage : Page
+    public partial class SuspectsInfoPage : Page
     {
-        public SuspectManagerPage()
+        public SuspectsInfoPage()
         {
             InitializeComponent();
-
-            this.DataContext = new SuspectViewModel();
         }
     }
 }

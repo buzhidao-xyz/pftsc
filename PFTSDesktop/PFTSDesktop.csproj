@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Global.cs" />
     <Compile Include="LoginDlg.xaml.cs">
       <DependentUpon>LoginDlg.xaml</DependentUpon>
     </Compile>
@@ -63,6 +64,7 @@
     </Compile>
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\SuspectViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
     <Compile Include="View\Pages\DeviceManagerPage.xaml.cs">
@@ -79,6 +81,9 @@
     </Compile>
     <Compile Include="View\Pages\SuspectManagerPage.xaml.cs">
       <DependentUpon>SuspectManagerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SuspectManager\SuspectsInfoPage.xaml.cs">
+      <DependentUpon>SuspectsInfoPage.xaml</DependentUpon>
     </Compile>
     <Page Include="LoginDlg.xaml">
       <SubType>Designer</SubType>
@@ -118,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\SuspectManagerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SuspectManager\SuspectsInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,6 +170,10 @@
       <Project>{ec79570a-25a6-4bcb-a828-ce04b0269919}</Project>
       <Name>PFTSModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PFTSTools\PFTSTools.csproj">
+      <Project>{418fa0d6-c0cf-4c3c-89cf-7ca5966f410b}</Project>
+      <Name>PFTSTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PFTSUITemplate\PFTSUITemplate.csproj">
       <Project>{9e33c2ae-36d8-4022-bf77-ff6f012c9852}</Project>
       <Name>PFTSUITemplate</Name>
@@ -203,6 +216,7 @@
     <Resource Include="Images\Login\登录2.png" />
     <Resource Include="Images\Login\登陆框.png" />
     <Resource Include="Images\Login\背景.png" />
+    <Resource Include="Images\btnImage.png" />
     <Content Include="lib\AudioRender.dll" />
     <Content Include="lib\HCCore.dll" />
     <Content Include="lib\HCNetSDK.dll" />

@@ -15,7 +15,6 @@ namespace PFTSDesktop.ViewModel
     {
         private FButton preBtn;
         RelayCommand _openCommand;
-        private Uri frameSource;
 
         #region Commands
         public ICommand OpenCommand
@@ -30,7 +29,6 @@ namespace PFTSDesktop.ViewModel
                 return _openCommand;
             }
         }
-       
         #endregion
 
         #region 公共方法
@@ -43,27 +41,15 @@ namespace PFTSDesktop.ViewModel
             FButton btn = (FButton)obj;
             if (preBtn != null)
             {
+                if (btn == preBtn)
+                    return;
                 preBtn.SelectEd = false;
             }
             preBtn = btn;
             btn.SelectEd = true;
             FrameSource = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
-
-       
         #endregion
-        public Uri FrameSource
-        {
-            get { return frameSource; }
-            set
-            {
-                if (value == frameSource)
-                    return;
-
-                frameSource = value;
-
-                base.OnPropertyChanged("FrameSource");
-            }
-        }
+       
     }
 }

@@ -10,6 +10,6 @@
         <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/WindowTemplet.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/ButtonEX.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/ImageButton.xaml"/>
-
+        <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/PagingDataGrid.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

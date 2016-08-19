@@ -256,6 +256,38 @@
     <Resource Include="Images\pagination_prev.gif" />
     <Resource Include="Images\pagination_prev_gray.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Messsage\Doubt.ico" />
+    <Resource Include="Images\Messsage\Error.ico" />
+    <Resource Include="Images\Messsage\Ok.ico" />
+    <Resource Include="Images\Messsage\Waring.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Button\maa.png" />
+    <Resource Include="Images\Button\max.png" />
+    <Resource Include="Images\Button\mie.png" />
+    <Resource Include="Images\Button\mim.png" />
+    <Resource Include="Images\Button\min.png" />
+    <Resource Include="Images\Button\mme.png" />
+    <Resource Include="Images\Button\mmm.png" />
+    <Resource Include="Images\Button\mmn.png" />
+    <Resource Include="Images\Button\mse.png" />
+    <Resource Include="Images\Button\msm.png" />
+    <Resource Include="Images\Button\msn.png" />
+    <Resource Include="Images\Button\mxe.png" />
+    <Resource Include="Images\Button\mxm.png" />
+    <Resource Include="Images\Button\mxn.png" />
+    <Resource Include="Images\Button\mxx.png" />
+    <Resource Include="Images\Button\ske.png" />
+    <Resource Include="Images\Button\skm.png" />
+    <Resource Include="Images\Button\skn.png" />
+    <Resource Include="Images\Button\xe.png" />
+    <Resource Include="Images\Button\xm.png" />
+    <Resource Include="Images\Button\xn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MessageImage.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

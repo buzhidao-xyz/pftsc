@@ -2,7 +2,9 @@
 using PFTSDesktop.Model;
 using PFTSDesktop.Properties;
 using PFTSModel;
+using PFTSTools;
 using PFTSUITemplate.Controls;
+using PFTSUITemplate.Element;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -74,7 +76,12 @@ namespace PFTSDesktop.ViewModel
             if (!operatorModel.IsValid)
                 throw new InvalidOperationException(Resources.LoginViewModel_Exception_CannotLogin);
             //TODO 登录
-            //@operator operator = operatorService.GetByAccount()
+            @operator opt = operatorService.GetByAccount(Account);
+            if (opt == null || opt.password != MD5Tool.GetEncryptCode(Password))
+            {
+                MessageWindow.Show("账号或者密码不正确！", "系统提示", MessageWindowButton.OK, MessageWindowIcon.Error);
+                return;
+            }
             WindowTemplet win = (WindowTemplet)obj;
             MainWindow main = new MainWindow();
             var viewModel = new MainWindowViewModel();

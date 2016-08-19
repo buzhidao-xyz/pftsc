@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Style/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/FButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
+          
             <SolidColorBrush x:Key="windowStyle" Color="#17b38e" />
             <Style x:Key="dataGridStyle" TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -25,7 +26,7 @@
             </Style>
             <Style x:Key="lableNameStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="黑体" />
-                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontSize" Value="12" />
                 <Setter Property="Foreground" Value="#827e7e" />
             </Style>
             <Style x:Key="checkBoxStyle" TargetType="CheckBox">
@@ -409,6 +410,7 @@
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Setter Property="Height" Value="40" />
             </Style>
+            <ImageSource x:Key="btnImage">/PFTSDesktop;component/Images/btnImage.png</ImageSource>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
