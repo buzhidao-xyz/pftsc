@@ -4,6 +4,7 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+                   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
                    Width="950"
                    Height="670"
                    MinWidth="950"
@@ -15,9 +16,14 @@
                    WindowStartupLocation="CenterScreen"
                    x:Name="main"
                    mc:Ignorable="d">
- <Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding OpenCommand}" CommandParameter="{Binding ElementName=btnMonitoring}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
         <Style TargetType="{x:Type tmp:FButton}" BasedOn="{StaticResource FButton_Transparency}">
-            <Setter Property="Command" Value="{Binding OpenCommand,ElementName=main}"/>
+            <Setter Property="Command" Value="{Binding OpenCommand}"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -37,8 +43,9 @@
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
             <Label  Grid.Column="0"  Name="TilteName" Width="120" HorizontalAlignment="Left" Content="涉案人员管理系统" FontFamily="宋体" Foreground="AliceBlue" Margin="5,0,0,0"/>
-         
-            <tmp:ButtonTemplet  Grid.Column="2" x:Name="btnMin" IsTabStop="False" VerticalAlignment="Top" Width="27" Height="22" Click="btnSysMin_Click">
+
+            <tmp:ButtonTemplet  Grid.Column="2" x:Name="btnMin" IsTabStop="False" VerticalAlignment="Top"
+                                Width="27" Height="22" Command="{Binding WindowMinCommand}" CommandParameter="{Binding ElementName=main}">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mim.png"/>
                 </tmp:ButtonTemplet.MyMoverBrush>
@@ -72,7 +79,8 @@
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/max.png"/>
                 </tmp:ButtonTemplet.Background>
             </tmp:ButtonTemplet>
-            <tmp:ButtonTemplet  Grid.Column="4" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Command="{Binding Path=CloseCommand}">
+            <tmp:ButtonTemplet  Grid.Column="4" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" 
+                                Width="27" Height="22" Command="{Binding Path=CloseCommand}" CommandParameter="{Binding ElementName=main}">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xm.png" />
                 </tmp:ButtonTemplet.MyMoverBrush>
@@ -86,7 +94,7 @@
 
         </Grid>
         <Grid Grid.Row="1">
-            
+
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -94,18 +102,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical" Background="#f7f7f7">
-                <tmp:FButton Name="btnMonitoring" FIcon="&#xe60e;" Tag="View/Pages/MonitoringPage.xaml" SelectEd="True" Margin="13" HorizontalAlignment="Left">实时监控</tmp:FButton>
+                <tmp:FButton Name="btnMonitoring" CommandParameter="{Binding ElementName=btnMonitoring}"
+                             FIcon="&#xe60e;" Tag="View/Pages/MonitoringPage.xaml" Margin="13" HorizontalAlignment="Left">实时监控</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0"  HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton FIcon="&#xe60e;" Tag="View/Pages/SuspectManagerPage.xaml" Margin="13" HorizontalAlignment="Left">嫌疑人管理</tmp:FButton>
+                <tmp:FButton Name="btnSuspect" CommandParameter="{Binding ElementName=btnSuspect}" FIcon="&#xe60e;" Tag="View/Pages/SuspectManagerPage.xaml" Margin="13" HorizontalAlignment="Left">嫌疑人管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton FIcon="&#xe60e;" Tag="View/Pages/PoliceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">警员管理</tmp:FButton>
+                <tmp:FButton Name="btnPolice" CommandParameter="{Binding ElementName=btnPolice}" FIcon="&#xe60e;" Tag="View/Pages/PoliceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">警员管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton FIcon="&#xe60e;" Tag="View/Pages/DeviceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">设备管理</tmp:FButton>
+                <tmp:FButton Name="btnDevice" CommandParameter="{Binding ElementName=btnDevice}" FIcon="&#xe60e;" Tag="View/Pages/DeviceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">设备管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton FIcon="&#xe60e;" Tag="View/Pages/OperatorManangerPage.xaml" Margin="13" HorizontalAlignment="Left">操作员管理</tmp:FButton>
+                <tmp:FButton Name="btnOperator" CommandParameter="{Binding ElementName=btnOperator}" FIcon="&#xe60e;" Tag="View/Pages/OperatorManangerPage.xaml" Margin="13" HorizontalAlignment="Left">操作员管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
             </StackPanel>
-            <Frame Background="White" x:Name="PageContext" Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" NavigationUIVisibility="Visible"/>
+            <Frame Background="White" Source="{Binding FrameSource}"  x:Name="PageContext" Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" NavigationUIVisibility="Visible"/>
         </Grid>
     </Grid>
 </tmp:WindowTemplet>

@@ -1,9 +1,11 @@
 ﻿using PFTSDesktop.Command;
+using PFTSUITemplate.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PFTSDesktop.ViewModel
@@ -29,7 +31,7 @@ namespace PFTSDesktop.ViewModel
 
         #endregion // Constructor
 
-        #region CloseCommand
+        #region Commands
 
         /// <summary>
         /// Returns the command that, when invoked, attempts
@@ -39,13 +41,17 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                if (_closeCommand == null)
-                    _closeCommand = new RelayCommand(param => this.OnRequestClose());
-
-                return _closeCommand;
+                return new RelayCommand(new Action<Object>(this.OnRequestClose));
             }
         }
 
+        public ICommand WindowMinCommand
+        {
+            get
+            {
+                return new RelayCommand(new Action<Object>(this.WindowMin));
+            }
+        }
         #endregion // CloseCommand
 
         #region RequestClose [event]
@@ -55,11 +61,20 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public event EventHandler RequestClose;
 
-        void OnRequestClose()
+        void OnRequestClose(Object obj)
         {
-            EventHandler handler = this.RequestClose;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            WindowTemplet win = (WindowTemplet)obj;
+            win.Close();
+        }
+
+        /// <summary>
+        /// 窗体最小化
+        /// </summary>
+        /// <param name="obj">指定窗体窗体</param>
+        public void WindowMin(Object obj)
+        {
+            WindowTemplet win = (WindowTemplet)obj;
+            win.WindowState = WindowState.Minimized;
         }
 
         #endregion // RequestClose [event]

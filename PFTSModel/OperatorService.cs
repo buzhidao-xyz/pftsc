@@ -32,5 +32,30 @@ namespace PFTSModel
             }
             return null;
         }
+
+        /// <summary>
+        /// 通过账号获取操作员信息
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        public @operator GetByAccount(string account)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<@operator> table = db.GetTable<@operator>();
+                    var query = from op in db.@operator
+                                where op.account == account
+                                select op;
+                    return query.FirstOrDefault();
+                }
+            }
+            catch
+            {
+
+            }
+            return null;
+        }
     }
 }

@@ -1,7 +1,8 @@
 ﻿<Application x:Class="PFTSDesktop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Video.xaml">
+             xmlns:vm="clr-namespace:PFTSDesktop.ViewModel"
+             xmlns:vw="clr-namespace:PFTSDesktop.View.Pages">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

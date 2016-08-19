@@ -133,11 +133,11 @@ namespace PFTSUITemplate.Element
                     }
                     else if (Type == StatusModel.Normal)
                     {
-                        if (!Regular_Expressions_other(textBox.Text))
-                        {
-                            textBox.Text = textBox.Text.Remove(offset, change[0].AddedLength);
-                            textBox.Select(offset, 0);
-                        }
+                        //if (!Regular_Expressions_other(textBox.Text))
+                        //{
+                        //    textBox.Text = textBox.Text.Remove(offset, change[0].AddedLength);
+                        //    textBox.Select(offset, 0);
+                        //}
                     }
                     else if (Type == StatusModel.PureDigital)
                     {

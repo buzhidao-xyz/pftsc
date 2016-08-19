@@ -1,0 +1,130 @@
+﻿<tmp:WindowTemplet x:Class="PFTSDesktop.LoginDlg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate" BorderBrush="LightGray" BorderThickness="1"
+        Height="500" Width="800" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        x:Name="main"
+        ShowInTaskbar="True" AllowsTransparency="True">
+
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock 
+          FontStyle="Italic"
+          Foreground="Red"
+          HorizontalAlignment="Right"
+          Margin="0,1"
+          Text="{Binding Path=ErrorContent}" 
+          />
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.Background>
+            <ImageBrush ImageSource="/PFTSDesktop;component\Images\Login\背景.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="90" />
+            <RowDefinition Height="70" />
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3.5*" />
+            <ColumnDefinition Width="6.5*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+
+        <Image x:Name="image2" Stretch="Fill" Source="/PFTSDesktop;component/Images\Login\登陆框.png" Grid.Row="2" Grid.RowSpan="5" Grid.Column="1" />
+        <Grid x:Name="gridTitleBar" Grid.ColumnSpan="3" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--<Image Grid.Column="0" HorizontalAlignment="Left" Source="/MoollyClient;component/Images/logo.ico" Margin="5,5,0,5"/>-->
+            <Label Grid.Column="1" Name="NameAndVis"  Content="嫌疑犯管理系统" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+                <tmp:ButtonTemplet x:Name="btnMin" VerticalAlignment="Top" Width="27" Height="22" Focusable="False" 
+                                   Command="{Binding WindowMinCommand}" CommandParameter="{Binding ElementName=main}" >
+                    <tmp:ButtonTemplet.MyMoverBrush>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mim.png"/>
+                    </tmp:ButtonTemplet.MyMoverBrush>
+                    <tmp:ButtonTemplet.MyEnterBrush>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mie.png"/>
+                    </tmp:ButtonTemplet.MyEnterBrush>
+                    <tmp:ButtonTemplet.Background>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/min.png"/>
+                    </tmp:ButtonTemplet.Background>
+                </tmp:ButtonTemplet>
+                <tmp:ButtonTemplet x:Name="btnExit" VerticalAlignment="Top" Width="27" Height="22" Focusable="False"
+                                   Command="{Binding Path=CloseCommand}" CommandParameter="{Binding ElementName=main}">
+                    <tmp:ButtonTemplet.MyMoverBrush>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xm.png" />
+                    </tmp:ButtonTemplet.MyMoverBrush>
+                    <tmp:ButtonTemplet.MyEnterBrush>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xe.png"/>
+                    </tmp:ButtonTemplet.MyEnterBrush>
+                    <tmp:ButtonTemplet.Background>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xn.png"/>
+                    </tmp:ButtonTemplet.Background>
+                </tmp:ButtonTemplet>
+            </StackPanel>
+        </Grid>
+
+        <Label Grid.Row="4" Grid.Column="1" Target="{Binding ElementName=txtUserName}" Margin="85,12,0,20" Width="80" HorizontalAlignment="Left">
+            <Label.Background>
+                <ImageBrush ImageSource="/PFTSDesktop;component/Images\Login\用户名.png"/>
+            </Label.Background>
+        </Label>
+
+        <Label Grid.Row="4" Height="38" Width="75" Margin="82,0,0,54"  Target="{Binding ElementName=txtPassword}" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.RowSpan="2">
+            <Label.Background>
+                <ImageBrush ImageSource="/PFTSDesktop;component/Images\Login\密码.png"/>
+            </Label.Background>
+        </Label>
+        <ele:RegularText  Grid.Row="4" Background="Transparent" BorderThickness="0"  x:Name="txtUserName" Grid.Column="1" Margin="0,17,155,26"
+                          Text="{Binding Account, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" 
+                           Validation.ErrorTemplate="{x:Null}"
+                          VerticalContentAlignment="Bottom" HorizontalAlignment="Right" Width="179">
+        </ele:RegularText>
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="------------------------------------------" Foreground="#6c5335" Height="9" HorizontalAlignment="Left" Margin="150,8,0,0" Width="220"/>
+        <ContentPresenter Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="150,0,0,5" 
+                          VerticalAlignment="Bottom" Content="{Binding ElementName=txtUserName, Path=(Validation.Errors).CurrentItem}"/>
+        <PasswordBox Grid.Row="4" Background="Transparent" BorderThickness="0"  Name="txtPassword"
+                     Grid.Column="1" Margin="0,69,155,63" HorizontalAlignment="Right" Width="180" Grid.RowSpan="2" VerticalContentAlignment="Bottom"/>
+        <TextBlock Grid.Row="5" Text="------------------------------------------" Grid.Column="1" Foreground="#6c5335" Height="9" HorizontalAlignment="Left" Margin="150,0,0,48" Width="220"/>
+        <ContentPresenter Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="150,0,0,5" 
+                          VerticalAlignment="Center" Content="{Binding ElementName=txtPassword, Path=(Validation.Errors).CurrentItem}"/>
+        <tmp:ButtonTemplet Grid.Row="5" IsDefault="True" x:Name="btnLogin" Focusable="False" Width="100" Height="35" HorizontalContentAlignment="Stretch"
+                Margin="133,55,0,0"  HorizontalAlignment="Left" Grid.Column="1" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=main}">
+            <tmp:ButtonTemplet.MyEnterBrush>
+                <ImageBrush ImageSource="/PFTSDesktop;component/Images\Login\登录2.png"></ImageBrush>
+            </tmp:ButtonTemplet.MyEnterBrush>
+            <tmp:ButtonTemplet.MyMoverBrush>
+                <ImageBrush ImageSource="/PFTSDesktop;component/Images\Login\登录2.png"></ImageBrush>
+            </tmp:ButtonTemplet.MyMoverBrush>
+            <tmp:ButtonTemplet.Background>
+                <ImageBrush ImageSource="/PFTSDesktop;component/Images\Login\登录.png"></ImageBrush>
+            </tmp:ButtonTemplet.Background>
+        </tmp:ButtonTemplet>
+        <tmp:ButtonTemplet Grid.Row="5"  Height="35" HorizontalAlignment="Right"  x:Name="btnCancel" VerticalAlignment="Center" Width="100" 
+                           IsCancel="True" Focusable="False"  Margin="0,55,128,0" Grid.Column="1" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=main}">
+            <tmp:ButtonTemplet.MyEnterBrush>
+                <ImageBrush ImageSource="/PFTSDesktop;component/Images\Login\取消2.png"></ImageBrush>
+            </tmp:ButtonTemplet.MyEnterBrush>
+            <tmp:ButtonTemplet.MyMoverBrush>
+                <ImageBrush ImageSource="/PFTSDesktop;component/Images\Login\取消2.png"></ImageBrush>
+            </tmp:ButtonTemplet.MyMoverBrush>
+            <tmp:ButtonTemplet.Background>
+                <ImageBrush ImageSource="/PFTSDesktop;component/Images\Login\取消.png"></ImageBrush>
+            </tmp:ButtonTemplet.Background>
+        </tmp:ButtonTemplet>
+    </Grid>
+</tmp:WindowTemplet>
+

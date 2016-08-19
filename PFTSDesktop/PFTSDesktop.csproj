@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,9 +54,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LoginDlg.xaml.cs">
+      <DependentUpon>LoginDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\OperatorModel.cs" />
     <Compile Include="Video.xaml.cs">
       <DependentUpon>Video.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
@@ -74,6 +80,10 @@
     <Compile Include="View\Pages\SuspectManagerPage.xaml.cs">
       <DependentUpon>SuspectManagerPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="LoginDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -180,10 +190,19 @@
     <Resource Include="Images\Button\xm.png" />
     <Resource Include="Images\Button\xn.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Images\Login\backfocus.png" />
+    <Resource Include="Images\Login\enter.png" />
+    <Resource Include="Images\Login\取消.png" />
+    <Resource Include="Images\Login\取消2.png" />
+    <Resource Include="Images\Login\字8.png" />
+    <Resource Include="Images\Login\密码.png" />
+    <Resource Include="Images\Login\用户名.png" />
+    <Resource Include="Images\Login\登录.png" />
+    <Resource Include="Images\Login\登录2.png" />
+    <Resource Include="Images\Login\登陆框.png" />
+    <Resource Include="Images\Login\背景.png" />
     <Content Include="lib\AudioRender.dll" />
     <Content Include="lib\HCCore.dll" />
     <Content Include="lib\HCNetSDK.dll" />
