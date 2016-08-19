@@ -8,7 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/TabControlLeft.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/TabItemLeft.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/WindowTemplet.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/Button.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/ButtonEX.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/ImageButton.xaml"/>
 
     </ResourceDictionary.MergedDictionaries>

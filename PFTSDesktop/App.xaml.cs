@@ -34,15 +34,15 @@ namespace PFTSDesktop
         {
             base.OnStartup(e);
 
-            //MainWindow window = new MainWindow();
+            LoginDlg window = new LoginDlg();
 
-            //// Create the ViewModel to which 
-            //// the main window binds.
-     
-            //var viewModel = new MainWindowViewModel();
+            // Create the ViewModel to which 
+            // the main window binds.
+           
+            var viewModel = new LoginViewModel();
 
-            //// When the ViewModel asks to be closed, 
-            //// close the window.
+            // When the ViewModel asks to be closed, 
+            // close the window.
             //EventHandler handler = null;
             //handler = delegate
             //{
@@ -51,13 +51,13 @@ namespace PFTSDesktop
             //};
             //viewModel.RequestClose += handler;
 
-            //// Allow all controls in the window to 
-            //// bind to the ViewModel by setting the 
-            //// DataContext, which propagates down 
-            //// the element tree.
-            //window.DataContext = viewModel;
+            // Allow all controls in the window to 
+            // bind to the ViewModel by setting the 
+            // DataContext, which propagates down 
+            // the element tree.
+            window.DataContext = viewModel;
 
-            //window.Show();
+            window.Show();
         }
     }
 }

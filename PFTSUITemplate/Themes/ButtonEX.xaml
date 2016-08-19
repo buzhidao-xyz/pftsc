@@ -15,7 +15,7 @@
     <SolidColorBrush Color="Blue" x:Key="DefaultBackground" />
     <SolidColorBrush Color="Gray" x:Key="DisabledBackground" />
 
-    <Style TargetType="{x:Type CustomWPF:Button}">
+    <Style TargetType="{x:Type CustomWPF:ButtonEX}">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Control.Template">
             <Setter.Value>

@@ -56,7 +56,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Button.cs">
+    <Compile Include="Controls\ButtonEX.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\ButtonTemplet.cs" />
@@ -198,7 +198,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Button.xaml">
+    <Page Include="Themes\ButtonEX.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

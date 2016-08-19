@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace PFTSUITemplate.Controls
 {
-    public class Button : System.Windows.Controls.Button
+    public class ButtonEX : System.Windows.Controls.Button
     {
-        static Button()
+        static ButtonEX()
 		{
             FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(Button), new FrameworkPropertyMetadata(typeof(Button)));
 		}
