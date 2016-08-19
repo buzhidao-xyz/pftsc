@@ -3,3 +3,10 @@ bin
 obj
 *.csproj.user
 /PFTSDesktop/*.dat
+/PFTSDesktop/3fiakebq.oho
+/PFTSHwCtrl/Supercharger.dat
+/PFTSHwCtrl/CodeMAP.dat
+/PFTSUITemplate/CodeMAP.dat
+/PFTSModel/Supercharger.dat
+/PFTSUITemplate/Supercharger.dat
+/.vs/pftsc/v14/.suo
