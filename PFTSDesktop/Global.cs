@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PFTSDesktop.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,9 @@ namespace PFTSDesktop
 {
     public static class Global
     {
-        public static Uri CurrentUri { get; set; }
+        /// <summary>
+        /// 程序主窗体
+        /// </summary>
+        public static MainWindowViewModel currentMainWindow { get; set; }
     }
 }
