@@ -50,7 +50,7 @@ namespace PFTSDesktop.ViewModel
         public void AddSupect(Object obj)
         {
             ButtonEX btn = (ButtonEX)obj;
-            FrameSource = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            Global.currentMainWindow.FrameSource = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
         public void GetSuspects(Object obj)

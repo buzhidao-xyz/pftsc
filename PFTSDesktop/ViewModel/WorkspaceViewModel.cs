@@ -21,7 +21,7 @@ namespace PFTSDesktop.ViewModel
 
         RelayCommand _closeCommand;
 
-        private Uri frameSource;
+       
 
         #endregion // Fields
 
@@ -79,19 +79,7 @@ namespace PFTSDesktop.ViewModel
             win.WindowState = WindowState.Minimized;
         }
 
-        public Uri FrameSource
-        {
-            get { return frameSource; }
-            set
-            {
-                if (value == frameSource)
-                    return;
-
-                frameSource = value;
-
-                base.OnPropertyChanged("FrameSource");
-            }
-        }
+       
         #endregion // RequestClose [event]
     }
 }

@@ -25,14 +25,14 @@
             <Label Content="嫌疑犯列表"  VerticalContentAlignment="Center" Style="{DynamicResource lableProStyle}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <tmp:ButtonTemplet Width="100" Height="35" SelectEd="True" FontFamily="黑体" FontWeight="Bold" Foreground="#827e7e" FontSize="13" 
+            <tmp:ButtonTemplet Width="100" Height="35" SelectEd="True" Tag="1" FontFamily="黑体" FontWeight="Bold" Foreground="#827e7e" FontSize="13" 
                                Name="btnIn"  Margin="30,0,0,0" Focusable="False"  Content="在监疑犯"  HorizontalAlignment="Center"
                                VerticalAlignment="Center" Command="{Binding GetSuspectsCommand}" CommandParameter="{Binding ElementName=btnIn}">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="{DynamicResource btnImage}"/>
                 </tmp:ButtonTemplet.MyMoverBrush>
             </tmp:ButtonTemplet>
-            <tmp:ButtonTemplet Width="100" Height="35" FontFamily="黑体" FontWeight="Bold" Foreground="#827e7e" FontSize="13" Name="btnAll" 
+            <tmp:ButtonTemplet Width="100" Height="35" FontFamily="黑体" Tag="2" FontWeight="Bold" Foreground="#827e7e" FontSize="13" Name="btnAll" 
                                Margin="30,0,0,0" Focusable="False" Content="全部疑犯" HorizontalAlignment="Center" VerticalAlignment="Center"
                                Command="{Binding GetSuspectsCommand}" CommandParameter="{Binding ElementName=btnAll}">
                 <tmp:ButtonTemplet.MyMoverBrush>
@@ -40,7 +40,7 @@
                 </tmp:ButtonTemplet.MyMoverBrush>
             </tmp:ButtonTemplet>
         </StackPanel>
-        <tmp:ButtonEX Name="btnAddSuspect" Grid.Row="1" Content="新增嫌疑人" VerticalAlignment="Top"  HorizontalAlignment="Right" Tag="View/Pages/SuspectManager/SuspectsInfoPage.xaml"
+        <tmp:ButtonEX Name="btnAddSuspect" Grid.Row="1" Content="新增嫌疑人" VerticalAlignment="Top"  HorizontalAlignment="Right" Tag="View/SuspectManager/AddSuspectPage.xaml"
                       Margin="0,12,100,0" Width="90" Height="26" Command="{Binding AddSupcetCommand}" CommandParameter="{Binding ElementName=btnAddSuspect}"/>
         <ele:PageDataGridEx  Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None">
             <ele:PageDataGridEx.Columns>

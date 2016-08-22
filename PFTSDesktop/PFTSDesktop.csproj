@@ -85,6 +85,9 @@
     <Compile Include="View\Pages\SuspectManagerPage.xaml.cs">
       <DependentUpon>SuspectManagerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SuspectManager\AddSuspectPage.xaml.cs">
+      <DependentUpon>AddSuspectPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SuspectManager\SuspectsInfoPage.xaml.cs">
       <DependentUpon>SuspectsInfoPage.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\SuspectManagerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SuspectManager\AddSuspectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

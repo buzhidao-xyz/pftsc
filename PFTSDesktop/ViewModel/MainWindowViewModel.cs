@@ -14,7 +14,13 @@ namespace PFTSDesktop.ViewModel
     public class MainWindowViewModel : WorkspaceViewModel
     {
         private FButton preBtn;
+        private Uri frameSource;
         RelayCommand _openCommand;
+
+        public MainWindowViewModel()
+        {
+            Global.currentMainWindow = this;
+        }
 
         #region Commands
         public ICommand OpenCommand
@@ -49,7 +55,21 @@ namespace PFTSDesktop.ViewModel
             btn.SelectEd = true;
             FrameSource = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
+
+        public Uri FrameSource
+        {
+            get { return frameSource; }
+            set
+            {
+                if (value == frameSource)
+                    return;
+
+                frameSource = value;
+
+                base.OnPropertyChanged("FrameSource");
+            }
+        }
         #endregion
-       
+
     }
 }
