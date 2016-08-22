@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PFTSHwCtrl
+namespace PFTSScene
 {
     /// <summary>
-    /// PFTSVideoControl.xaml 的交互逻辑
+    /// PFTSSceneControl.xaml 的交互逻辑
     /// </summary>
-    public partial class PFTSVideoControl : UserControl
+    public partial class PFTSSceneControl : UserControl
     {
-        public PFTSVideoControl()
+        public PFTSSceneControl()
         {
             InitializeComponent();
         }

@@ -169,7 +169,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PFTSHwCtrl\PFTSHwCtrl.csproj">
@@ -179,6 +181,10 @@
     <ProjectReference Include="..\PFTSModel\PFTSModel.csproj">
       <Project>{ec79570a-25a6-4bcb-a828-ce04b0269919}</Project>
       <Name>PFTSModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PFTSScene\PFTSScene.csproj">
+      <Project>{bf8ac279-0b0e-40d6-ae8d-7a1baa7bc8a4}</Project>
+      <Name>PFTSScene</Name>
     </ProjectReference>
     <ProjectReference Include="..\PFTSTools\PFTSTools.csproj">
       <Project>{418fa0d6-c0cf-4c3c-89cf-7ca5966f410b}</Project>

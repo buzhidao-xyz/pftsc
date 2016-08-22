@@ -25,6 +25,9 @@ namespace PFTSDesktop.ViewModel
         public LoginViewModel() {
             operatorModel = new OperatorModel();
             operatorService = new OperatorService();
+            // TODO: test
+            operatorModel.Account = "admin";
+            operatorModel.Password = "123456";
         }
 
         #region 人员表属性
