@@ -53,6 +53,7 @@
     <Compile Include="PFTSVideoControl.xaml.cs">
       <DependentUpon>PFTSVideoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PFTSVideoProxy.cs" />
     <Compile Include="PlayCtrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

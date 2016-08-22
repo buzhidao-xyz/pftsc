@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -244,7 +247,6 @@
     <PostBuildEvent>copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
 rd/s/q "$(ProjectDir)$(OutDir)\HCNetSDKCom"
 mkdir "$(ProjectDir)$(OutDir)\HCNetSDKCom"
-
 copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
 copy "$(ProjectDir)lib\HCNetSDKCom\*" "$(ProjectDir)$(OutDir)\HCNetSDKCom"</PostBuildEvent>
   </PropertyGroup>
