@@ -14,14 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PFTSDesktop.ViewModel;
 
-namespace PFTSDesktop.View.Pages
+namespace PFTSDesktop.View.OperatorManager
 {
     /// <summary>
-    /// OperatorManangerPage.xaml 的交互逻辑
+    /// OperatorNewPage.xaml 的交互逻辑
     /// </summary>
-    public partial class OperatorManangerPage : Page
+    public partial class OperatorNewPage : Page
     {
-        public OperatorManangerPage()
+        public OperatorNewPage()
         {
             InitializeComponent();
 
