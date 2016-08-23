@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using PFTSHwCtrl;
 
 namespace PFTSDesktop.ViewModel
 {
@@ -24,6 +25,9 @@ namespace PFTSDesktop.ViewModel
         public LoginViewModel() {
             operatorModel = new OperatorModel();
             operatorService = new OperatorService();
+            // TODO: test
+            operatorModel.Account = "admin";
+            operatorModel.Password = "123456";
         }
 
         #region 人员表属性
@@ -73,6 +77,10 @@ namespace PFTSDesktop.ViewModel
 
         public void Login(Object obj)
         {
+            var proxy = new PFTSVideoProxy("192.168.10.164", 8000, "admin", "Gt123456");
+            proxy.Login();
+            proxy.StartRecord("D:\\aa.mp4");
+
             if (!operatorModel.IsValid)
                 throw new InvalidOperationException(Resources.LoginViewModel_Exception_CannotLogin);
             //TODO 登录

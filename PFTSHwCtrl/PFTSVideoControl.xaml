@@ -8,7 +8,7 @@
              d:DesignWidth="600"
              mc:Ignorable="d">
     <Grid>
-        <WindowsFormsHost Width="600" Height="400">
+        <WindowsFormsHost>
             <winf:PictureBox x:Name="realPlayWnd"
                              BackColor="Black"
                              Dock="Fill" />

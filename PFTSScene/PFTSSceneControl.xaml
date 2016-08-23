@@ -1,0 +1,228 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PFTSScene"
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="PFTSScene.PFTSSceneControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="886" d:DesignWidth="1660">
+    <UserControl.Resources>
+        <ResourceDictionary Source="DictionaryScene.xaml"/>
+    </UserControl.Resources>
+    <UserControl.Background>
+        <ImageBrush ImageSource="Images/background.png"/>
+    </UserControl.Background>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="54*"/>
+                <RowDefinition Height="120*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="26*"/>
+                <RowDefinition Height="106*"/>
+                <RowDefinition Height="140*"/>
+                <RowDefinition Height="160*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="82*"/>
+                <ColumnDefinition Width="56*"/>
+                <ColumnDefinition Width="82*"/>
+                <ColumnDefinition Width="64*"/>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="160*"/>
+                <ColumnDefinition Width="120*"/>
+                <ColumnDefinition Width="140*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="180*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="90*"/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="180*"/>
+                <ColumnDefinition Width="76*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="room1" Grid.Row="9" Grid.Column="15" Grid.ColumnSpan="2">
+                <Image x:Name="image1" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+            <Grid x:Name="room2" Grid.Row="8" Grid.Column="16" Grid.ColumnSpan="1">
+                <Image x:Name="image2" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+            <Grid x:Name="room3" Grid.Row="7" Grid.Column="16" Grid.ColumnSpan="1">
+                <Image x:Name="image3" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+            <Grid x:Name="room4" Grid.Row="5" Grid.RowSpan="2" Grid.Column="16" Grid.ColumnSpan="1" >
+                <Image x:Name="image4" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+            <Grid Grid.Row="6" Grid.RowSpan="2" Grid.Column="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room5" Grid.Column="1">
+                    <Image x:Name="image5" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                </Grid>
+            </Grid>
+            <Grid x:Name="room6" Grid.Row="3" Grid.Column="15">
+                <Image x:Name="image6" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+            <Grid x:Name="room7" Grid.Row="0" Grid.RowSpan="2" Grid.Column="14" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room8" Grid.Row="8" Grid.Column="13" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room9" Grid.Row="6" Grid.RowSpan="2" Grid.Column="13" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room10" Grid.Row="4" Grid.RowSpan="2" Grid.Column="13" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room11" Grid.Row="3" Grid.Column="13" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room12" Grid.Row="2" Grid.Column="13">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room13" Grid.Row="0" Grid.RowSpan="2" Grid.Column="12" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room14" Grid.Row="8" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room15" Grid.Row="6" Grid.RowSpan="2" Grid.Column="10" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room16" Grid.Row="4" Grid.RowSpan="2" Grid.Column="10" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room17" Grid.Row="3" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room18" Grid.Row="2" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room19" Grid.Row="0" Grid.RowSpan="2" Grid.Column="9" Grid.ColumnSpan="3">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room20" Grid.Row="8" Grid.RowSpan="1" Grid.Column="7" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room21" Grid.Row="6" Grid.RowSpan="2" Grid.Column="7" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room22" Grid.Row="4" Grid.RowSpan="2" Grid.Column="7" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room23" Grid.Row="3" Grid.RowSpan="1" Grid.Column="7" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room24" Grid.Row="3" Grid.RowSpan="2" Grid.Column="9" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room25" Grid.Row="2" Grid.RowSpan="1" Grid.Column="7" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room26" Grid.Row="0" Grid.RowSpan="2" Grid.Column="7" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room27" Grid.Row="8" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room28" Grid.Row="6" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room29" Grid.Row="4" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room30" Grid.Row="3" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room31" Grid.Row="2" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room32" Grid.Row="1" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid Grid.Row="6" Grid.RowSpan="2" Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition Width="0.4*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room33">
+                    <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.RowSpan="2" Grid.Column="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room34" Grid.Column="1">
+                    <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                </Grid>
+            </Grid>
+
+            <Grid x:Name="room35" Grid.Row="9" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="4">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room36" Grid.Row="8" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room37" Grid.Row="7" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room38" Grid.Row="4" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room39" Grid.Row="3" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="2">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room40" Grid.Row="2" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="1">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+            <Grid x:Name="room43" Grid.Row="1" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="3">
+                <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>
