@@ -15,6 +15,8 @@ namespace PFTSDesktop.ViewModel
 {
     class OperatorManagerViewModel : WorkspaceViewModel
     {
+        private static OperatorManagerViewModel instance;
+
         //操作员serviceobject
         private OperatorService OperatorService;
 
@@ -28,6 +30,15 @@ namespace PFTSDesktop.ViewModel
         public OperatorManagerViewModel()
         {
             OperatorService = new OperatorService();
+        }
+
+        public static OperatorManagerViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new OperatorManagerViewModel();
+            }
+            return instance;
         }
 
         /// <summary>

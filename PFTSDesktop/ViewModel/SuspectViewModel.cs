@@ -275,7 +275,6 @@ namespace PFTSDesktop.ViewModel
             btk.locker_id = _suspectModel.LockerId;
             btk.private_goods = _suspectModel.PirvateGoods;
             btk.in_time = DateTime.Now;
-            btk.locker_id = null;
             bool result = _supectService.Insert(btk);
             if (result)
             {
