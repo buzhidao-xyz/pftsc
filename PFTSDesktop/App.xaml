@@ -5,10 +5,9 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Style/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/FButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
-          
+
             <SolidColorBrush x:Key="windowStyle" Color="#17b38e" />
             <Style x:Key="dataGridStyle" TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -16,27 +15,34 @@
             </Style>
             <Style TargetType="element:RegularText" x:Key="textboxStyle">
                 <Setter Property="BorderBrush" Value="#7debd2"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
+                <Setter Property="FontSize" Value="14"></Setter>
                 <Setter Property="Foreground" Value="#17b38e"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="30"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
             <Style x:Key="dataGridComStyle" TargetType="CheckBox">
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock  FontStyle="Italic" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,1" Text="{Binding Path=ErrorContent}"/>
+            </DataTemplate>
             <Style x:Key="lableProStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="黑体" />
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="14" />
                 <Setter Property="Foreground" Value="#e77615" />
             </Style>
             <Style x:Key="lableNameStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="黑体" />
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
                 <Setter Property="Foreground" Value="#827e7e" />
             </Style>
             <Style x:Key="checkBoxStyle" TargetType="CheckBox">
                 <Setter Property="FontFamily" Value="黑体" />
-                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontSize" Value="14" />
                 <Setter Property="Foreground" Value="#827e7e" />
             </Style>
 
@@ -49,7 +55,7 @@
             </Style>
             <Style x:Key="comboxStyle" TargetType="ComboBox">
                 <Setter Property="BorderBrush" Value="#7debd2" />
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="14" />
                 <Setter Property="Foreground" Value="#17b38e" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
@@ -416,6 +422,48 @@
                 <Setter Property="Height" Value="40" />
             </Style>
             <ImageSource x:Key="btnImage">/PFTSDesktop;component/Images/btnImage.png</ImageSource>
+
+
+            <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+                <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+            </ControlTemplate>
+
+            <Style TargetType="{x:Type ComboBox}" x:Key="comboxStyleEx" BasedOn="{StaticResource comboxStyle}">
+                <Setter Property="Height" Value="30"/>
+               
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ComboBox}">
+                            <Grid>
+                                <!-- ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen -->
+                                <ToggleButton Grid.Column="2"  Style="{DynamicResource ComboToggleButton}"  x:Name="ToggleButton" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"/>
+                                <ContentPresenter HorizontalAlignment="Left" Margin="3,3,23,3" x:Name="ContentSite"   VerticalAlignment="Center" Content="{TemplateBinding SelectionBoxItem}" 
+                                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" IsHitTestVisible="False"/>
+
+                                <!-- 必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它 -->
+                                <TextBox Visibility="Hidden" Template="{DynamicResource ComboBoxTextBox}" HorizontalAlignment="Left" Margin="3,3,23,3" x:Name="PART_EditableTextBox" Style="{x:Null}" VerticalAlignment="Center" Focusable="True" Background="Transparent" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+
+                                <!-- Popup 可显示 ComboBox 中的项列表。IsOpen 已数据绑定到通过 ComboBoxToggleButton 来切换的 IsDropDownOpen -->
+                                <!--弹出下拉控件-->
+                                <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False"
+                               IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                               PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
+                                    <Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                  MaxHeight="{Binding MaxDropDownHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Border x:Name="PopupBorder" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch"
+                                        Height="Auto" BorderBrush="#7debd2"
+                                        Background="{StaticResource PopupBackground}">
+                                        </Border>
+                                        <ScrollViewer x:Name="DropDownScrollViewer" BorderThickness="0" Margin="1">
+                                            <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        </ScrollViewer>
+                                    </Grid>
+                                </Popup>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

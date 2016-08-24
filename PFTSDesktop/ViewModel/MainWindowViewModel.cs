@@ -47,8 +47,6 @@ namespace PFTSDesktop.ViewModel
             FButton btn = (FButton)obj;
             if (preBtn != null)
             {
-                if (btn == preBtn)
-                    return;
                 preBtn.SelectEd = false;
             }
             preBtn = btn;

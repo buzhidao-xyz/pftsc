@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PFTSDesktop.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace PFTSDesktop.View.SuspectManager
         public AddSuspectPage()
         {
             InitializeComponent();
+            this.DataContext = new SuspectViewModel();
         }
     }
 }

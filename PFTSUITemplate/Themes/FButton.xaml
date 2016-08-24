@@ -26,7 +26,7 @@
                     </TextBlock.RenderTransform>
                 </TextBlock>
 
-                <TextBlock VerticalAlignment="Center"  x:Name="txt" 
+                <TextBlock VerticalAlignment="Center"  x:Name="txt" Margin="5,0,0,0"
                            TextDecorations="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ContentDecorations}" 
                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Content}" 
                                                FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=FontSize}" 
