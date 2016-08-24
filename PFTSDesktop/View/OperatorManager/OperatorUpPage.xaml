@@ -46,7 +46,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="账号：" Style="{StaticResource lableNameStyle}" FontSize="16"/>
-            <Element:RegularText Width="300" Height="30" Margin="0,0,20,0" Text="{Binding Path=GetOperatorInfo.account,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <TextBlock Width="300" Height="30" Margin="0,0,20,0" Text="{Binding GetOperatorInfo.account,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="密码：" Style="{StaticResource lableNameStyle}" FontSize="16"/>

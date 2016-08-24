@@ -60,7 +60,7 @@
                                     HorizontalAlignment="Center" VerticalAlignment="Center"
                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                     Tag="View/OperatorManager/OperatorUpPage.xaml"
-                                    Command="{Binding DataContext.OperatorUpCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding ElementName=main}"/>
+                                    Command="{Binding DataContext.OperatorUpCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

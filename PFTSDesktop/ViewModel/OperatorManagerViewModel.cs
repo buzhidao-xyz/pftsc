@@ -95,7 +95,7 @@ namespace PFTSDesktop.ViewModel
         public void OperatorManage(Object obj)
         {
             Button btn = (Button)obj;
-            Global.currentMainWindow.FrameSource = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
         /// <summary>
@@ -140,6 +140,7 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
+                if (OperatorInfo == null) OperatorInfo = GetOperatorInfo;
                 var account = OperatorInfo.account.Trim();
 
                 //检查是否为空
@@ -169,6 +170,7 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
+                if (OperatorInfo == null) OperatorInfo = GetOperatorInfo;
                 var password = OperatorInfo.password.Trim();
 
                 //检查是否为空
@@ -190,6 +192,7 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
+                if (OperatorInfo == null) OperatorInfo = GetOperatorInfo;
                 var name = OperatorInfo.name.Trim();
 
                 //检查是否为空
@@ -231,7 +234,7 @@ namespace PFTSDesktop.ViewModel
                 MessageBox.Show("保存成功！");
 
                 Button btn = (Button)obj;
-                Global.currentMainWindow.FrameSource = new Uri("View/Pages/OperatorManangerPage.xaml", UriKind.Relative);
+                Global.currentFrame.NavigationService.GoBack();
             } else
             {
                 MessageBox.Show("保存失败！");
@@ -252,15 +255,55 @@ namespace PFTSDesktop.ViewModel
         }
 
         /// <summary>
-        /// 编辑操作员
+        /// 编辑操作员保存命令
         /// </summary>
         private void OperatorUp(Object obj)
         {
-            var OperatorInfo = GetOperatorInfo;
+            MessageBox.Show(GetOperatorInfo.account);
 
-            MessageBox.Show(OperatorInfo.id.ToString());
+            Button btn = (Button)obj;
+            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+        }
 
-            Console.WriteLine(OperatorInfo.id);
+        public ICommand OperatorUpSaveCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                    new Action<Object>(this.OperatorUpSave)
+                    );
+            }
+        }
+
+        /// <summary>
+        /// 编辑操作员保存
+        /// </summary>
+        private void OperatorUpSave(Object obj)
+        {
+            OperatorInfo = GetOperatorInfo;
+            
+            OperatorInfo.password = password;
+            if (OperatorInfo.password == null) return;
+
+            OperatorInfo.name = name;
+            if (OperatorInfo.name == null) return;
+
+            //处理数据//
+            //密码MD5加密
+            OperatorInfo.password = MD5Tool.GetEncryptCode(OperatorInfo.password);
+
+            bool Result = OperatorService.Insert(OperatorInfo);
+            if (Result)
+            {
+                MessageBox.Show("保存成功！");
+
+                Button btn = (Button)obj;
+                Global.currentFrame.NavigationService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("保存失败！");
+            }
         }
     }
 }
