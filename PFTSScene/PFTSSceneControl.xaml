@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PFTSScene"
-             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="PFTSScene.PFTSSceneControl"
+             xmlns:tools="clr-namespace:PFTSScene.Tools"
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+             x:Class="PFTSScene.PFTSSceneControl"
              mc:Ignorable="d" 
-             d:DesignHeight="886" d:DesignWidth="1660">
+             d:DesignHeight="886" d:DesignWidth="1660" Loaded="UserControl_Loaded" SizeChanged="UserControl_SizeChanged">
     <UserControl.Resources>
         <ResourceDictionary Source="DictionaryScene.xaml"/>
     </UserControl.Resources>
@@ -14,7 +16,7 @@
         <ImageBrush ImageSource="Images/background.png"/>
     </UserControl.Background>
     <Grid>
-        <Grid>
+        <Grid x:Name="baseGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="120*"/>
                 <RowDefinition Height="40*"/>
@@ -47,12 +49,12 @@
                 <ColumnDefinition Width="180*"/>
                 <ColumnDefinition Width="76*"/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="room1" Grid.Row="9" Grid.Column="15" Grid.ColumnSpan="2">
+            <tools:GridRoom x:Name="room1" Grid.Row="9" Grid.Column="15" Grid.ColumnSpan="2">
                 <Image x:Name="image1" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
-            </Grid>
-            <Grid x:Name="room2" Grid.Row="8" Grid.Column="16" Grid.ColumnSpan="1">
+            </tools:GridRoom>
+            <tools:GridRoom x:Name="room2" Grid.Row="8" Grid.Column="16" Grid.ColumnSpan="1">
                 <Image x:Name="image2" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
-            </Grid>
+            </tools:GridRoom>
             <Grid x:Name="room3" Grid.Row="7" Grid.Column="16" Grid.ColumnSpan="1">
                 <Image x:Name="image3" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
             </Grid>
@@ -222,6 +224,10 @@
             <Grid x:Name="room43" Grid.Row="1" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="3">
                 <Image Style="{StaticResource ResourceKey=imageRfidStyle}"/>
             </Grid>
+
+            <Grid x:Name="gridPaths" Grid.Row="0" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="18"></Grid>
+
+            <tools:Arrow X1="{Binding CenterX, ElementName=room1, Mode=TwoWay}" Y1="{Binding CenterY, ElementName=room1, Mode=TwoWay}" X2="{Binding CenterX, ElementName=room2, Mode=OneWay}" Y2="{Binding CenterY, ElementName=room2, Mode=OneWay}"  HeadWidth="15" HeadHeight="5" Stroke="Red" StrokeThickness="2.0"></tools:Arrow>
 
         </Grid>
     </Grid>
