@@ -1832,7 +1832,7 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint", DbType="Binary(2048)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint", DbType="Binary(2048)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary fingerprint
 		{
 			get

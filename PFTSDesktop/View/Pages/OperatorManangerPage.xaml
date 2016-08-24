@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:Element="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate" x:Name="OperatorManagerPage" x:Class="PFTSDesktop.View.Pages.OperatorManangerPage" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="500" d:DesignWidth="500"
 	Title="操作员管理" Background="White">
 
     <Grid x:Name="OperatorView">
@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0">
+        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFECE3E3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -27,7 +27,15 @@
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     Tag="View/OperatorManager/OperatorNewPage.xaml"
                     Command="{Binding OperatorNewCommand}" CommandParameter="{Binding ElementName=OperatorNewBtn}"/>
-            <Button x:Name="OperatorManageBtn" Background="White" Content="操作员管理" Grid.Row="0" Grid.Column="1" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="OperatorManageBtn"
+                    Background="White"
+                    Content="操作员管理"
+                    Grid.Row="0" Grid.Column="1"
+                    Width="100" Height="30"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Tag="View/Pages/OperatorManangerPage.xaml"
+                    Command="{Binding OperatorManageCommand}" CommandParameter="{Binding ElementName=OperatorManageBtn}"/>
         </Grid>
         
         <Element:PageDataGridEx SelectedItem="{Binding GetOperatorInfo}" Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None" ItemsSource="{Binding GetOperatorList}">
@@ -41,8 +49,8 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="昵称" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="上次登录时间"  Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding last_login_time}"/>
+                <DataGridTextColumn Header="昵称" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="上次登录时间"  Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding last_login_time}"/>
                 <DataGridTemplateColumn Header="操作" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -51,7 +59,8 @@
                                     Width="70" Height="20"
                                     HorizontalAlignment="Center" VerticalAlignment="Center"
                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                    Command="{Binding OperatorUpCommand}" CommandParameter="{Binding ElementName=main}"/>
+                                    Tag="View/OperatorManager/OperatorUpPage.xaml"
+                                    Command="{Binding DataContext.OperatorUpCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

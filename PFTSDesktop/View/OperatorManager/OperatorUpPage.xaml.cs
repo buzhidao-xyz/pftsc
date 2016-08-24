@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PFTSDesktop.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,20 +13,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PFTSDesktop.ViewModel;
 
-namespace PFTSDesktop.View.Pages
+namespace PFTSDesktop.View.OperatorManager
 {
     /// <summary>
-    /// OperatorManangerPage.xaml 的交互逻辑
+    /// OperatorUpPage.xaml 的交互逻辑
     /// </summary>
-    public partial class OperatorManangerPage : Page
+    public partial class OperatorUpPage : Page
     {
-        public OperatorManangerPage()
+        public OperatorUpPage()
         {
             InitializeComponent();
 
-            var viewModel =  OperatorManagerViewModel.GetInstance();
+            var viewModel = OperatorManagerViewModel.GetInstance();
 
             this.DataContext = viewModel;
         }

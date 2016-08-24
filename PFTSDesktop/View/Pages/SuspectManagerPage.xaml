@@ -55,7 +55,8 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <tmp:ButtonTemplet ToolTip="查看物品" Command="{Binding DataContext.CheckGoodsCommand, RelativeSource={RelativeSource AncestorType=Page}}"  VerticalAlignment="Center" Margin="5,0,0,0">
+                                <tmp:ButtonTemplet ToolTip="查看物品" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"
+                                                   Command="{Binding DataContext.CheckGoodsCommand, RelativeSource={RelativeSource AncestorType=Page}}"  VerticalAlignment="Center" Margin="5,0,0,0">
                                     <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
                                 </tmp:ButtonTemplet>
                                 <tmp:ButtonTemplet ToolTip="查看视频"  VerticalAlignment="Center" Margin="5,0,0,0">
