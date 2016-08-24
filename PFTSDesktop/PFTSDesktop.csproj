@@ -74,6 +74,9 @@
     <Compile Include="View\OperatorManager\OperatorNewPage.xaml.cs">
       <DependentUpon>OperatorNewPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OperatorManager\OperatorUpPage.xaml.cs">
+      <DependentUpon>OperatorUpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\DeviceManagerPage.xaml.cs">
       <DependentUpon>DeviceManagerPage.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\OperatorManager\OperatorNewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OperatorManager\OperatorUpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

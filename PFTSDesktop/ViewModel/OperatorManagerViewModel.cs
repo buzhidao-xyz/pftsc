@@ -8,6 +8,8 @@ using PFTSDesktop.Command;
 using System.Windows.Input;
 using PFTSUITemplate.Controls;
 using System.Windows.Controls;
+using System.Windows;
+using PFTSTools;
 
 namespace PFTSDesktop.ViewModel
 {
@@ -18,7 +20,7 @@ namespace PFTSDesktop.ViewModel
 
         private RelayCommand OperatorCommand;
 
-        //操作员列表对象
+        //操作员列表
         private List<@operator> OperatorList;
         //操作员信息
         private @operator OperatorInfo;
@@ -26,9 +28,6 @@ namespace PFTSDesktop.ViewModel
         public OperatorManagerViewModel()
         {
             OperatorService = new OperatorService();
-
-            //获取操作员列表
-            OperatorList = OperatorService.GetOperatorList();
         }
 
         /// <summary>
@@ -36,7 +35,11 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public List<@operator> GetOperatorList
         {
-            get { return OperatorList; }
+            get {
+                if (OperatorList == null) OperatorList = OperatorService.GetOperatorList();
+
+                return OperatorList;
+            }
             set
             {
                 if (value == OperatorList)
@@ -48,9 +51,16 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 获取操作员信息
+        /// </summary>
         public @operator GetOperatorInfo
         {
-            get { return OperatorInfo;  }
+            get {
+                if (OperatorInfo == null) OperatorInfo = new @operator();
+
+                return OperatorInfo;
+            }
             set
             {
                 if (value == OperatorInfo)
@@ -63,19 +73,41 @@ namespace PFTSDesktop.ViewModel
         }
 
         /// <summary>
-        /// 新增操作员命令
+        /// 操作员管理命令
         /// </summary>
-        public ICommand OperatorNewCommand
+        public ICommand OperatorManageCommand
         {
             get
             {
                 if (OperatorCommand == null)
                 {
                     OperatorCommand = new RelayCommand(
-                        new Action<Object>(this.OperatorNew)
+                        new Action<Object>(this.OperatorManage)
                         );
                 }
                 return OperatorCommand;
+            }
+        }
+
+        /// <summary>
+        /// 操作员管理操作
+        /// </summary>
+        public void OperatorManage(Object obj)
+        {
+            Button btn = (Button)obj;
+            Global.currentMainWindow.FrameSource = new Uri(btn.Tag.ToString(), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// 新增操作员命令
+        /// </summary>
+        public ICommand OperatorNewCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                    new Action<Object>(this.OperatorNew)
+                    );
             }
         }
 
@@ -89,19 +121,133 @@ namespace PFTSDesktop.ViewModel
         }
 
         /// <summary>
+        /// 新增操作员保存命令
+        /// </summary>
+        public ICommand OperatorNewSaveCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                    new Action<Object>(this.OperatorNewSave)
+                    );
+            }
+        }
+
+        /// <summary>
+        /// 账号
+        /// </summary>
+        private string account
+        {
+            get
+            {
+                var account = OperatorInfo.account.Trim();
+
+                //检查是否为空
+                if (account == null)
+                {
+                    MessageBox.Show("请填写账号！");
+
+                    return null;
+                }
+
+                //检查account是否已存在
+                if (OperatorService.GetByAccount(OperatorInfo.account) != null)
+                {
+                    MessageBox.Show("账号 " + OperatorInfo.account + " 已存在！");
+
+                    return null;
+                }
+
+                return account;
+            }
+        }
+
+        /// <summary>
+        /// 密码
+        /// </summary>
+        private string password
+        {
+            get
+            {
+                var password = OperatorInfo.password.Trim();
+
+                //检查是否为空
+                if (password == null)
+                {
+                    MessageBox.Show("请填写密码！");
+
+                    return null;
+                }
+
+                return password;
+            }
+        }
+
+        /// <summary>
+        /// 昵称
+        /// </summary>
+        private string name
+        {
+            get
+            {
+                var name = OperatorInfo.name.Trim();
+
+                //检查是否为空
+                if (name == null)
+                {
+                    MessageBox.Show("请填写昵称！");
+
+                    return null;
+                }
+
+                return name;
+            }
+        }
+
+        /// <summary>
+        /// 新增操作员保存
+        /// </summary>
+        /// <param name="obj"></param>
+        public void OperatorNewSave(Object obj)
+        {
+            OperatorInfo = GetOperatorInfo;
+
+            OperatorInfo.account = account;
+            if (OperatorInfo.account == null) return;
+
+            OperatorInfo.password = password;
+            if (OperatorInfo.password == null) return;
+
+            OperatorInfo.name = name;
+            if (OperatorInfo.name == null) return;
+            
+            //处理数据//
+            //密码MD5加密
+            OperatorInfo.password = MD5Tool.GetEncryptCode(OperatorInfo.password);
+
+            bool Result = OperatorService.Insert(OperatorInfo);
+            if (Result)
+            {
+                MessageBox.Show("保存成功！");
+
+                Button btn = (Button)obj;
+                Global.currentMainWindow.FrameSource = new Uri("View/Pages/OperatorManangerPage.xaml", UriKind.Relative);
+            } else
+            {
+                MessageBox.Show("保存失败！");
+            }
+        }
+
+        /// <summary>
         /// 编辑操作员命令
         /// </summary>
         public ICommand OperatorUpCommand
         {
             get
             {
-                if (OperatorCommand == null)
-                {
-                    OperatorCommand = new RelayCommand(
-                        new Action<Object>(this.OperatorUp)
-                        );
-                }
-                return OperatorCommand;
+                return new RelayCommand(
+                    new Action<Object>(this.OperatorUp)
+                    );
             }
         }
 
@@ -111,6 +257,8 @@ namespace PFTSDesktop.ViewModel
         private void OperatorUp(Object obj)
         {
             var OperatorInfo = GetOperatorInfo;
+
+            MessageBox.Show(OperatorInfo.id.ToString());
 
             Console.WriteLine(OperatorInfo.id);
         }
