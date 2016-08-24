@@ -68,9 +68,13 @@
     </Compile>
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\OperatorManagerViewModel.cs" />
     <Compile Include="ViewModel\SuspectViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
+    <Compile Include="View\OperatorManager\OperatorNewPage.xaml.cs">
+      <DependentUpon>OperatorNewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\DeviceManagerPage.xaml.cs">
       <DependentUpon>DeviceManagerPage.xaml</DependentUpon>
     </Compile>
@@ -112,6 +116,10 @@
     <Page Include="Video.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OperatorManager\OperatorNewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\DeviceManagerPage.xaml">
       <SubType>Designer</SubType>
