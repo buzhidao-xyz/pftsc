@@ -5,5 +5,13 @@
         <Setter Property="Source" Value="Images/rfid.png"></Setter>
         <Setter Property="Height" Value="30"></Setter>
         <Setter Property="Width" Value="30"></Setter>
+        <Setter Property="Visibility" Value="{Binding RfidImageVisiable, ElementName=userControl}"></Setter>
+    </Style>
+
+    <Style x:Key="imageCameraStyle" TargetType="Image">
+        <Setter Property="Source" Value="Images/camera.png"></Setter>
+        <Setter Property="Height" Value="30"></Setter>
+        <Setter Property="Width" Value="30"></Setter>
+        <Setter Property="Visibility" Value="{Binding CameraImageVisiable, ElementName=userControl}"></Setter>
     </Style>
 </ResourceDictionary>
