@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,28 @@ namespace PFTSScene
 
             paths = new List<InArrow>();
         }
+
+        #region Dependency Properties
+
+        public static readonly DependencyProperty RfidImageVisibleProperty = DependencyProperty.Register("RfidImageVisiable", typeof(Visibility), typeof(PFTSSceneControl), new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
+        public static readonly DependencyProperty CameraImageVisibleProperty = DependencyProperty.Register("CameraImageVisible", typeof(Visibility), typeof(PFTSSceneControl), new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
+        #endregion
+
+        #region CLR Properties
+
+        public Visibility RfidImageVisiable
+        {
+            get { return (Visibility)base.GetValue(RfidImageVisibleProperty); }
+            set { base.SetValue(RfidImageVisibleProperty, value); }
+        }
+
+        public Visibility CameraImageVisible
+        {
+            get { return (Visibility)base.GetValue(CameraImageVisibleProperty); }
+            set { base.SetValue(CameraImageVisibleProperty, value); }
+        }
+
+        #endregion
 
         private void PathTo(Grid origin, Grid dest)
         {
