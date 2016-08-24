@@ -103,18 +103,18 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical" Background="#f7f7f7">
                 <tmp:FButton Name="btnMonitoring" CommandParameter="{Binding ElementName=btnMonitoring}"
-                             FIcon="&#xe60e;" Tag="View/Pages/MonitoringPage.xaml" Margin="13" HorizontalAlignment="Left">实时监控</tmp:FButton>
+                             FIcon="&#xe602;" Tag="View/Pages/MonitoringPage.xaml" Margin="13" HorizontalAlignment="Left">实时监控</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0"  HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton Name="btnSuspect" CommandParameter="{Binding ElementName=btnSuspect}" FIcon="&#xe60e;" Tag="View/Pages/SuspectManagerPage.xaml" Margin="13" HorizontalAlignment="Left">嫌疑人管理</tmp:FButton>
+                <tmp:FButton Name="btnSuspect" CommandParameter="{Binding ElementName=btnSuspect}" FIcon="&#xe63a;" Tag="View/Pages/SuspectManagerPage.xaml" Margin="13" HorizontalAlignment="Left">嫌疑人管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton Name="btnPolice" CommandParameter="{Binding ElementName=btnPolice}" FIcon="&#xe60e;" Tag="View/Pages/PoliceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">警员管理</tmp:FButton>
+                <tmp:FButton Name="btnPolice" CommandParameter="{Binding ElementName=btnPolice}" FIcon="&#xe607;" Tag="View/Pages/PoliceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">警员管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton Name="btnDevice" CommandParameter="{Binding ElementName=btnDevice}" FIcon="&#xe60e;" Tag="View/Pages/DeviceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">设备管理</tmp:FButton>
+                <tmp:FButton Name="btnDevice" CommandParameter="{Binding ElementName=btnDevice}" FIcon="&#xe61d;" Tag="View/Pages/DeviceManagerPage.xaml" Margin="13" HorizontalAlignment="Left">设备管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
-                <tmp:FButton Name="btnOperator" CommandParameter="{Binding ElementName=btnOperator}" FIcon="&#xe60e;" Tag="View/Pages/OperatorManangerPage.xaml" Margin="13" HorizontalAlignment="Left">操作员管理</tmp:FButton>
+                <tmp:FButton Name="btnOperator" CommandParameter="{Binding ElementName=btnOperator}" FIcon="&#xe66c;" Tag="View/Pages/OperatorManangerPage.xaml" Margin="13" HorizontalAlignment="Left">操作员管理</tmp:FButton>
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
             </StackPanel>
-            <Frame Background="White" Source="{Binding FrameSource}"  x:Name="PageContext" Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" NavigationUIVisibility="Hidden"/>
+            <Frame Background="White" x:Name="PageContext" Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>
 </tmp:WindowTemplet>

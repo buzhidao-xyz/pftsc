@@ -41,6 +41,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Utility">
+      <HintPath>lib\System.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -56,6 +59,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ControlAttachProperty.cs" />
+    <Compile Include="Common\Converters.cs" />
     <Compile Include="Controls\ButtonEX.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -95,6 +100,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\WindowTemplet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converter\BackgroundToForegroundConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converter\PercentToAngleConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converter\ThicknessToDoubleConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converter\TreeViewMarginConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converter\TrueToFalseConverter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Element\ImageButton.xaml.cs">
@@ -158,9 +178,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Controls\ImageButton.xaml">
       <SubType>Designer</SubType>
@@ -191,6 +209,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,6 +281,7 @@
     <Resource Include="Images\pagination_next_gray.gif" />
     <Resource Include="Images\pagination_prev.gif" />
     <Resource Include="Images\pagination_prev_gray.gif" />
+    <Resource Include="Resources\iconfont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Messsage\Doubt.ico" />

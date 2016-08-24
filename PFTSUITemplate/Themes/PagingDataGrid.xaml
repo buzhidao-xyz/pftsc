@@ -373,7 +373,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
                                 <Control SnapsToDevicePixels="false"
-                                         Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=(Validation.HasError), Converter={StaticResource bool2VisibilityConverter}}"
+                                         Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=(Validation.HasError)}"
                                          Template="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=ValidationErrorTemplate}" />
                             </StackPanel>
                         </theme:DataGridHeaderBorder>

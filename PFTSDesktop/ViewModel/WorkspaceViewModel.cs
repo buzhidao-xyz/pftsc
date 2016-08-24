@@ -43,7 +43,7 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                return new RelayCommand(new Action<Object>(this.OnRequestClose));
+                return new RelayCommand(new Action<Object>(this.windowClose));
             }
         }
 
@@ -63,10 +63,17 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public event EventHandler RequestClose;
 
-        void OnRequestClose(Object obj)
+        public void windowClose(Object obj)
         {
             WindowTemplet win = (WindowTemplet)obj;
             win.Close();
+        }
+
+        public void OnRequestClose()
+        {
+            EventHandler handler = this.RequestClose;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         /// <summary>

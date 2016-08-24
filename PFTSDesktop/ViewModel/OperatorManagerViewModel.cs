@@ -117,7 +117,7 @@ namespace PFTSDesktop.ViewModel
         public void OperatorNew(Object obj)
         {
             Button btn = (Button)obj;
-            Global.currentMainWindow.FrameSource = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
         /// <summary>

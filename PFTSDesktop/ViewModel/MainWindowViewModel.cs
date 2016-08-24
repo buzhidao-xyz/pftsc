@@ -17,11 +17,6 @@ namespace PFTSDesktop.ViewModel
         private Uri frameSource;
         RelayCommand _openCommand;
 
-        public MainWindowViewModel()
-        {
-            Global.currentMainWindow = this;
-        }
-
         #region Commands
         public ICommand OpenCommand
         {
@@ -47,28 +42,13 @@ namespace PFTSDesktop.ViewModel
             FButton btn = (FButton)obj;
             if (preBtn != null)
             {
-                if (btn == preBtn)
-                    return;
                 preBtn.SelectEd = false;
             }
             preBtn = btn;
             btn.SelectEd = true;
-            FrameSource = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
-        public Uri FrameSource
-        {
-            get { return frameSource; }
-            set
-            {
-                if (value == frameSource)
-                    return;
-
-                frameSource = value;
-
-                base.OnPropertyChanged("FrameSource");
-            }
-        }
         #endregion
 
     }
