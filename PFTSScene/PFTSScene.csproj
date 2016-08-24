@@ -53,6 +53,7 @@
     <Compile Include="PFTS3DSceneControl.xaml.cs">
       <DependentUpon>PFTS3DSceneControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PFTSResourceLoader.cs" />
     <Compile Include="PFTSSceneControl.xaml.cs">
       <DependentUpon>PFTSSceneControl.xaml</DependentUpon>
     </Compile>
@@ -108,6 +109,16 @@
       <Project>{E1A1497F-CA0E-425C-8CF9-34F05CCCD231}</Project>
       <Name>PFTSHwCtrl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PFTSModel\PFTSModel.csproj">
+      <Project>{ec79570a-25a6-4bcb-a828-ce04b0269919}</Project>
+      <Name>PFTSModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\camera_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rfid_gray.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

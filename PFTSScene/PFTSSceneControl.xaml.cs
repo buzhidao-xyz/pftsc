@@ -21,13 +21,26 @@ namespace PFTSScene
     /// </summary>
     public partial class PFTSSceneControl : UserControl
     {
+        static PFTSResourceLoader sceneResourceCache = new PFTSResourceLoader();
+        private Dictionary<int, Grid> m_mapRooms = new Dictionary<int, Grid>();
+        private Dictionary<int, Image> m_mapRfids = new Dictionary<int, Image>();
+        private Dictionary<int, Image> m_mapCameras = new Dictionary<int, Image>();
+
         private List<InArrow> paths;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public PFTSSceneControl()
         {
             InitializeComponent();
+            // load controls
+            loadLocalRooms();
+            loadLocalRFIDImages();
+            loadLocalCameraImages();
 
-            paths = new List<InArrow>();
+            LoadRFIDInfos();
+            LoadCameraInfos();
         }
 
         #region Dependency Properties
@@ -52,6 +65,129 @@ namespace PFTSScene
 
         #endregion
 
+        #region 保存场景界面元素
+        public void loadLocalRooms()
+        {
+            for(var i = 0;i < 42; i++)
+            {
+                object element = this.FindName("room" + (i + 1));
+                if (element == null) continue;
+                try
+                {
+                    Grid room = (Grid)element;
+                    string tags = room.Tag.ToString();
+                    int tagi = int.Parse(tags);
+                    m_mapRooms.Add(tagi, room);
+                }
+                catch { continue; }
+            }
+        }
+
+        public void loadLocalRFIDImages()
+        {
+            for(var i = 0; i < 42; i++)
+            {
+                object element = this.FindName("imgRfid" + (i + 1));
+                if (element == null) continue;
+                try
+                {
+                    Image img = (Image)element;
+                    Grid room = (Grid)img.Parent;
+                    string tags = room.Tag.ToString();
+                    int tagi = int.Parse(tags);
+                    m_mapRfids.Add(tagi, img);
+                }
+                catch { continue; }
+            }
+        }
+
+        public void loadLocalCameraImages()
+        {
+            for (var i = 0; i < 40; i++)
+            {
+                object element = this.FindName("imgCamera" + (i + 1));
+                if (element == null) continue;
+                try
+                {
+                    Image img = (Image)element;
+                    string tags = img.Tag.ToString();
+                    int tagi = int.Parse(tags);
+                    m_mapCameras.Add(tagi, img);
+                }
+                catch { continue; }
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 更新rfid信息
+        /// </summary>
+        public void LoadRFIDInfos()
+        {
+            var rfidPositions = PFTSSceneControl.sceneResourceCache.PositionRFIDs;
+            if (rfidPositions == null) return;
+            foreach(PFTSModel.position_rfid pr in rfidPositions)
+            {
+                if (!m_mapRfids.ContainsKey(pr.id)) continue;
+                Image img = m_mapRfids[pr.id];
+                if (pr.rfid_id == null)
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"Images/rfid_gray.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                }
+                else
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"Images/rfid.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 更新camera信息
+        /// </summary>
+        public void LoadCameraInfos()
+        {
+            var cameraPositions = PFTSSceneControl.sceneResourceCache.PositionCameras;
+            if (cameraPositions == null) return;
+            foreach (PFTSModel.position_camera pr in cameraPositions)
+            {
+                if (!m_mapCameras.ContainsKey(pr.id)) continue;
+                Image img = m_mapCameras[pr.id];
+                if (pr.camera_id == null)
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"Images/camera_gray.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                }
+                else
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"Images/camera.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 画不同房间之间的路径（包含方向）
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="dest"></param>
         private void PathTo(Grid origin, Grid dest)
         {
             var transformStart = origin.TransformToAncestor(this.baseGrid);
@@ -93,15 +229,15 @@ namespace PFTSScene
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            PathTo(room1, room10);
+            //PathTo(room1, room10);
         }
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            foreach (var ia in this.paths)
-            {
-                RefreshPosition(ia);
-            }
+            //foreach (var ia in this.paths)
+            //{
+            //    RefreshPosition(ia);
+            //}
         }
 
         public struct InArrow

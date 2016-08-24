@@ -45,12 +45,7 @@ namespace PFTSModel
                     System.Data.Linq.Table<TEntity> table = db.GetTable<TEntity>();
                     var query = from q in table
                                 select q;
-                    List<TEntity> retList = new List<TEntity>();
-                    foreach (TEntity entity in query)
-                    {
-                        retList.Add(entity);
-                    }
-                    return retList;
+                    return query.ToList<TEntity>();
                 }
             }
             catch (Exception e)
