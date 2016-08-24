@@ -126,4 +126,16 @@
   <data name="Operator_Error_MissPasswprd" xml:space="preserve">
     <value>密码不能为空</value>
   </data>
+  <data name="Suspect_Error_MissName" xml:space="preserve">
+    <value>姓名不能为空</value>
+  </data>
+  <data name="Suspect_Error_MissNo" xml:space="preserve">
+    <value>案卷号 不能为空</value>
+  </data>
+  <data name="Suspect_Error_MissOfficer" xml:space="preserve">
+    <value>负责民警不能为空</value>
+  </data>
+  <data name="Suspect_Error_MissVest" xml:space="preserve">
+    <value>RFID服装不能为空</value>
+  </data>
 </root>

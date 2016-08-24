@@ -86,5 +86,41 @@ namespace PFTSDesktop.Properties {
                 return ResourceManager.GetString("Operator_Error_MissPasswprd", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 姓名不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Suspect_Error_MissName {
+            get {
+                return ResourceManager.GetString("Suspect_Error_MissName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 案卷号 不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Suspect_Error_MissNo {
+            get {
+                return ResourceManager.GetString("Suspect_Error_MissNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 负责民警不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Suspect_Error_MissOfficer {
+            get {
+                return ResourceManager.GetString("Suspect_Error_MissOfficer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 RFID服装不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Suspect_Error_MissVest {
+            get {
+                return ResourceManager.GetString("Suspect_Error_MissVest", resourceCulture);
+            }
+        }
     }
 }
