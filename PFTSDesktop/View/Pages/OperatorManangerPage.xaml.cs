@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PFTSDesktop.ViewModel;
 
 namespace PFTSDesktop.View.Pages
 {
@@ -23,6 +24,10 @@ namespace PFTSDesktop.View.Pages
         public OperatorManangerPage()
         {
             InitializeComponent();
+
+            var viewModel = new OperatorManagerViewModel();
+
+            this.DataContext = viewModel;
         }
     }
 }

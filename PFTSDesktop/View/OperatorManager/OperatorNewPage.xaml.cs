@@ -12,17 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PFTSDesktop.ViewModel;
 
-namespace PFTSHwCtrl
+namespace PFTSDesktop.View.OperatorManager
 {
     /// <summary>
-    /// PFTSVideoControl.xaml 的交互逻辑
+    /// OperatorNewPage.xaml 的交互逻辑
     /// </summary>
-    public partial class PFTSVideoControl : UserControl
+    public partial class OperatorNewPage : Page
     {
-        public PFTSVideoControl()
+        public OperatorNewPage()
         {
             InitializeComponent();
+
+            var viewModel = new OperatorManagerViewModel();
+
+            this.DataContext = viewModel;
         }
     }
 }

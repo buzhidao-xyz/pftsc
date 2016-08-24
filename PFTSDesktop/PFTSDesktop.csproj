@@ -33,7 +33,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -65,9 +69,13 @@
     </Compile>
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\OperatorManagerViewModel.cs" />
     <Compile Include="ViewModel\SuspectViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
+    <Compile Include="View\OperatorManager\OperatorNewPage.xaml.cs">
+      <DependentUpon>OperatorNewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\DeviceManagerPage.xaml.cs">
       <DependentUpon>DeviceManagerPage.xaml</DependentUpon>
     </Compile>
@@ -109,6 +117,10 @@
     <Page Include="Video.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OperatorManager\OperatorNewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\DeviceManagerPage.xaml">
       <SubType>Designer</SubType>
@@ -167,7 +179,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PFTSHwCtrl\PFTSHwCtrl.csproj">
@@ -177,6 +191,10 @@
     <ProjectReference Include="..\PFTSModel\PFTSModel.csproj">
       <Project>{ec79570a-25a6-4bcb-a828-ce04b0269919}</Project>
       <Name>PFTSModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PFTSScene\PFTSScene.csproj">
+      <Project>{bf8ac279-0b0e-40d6-ae8d-7a1baa7bc8a4}</Project>
+      <Name>PFTSScene</Name>
     </ProjectReference>
     <ProjectReference Include="..\PFTSTools\PFTSTools.csproj">
       <Project>{418fa0d6-c0cf-4c3c-89cf-7ca5966f410b}</Project>
@@ -252,7 +270,6 @@
     <PostBuildEvent>copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
 rd/s/q "$(ProjectDir)$(OutDir)\HCNetSDKCom"
 mkdir "$(ProjectDir)$(OutDir)\HCNetSDKCom"
-
 copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
 copy "$(ProjectDir)lib\HCNetSDKCom\*" "$(ProjectDir)$(OutDir)\HCNetSDKCom"</PostBuildEvent>
   </PropertyGroup>

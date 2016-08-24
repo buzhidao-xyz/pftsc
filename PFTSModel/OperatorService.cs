@@ -57,5 +57,25 @@ namespace PFTSModel
             }
             return null;
         }
+
+        /// <summary>
+        /// 获取操作员列表
+        /// </summary>
+        /// <returns></returns>
+        public List<@operator> GetOperatorList()
+        {
+            try
+            {
+                List<@operator> OperatorList = base.GetAll();
+
+                return OperatorList;
+            }
+            catch
+            {
+
+            }
+
+            return null;
+        }
     }
 }
