@@ -32,7 +32,7 @@
                     <ImageBrush ImageSource="{DynamicResource btnImage}"/>
                 </tmp:ButtonTemplet.MyMoverBrush>
             </tmp:ButtonTemplet>
-            <tmp:ButtonTemplet Width="100" Height="35" FontFamily="黑体" FontWeight="Bold" Foreground="#827e7e" FontSize="13" Name="btnAll" 
+            <tmp:ButtonTemplet Width="100" Height="35" Tag="1" FontFamily="黑体" FontWeight="Bold" Foreground="#827e7e" FontSize="13" Name="btnAll" 
                                Margin="30,0,0,0" Focusable="False" Content="全部疑犯" HorizontalAlignment="Center" VerticalAlignment="Center"
                                Command="{Binding GetSuspectsCommand}" CommandParameter="{Binding ElementName=btnAll}">
                 <tmp:ButtonTemplet.MyMoverBrush>
@@ -46,12 +46,30 @@
                              ItemsSource="{Binding Btrackers}">
             <ele:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="姓名" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="性别" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="身份证号" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="案卷号" Binding="{Binding name}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="负责民警" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="收监日期" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="操作" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="性别" Binding="{Binding sex}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="身份证号" Binding="{Binding number}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="案卷号" Binding="{Binding no}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="负责民警" Binding="{Binding officer_id}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="收监日期" Binding="{Binding in_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTemplateColumn Header="操作" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <tmp:ButtonTemplet ToolTip="查看物品" Command="{Binding DataContext.CheckGoodsCommand, RelativeSource={RelativeSource AncestorType=Page}}"  VerticalAlignment="Center" Margin="5,0,0,0">
+                                    <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
+                                </tmp:ButtonTemplet>
+                                <tmp:ButtonTemplet ToolTip="查看视频"  VerticalAlignment="Center" Margin="5,0,0,0">
+                                    <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
+                                </tmp:ButtonTemplet>
+                                <tmp:ButtonTemplet ToolTip="人员转移"  VerticalAlignment="Center" Margin="5,0,0,0">
+                                    <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
+                                </tmp:ButtonTemplet>
+                            </StackPanel>
+                           
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </ele:PageDataGridEx.Columns>
         </ele:PageDataGridEx>
     </Grid>

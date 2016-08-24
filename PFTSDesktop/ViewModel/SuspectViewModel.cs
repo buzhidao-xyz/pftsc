@@ -243,13 +243,25 @@ namespace PFTSDesktop.ViewModel
                     );
             }
         }
+
+        public ICommand CheckGoodsCommand {
+
+            get {
+                return new RelayCommand(param => this.CheckGoods());
+            }
+        }
         #endregion
 
         #region 方法
+
+        public void CheckGoods()
+        {
+            MessageWindow.Show("ccccc");
+        }
         public void AddSupectPage(Object obj)
         {
             ButtonEX btn = (ButtonEX)obj;
-            Global.currentMainWindow.FrameSource = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
         public void AddSupectInfo() {
@@ -264,7 +276,13 @@ namespace PFTSDesktop.ViewModel
             btk.private_goods = _suspectModel.PirvateGoods;
             btk.in_time = DateTime.Now;
             btk.locker_id = null;
-            bool isSuccess = _supectService.Insert(btk);
+            bool result = _supectService.Insert(btk);
+            if (result)
+            {
+                MessageWindow.Show("嫌疑人添加成功","系统提示");
+                Global.currentFrame.NavigationService.GoBack();  
+            }
+
         }
 
         bool CanSave
@@ -283,12 +301,12 @@ namespace PFTSDesktop.ViewModel
             }
             _preBtn = btn;
             btn.SelectEd = true;
-            if (btn.Tag == "0")
+            if (btn.Tag.ToString() == "0")
             {
-                _btrackers = _supectService.GetAllByIn(0);
+                Btrackers = _supectService.GetAllByIn(0);
             }
             else {
-                _btrackers = _supectService.GetAll();
+                Btrackers = _supectService.GetAll();
             }
         }
         #endregion

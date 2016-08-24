@@ -93,7 +93,7 @@ namespace PFTSDesktop.ViewModel
             WindowTemplet win = (WindowTemplet)obj;
             MainWindow main = new MainWindow();
             var viewModel = new MainWindowViewModel();
-
+            Global.currentFrame = main.PageContext;
             main.DataContext = viewModel;
             win.Close();
             main.Show();
