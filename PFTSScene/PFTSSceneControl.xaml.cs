@@ -52,11 +52,17 @@ namespace PFTSScene
         private Dictionary<int, Image> m_mapRfids = new Dictionary<int, Image>();
         private Dictionary<int, Image> m_mapCameras = new Dictionary<int, Image>();
         private Dictionary<int, ContextMenu> m_mapCameraMenu = new Dictionary<int, ContextMenu>();
+        private Dictionary<int, Tools.GridRoom> m_mapGridRooms = new Dictionary<int, Tools.GridRoom>();
+        private Dictionary<int, int> m_mapPeopleCounts = new Dictionary<int, int>();
 
         private CameraMode m_cameraMode;
         private RFIDMode m_rfidMode;
 
-        private List<InArrow> paths;
+        private BitmapImage m_bmImgPeople;
+        private bool m_loaded = false;
+
+        //private List<InArrow> paths;
+        //private Tools.GridRoom gridRoom1;
 
         /// <summary>
         /// 构造函数
@@ -68,9 +74,12 @@ namespace PFTSScene
             loadLocalRooms();
             loadLocalRFIDImages();
             loadLocalCameraImages();
+            initGridRooms();
 
-            //LoadRFIDInfos();
-            //LoadCameraInfos();
+            m_bmImgPeople = new BitmapImage();
+            m_bmImgPeople.BeginInit();
+            m_bmImgPeople.UriSource = new Uri(@"Images/people.png", UriKind.RelativeOrAbsolute);
+            m_bmImgPeople.EndInit();
         }
 
         #region Dependency Properties
@@ -147,6 +156,17 @@ namespace PFTSScene
                 catch { continue; }
             }
         }
+
+        public void initGridRooms()
+        {
+            foreach (int k in m_mapRooms.Keys)
+            {
+                var gridRoom = new Tools.GridRoom();
+                m_mapRooms[k].Children.Add(gridRoom);
+                m_mapGridRooms[k] = gridRoom;
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -364,7 +384,7 @@ namespace PFTSScene
             ia.ArrowD = arrow;
             ia.RoomOrigin = origin;
             ia.RoomDest = dest;
-            paths.Add(ia);
+//            paths.Add(ia);
         }
 
         private void RefreshPosition(InArrow ia)
@@ -381,17 +401,72 @@ namespace PFTSScene
             ia.ArrowD.Y2 = pointEnd.Y;
         }
 
+
+        public void AddAPeople(int roomId)
+        {
+            if (m_loaded)
+            {
+                if (m_mapGridRooms.ContainsKey(roomId))
+                {
+                    var gr = m_mapGridRooms[roomId];
+                    Image img = new Image();
+                    img.Width = 30;
+                    img.Height = 30;
+                    img.Source = m_bmImgPeople;
+                    gr.AddImage(img);
+                    if (m_mapPeopleCounts.ContainsKey(roomId))
+                    {
+                        m_mapPeopleCounts[roomId] += 1;
+                    }else
+                    {
+                        m_mapPeopleCounts[roomId] = 1;
+                    }
+                }
+            }else
+            {
+                if (m_mapPeopleCounts.ContainsKey(roomId))
+                {
+                    m_mapPeopleCounts[roomId] += 1;
+                }
+                else
+                {
+                    m_mapPeopleCounts[roomId] = 1;
+                }
+            }
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //PathTo(room1, room10);
+            m_loaded = true;
+            foreach (var gr in m_mapGridRooms)
+            {
+                gr.Value.MetaSize = new Size(30, 30);
+                if (m_mapPeopleCounts.ContainsKey(gr.Key) && m_mapPeopleCounts[gr.Key] > 0)
+                {
+                    for (var i = 0;i < m_mapPeopleCounts[gr.Key]; i++)
+                    {
+                        Image img = new Image();
+                        img.Width = 30;
+                        img.Height = 30;
+                        img.Source = m_bmImgPeople;
+                        gr.Value.AddImage(img);
+                    }
+                }
+            }
         }
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //foreach (var ia in this.paths)
-            //{
-            //    RefreshPosition(ia);
-            //}
+            foreach (var pc in m_mapPeopleCounts)
+            {
+                if (pc.Value > 0)
+                {
+                    if (m_mapGridRooms.ContainsKey(pc.Key))
+                    {
+                        m_mapGridRooms[pc.Key].Resize();
+                    }
+                }
+            }
         }
 
         public struct InArrow

@@ -26,6 +26,10 @@ namespace PFTSDesktop.View.Pages
             // 监控模式
             controlScene.CameraMode = PFTSScene.CameraMode.Monitoring;
             controlScene.RFIDMode = PFTSScene.RFIDMode.Monitoring;
+
+            controlScene.AddAPeople(2);
+            controlScene.AddAPeople(5);
+            controlScene.AddAPeople(5);
         }
     }
 }
