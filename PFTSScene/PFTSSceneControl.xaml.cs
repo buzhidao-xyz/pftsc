@@ -13,9 +13,35 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
 
 namespace PFTSScene
 {
+
+    public enum CameraMode
+    {
+        // 显示所有位置，高亮显示
+        ShowAllPosition,
+        // 监控模式，只显示摄像头，并包含操作菜单
+        Monitoring,
+        // 配置模式，摄像头高亮，空位置灰掉
+        Configing,
+        // 隐藏所有
+        Hidden
+    }
+
+    public enum RFIDMode
+    {
+        // 显示所有位置，高亮显示
+        ShowAllPosition,
+        // 监控模式，全部隐藏
+        Monitoring,
+        // 配置模式，摄像头高亮，空位置灰掉
+        Configing,
+        // 隐藏所有
+        Hidden
+    }
+
     /// <summary>
     /// PFTSSceneControl.xaml 的交互逻辑
     /// </summary>
@@ -25,6 +51,10 @@ namespace PFTSScene
         private Dictionary<int, Grid> m_mapRooms = new Dictionary<int, Grid>();
         private Dictionary<int, Image> m_mapRfids = new Dictionary<int, Image>();
         private Dictionary<int, Image> m_mapCameras = new Dictionary<int, Image>();
+        private Dictionary<int, ContextMenu> m_mapCameraMenu = new Dictionary<int, ContextMenu>();
+
+        private CameraMode m_cameraMode;
+        private RFIDMode m_rfidMode;
 
         private List<InArrow> paths;
 
@@ -39,8 +69,8 @@ namespace PFTSScene
             loadLocalRFIDImages();
             loadLocalCameraImages();
 
-            LoadRFIDInfos();
-            LoadCameraInfos();
+            //LoadRFIDInfos();
+            //LoadCameraInfos();
         }
 
         #region Dependency Properties
@@ -120,9 +150,65 @@ namespace PFTSScene
         #endregion
 
         /// <summary>
-        /// 更新rfid信息
+        /// 摄像头模式
         /// </summary>
-        public void LoadRFIDInfos()
+        public CameraMode CameraMode
+        {
+            get
+            {
+                return m_cameraMode;
+            }
+            set
+            {
+                m_cameraMode = value;
+                switch (m_cameraMode)
+                {
+                    case CameraMode.ShowAllPosition:
+                        CameraImageVisible = Visibility.Visible;
+                        break;
+                    case CameraMode.Hidden:
+                        CameraImageVisible = Visibility.Hidden;
+                        break;
+                    case CameraMode.Monitoring:
+                        LoadMonitoringCameraInfos();
+                        break;
+                    case CameraMode.Configing:
+                        LoadConfigCameraInfos();
+                        break;
+                }
+            }
+        }
+
+        public RFIDMode RFIDMode
+        {
+            get
+            {
+                return m_rfidMode;
+            }
+            set
+            {
+                m_rfidMode = value;
+                switch (m_rfidMode)
+                {
+                    case RFIDMode.ShowAllPosition:
+                        RfidImageVisiable = Visibility.Visible;
+                        break;
+                    case RFIDMode.Monitoring:
+                    case RFIDMode.Hidden:
+                        RfidImageVisiable = Visibility.Hidden;
+                        break;
+                    case RFIDMode.Configing:
+                        LoadConfigRFIDInfos();
+                        break;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 更新rfid信息,Configing模式
+        /// </summary>
+        public void LoadConfigRFIDInfos()
         {
             var rfidPositions = PFTSSceneControl.sceneResourceCache.PositionRFIDs;
             if (rfidPositions == null) return;
@@ -152,9 +238,9 @@ namespace PFTSScene
         }
 
         /// <summary>
-        /// 更新camera信息
+        /// 更新camera信息,Configing模式
         /// </summary>
-        public void LoadCameraInfos()
+        public void LoadConfigCameraInfos()
         {
             var cameraPositions = PFTSSceneControl.sceneResourceCache.PositionCameras;
             if (cameraPositions == null) return;
@@ -179,7 +265,75 @@ namespace PFTSScene
                     bi.UriSource = new Uri(@"Images/camera.png", UriKind.RelativeOrAbsolute);
                     bi.EndInit();
                     img.Source = bi;
+                    img.Cursor = Cursors.Hand;   
                 }
+            }
+        }
+
+        /// <summary>
+        /// 加载相机信息，监控模式
+        /// </summary>
+        public void LoadMonitoringCameraInfos()
+        {
+            var cameraPositions = PFTSSceneControl.sceneResourceCache.PositionCameras;
+            if (cameraPositions == null) return;
+            foreach (PFTSModel.position_camera pr in cameraPositions)
+            {
+                if (!m_mapCameras.ContainsKey(pr.id)) continue;
+                Image img = m_mapCameras[pr.id];
+                if (pr.camera_id == null)
+                {
+                    img.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"Images/camera.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                    img.Cursor = Cursors.Hand;
+                    var ctxMenu = new ContextMenu();
+                    var menuItem1 = new MenuItem();
+                    menuItem1.Header = "实时监控";
+                    var menuItem2 = new MenuItem();
+                    menuItem2.Header = "历史画面";
+                    var menuItem3 = new MenuItem();
+                    menuItem3.Header = "取消";
+                    ctxMenu.Items.Add(menuItem1);
+                    ctxMenu.Items.Add(menuItem2);
+                    ctxMenu.Items.Add(menuItem3);
+                    m_mapCameraMenu.Add(pr.id, ctxMenu);
+                    img.MouseUp += ImgCamera_MouseUp;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 摄像头鼠标点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImgCamera_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                Image img = (Image)sender;
+                Grid room = (Grid)img.Parent;
+                string tags = room.Tag.ToString();
+                int tagi = int.Parse(tags);
+                if (m_mapCameraMenu.ContainsKey(tagi))
+                {
+                    var ctxMenu = m_mapCameraMenu[tagi];
+                    ctxMenu.PlacementTarget = img;
+                    ctxMenu.Placement = PlacementMode.Top;
+                    ctxMenu.IsOpen = true;
+                }
+            }
+            catch
+            {
+
             }
         }
 

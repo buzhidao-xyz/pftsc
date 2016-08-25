@@ -9,6 +9,6 @@
 	Title="实时监控">
 
     <Grid>
-        <scene:PFTSSceneControl></scene:PFTSSceneControl>
+        <scene:PFTSSceneControl x:Name="controlScene"></scene:PFTSSceneControl>
     </Grid>
 </Page>

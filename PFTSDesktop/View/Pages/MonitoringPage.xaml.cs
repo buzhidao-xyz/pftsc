@@ -23,6 +23,9 @@ namespace PFTSDesktop.View.Pages
         public MonitoringPage()
         {
             InitializeComponent();
+            // 监控模式
+            controlScene.CameraMode = PFTSScene.CameraMode.Monitoring;
+            controlScene.RFIDMode = PFTSScene.RFIDMode.Monitoring;
         }
     }
 }
