@@ -144,6 +144,8 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public void OperatorNew(Object obj)
         {
+            OperatorInfo = new @operator();
+
             Button btn = (Button)obj;
             Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
@@ -164,15 +166,17 @@ namespace PFTSDesktop.ViewModel
         /// <summary>
         /// 账号
         /// </summary>
-        private bool CheckAccount(string account)
+        private bool CheckAccount()
         {
             //检查是否为空
-            if (account.Length == 0)
+            if (OperatorInfo.account == null || OperatorInfo.account.Trim().Length == 0)
             {
                 MessageBox.Show("请填写账号！");
 
                 return false;
             }
+
+            OperatorInfo.account = OperatorInfo.account.Trim();
 
             //检查account是否已存在
             if (OperatorService.GetByAccount(OperatorInfo.account) != null)
@@ -188,15 +192,17 @@ namespace PFTSDesktop.ViewModel
         /// <summary>
         /// 密码
         /// </summary>
-        private bool CheckPassword(string password)
+        private bool CheckPassword()
         {
             //检查是否为空
-            if (password.Length == 0)
+            if (OperatorInfo.password == null || OperatorInfo.password.Trim().Length == 0)
             {
                 MessageBox.Show("请填写密码！");
 
                 return false;
             }
+
+            OperatorInfo.password = OperatorInfo.password.Trim();
 
             return true;
         }
@@ -204,15 +210,17 @@ namespace PFTSDesktop.ViewModel
         /// <summary>
         /// 昵称
         /// </summary>
-        private bool CheckName(string name)
+        private bool CheckName()
         {
             //检查是否为空
-            if (name.Length == 0)
+            if (OperatorInfo.name == null || OperatorInfo.name.Trim().Length == 0)
             {
                 MessageBox.Show("请填写昵称！");
 
                 return false;
             }
+
+            OperatorInfo.name = OperatorInfo.name.Trim();
 
             return true;
         }
@@ -224,14 +232,11 @@ namespace PFTSDesktop.ViewModel
         public void OperatorNewSave(Object obj)
         {
             OperatorInfo = GetOperatorInfo;
-            OperatorInfo.account = OperatorInfo.account.Trim();
-            OperatorInfo.password = OperatorInfo.password.Trim();
-            OperatorInfo.name = OperatorInfo.name.Trim();
 
-            if (!CheckAccount(OperatorInfo.account)) return;
-            if (!CheckPassword(OperatorInfo.password)) return;
-            if (!CheckName(OperatorInfo.name)) return;
-            
+            if (!CheckAccount()) return;
+            if (!CheckPassword()) return;
+            if (!CheckName()) return;
+
             //处理数据//
             //密码MD5加密
             OperatorInfo.password = MD5Tool.GetEncryptCode(OperatorInfo.password);
@@ -297,9 +302,7 @@ namespace PFTSDesktop.ViewModel
             
             if (OperatorInfo.password.Length > 0)
             {
-                OperatorInfo.password = OperatorInfo.password.Trim();
-
-                if (!CheckPassword(OperatorInfo.password)) return;
+                if (!CheckPassword()) return;
                 if (PasswordCF != OperatorInfo.password)
                 {
                     MessageBox.Show("确认密码不正确！");
@@ -310,7 +313,7 @@ namespace PFTSDesktop.ViewModel
                 OperatorInfo.password = MD5Tool.GetEncryptCode(OperatorInfo.password);
             }
 
-            if (!CheckName(OperatorInfo.name)) return;
+            if (!CheckName()) return;
 
             bool Result = OperatorService.OperatorUpInfo(OperatorInfo.id, OperatorInfo.password, OperatorInfo.name);
             if (Result)
