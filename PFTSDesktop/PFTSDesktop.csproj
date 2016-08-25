@@ -58,7 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Global.cs" />
+    <Compile Include="common\Converter.cs" />
+    <Compile Include="common\Global.cs" />
     <Compile Include="LoginDlg.xaml.cs">
       <DependentUpon>LoginDlg.xaml</DependentUpon>
     </Compile>
@@ -81,6 +82,12 @@
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
     <Compile Include="View\DeviceManager\CameraManagerControl.xaml.cs">
       <DependentUpon>CameraManagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\LockerAddDlg.xaml.cs">
+      <DependentUpon>LockerAddDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\LockerEditDlg.xaml.cs">
+      <DependentUpon>LockerEditDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DeviceManager\LockerManagerControl.xaml.cs">
       <DependentUpon>LockerManagerControl.xaml</DependentUpon>
@@ -146,6 +153,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\DeviceManager\CameraManagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\LockerAddDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\LockerEditDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

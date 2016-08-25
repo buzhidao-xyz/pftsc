@@ -16,6 +16,7 @@ namespace PFTSDesktop.ViewModel
 {
     public class VestManagerViewModel : WorkspaceViewModel, IDataErrorInfo
     {
+        #region 私有变量
         private RelayCommand _editVestDlgCommand;
         private RelayCommand _addVestDlgCommand;
         private VestModel _vestModel;
@@ -29,6 +30,7 @@ namespace PFTSDesktop.ViewModel
         private RelayCommand _getVestListCommand;
         private List<dev_vest> _vestList;
         private int type;
+        #endregion
 
         public VestManagerViewModel()
         {
@@ -115,8 +117,8 @@ namespace PFTSDesktop.ViewModel
         private void AddVestDlg()
         {
             type = 1;
+            VestAddModel = new VestModel();
             VestAddDlg dlg = new VestAddDlg();
-            dlg.DataContext = VestManagerViewModel.GetInstance();
             dlg.ShowDialog();
         }
 
@@ -126,7 +128,6 @@ namespace PFTSDesktop.ViewModel
             VestEditDlg dlg = new VestEditDlg();
             _vestModel.OldName = DevVest.name;
             _vestModel.OldNo = DevVest.no;
-            dlg.DataContext = VestManagerViewModel.GetInstance();
             dlg.ShowDialog();
         }
 
@@ -173,6 +174,7 @@ namespace PFTSDesktop.ViewModel
         }
         #endregion
 
+        #region 属性
         public dev_vest DevVest
         {
             get
@@ -241,6 +243,8 @@ namespace PFTSDesktop.ViewModel
                 base.OnPropertyChanged("VestList");
             }
         }
+
+        #endregion
 
         #region IDataErrorInfo Members
 

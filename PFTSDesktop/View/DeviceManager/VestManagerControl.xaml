@@ -7,6 +7,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
                xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+             xmlns:conver="clr-namespace:PFTSDesktop.common"
             d:DesignHeight="800" d:DesignWidth="800" BorderBrush="LightBlue" BorderThickness="1">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,7 +21,7 @@
             <ele:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="马甲名称" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="识别码" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="状态" Binding="{Binding status}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="状态" Binding="{Binding status,Converter={conver:VestStatusConverter}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="穿戴者" Binding="{Binding btracker_id}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="创建时间" Binding="{Binding create_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTemplateColumn Header="操作" Width="80">

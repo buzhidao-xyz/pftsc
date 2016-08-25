@@ -8,5 +8,7 @@ namespace PFTSDesktop.ViewModel
 {
     public class LockerManagerViewModel : WorkspaceViewModel
     {
+
     }
+
 }
