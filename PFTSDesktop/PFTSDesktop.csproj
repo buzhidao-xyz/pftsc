@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="Model\OperatorModel.cs" />
     <Compile Include="Model\SuspectModel.cs" />
+    <Compile Include="Model\VestModel.cs" />
     <Compile Include="Video.xaml.cs">
       <DependentUpon>Video.xaml</DependentUpon>
     </Compile>
@@ -86,6 +87,12 @@
     </Compile>
     <Compile Include="View\DeviceManager\RFIDManagerControl.xaml.cs">
       <DependentUpon>RFIDManagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\VestAddDlg.xaml.cs">
+      <DependentUpon>VestAddDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\VestEditDlg.xaml.cs">
+      <DependentUpon>VestEditDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DeviceManager\VestManagerControl.xaml.cs">
       <DependentUpon>VestManagerControl.xaml</DependentUpon>
@@ -147,6 +154,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DeviceManager\RFIDManagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\VestAddDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\VestEditDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

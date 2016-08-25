@@ -14,7 +14,6 @@ namespace PFTSDesktop.ViewModel
     public class MainWindowViewModel : WorkspaceViewModel
     {
         private FButton preBtn;
-        private Uri frameSource;
         RelayCommand _openCommand;
 
         #region Commands

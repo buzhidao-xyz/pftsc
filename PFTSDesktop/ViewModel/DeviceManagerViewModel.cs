@@ -47,7 +47,7 @@ namespace PFTSDesktop.ViewModel
             switch (btn.Tag.ToString())
             {
                 case "1":
-                    Workspace = new VestManagerViewModel();
+                    Workspace =  VestManagerViewModel.GetInstance();
                     break;
                 case "2":
                     Workspace = new LockerManagerViewModel();

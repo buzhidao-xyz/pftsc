@@ -138,4 +138,16 @@
   <data name="Suspect_Error_MissVest" xml:space="preserve">
     <value>RFID服装不能为空</value>
   </data>
+  <data name="Vest_Error_MissName" xml:space="preserve">
+    <value>马甲名称不能为空</value>
+  </data>
+  <data name="Vest_Error_MissNo" xml:space="preserve">
+    <value>马甲识别码不能为空</value>
+  </data>
+  <data name="Vest_Error_ReName" xml:space="preserve">
+    <value>存在重名马甲名称</value>
+  </data>
+  <data name="Vest_Error_ReNo" xml:space="preserve">
+    <value>存在重名识别码</value>
+  </data>
 </root>

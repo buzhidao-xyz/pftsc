@@ -19,9 +19,7 @@ namespace PFTSDesktop.ViewModel
     {
         #region Fields
 
-        RelayCommand _closeCommand;
-
-
+   
 
         #endregion // Fields
 
