@@ -64,15 +64,39 @@
     </Compile>
     <Compile Include="Model\OperatorModel.cs" />
     <Compile Include="Model\SuspectModel.cs" />
+    <Compile Include="Model\VestModel.cs" />
     <Compile Include="Video.xaml.cs">
       <DependentUpon>Video.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CameraManagerViewModel.cs" />
+    <Compile Include="ViewModel\DeviceManagerViewModel.cs" />
+    <Compile Include="ViewModel\LockerManagerViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\OperatorManagerViewModel.cs" />
+    <Compile Include="ViewModel\RFIDManagerViewModel.cs" />
     <Compile Include="ViewModel\SuspectViewModel.cs" />
+    <Compile Include="ViewModel\VestManagerViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
+    <Compile Include="View\DeviceManager\CameraManagerControl.xaml.cs">
+      <DependentUpon>CameraManagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\LockerManagerControl.xaml.cs">
+      <DependentUpon>LockerManagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\RFIDManagerControl.xaml.cs">
+      <DependentUpon>RFIDManagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\VestAddDlg.xaml.cs">
+      <DependentUpon>VestAddDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\VestEditDlg.xaml.cs">
+      <DependentUpon>VestEditDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\VestManagerControl.xaml.cs">
+      <DependentUpon>VestManagerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OperatorManager\OperatorNewPage.xaml.cs">
       <DependentUpon>OperatorNewPage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +144,30 @@
     <Page Include="Video.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DeviceManager\CameraManagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\LockerManagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\RFIDManagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\VestAddDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\VestEditDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\VestManagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OperatorManager\OperatorNewPage.xaml">
       <SubType>Designer</SubType>

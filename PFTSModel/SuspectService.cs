@@ -13,7 +13,7 @@ namespace PFTSModel
         /// 获取所有值
         /// </summary>
         /// <returns></returns>
-        public List<btracker> GetAllByIn(int status)
+        public List<BtrackerInfoEntity> GetAllByIn(System.Nullable<int> status)
         {
             try
             {
@@ -21,14 +21,26 @@ namespace PFTSModel
                 {
                     System.Data.Linq.Table<btracker> table = db.GetTable<btracker>();
                     var query = from q in table
-                                where q.status == status
-                                select q;
-                    List<btracker> retList = new List<btracker>();
-                    foreach (btracker entity in query)
+                                from r in db.GetTable<officer>()
+                                where q.officer_id == r.id
+                                select new BtrackerInfoEntity
+                                {
+                                    id = q.id,
+                                    no = q.no,
+                                    name = q.name,
+                                    number = q.number,
+                                    sex = q.sex,
+                                    officer_name = r.name,
+                                    in_time = q.in_time,
+                                    status = q.status
+                                };
+
+                    if (status != null)
                     {
-                        retList.Add(entity);
+                        query = query.Where(p => p.status == status);
                     }
-                    return retList;
+
+                    return query.ToList();
                 }
             }
             catch (Exception e)

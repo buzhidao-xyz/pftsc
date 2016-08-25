@@ -122,5 +122,41 @@ namespace PFTSDesktop.Properties {
                 return ResourceManager.GetString("Suspect_Error_MissVest", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 马甲名称不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Vest_Error_MissName {
+            get {
+                return ResourceManager.GetString("Vest_Error_MissName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 马甲识别码不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Vest_Error_MissNo {
+            get {
+                return ResourceManager.GetString("Vest_Error_MissNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名马甲名称 的本地化字符串。
+        /// </summary>
+        internal static string Vest_Error_ReName {
+            get {
+                return ResourceManager.GetString("Vest_Error_ReName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名识别码 的本地化字符串。
+        /// </summary>
+        internal static string Vest_Error_ReNo {
+            get {
+                return ResourceManager.GetString("Vest_Error_ReNo", resourceCulture);
+            }
+        }
     }
 }

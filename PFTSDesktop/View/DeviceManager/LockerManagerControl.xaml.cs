@@ -12,22 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PFTSDesktop.ViewModel;
 
-namespace PFTSDesktop.View.Pages
+namespace PFTSDesktop.View.DeviceManager
 {
     /// <summary>
-    /// OperatorManangerPage.xaml 的交互逻辑
+    /// LockerManagerControl.xaml 的交互逻辑
     /// </summary>
-    public partial class OperatorManangerPage : Page
+    public partial class LockerManagerControl : UserControl
     {
-        public OperatorManangerPage()
+        public LockerManagerControl()
         {
             InitializeComponent();
-
-            var viewModel = new OperatorManagerViewModel();
-
-            this.DataContext = viewModel;
         }
     }
 }
