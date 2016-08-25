@@ -63,6 +63,7 @@
     <Compile Include="LoginDlg.xaml.cs">
       <DependentUpon>LoginDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\LockerModel.cs" />
     <Compile Include="Model\OperatorModel.cs" />
     <Compile Include="Model\SuspectModel.cs" />
     <Compile Include="Model\VestModel.cs" />
