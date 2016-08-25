@@ -4,10 +4,55 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-	Title="设备管理">
-
+       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+      xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
+      xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+      d:DesignHeight="800" d:DesignWidth="800"
+	  Title="嫌疑犯管理">
+    <Page.Resources>
+        <Style TargetType="tmp:ButtonTemplet" BasedOn="{StaticResource radioBtnStyle}"/>
+    </Page.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction  Command="{Binding FunctionChangeCommand}" CommandParameter="{Binding ElementName=btnVest}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
-        <TextBlock Text="设备管理" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Background="#f2f2f2">
+            <Label Content="您的当前位置：设备管理  > "   VerticalContentAlignment="Center" Style="{DynamicResource lableNameStyle}"/>
+            <Label Content="{Binding FunctionName}"  VerticalContentAlignment="Center" Style="{DynamicResource lableProStyle}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <tmp:ButtonTemplet Width="100" Name="btnVest" Tag="1"  Margin="30,0,0,0" Content="RFID服装" 
+                               Command="{Binding FunctionChangeCommand}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="{StaticResource btnImage}"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+            </tmp:ButtonTemplet>
+            <tmp:ButtonTemplet Width="100" Name="btnLocker" Tag="2" Margin="10,0,0,0" Content="储物柜"
+                              Command="{Binding FunctionChangeCommand}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="{DynamicResource btnImage}"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+            </tmp:ButtonTemplet>
+            <tmp:ButtonTemplet Width="100" Name="btnRFID" Tag="3" Margin="10,0,0,0" Content="RFID接收器"
+                               Command="{Binding FunctionChangeCommand}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="{DynamicResource btnImage}"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+            </tmp:ButtonTemplet>
+            <tmp:ButtonTemplet Width="100" Name="btnCamera" Tag="4" Margin="10,0,0,0" Content="摄像头"
+                               Command="{Binding FunctionChangeCommand}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="{DynamicResource btnImage}"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+            </tmp:ButtonTemplet>
+        </StackPanel>
+        <ContentControl Content="{Binding Workspace}" Grid.Row="2"/>
     </Grid>
 </Page>

@@ -1,17 +1,46 @@
 ﻿<Application x:Class="PFTSDesktop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:element="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate">
+             xmlns:element="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
+             xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+             xmlns:vw="clr-namespace:PFTSDesktop.View.DeviceManager"
+             xmlns:vm="clr-namespace:PFTSDesktop.ViewModel">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/PFTSUITemplate;component/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <DataTemplate DataType="{x:Type vm:LockerManagerViewModel}">
+                <vw:LockerManagerControl/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:CameraManagerViewModel}">
+                <vw:CameraManagerControl/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vm:RFIDManagerViewModel}">
+                <vw:RFIDManagerControl/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vm:VestManagerViewModel}">
+                <vw:VestManagerControl/>
+            </DataTemplate>
+
             <SolidColorBrush x:Key="windowStyle" Color="#17b38e" />
             <Style x:Key="dataGridStyle" TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="radioBtnStyle" TargetType="tmp:ButtonTemplet">
+                <Setter Property="Height" Value="35"/>
+                <Setter Property="FontFamily" Value="黑体"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="#827e7e"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
             <Style TargetType="element:RegularText" x:Key="textboxStyle">
                 <Setter Property="BorderBrush" Value="#7debd2"></Setter>

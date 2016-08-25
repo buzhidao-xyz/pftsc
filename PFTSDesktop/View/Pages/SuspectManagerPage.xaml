@@ -49,7 +49,7 @@
                 <DataGridTextColumn Header="性别" Binding="{Binding sex}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="身份证号" Binding="{Binding number}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="案卷号" Binding="{Binding no}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="负责民警" Binding="{Binding officer_id}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="负责民警" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="收监日期" Binding="{Binding in_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>

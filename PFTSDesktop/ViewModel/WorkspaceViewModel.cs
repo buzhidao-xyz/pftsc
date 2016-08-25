@@ -21,7 +21,7 @@ namespace PFTSDesktop.ViewModel
 
         RelayCommand _closeCommand;
 
-       
+
 
         #endregion // Fields
 
@@ -54,6 +54,14 @@ namespace PFTSDesktop.ViewModel
                 return new RelayCommand(new Action<Object>(this.WindowMin));
             }
         }
+
+        public ICommand PageCloseCommand
+        {
+            get
+            {
+                return new RelayCommand(param => this.PageClose());
+            }
+        }
         #endregion // CloseCommand
 
         #region RequestClose [event]
@@ -69,6 +77,10 @@ namespace PFTSDesktop.ViewModel
             win.Close();
         }
 
+        public void PageClose()
+        {
+            Global.currentFrame.NavigationService.GoBack();
+        }
         public void OnRequestClose()
         {
             EventHandler handler = this.RequestClose;
@@ -86,7 +98,7 @@ namespace PFTSDesktop.ViewModel
             win.WindowState = WindowState.Minimized;
         }
 
-       
+
         #endregion // RequestClose [event]
     }
 }

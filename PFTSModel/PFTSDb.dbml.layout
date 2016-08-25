@@ -157,14 +157,14 @@
         <classShapeMoniker Id="e5b3c7dd-1f01-4c4a-8f5b-ac4002d974ac" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 8.957216796875); (3.04166666666667 : 8.957216796875 : JumpStart); (3.20833333333333 : 8.957216796875 : JumpEnd); (3.53125 : 8.957216796875); (3.53125 : 2.65689331054688)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 8.957216796875); (3.53125 : 8.957216796875); (3.53125 : 2.65689331054688)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/dev_camera/dev_camera_video" />
       <nodes>
         <classShapeMoniker Id="2826df2c-34c8-46d6-a29b-5b19e14d070f" />
         <classShapeMoniker Id="ec908753-c6f3-4319-923e-0324f93105e8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.125 : 11.125); (3.125 : 1.70344665527344); (3.5 : 1.70344665527344)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.5 : 11.8936525472005); (4.5 : 11.8936525472005); (4.5 : 8.07545206705729); (3.61458333333333 : 8.07545206705729 : JumpStart); (3.44791666666667 : 8.07545206705729 : JumpEnd); (3.125 : 8.07545206705729); (3.125 : 3.03189331054688); (3.44791666666667 : 3.03189331054687 : JumpStart); (3.61458333333333 : 3.03189331054688 : JumpEnd); (4.546877 : 3.03189331054688); (4.546877 : 2.65689331054688)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/position_camera/position_camera_video" />
       <nodes>
         <classShapeMoniker Id="c61857f9-288c-4b6c-a3ae-d61318e43bba" />
@@ -205,7 +205,7 @@
         <classShapeMoniker Id="a20a104d-d739-4459-b1e4-573875fdadff" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 5.70344665527344); (3.04166666666667 : 5.70344665527344 : JumpStart); (3.20833333333333 : 5.70344665527344 : JumpEnd); (3.44791666666667 : 5.70344665527344 : JumpStart); (3.61458333333333 : 5.70344665527344 : JumpEnd); (3.625 : 5.70344665527344)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 6.20992268880208); (3.04166666666667 : 6.20992268880208 : JumpStart); (3.20833333333333 : 6.20992268880208 : JumpEnd); (3.44791666666667 : 6.20992268880208 : JumpStart); (3.61458333333333 : 6.20992268880208 : JumpEnd); (3.625 : 6.20992268880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/officer/officer_btracker" />
       <nodes>
         <classShapeMoniker Id="32e60c0b-22b5-402e-be1e-d67d1348fc8f" />
@@ -219,5 +219,11 @@
         <classShapeMoniker Id="a20a104d-d739-4459-b1e4-573875fdadff" />
       </nodes>
     </associationConnector>
+    <classShape Id="003a3b3e-ea25-41f9-89be-56101d768f97" absoluteBounds="0.5, 0.5, 2, 3.3852461751302081">
+      <DataClassMoniker Name="/PFTSDbDataContext/btrackerInfo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="620b6325-72a2-43f6-9986-f5d04a1c703e" absoluteBounds="0.5149999999999999, 0.96, 1.9700000000000002, 2.825246175130208" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

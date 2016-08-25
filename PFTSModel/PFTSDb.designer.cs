@@ -72,6 +72,9 @@ namespace PFTSModel
     partial void Insertbtracker(btracker instance);
     partial void Updatebtracker(btracker instance);
     partial void Deletebtracker(btracker instance);
+    partial void InsertbtrackerInfo(btrackerInfo instance);
+    partial void UpdatebtrackerInfo(btrackerInfo instance);
+    partial void DeletebtrackerInfo(btrackerInfo instance);
     #endregion
 		
 		public PFTSDbDataContext() : 
@@ -213,6 +216,14 @@ namespace PFTSModel
 			get
 			{
 				return this.GetTable<btracker>();
+			}
+		}
+		
+		public System.Data.Linq.Table<btrackerInfo> btrackerInfo
+		{
+			get
+			{
+				return this.GetTable<btrackerInfo>();
 			}
 		}
 	}
@@ -1832,7 +1843,7 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint", DbType="Binary(2048)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint", DbType="Binary(2048)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary fingerprint
 		{
 			get
@@ -3905,6 +3916,380 @@ namespace PFTSModel
 		{
 			this.SendPropertyChanging();
 			entity.btracker = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class btrackerInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private string _number;
+		
+		private string _sex;
+		
+		private int _vest_id;
+		
+		private System.Nullable<int> _locker_id;
+		
+		private System.Nullable<int> _officer_id;
+		
+		private System.DateTime _in_time;
+		
+		private System.Nullable<System.DateTime> _out_time;
+		
+		private int _status;
+		
+		private System.Nullable<bool> _recover;
+		
+		private string _private_goods;
+		
+		private string _officer_name;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnoChanging(string value);
+    partial void OnnoChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnnumberChanging(string value);
+    partial void OnnumberChanged();
+    partial void OnsexChanging(string value);
+    partial void OnsexChanged();
+    partial void Onvest_idChanging(int value);
+    partial void Onvest_idChanged();
+    partial void Onlocker_idChanging(System.Nullable<int> value);
+    partial void Onlocker_idChanged();
+    partial void Onofficer_idChanging(System.Nullable<int> value);
+    partial void Onofficer_idChanged();
+    partial void Onin_timeChanging(System.DateTime value);
+    partial void Onin_timeChanged();
+    partial void Onout_timeChanging(System.Nullable<System.DateTime> value);
+    partial void Onout_timeChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void OnrecoverChanging(System.Nullable<bool> value);
+    partial void OnrecoverChanged();
+    partial void Onprivate_goodsChanging(string value);
+    partial void Onprivate_goodsChanged();
+    partial void Onofficer_nameChanging(string value);
+    partial void Onofficer_nameChanged();
+    #endregion
+		
+		public btrackerInfo()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(36)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this.OnnoChanging(value);
+					this.SendPropertyChanging();
+					this._no = value;
+					this.SendPropertyChanged("no");
+					this.OnnoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="VarChar(32)")]
+		public string number
+		{
+			get
+			{
+				return this._number;
+			}
+			set
+			{
+				if ((this._number != value))
+				{
+					this.OnnumberChanging(value);
+					this.SendPropertyChanging();
+					this._number = value;
+					this.SendPropertyChanged("number");
+					this.OnnumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="VarChar(8)")]
+		public string sex
+		{
+			get
+			{
+				return this._sex;
+			}
+			set
+			{
+				if ((this._sex != value))
+				{
+					this.OnsexChanging(value);
+					this.SendPropertyChanging();
+					this._sex = value;
+					this.SendPropertyChanged("sex");
+					this.OnsexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int NOT NULL")]
+		public int vest_id
+		{
+			get
+			{
+				return this._vest_id;
+			}
+			set
+			{
+				if ((this._vest_id != value))
+				{
+					this.Onvest_idChanging(value);
+					this.SendPropertyChanging();
+					this._vest_id = value;
+					this.SendPropertyChanged("vest_id");
+					this.Onvest_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_locker_id", DbType="Int")]
+		public System.Nullable<int> locker_id
+		{
+			get
+			{
+				return this._locker_id;
+			}
+			set
+			{
+				if ((this._locker_id != value))
+				{
+					this.Onlocker_idChanging(value);
+					this.SendPropertyChanging();
+					this._locker_id = value;
+					this.SendPropertyChanged("locker_id");
+					this.Onlocker_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_id", DbType="Int")]
+		public System.Nullable<int> officer_id
+		{
+			get
+			{
+				return this._officer_id;
+			}
+			set
+			{
+				if ((this._officer_id != value))
+				{
+					this.Onofficer_idChanging(value);
+					this.SendPropertyChanging();
+					this._officer_id = value;
+					this.SendPropertyChanged("officer_id");
+					this.Onofficer_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_time", DbType="DateTime NOT NULL")]
+		public System.DateTime in_time
+		{
+			get
+			{
+				return this._in_time;
+			}
+			set
+			{
+				if ((this._in_time != value))
+				{
+					this.Onin_timeChanging(value);
+					this.SendPropertyChanging();
+					this._in_time = value;
+					this.SendPropertyChanged("in_time");
+					this.Onin_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_out_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> out_time
+		{
+			get
+			{
+				return this._out_time;
+			}
+			set
+			{
+				if ((this._out_time != value))
+				{
+					this.Onout_timeChanging(value);
+					this.SendPropertyChanging();
+					this._out_time = value;
+					this.SendPropertyChanged("out_time");
+					this.Onout_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
+		public System.Nullable<bool> recover
+		{
+			get
+			{
+				return this._recover;
+			}
+			set
+			{
+				if ((this._recover != value))
+				{
+					this.OnrecoverChanging(value);
+					this.SendPropertyChanging();
+					this._recover = value;
+					this.SendPropertyChanged("recover");
+					this.OnrecoverChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_private_goods", DbType="VarChar(512)")]
+		public string private_goods
+		{
+			get
+			{
+				return this._private_goods;
+			}
+			set
+			{
+				if ((this._private_goods != value))
+				{
+					this.Onprivate_goodsChanging(value);
+					this.SendPropertyChanging();
+					this._private_goods = value;
+					this.SendPropertyChanged("private_goods");
+					this.Onprivate_goodsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="", Storage="_officer_name", CanBeNull=false)]
+		public string officer_name
+		{
+			get
+			{
+				return this._officer_name;
+			}
+			set
+			{
+				if ((this._officer_name != value))
+				{
+					this.Onofficer_nameChanging(value);
+					this.SendPropertyChanging();
+					this._officer_name = value;
+					this.SendPropertyChanged("officer_name");
+					this.Onofficer_nameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

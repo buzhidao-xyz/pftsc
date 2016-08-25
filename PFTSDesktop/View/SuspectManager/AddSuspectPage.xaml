@@ -93,6 +93,8 @@
         <Button Grid.Row="10" Grid.Column="2" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
                 HorizontalAlignment="Right" Content="保    存" Command="{Binding AddSupectInfoCommand}"
                 Height="30" Width="90" Margin="0,0,10,0"/>
-
+        <Button Grid.Row="10" Grid.Column="2" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
+                HorizontalAlignment="Right" Content="返    回" Command="{Binding PageCloseCommand}"
+                Height="30" Width="90" Margin="0,0,110,0"/>
     </Grid>
 </Page>

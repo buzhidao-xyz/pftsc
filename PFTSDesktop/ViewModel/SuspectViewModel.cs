@@ -30,7 +30,7 @@ namespace PFTSDesktop.ViewModel
         private officer _officer;
         private dev_vest _devVert;
         private SuspectService _supectService;
-        private List<btracker> _btrackers;
+        private List<BtrackerInfoEntity> _btrackers;
         private string[] _sexOpetions;
 
         public SuspectViewModel()
@@ -182,7 +182,7 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<btracker> Btrackers
+        public List<BtrackerInfoEntity> Btrackers
         {
             get
             {
@@ -305,7 +305,7 @@ namespace PFTSDesktop.ViewModel
                 Btrackers = _supectService.GetAllByIn(0);
             }
             else {
-                Btrackers = _supectService.GetAll();
+                Btrackers = _supectService.GetAllByIn(null);
             }
         }
         #endregion
