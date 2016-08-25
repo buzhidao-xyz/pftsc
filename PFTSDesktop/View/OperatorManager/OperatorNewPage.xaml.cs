@@ -25,7 +25,7 @@ namespace PFTSDesktop.View.OperatorManager
         {
             InitializeComponent();
 
-            var viewModel = new OperatorManagerViewModel();
+            var viewModel = OperatorManagerViewModel.GetInstance();
 
             this.DataContext = viewModel;
         }

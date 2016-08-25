@@ -77,5 +77,44 @@ namespace PFTSModel
 
             return null;
         }
+
+        /// <summary>
+        /// 更新操作员信息
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool OperatorUpInfo(int id, string password, string name)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<@operator> table = db.GetTable<@operator>();
+
+                    var query = from op in db.@operator
+                                where op.id == id
+                                select op;
+                    foreach (var p in query)
+                    {
+                        if (password.Length != 0)
+                        {
+                            p.password = password;
+                        } 
+                        p.name = name;
+                    }
+
+                    db.SubmitChanges();
+
+                    return true;
+                }
+            }
+            catch
+            {
+
+            }
+
+            return true;
+        }
     }
 }

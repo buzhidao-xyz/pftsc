@@ -27,6 +27,9 @@ namespace PFTSDesktop.ViewModel
         //操作员信息
         private @operator OperatorInfo;
 
+        //确认密码
+        private string PasswordCFV;
+
         public OperatorManagerViewModel()
         {
             OperatorService = new OperatorService();
@@ -47,7 +50,7 @@ namespace PFTSDesktop.ViewModel
         public List<@operator> GetOperatorList
         {
             get {
-                if (OperatorList == null) OperatorList = OperatorService.GetOperatorList();
+                OperatorList = OperatorService.GetOperatorList();
 
                 return OperatorList;
             }
@@ -80,6 +83,20 @@ namespace PFTSDesktop.ViewModel
                 OperatorInfo = value;
 
                 base.OnPropertyChanged("GetOperatorInfo");
+            }
+        }
+
+        public string PasswordCF
+        {
+            get { return PasswordCFV; }
+            set
+            {
+                if (value == PasswordCFV)
+                    return;
+
+                PasswordCFV = value;
+
+                base.OnPropertyChanged("PasswordCF");
             }
         }
 
@@ -127,6 +144,8 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public void OperatorNew(Object obj)
         {
+            OperatorInfo = new @operator();
+
             Button btn = (Button)obj;
             Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
@@ -147,75 +166,63 @@ namespace PFTSDesktop.ViewModel
         /// <summary>
         /// 账号
         /// </summary>
-        private string account
+        private bool CheckAccount()
         {
-            get
+            //检查是否为空
+            if (OperatorInfo.account == null || OperatorInfo.account.Trim().Length == 0)
             {
-                if (OperatorInfo == null) OperatorInfo = GetOperatorInfo;
-                var account = OperatorInfo.account.Trim();
+                MessageBox.Show("请填写账号！");
 
-                //检查是否为空
-                if (account == null)
-                {
-                    MessageBox.Show("请填写账号！");
-
-                    return null;
-                }
-
-                //检查account是否已存在
-                if (OperatorService.GetByAccount(OperatorInfo.account) != null)
-                {
-                    MessageBox.Show("账号 " + OperatorInfo.account + " 已存在！");
-
-                    return null;
-                }
-
-                return account;
+                return false;
             }
+
+            OperatorInfo.account = OperatorInfo.account.Trim();
+
+            //检查account是否已存在
+            if (OperatorService.GetByAccount(OperatorInfo.account) != null)
+            {
+                MessageBox.Show("账号 " + OperatorInfo.account + " 已存在！");
+
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
         /// 密码
         /// </summary>
-        private string password
+        private bool CheckPassword()
         {
-            get
+            //检查是否为空
+            if (OperatorInfo.password == null || OperatorInfo.password.Trim().Length == 0)
             {
-                if (OperatorInfo == null) OperatorInfo = GetOperatorInfo;
-                var password = OperatorInfo.password.Trim();
+                MessageBox.Show("请填写密码！");
 
-                //检查是否为空
-                if (password == null)
-                {
-                    MessageBox.Show("请填写密码！");
-
-                    return null;
-                }
-
-                return password;
+                return false;
             }
+
+            OperatorInfo.password = OperatorInfo.password.Trim();
+
+            return true;
         }
 
         /// <summary>
         /// 昵称
         /// </summary>
-        private string name
+        private bool CheckName()
         {
-            get
+            //检查是否为空
+            if (OperatorInfo.name == null || OperatorInfo.name.Trim().Length == 0)
             {
-                if (OperatorInfo == null) OperatorInfo = GetOperatorInfo;
-                var name = OperatorInfo.name.Trim();
+                MessageBox.Show("请填写昵称！");
 
-                //检查是否为空
-                if (name == null)
-                {
-                    MessageBox.Show("请填写昵称！");
-
-                    return null;
-                }
-
-                return name;
+                return false;
             }
+
+            OperatorInfo.name = OperatorInfo.name.Trim();
+
+            return true;
         }
 
         /// <summary>
@@ -226,15 +233,10 @@ namespace PFTSDesktop.ViewModel
         {
             OperatorInfo = GetOperatorInfo;
 
-            OperatorInfo.account = account;
-            if (OperatorInfo.account == null) return;
+            if (!CheckAccount()) return;
+            if (!CheckPassword()) return;
+            if (!CheckName()) return;
 
-            OperatorInfo.password = password;
-            if (OperatorInfo.password == null) return;
-
-            OperatorInfo.name = name;
-            if (OperatorInfo.name == null) return;
-            
             //处理数据//
             //密码MD5加密
             OperatorInfo.password = MD5Tool.GetEncryptCode(OperatorInfo.password);
@@ -270,7 +272,7 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         private void OperatorUp(Object obj)
         {
-            MessageBox.Show(GetOperatorInfo.account);
+            GetOperatorInfo.password = "";
 
             Button btn = (Button)obj;
             Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
@@ -292,18 +294,28 @@ namespace PFTSDesktop.ViewModel
         private void OperatorUpSave(Object obj)
         {
             OperatorInfo = GetOperatorInfo;
+            if (OperatorInfo.id == 0 || OperatorInfo.id.ToString().Length == 0)
+            {
+                MessageBox.Show("未知操作员信息！");
+                return;
+            }
             
-            OperatorInfo.password = password;
-            if (OperatorInfo.password == null) return;
+            if (OperatorInfo.password.Length > 0)
+            {
+                if (!CheckPassword()) return;
+                if (PasswordCF != OperatorInfo.password)
+                {
+                    MessageBox.Show("确认密码不正确！");
+                    return;
+                }
 
-            OperatorInfo.name = name;
-            if (OperatorInfo.name == null) return;
+                //密码MD5加密
+                OperatorInfo.password = MD5Tool.GetEncryptCode(OperatorInfo.password);
+            }
 
-            //处理数据//
-            //密码MD5加密
-            OperatorInfo.password = MD5Tool.GetEncryptCode(OperatorInfo.password);
+            if (!CheckName()) return;
 
-            bool Result = OperatorService.Insert(OperatorInfo);
+            bool Result = OperatorService.OperatorUpInfo(OperatorInfo.id, OperatorInfo.password, OperatorInfo.name);
             if (Result)
             {
                 MessageBox.Show("保存成功！");
