@@ -54,11 +54,17 @@ namespace PFTSScene
         private Dictionary<int, ContextMenu> m_mapCameraMenu = new Dictionary<int, ContextMenu>();
         private Dictionary<int, Tools.GridRoom> m_mapGridRooms = new Dictionary<int, Tools.GridRoom>();
         private Dictionary<int, int> m_mapPeopleCounts = new Dictionary<int, int>();
+        private Dictionary<int, PFTSModel.btracker> m_mapBtrackers = new Dictionary<int, PFTSModel.btracker>();
+        private List<PFTSModel.btracker> m_listUnloadPeople = new List<PFTSModel.btracker>();
 
         private CameraMode m_cameraMode;
         private RFIDMode m_rfidMode;
 
         private BitmapImage m_bmImgPeople;
+        // 人物提示名
+        private ToolTip m_toolTip;
+        private Label m_lblToolTip;
+        private ContextMenu m_peopleMenu;
         private bool m_loaded = false;
 
         //private List<InArrow> paths;
@@ -80,6 +86,23 @@ namespace PFTSScene
             m_bmImgPeople.BeginInit();
             m_bmImgPeople.UriSource = new Uri(@"Images/people.png", UriKind.RelativeOrAbsolute);
             m_bmImgPeople.EndInit();
+
+            m_toolTip = new ToolTip();
+            m_lblToolTip = new Label();
+            m_toolTip.Content = m_lblToolTip;
+            m_toolTip.Placement = PlacementMode.Top;
+
+            m_peopleMenu = new ContextMenu();
+            var menuItem1 = new MenuItem();
+            menuItem1.Header = "实时监控";
+            var menuItem2 = new MenuItem();
+            menuItem2.Header = "历史轨迹";
+            var menuItem3 = new MenuItem();
+            menuItem3.Header = "取消";
+            m_peopleMenu.Items.Add(menuItem1);
+            m_peopleMenu.Items.Add(menuItem2);
+            m_peopleMenu.Items.Add(menuItem3);
+            m_peopleMenu.Placement = PlacementMode.Top;
         }
 
         #region Dependency Properties
@@ -402,8 +425,9 @@ namespace PFTSScene
         }
 
 
-        public void AddAPeople(int roomId)
+        public void AddAPeople(PFTSModel.btracker btracker)
         {
+            int roomId = btracker.position_id.Value;
             if (m_loaded)
             {
                 if (m_mapGridRooms.ContainsKey(roomId))
@@ -421,18 +445,49 @@ namespace PFTSScene
                     {
                         m_mapPeopleCounts[roomId] = 1;
                     }
+                    img.Tag = btracker.id;
+                    img.Cursor = Cursors.Hand;
+                    img.MouseEnter += Img_MouseEnter;
+                    img.MouseLeave += Img_MouseLeave;
+                    img.MouseUp += Img_MouseUp;
+                    m_mapBtrackers.Add(btracker.id, btracker);
                 }
             }else
             {
-                if (m_mapPeopleCounts.ContainsKey(roomId))
+                m_listUnloadPeople.Add(btracker);
+            }
+        }
+
+        private void Img_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.Img_MouseLeave(sender, null);
+            m_peopleMenu.PlacementTarget = (Image)sender;
+            m_peopleMenu.IsOpen = true;
+        }
+
+        private void Img_MouseLeave(object sender, MouseEventArgs e)
+        {
+            m_toolTip.IsOpen = false;
+        }
+
+        private void Img_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Image img = (Image)sender;
+            try
+            {
+                int id = int.Parse(img.Tag.ToString());
+                if (m_mapBtrackers.ContainsKey(id))
                 {
-                    m_mapPeopleCounts[roomId] += 1;
-                }
-                else
-                {
-                    m_mapPeopleCounts[roomId] = 1;
+                    var bt = m_mapBtrackers[id];
+                    m_lblToolTip.Content = bt.name;
                 }
             }
+            catch
+            {
+
+            }
+            m_toolTip.PlacementTarget = img;
+            m_toolTip.IsOpen = true;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -441,18 +496,12 @@ namespace PFTSScene
             foreach (var gr in m_mapGridRooms)
             {
                 gr.Value.MetaSize = new Size(30, 30);
-                if (m_mapPeopleCounts.ContainsKey(gr.Key) && m_mapPeopleCounts[gr.Key] > 0)
-                {
-                    for (var i = 0;i < m_mapPeopleCounts[gr.Key]; i++)
-                    {
-                        Image img = new Image();
-                        img.Width = 30;
-                        img.Height = 30;
-                        img.Source = m_bmImgPeople;
-                        gr.Value.AddImage(img);
-                    }
-                }
             }
+            foreach (var bt in m_listUnloadPeople)
+            {
+                AddAPeople(bt);
+            }
+            m_listUnloadPeople = new List<PFTSModel.btracker>();
         }
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)

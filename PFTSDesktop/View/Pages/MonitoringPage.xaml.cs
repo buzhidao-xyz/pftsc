@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PFTSModel;
 
 namespace PFTSDesktop.View.Pages
 {
@@ -27,9 +28,12 @@ namespace PFTSDesktop.View.Pages
             controlScene.CameraMode = PFTSScene.CameraMode.Monitoring;
             controlScene.RFIDMode = PFTSScene.RFIDMode.Monitoring;
 
-            controlScene.AddAPeople(2);
-            controlScene.AddAPeople(5);
-            controlScene.AddAPeople(5);
+            var btrackers = new BTrackerService();
+            var bs = btrackers.GetAllInscene();
+            foreach (var b in bs)
+            {
+                controlScene.AddAPeople(b);
+            }
         }
     }
 }
