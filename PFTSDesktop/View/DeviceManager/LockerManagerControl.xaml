@@ -7,6 +7,7 @@
             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
                xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+              xmlns:conver="clr-namespace:PFTSDesktop.common"
             d:DesignHeight="800" d:DesignWidth="800" BorderBrush="LightBlue" BorderThickness="1">
     <Grid>
         <Grid.RowDefinitions>
@@ -14,21 +15,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <tmp:ButtonEX Name="btnAddVest" Grid.Row="0" Content="新增储物柜" VerticalAlignment="Center"  HorizontalAlignment="Right" Tag="View/SuspectManager/AddSuspectPage.xaml"
-                      Margin="0,0,20,0" Width="90" Height="26" Command="{Binding AddSupcetPageCommand}" CommandParameter="{Binding ElementName=btnAddVest}"/>
+                      Margin="0,0,20,0" Width="90" Height="26" Command="{Binding AddLockerDlgCommand}"/>
         <ele:PageDataGridEx  Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None"
-                             ItemsSource="{Binding Btrackers}">
+                             ItemsSource="{Binding LockerList}" SelectedItem="{Binding DevLocker}">
             <ele:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="物品箱名称" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="识别码" Binding="{Binding sex}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="状态" Binding="{Binding number}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="嫌疑犯名称" Binding="{Binding no}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="警员名称" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="创建时间" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="识别码" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="状态" Binding="{Binding status,Converter={conver:LockerStatusConverter}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="嫌疑犯名称" Binding="{Binding btracker_id}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="警员名称" Binding="{Binding officer_id}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="创建时间" Binding="{Binding create_time}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <tmp:ButtonTemplet ToolTip="编辑"  VerticalAlignment="Center" Margin="5,0,0,0">
+                                <tmp:ButtonTemplet ToolTip="编辑"  VerticalAlignment="Center" Margin="5,0,0,0"
+                                                   Command="{Binding DataContext.EditLockerDlgCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
                                     <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
                                 </tmp:ButtonTemplet>
                             </StackPanel>

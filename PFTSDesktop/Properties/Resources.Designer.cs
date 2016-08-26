@@ -61,6 +61,42 @@ namespace PFTSDesktop.Properties {
         }
         
         /// <summary>
+        ///   查找类似 储物柜名称不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Locker_Error_MissName {
+            get {
+                return ResourceManager.GetString("Locker_Error_MissName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 储物柜识别码不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Locker_Error_MissNo {
+            get {
+                return ResourceManager.GetString("Locker_Error_MissNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名储物柜名称 的本地化字符串。
+        /// </summary>
+        internal static string Locker_Error_ReName {
+            get {
+                return ResourceManager.GetString("Locker_Error_ReName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名识别码 的本地化字符串。
+        /// </summary>
+        internal static string Locker_Error_ReNo {
+            get {
+                return ResourceManager.GetString("Locker_Error_ReNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 无效的登录请求 的本地化字符串。
         /// </summary>
         internal static string LoginViewModel_Exception_CannotLogin {

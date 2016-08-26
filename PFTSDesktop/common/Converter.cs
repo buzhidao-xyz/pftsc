@@ -41,4 +41,39 @@ namespace PFTSDesktop.common
             return this;
         }
     }
+
+    public class LockerStatusConverter : MarkupExtension, IValueConverter
+    {
+
+        public LockerStatusConverter() { }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int status = (int)value;
+            string strType = "";
+            if (status == 0)
+            {
+                strType = "未使用";
+            }
+            else if (status == 1)
+            {
+                strType = "已使用";
+            }
+            else
+            {
+                throw new Exception("绑定类型不正确");
+            }
+            return strType;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

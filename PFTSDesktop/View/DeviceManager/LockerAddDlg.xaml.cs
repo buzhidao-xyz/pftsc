@@ -1,4 +1,5 @@
-﻿using PFTSUITemplate.Controls;
+﻿using PFTSDesktop.ViewModel;
+using PFTSUITemplate.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace PFTSDesktop.View.DeviceManager
         public LockerAddDlg()
         {
             InitializeComponent();
+            this.DataContext = LockerManagerViewModel.GetInstance();
         }
     }
 }
