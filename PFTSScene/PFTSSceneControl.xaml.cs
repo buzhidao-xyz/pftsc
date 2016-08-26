@@ -42,6 +42,11 @@ namespace PFTSScene
         Hidden
     }
 
+    #region handler
+    // 点击实时画面
+    public delegate void BTrackerRealVideoHandler(PFTSModel.btracker btracker);
+    #endregion
+
     /// <summary>
     /// PFTSSceneControl.xaml 的交互逻辑
     /// </summary>
@@ -67,6 +72,7 @@ namespace PFTSScene
         private ContextMenu m_peopleMenu;
         private bool m_loaded = false;
 
+        public event BTrackerRealVideoHandler BTrackerRealVideo;
         //private List<InArrow> paths;
         //private Tools.GridRoom gridRoom1;
 
@@ -95,6 +101,7 @@ namespace PFTSScene
             m_peopleMenu = new ContextMenu();
             var menuItem1 = new MenuItem();
             menuItem1.Header = "实时监控";
+            menuItem1.Click += MenuPeopleRealVideo_Click;
             var menuItem2 = new MenuItem();
             menuItem2.Header = "历史轨迹";
             var menuItem3 = new MenuItem();
@@ -458,8 +465,37 @@ namespace PFTSScene
             }
         }
 
+        private void MenuPeopleRealVideo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int id = (int)m_peopleMenu.Tag;
+                if (m_mapBtrackers.ContainsKey(id))
+                {
+                    if (BTrackerRealVideo != null)
+                    {
+                        this.BTrackerRealVideo(m_mapBtrackers[id]);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
         private void Img_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            Image img = (Image)sender;
+            try
+            {
+                int id = int.Parse(img.Tag.ToString());
+                m_peopleMenu.Tag = id;
+            }
+            catch
+            {
+
+            }
             this.Img_MouseLeave(sender, null);
             m_peopleMenu.PlacementTarget = (Image)sender;
             m_peopleMenu.IsOpen = true;

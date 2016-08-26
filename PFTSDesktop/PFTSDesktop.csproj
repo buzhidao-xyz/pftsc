@@ -40,6 +40,7 @@
     <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -79,6 +81,7 @@
     <Compile Include="ViewModel\RFIDManagerViewModel.cs" />
     <Compile Include="ViewModel\SuspectViewModel.cs" />
     <Compile Include="ViewModel\VestManagerViewModel.cs" />
+    <Compile Include="ViewModel\VideoListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
     <Compile Include="View\DeviceManager\CameraManagerControl.xaml.cs">
@@ -104,6 +107,9 @@
     </Compile>
     <Compile Include="View\DeviceManager\VestManagerControl.xaml.cs">
       <DependentUpon>VestManagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\VideoListWindow.xaml.cs">
+      <DependentUpon>VideoListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OperatorManager\OperatorNewPage.xaml.cs">
       <DependentUpon>OperatorNewPage.xaml</DependentUpon>
@@ -182,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DeviceManager\VestManagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Monitoring\VideoListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -338,14 +348,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
-
-rd/s/q "$(ProjectDir)$(OutDir)HCNetSDKCom"
+    <PostBuildEvent>copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)" 
+rd/s/q "$(ProjectDir)$(OutDir)HCNetSDKCom" 
 mkdir "$(ProjectDir)$(OutDir)HCNetSDKCom"
-
 copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
-
-copy "$(ProjectDir)lib\HCNetSDKCom\*" "$(ProjectDir)$(OutDir)\HCNetSDKCom"</PostBuildEvent>
+copy "$(ProjectDir)lib\HCNetSDKCom\*" "$(ProjectDir)$(OutDir)HCNetSDKCom"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

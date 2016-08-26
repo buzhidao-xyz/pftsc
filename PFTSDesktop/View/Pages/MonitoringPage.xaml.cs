@@ -27,6 +27,7 @@ namespace PFTSDesktop.View.Pages
             // 监控模式
             controlScene.CameraMode = PFTSScene.CameraMode.Monitoring;
             controlScene.RFIDMode = PFTSScene.RFIDMode.Monitoring;
+            controlScene.BTrackerRealVideo += ControlScene_BTrackerRealVideo;
 
             var btrackers = new BTrackerService();
             var bs = btrackers.GetAllInscene();
@@ -34,6 +35,12 @@ namespace PFTSDesktop.View.Pages
             {
                 controlScene.AddAPeople(b);
             }
+        }
+
+        private void ControlScene_BTrackerRealVideo(btracker btracker)
+        {
+            Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow();
+            vw.Show();
         }
     }
 }
