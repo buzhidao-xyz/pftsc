@@ -30,6 +30,9 @@ namespace PFTSModel
 		
     #region 可扩展性方法定义
     partial void OnCreated();
+    partial void Insertbtracker(btracker instance);
+    partial void Updatebtracker(btracker instance);
+    partial void Deletebtracker(btracker instance);
     partial void Insertvideo_btracker_r(video_btracker_r instance);
     partial void Updatevideo_btracker_r(video_btracker_r instance);
     partial void Deletevideo_btracker_r(video_btracker_r instance);
@@ -69,12 +72,6 @@ namespace PFTSModel
     partial void Insertvideo(video instance);
     partial void Updatevideo(video instance);
     partial void Deletevideo(video instance);
-    partial void Insertbtracker(btracker instance);
-    partial void Updatebtracker(btracker instance);
-    partial void Deletebtracker(btracker instance);
-    partial void InsertbtrackerInfo(btrackerInfo instance);
-    partial void UpdatebtrackerInfo(btrackerInfo instance);
-    partial void DeletebtrackerInfo(btrackerInfo instance);
     #endregion
 		
 		public PFTSDbDataContext() : 
@@ -105,6 +102,14 @@ namespace PFTSModel
 				base(connection, mappingSource)
 		{
 			OnCreated();
+		}
+		
+		public System.Data.Linq.Table<btracker> btracker
+		{
+			get
+			{
+				return this.GetTable<btracker>();
+			}
 		}
 		
 		public System.Data.Linq.Table<video_btracker_r> video_btracker_r
@@ -210,21 +215,627 @@ namespace PFTSModel
 				return this.GetTable<video>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.btracker")]
+	public partial class btracker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<btracker> btracker
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private string _number;
+		
+		private string _sex;
+		
+		private int _vest_id;
+		
+		private System.Nullable<int> _locker_id;
+		
+		private System.Nullable<int> _officer_id;
+		
+		private System.DateTime _in_time;
+		
+		private System.Nullable<System.DateTime> _out_time;
+		
+		private int _status;
+		
+		private System.Nullable<bool> _recover;
+		
+		private string _private_goods;
+		
+		private System.Nullable<int> _position_id;
+		
+		private EntitySet<video_btracker_r> _video_btracker_r;
+		
+		private EntitySet<dev_lockers> _dev_lockers1;
+		
+		private EntitySet<dev_vest> _dev_vest1;
+		
+		private EntityRef<dev_lockers> _dev_lockers;
+		
+		private EntityRef<dev_vest> _dev_vest;
+		
+		private EntityRef<officer> _officer;
+		
+		private EntityRef<position_rfid> _position_rfid;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnoChanging(string value);
+    partial void OnnoChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnnumberChanging(string value);
+    partial void OnnumberChanged();
+    partial void OnsexChanging(string value);
+    partial void OnsexChanged();
+    partial void Onvest_idChanging(int value);
+    partial void Onvest_idChanged();
+    partial void Onlocker_idChanging(System.Nullable<int> value);
+    partial void Onlocker_idChanged();
+    partial void Onofficer_idChanging(System.Nullable<int> value);
+    partial void Onofficer_idChanged();
+    partial void Onin_timeChanging(System.DateTime value);
+    partial void Onin_timeChanged();
+    partial void Onout_timeChanging(System.Nullable<System.DateTime> value);
+    partial void Onout_timeChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void OnrecoverChanging(System.Nullable<bool> value);
+    partial void OnrecoverChanged();
+    partial void Onprivate_goodsChanging(string value);
+    partial void Onprivate_goodsChanged();
+    partial void Onposition_idChanging(System.Nullable<int> value);
+    partial void Onposition_idChanged();
+    #endregion
+		
+		public btracker()
+		{
+			this._video_btracker_r = new EntitySet<video_btracker_r>(new Action<video_btracker_r>(this.attach_video_btracker_r), new Action<video_btracker_r>(this.detach_video_btracker_r));
+			this._dev_lockers1 = new EntitySet<dev_lockers>(new Action<dev_lockers>(this.attach_dev_lockers1), new Action<dev_lockers>(this.detach_dev_lockers1));
+			this._dev_vest1 = new EntitySet<dev_vest>(new Action<dev_vest>(this.attach_dev_vest1), new Action<dev_vest>(this.detach_dev_vest1));
+			this._dev_lockers = default(EntityRef<dev_lockers>);
+			this._dev_vest = default(EntityRef<dev_vest>);
+			this._officer = default(EntityRef<officer>);
+			this._position_rfid = default(EntityRef<position_rfid>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
 		{
 			get
 			{
-				return this.GetTable<btracker>();
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
 			}
 		}
 		
-		public System.Data.Linq.Table<btrackerInfo> btrackerInfo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(36)")]
+		public string no
 		{
 			get
 			{
-				return this.GetTable<btrackerInfo>();
+				return this._no;
 			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this.OnnoChanging(value);
+					this.SendPropertyChanging();
+					this._no = value;
+					this.SendPropertyChanged("no");
+					this.OnnoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="VarChar(32)")]
+		public string number
+		{
+			get
+			{
+				return this._number;
+			}
+			set
+			{
+				if ((this._number != value))
+				{
+					this.OnnumberChanging(value);
+					this.SendPropertyChanging();
+					this._number = value;
+					this.SendPropertyChanged("number");
+					this.OnnumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="VarChar(8)")]
+		public string sex
+		{
+			get
+			{
+				return this._sex;
+			}
+			set
+			{
+				if ((this._sex != value))
+				{
+					this.OnsexChanging(value);
+					this.SendPropertyChanging();
+					this._sex = value;
+					this.SendPropertyChanged("sex");
+					this.OnsexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int NOT NULL")]
+		public int vest_id
+		{
+			get
+			{
+				return this._vest_id;
+			}
+			set
+			{
+				if ((this._vest_id != value))
+				{
+					if (this._dev_vest.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onvest_idChanging(value);
+					this.SendPropertyChanging();
+					this._vest_id = value;
+					this.SendPropertyChanged("vest_id");
+					this.Onvest_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_locker_id", DbType="Int")]
+		public System.Nullable<int> locker_id
+		{
+			get
+			{
+				return this._locker_id;
+			}
+			set
+			{
+				if ((this._locker_id != value))
+				{
+					if (this._dev_lockers.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onlocker_idChanging(value);
+					this.SendPropertyChanging();
+					this._locker_id = value;
+					this.SendPropertyChanged("locker_id");
+					this.Onlocker_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_id", DbType="Int")]
+		public System.Nullable<int> officer_id
+		{
+			get
+			{
+				return this._officer_id;
+			}
+			set
+			{
+				if ((this._officer_id != value))
+				{
+					if (this._officer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onofficer_idChanging(value);
+					this.SendPropertyChanging();
+					this._officer_id = value;
+					this.SendPropertyChanged("officer_id");
+					this.Onofficer_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_time", DbType="DateTime NOT NULL")]
+		public System.DateTime in_time
+		{
+			get
+			{
+				return this._in_time;
+			}
+			set
+			{
+				if ((this._in_time != value))
+				{
+					this.Onin_timeChanging(value);
+					this.SendPropertyChanging();
+					this._in_time = value;
+					this.SendPropertyChanged("in_time");
+					this.Onin_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_out_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> out_time
+		{
+			get
+			{
+				return this._out_time;
+			}
+			set
+			{
+				if ((this._out_time != value))
+				{
+					this.Onout_timeChanging(value);
+					this.SendPropertyChanging();
+					this._out_time = value;
+					this.SendPropertyChanged("out_time");
+					this.Onout_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
+		public System.Nullable<bool> recover
+		{
+			get
+			{
+				return this._recover;
+			}
+			set
+			{
+				if ((this._recover != value))
+				{
+					this.OnrecoverChanging(value);
+					this.SendPropertyChanging();
+					this._recover = value;
+					this.SendPropertyChanged("recover");
+					this.OnrecoverChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_private_goods", DbType="VarChar(512)")]
+		public string private_goods
+		{
+			get
+			{
+				return this._private_goods;
+			}
+			set
+			{
+				if ((this._private_goods != value))
+				{
+					this.Onprivate_goodsChanging(value);
+					this.SendPropertyChanging();
+					this._private_goods = value;
+					this.SendPropertyChanged("private_goods");
+					this.Onprivate_goodsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_position_id", DbType="Int")]
+		public System.Nullable<int> position_id
+		{
+			get
+			{
+				return this._position_id;
+			}
+			set
+			{
+				if ((this._position_id != value))
+				{
+					if (this._position_rfid.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onposition_idChanging(value);
+					this.SendPropertyChanging();
+					this._position_id = value;
+					this.SendPropertyChanged("position_id");
+					this.Onposition_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_video_btracker_r", Storage="_video_btracker_r", ThisKey="id", OtherKey="btracker_id")]
+		public EntitySet<video_btracker_r> video_btracker_r
+		{
+			get
+			{
+				return this._video_btracker_r;
+			}
+			set
+			{
+				this._video_btracker_r.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_lockers", Storage="_dev_lockers1", ThisKey="id", OtherKey="btracker_id")]
+		public EntitySet<dev_lockers> dev_lockers1
+		{
+			get
+			{
+				return this._dev_lockers1;
+			}
+			set
+			{
+				this._dev_lockers1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_vest", Storage="_dev_vest1", ThisKey="id", OtherKey="btracker_id")]
+		public EntitySet<dev_vest> dev_vest1
+		{
+			get
+			{
+				return this._dev_vest1;
+			}
+			set
+			{
+				this._dev_vest1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_lockers_btracker", Storage="_dev_lockers", ThisKey="locker_id", OtherKey="id", IsForeignKey=true)]
+		public dev_lockers dev_lockers
+		{
+			get
+			{
+				return this._dev_lockers.Entity;
+			}
+			set
+			{
+				dev_lockers previousValue = this._dev_lockers.Entity;
+				if (((previousValue != value) 
+							|| (this._dev_lockers.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._dev_lockers.Entity = null;
+						previousValue.btracker.Remove(this);
+					}
+					this._dev_lockers.Entity = value;
+					if ((value != null))
+					{
+						value.btracker.Add(this);
+						this._locker_id = value.id;
+					}
+					else
+					{
+						this._locker_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("dev_lockers");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_vest_btracker", Storage="_dev_vest", ThisKey="vest_id", OtherKey="id", IsForeignKey=true)]
+		public dev_vest dev_vest
+		{
+			get
+			{
+				return this._dev_vest.Entity;
+			}
+			set
+			{
+				dev_vest previousValue = this._dev_vest.Entity;
+				if (((previousValue != value) 
+							|| (this._dev_vest.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._dev_vest.Entity = null;
+						previousValue.btracker.Remove(this);
+					}
+					this._dev_vest.Entity = value;
+					if ((value != null))
+					{
+						value.btracker.Add(this);
+						this._vest_id = value.id;
+					}
+					else
+					{
+						this._vest_id = default(int);
+					}
+					this.SendPropertyChanged("dev_vest");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_btracker", Storage="_officer", ThisKey="officer_id", OtherKey="id", IsForeignKey=true)]
+		public officer officer
+		{
+			get
+			{
+				return this._officer.Entity;
+			}
+			set
+			{
+				officer previousValue = this._officer.Entity;
+				if (((previousValue != value) 
+							|| (this._officer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._officer.Entity = null;
+						previousValue.btracker.Remove(this);
+					}
+					this._officer.Entity = value;
+					if ((value != null))
+					{
+						value.btracker.Add(this);
+						this._officer_id = value.id;
+					}
+					else
+					{
+						this._officer_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("officer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_rfid_btracker", Storage="_position_rfid", ThisKey="position_id", OtherKey="id", IsForeignKey=true)]
+		public position_rfid position_rfid
+		{
+			get
+			{
+				return this._position_rfid.Entity;
+			}
+			set
+			{
+				position_rfid previousValue = this._position_rfid.Entity;
+				if (((previousValue != value) 
+							|| (this._position_rfid.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._position_rfid.Entity = null;
+						previousValue.btracker.Remove(this);
+					}
+					this._position_rfid.Entity = value;
+					if ((value != null))
+					{
+						value.btracker.Add(this);
+						this._position_id = value.id;
+					}
+					else
+					{
+						this._position_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("position_rfid");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_video_btracker_r(video_btracker_r entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker = this;
+		}
+		
+		private void detach_video_btracker_r(video_btracker_r entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker = null;
+		}
+		
+		private void attach_dev_lockers1(dev_lockers entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker1 = this;
+		}
+		
+		private void detach_dev_lockers1(dev_lockers entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker1 = null;
+		}
+		
+		private void attach_dev_vest1(dev_vest entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker1 = this;
+		}
+		
+		private void detach_dev_vest1(dev_vest entity)
+		{
+			this.SendPropertyChanging();
+			entity.btracker1 = null;
 		}
 	}
 	
@@ -238,9 +849,9 @@ namespace PFTSModel
 		
 		private int _btracker_id;
 		
-		private EntityRef<video> _video;
-		
 		private EntityRef<btracker> _btracker;
+		
+		private EntityRef<video> _video;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -254,8 +865,8 @@ namespace PFTSModel
 		
 		public video_btracker_r()
 		{
-			this._video = default(EntityRef<video>);
 			this._btracker = default(EntityRef<btracker>);
+			this._video = default(EntityRef<video>);
 			OnCreated();
 		}
 		
@@ -307,40 +918,6 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="video_video_btracker_r", Storage="_video", ThisKey="video_id", OtherKey="id", IsForeignKey=true)]
-		public video video
-		{
-			get
-			{
-				return this._video.Entity;
-			}
-			set
-			{
-				video previousValue = this._video.Entity;
-				if (((previousValue != value) 
-							|| (this._video.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._video.Entity = null;
-						previousValue.video_btracker_r.Remove(this);
-					}
-					this._video.Entity = value;
-					if ((value != null))
-					{
-						value.video_btracker_r.Add(this);
-						this._video_id = value.id;
-					}
-					else
-					{
-						this._video_id = default(int);
-					}
-					this.SendPropertyChanged("video");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_video_btracker_r", Storage="_btracker", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
 		public btracker btracker
 		{
@@ -371,6 +948,40 @@ namespace PFTSModel
 						this._btracker_id = default(int);
 					}
 					this.SendPropertyChanged("btracker");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="video_video_btracker_r", Storage="_video", ThisKey="video_id", OtherKey="id", IsForeignKey=true)]
+		public video video
+		{
+			get
+			{
+				return this._video.Entity;
+			}
+			set
+			{
+				video previousValue = this._video.Entity;
+				if (((previousValue != value) 
+							|| (this._video.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._video.Entity = null;
+						previousValue.video_btracker_r.Remove(this);
+					}
+					this._video.Entity = value;
+					if ((value != null))
+					{
+						value.video_btracker_r.Add(this);
+						this._video_id = value.id;
+					}
+					else
+					{
+						this._video_id = default(int);
+					}
+					this.SendPropertyChanged("video");
 				}
 			}
 		}
@@ -593,6 +1204,10 @@ namespace PFTSModel
 		
 		private System.Nullable<System.DateTime> _create_time;
 		
+		private string _admin;
+		
+		private string _password;
+		
 		private EntitySet<position_camera> _position_camera1;
 		
 		private EntitySet<video> _video;
@@ -619,6 +1234,10 @@ namespace PFTSModel
     partial void OnportChanged();
     partial void Oncreate_timeChanging(System.Nullable<System.DateTime> value);
     partial void Oncreate_timeChanged();
+    partial void OnadminChanging(string value);
+    partial void OnadminChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
     #endregion
 		
 		public dev_camera()
@@ -793,6 +1412,46 @@ namespace PFTSModel
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_admin", DbType="VarChar(32)")]
+		public string admin
+		{
+			get
+			{
+				return this._admin;
+			}
+			set
+			{
+				if ((this._admin != value))
+				{
+					this.OnadminChanging(value);
+					this.SendPropertyChanging();
+					this._admin = value;
+					this.SendPropertyChanged("admin");
+					this.OnadminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(32)")]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_camera_position_camera", Storage="_position_camera1", ThisKey="id", OtherKey="camera_id")]
 		public EntitySet<position_camera> position_camera1
 		{
@@ -918,11 +1577,11 @@ namespace PFTSModel
 		
 		private System.Nullable<System.DateTime> _create_time;
 		
-		private EntitySet<btracker> _btracker1;
+		private EntitySet<btracker> _btracker;
+		
+		private EntityRef<btracker> _btracker1;
 		
 		private EntityRef<officer> _officer;
-		
-		private EntityRef<btracker> _btracker;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -946,9 +1605,9 @@ namespace PFTSModel
 		
 		public dev_lockers()
 		{
-			this._btracker1 = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker1), new Action<btracker>(this.detach_btracker1));
+			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
+			this._btracker1 = default(EntityRef<btracker>);
 			this._officer = default(EntityRef<officer>);
-			this._btracker = default(EntityRef<btracker>);
 			OnCreated();
 		}
 		
@@ -1043,7 +1702,7 @@ namespace PFTSModel
 			{
 				if ((this._btracker_id != value))
 				{
-					if (this._btracker.HasLoadedOrAssignedValue)
+					if (this._btracker1.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1100,16 +1759,50 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_lockers_btracker", Storage="_btracker1", ThisKey="id", OtherKey="locker_id")]
-		public EntitySet<btracker> btracker1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_lockers_btracker", Storage="_btracker", ThisKey="id", OtherKey="locker_id")]
+		public EntitySet<btracker> btracker
 		{
 			get
 			{
-				return this._btracker1;
+				return this._btracker;
 			}
 			set
 			{
-				this._btracker1.Assign(value);
+				this._btracker.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_lockers", Storage="_btracker1", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
+		public btracker btracker1
+		{
+			get
+			{
+				return this._btracker1.Entity;
+			}
+			set
+			{
+				btracker previousValue = this._btracker1.Entity;
+				if (((previousValue != value) 
+							|| (this._btracker1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._btracker1.Entity = null;
+						previousValue.dev_lockers1.Remove(this);
+					}
+					this._btracker1.Entity = value;
+					if ((value != null))
+					{
+						value.dev_lockers1.Add(this);
+						this._btracker_id = value.id;
+					}
+					else
+					{
+						this._btracker_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("btracker1");
+				}
 			}
 		}
 		
@@ -1147,40 +1840,6 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_lockers", Storage="_btracker", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
-		public btracker btracker
-		{
-			get
-			{
-				return this._btracker.Entity;
-			}
-			set
-			{
-				btracker previousValue = this._btracker.Entity;
-				if (((previousValue != value) 
-							|| (this._btracker.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._btracker.Entity = null;
-						previousValue.dev_lockers.Remove(this);
-					}
-					this._btracker.Entity = value;
-					if ((value != null))
-					{
-						value.dev_lockers.Add(this);
-						this._btracker_id = value.id;
-					}
-					else
-					{
-						this._btracker_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("btracker");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1201,16 +1860,16 @@ namespace PFTSModel
 			}
 		}
 		
-		private void attach_btracker1(btracker entity)
+		private void attach_btracker(btracker entity)
 		{
 			this.SendPropertyChanging();
-			entity.dev_lockers1 = this;
+			entity.dev_lockers = this;
 		}
 		
-		private void detach_btracker1(btracker entity)
+		private void detach_btracker(btracker entity)
 		{
 			this.SendPropertyChanging();
-			entity.dev_lockers1 = null;
+			entity.dev_lockers = null;
 		}
 	}
 	
@@ -1483,9 +2142,9 @@ namespace PFTSModel
 		
 		private System.Nullable<System.DateTime> _create_time;
 		
-		private EntitySet<btracker> _btracker1;
+		private EntitySet<btracker> _btracker;
 		
-		private EntityRef<btracker> _btracker;
+		private EntityRef<btracker> _btracker1;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -1507,8 +2166,8 @@ namespace PFTSModel
 		
 		public dev_vest()
 		{
-			this._btracker1 = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker1), new Action<btracker>(this.detach_btracker1));
-			this._btracker = default(EntityRef<btracker>);
+			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
+			this._btracker1 = default(EntityRef<btracker>);
 			OnCreated();
 		}
 		
@@ -1603,7 +2262,7 @@ namespace PFTSModel
 			{
 				if ((this._btracker_id != value))
 				{
-					if (this._btracker.HasLoadedOrAssignedValue)
+					if (this._btracker1.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1636,49 +2295,49 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_vest_btracker", Storage="_btracker1", ThisKey="id", OtherKey="vest_id")]
-		public EntitySet<btracker> btracker1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_vest_btracker", Storage="_btracker", ThisKey="id", OtherKey="vest_id")]
+		public EntitySet<btracker> btracker
 		{
 			get
 			{
-				return this._btracker1;
+				return this._btracker;
 			}
 			set
 			{
-				this._btracker1.Assign(value);
+				this._btracker.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_vest", Storage="_btracker", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
-		public btracker btracker
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_vest", Storage="_btracker1", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
+		public btracker btracker1
 		{
 			get
 			{
-				return this._btracker.Entity;
+				return this._btracker1.Entity;
 			}
 			set
 			{
-				btracker previousValue = this._btracker.Entity;
+				btracker previousValue = this._btracker1.Entity;
 				if (((previousValue != value) 
-							|| (this._btracker.HasLoadedOrAssignedValue == false)))
+							|| (this._btracker1.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._btracker.Entity = null;
-						previousValue.dev_vest.Remove(this);
+						this._btracker1.Entity = null;
+						previousValue.dev_vest1.Remove(this);
 					}
-					this._btracker.Entity = value;
+					this._btracker1.Entity = value;
 					if ((value != null))
 					{
-						value.dev_vest.Add(this);
+						value.dev_vest1.Add(this);
 						this._btracker_id = value.id;
 					}
 					else
 					{
 						this._btracker_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("btracker");
+					this.SendPropertyChanged("btracker1");
 				}
 			}
 		}
@@ -1703,16 +2362,16 @@ namespace PFTSModel
 			}
 		}
 		
-		private void attach_btracker1(btracker entity)
+		private void attach_btracker(btracker entity)
 		{
 			this.SendPropertyChanging();
-			entity.dev_vest1 = this;
+			entity.dev_vest = this;
 		}
 		
-		private void detach_btracker1(btracker entity)
+		private void detach_btracker(btracker entity)
 		{
 			this.SendPropertyChanging();
-			entity.dev_vest1 = null;
+			entity.dev_vest = null;
 		}
 	}
 	
@@ -1734,9 +2393,9 @@ namespace PFTSModel
 		
 		private System.Nullable<System.DateTime> _create_time;
 		
-		private EntitySet<dev_lockers> _dev_lockers;
-		
 		private EntitySet<btracker> _btracker;
+		
+		private EntitySet<dev_lockers> _dev_lockers;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -1758,8 +2417,8 @@ namespace PFTSModel
 		
 		public officer()
 		{
-			this._dev_lockers = new EntitySet<dev_lockers>(new Action<dev_lockers>(this.attach_dev_lockers), new Action<dev_lockers>(this.detach_dev_lockers));
 			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
+			this._dev_lockers = new EntitySet<dev_lockers>(new Action<dev_lockers>(this.attach_dev_lockers), new Action<dev_lockers>(this.detach_dev_lockers));
 			OnCreated();
 		}
 		
@@ -1843,7 +2502,7 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint", DbType="Binary(2048)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint", DbType="Binary(2048)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary fingerprint
 		{
 			get
@@ -1883,19 +2542,6 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_dev_lockers", Storage="_dev_lockers", ThisKey="id", OtherKey="officer_id")]
-		public EntitySet<dev_lockers> dev_lockers
-		{
-			get
-			{
-				return this._dev_lockers;
-			}
-			set
-			{
-				this._dev_lockers.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_btracker", Storage="_btracker", ThisKey="id", OtherKey="officer_id")]
 		public EntitySet<btracker> btracker
 		{
@@ -1906,6 +2552,19 @@ namespace PFTSModel
 			set
 			{
 				this._btracker.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_dev_lockers", Storage="_dev_lockers", ThisKey="id", OtherKey="officer_id")]
+		public EntitySet<dev_lockers> dev_lockers
+		{
+			get
+			{
+				return this._dev_lockers;
+			}
+			set
+			{
+				this._dev_lockers.Assign(value);
 			}
 		}
 		
@@ -1929,18 +2588,6 @@ namespace PFTSModel
 			}
 		}
 		
-		private void attach_dev_lockers(dev_lockers entity)
-		{
-			this.SendPropertyChanging();
-			entity.officer = this;
-		}
-		
-		private void detach_dev_lockers(dev_lockers entity)
-		{
-			this.SendPropertyChanging();
-			entity.officer = null;
-		}
-		
 		private void attach_btracker(btracker entity)
 		{
 			this.SendPropertyChanging();
@@ -1948,6 +2595,18 @@ namespace PFTSModel
 		}
 		
 		private void detach_btracker(btracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.officer = null;
+		}
+		
+		private void attach_dev_lockers(dev_lockers entity)
+		{
+			this.SendPropertyChanging();
+			entity.officer = this;
+		}
+		
+		private void detach_dev_lockers(dev_lockers entity)
 		{
 			this.SendPropertyChanging();
 			entity.officer = null;
@@ -2618,6 +3277,8 @@ namespace PFTSModel
 		
 		private System.Nullable<int> _rfid_id;
 		
+		private EntitySet<btracker> _btracker;
+		
 		private EntitySet<dev_rfid> _dev_rfid;
 		
 		private EntitySet<path_rfid> _path_rfid;
@@ -2644,6 +3305,7 @@ namespace PFTSModel
 		
 		public position_rfid()
 		{
+			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
 			this._dev_rfid = new EntitySet<dev_rfid>(new Action<dev_rfid>(this.attach_dev_rfid), new Action<dev_rfid>(this.detach_dev_rfid));
 			this._path_rfid = new EntitySet<path_rfid>(new Action<path_rfid>(this.attach_path_rfid), new Action<path_rfid>(this.detach_path_rfid));
 			this._path_rfid1 = new EntitySet<path_rfid>(new Action<path_rfid>(this.attach_path_rfid1), new Action<path_rfid>(this.detach_path_rfid1));
@@ -2737,6 +3399,19 @@ namespace PFTSModel
 					this.SendPropertyChanged("rfid_id");
 					this.Onrfid_idChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="position_rfid_btracker", Storage="_btracker", ThisKey="id", OtherKey="position_id")]
+		public EntitySet<btracker> btracker
+		{
+			get
+			{
+				return this._btracker;
+			}
+			set
+			{
+				this._btracker.Assign(value);
 			}
 		}
 		
@@ -2865,6 +3540,18 @@ namespace PFTSModel
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_btracker(btracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_rfid = this;
+		}
+		
+		private void detach_btracker(btracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.position_rfid = null;
 		}
 		
 		private void attach_dev_rfid(dev_rfid entity)
@@ -3359,937 +4046,6 @@ namespace PFTSModel
 		{
 			this.SendPropertyChanging();
 			entity.video = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.btracker")]
-	public partial class btracker : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _no;
-		
-		private string _name;
-		
-		private string _number;
-		
-		private string _sex;
-		
-		private int _vest_id;
-		
-		private System.Nullable<int> _locker_id;
-		
-		private System.Nullable<int> _officer_id;
-		
-		private System.DateTime _in_time;
-		
-		private System.Nullable<System.DateTime> _out_time;
-		
-		private int _status;
-		
-		private System.Nullable<bool> _recover;
-		
-		private string _private_goods;
-		
-		private EntitySet<video_btracker_r> _video_btracker_r;
-		
-		private EntitySet<dev_lockers> _dev_lockers;
-		
-		private EntitySet<dev_vest> _dev_vest;
-		
-		private EntityRef<dev_lockers> _dev_lockers1;
-		
-		private EntityRef<officer> _officer;
-		
-		private EntityRef<dev_vest> _dev_vest1;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnnoChanging(string value);
-    partial void OnnoChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OnnumberChanging(string value);
-    partial void OnnumberChanged();
-    partial void OnsexChanging(string value);
-    partial void OnsexChanged();
-    partial void Onvest_idChanging(int value);
-    partial void Onvest_idChanged();
-    partial void Onlocker_idChanging(System.Nullable<int> value);
-    partial void Onlocker_idChanged();
-    partial void Onofficer_idChanging(System.Nullable<int> value);
-    partial void Onofficer_idChanged();
-    partial void Onin_timeChanging(System.DateTime value);
-    partial void Onin_timeChanged();
-    partial void Onout_timeChanging(System.Nullable<System.DateTime> value);
-    partial void Onout_timeChanged();
-    partial void OnstatusChanging(int value);
-    partial void OnstatusChanged();
-    partial void OnrecoverChanging(System.Nullable<bool> value);
-    partial void OnrecoverChanged();
-    partial void Onprivate_goodsChanging(string value);
-    partial void Onprivate_goodsChanged();
-    #endregion
-		
-		public btracker()
-		{
-			this._video_btracker_r = new EntitySet<video_btracker_r>(new Action<video_btracker_r>(this.attach_video_btracker_r), new Action<video_btracker_r>(this.detach_video_btracker_r));
-			this._dev_lockers = new EntitySet<dev_lockers>(new Action<dev_lockers>(this.attach_dev_lockers), new Action<dev_lockers>(this.detach_dev_lockers));
-			this._dev_vest = new EntitySet<dev_vest>(new Action<dev_vest>(this.attach_dev_vest), new Action<dev_vest>(this.detach_dev_vest));
-			this._dev_lockers1 = default(EntityRef<dev_lockers>);
-			this._officer = default(EntityRef<officer>);
-			this._dev_vest1 = default(EntityRef<dev_vest>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(36)")]
-		public string no
-		{
-			get
-			{
-				return this._no;
-			}
-			set
-			{
-				if ((this._no != value))
-				{
-					this.OnnoChanging(value);
-					this.SendPropertyChanging();
-					this._no = value;
-					this.SendPropertyChanged("no");
-					this.OnnoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="VarChar(32)")]
-		public string number
-		{
-			get
-			{
-				return this._number;
-			}
-			set
-			{
-				if ((this._number != value))
-				{
-					this.OnnumberChanging(value);
-					this.SendPropertyChanging();
-					this._number = value;
-					this.SendPropertyChanged("number");
-					this.OnnumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="VarChar(8)")]
-		public string sex
-		{
-			get
-			{
-				return this._sex;
-			}
-			set
-			{
-				if ((this._sex != value))
-				{
-					this.OnsexChanging(value);
-					this.SendPropertyChanging();
-					this._sex = value;
-					this.SendPropertyChanged("sex");
-					this.OnsexChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int NOT NULL")]
-		public int vest_id
-		{
-			get
-			{
-				return this._vest_id;
-			}
-			set
-			{
-				if ((this._vest_id != value))
-				{
-					if (this._dev_vest1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onvest_idChanging(value);
-					this.SendPropertyChanging();
-					this._vest_id = value;
-					this.SendPropertyChanged("vest_id");
-					this.Onvest_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_locker_id", DbType="Int")]
-		public System.Nullable<int> locker_id
-		{
-			get
-			{
-				return this._locker_id;
-			}
-			set
-			{
-				if ((this._locker_id != value))
-				{
-					if (this._dev_lockers1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onlocker_idChanging(value);
-					this.SendPropertyChanging();
-					this._locker_id = value;
-					this.SendPropertyChanged("locker_id");
-					this.Onlocker_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_id", DbType="Int")]
-		public System.Nullable<int> officer_id
-		{
-			get
-			{
-				return this._officer_id;
-			}
-			set
-			{
-				if ((this._officer_id != value))
-				{
-					if (this._officer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onofficer_idChanging(value);
-					this.SendPropertyChanging();
-					this._officer_id = value;
-					this.SendPropertyChanged("officer_id");
-					this.Onofficer_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_time", DbType="DateTime NOT NULL")]
-		public System.DateTime in_time
-		{
-			get
-			{
-				return this._in_time;
-			}
-			set
-			{
-				if ((this._in_time != value))
-				{
-					this.Onin_timeChanging(value);
-					this.SendPropertyChanging();
-					this._in_time = value;
-					this.SendPropertyChanged("in_time");
-					this.Onin_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_out_time", DbType="DateTime")]
-		public System.Nullable<System.DateTime> out_time
-		{
-			get
-			{
-				return this._out_time;
-			}
-			set
-			{
-				if ((this._out_time != value))
-				{
-					this.Onout_timeChanging(value);
-					this.SendPropertyChanging();
-					this._out_time = value;
-					this.SendPropertyChanged("out_time");
-					this.Onout_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
-		public int status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
-		public System.Nullable<bool> recover
-		{
-			get
-			{
-				return this._recover;
-			}
-			set
-			{
-				if ((this._recover != value))
-				{
-					this.OnrecoverChanging(value);
-					this.SendPropertyChanging();
-					this._recover = value;
-					this.SendPropertyChanged("recover");
-					this.OnrecoverChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_private_goods", DbType="VarChar(512)")]
-		public string private_goods
-		{
-			get
-			{
-				return this._private_goods;
-			}
-			set
-			{
-				if ((this._private_goods != value))
-				{
-					this.Onprivate_goodsChanging(value);
-					this.SendPropertyChanging();
-					this._private_goods = value;
-					this.SendPropertyChanged("private_goods");
-					this.Onprivate_goodsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_video_btracker_r", Storage="_video_btracker_r", ThisKey="id", OtherKey="btracker_id")]
-		public EntitySet<video_btracker_r> video_btracker_r
-		{
-			get
-			{
-				return this._video_btracker_r;
-			}
-			set
-			{
-				this._video_btracker_r.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_lockers", Storage="_dev_lockers", ThisKey="id", OtherKey="btracker_id")]
-		public EntitySet<dev_lockers> dev_lockers
-		{
-			get
-			{
-				return this._dev_lockers;
-			}
-			set
-			{
-				this._dev_lockers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_dev_vest", Storage="_dev_vest", ThisKey="id", OtherKey="btracker_id")]
-		public EntitySet<dev_vest> dev_vest
-		{
-			get
-			{
-				return this._dev_vest;
-			}
-			set
-			{
-				this._dev_vest.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_lockers_btracker", Storage="_dev_lockers1", ThisKey="locker_id", OtherKey="id", IsForeignKey=true)]
-		public dev_lockers dev_lockers1
-		{
-			get
-			{
-				return this._dev_lockers1.Entity;
-			}
-			set
-			{
-				dev_lockers previousValue = this._dev_lockers1.Entity;
-				if (((previousValue != value) 
-							|| (this._dev_lockers1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._dev_lockers1.Entity = null;
-						previousValue.btracker1.Remove(this);
-					}
-					this._dev_lockers1.Entity = value;
-					if ((value != null))
-					{
-						value.btracker1.Add(this);
-						this._locker_id = value.id;
-					}
-					else
-					{
-						this._locker_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("dev_lockers1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_btracker", Storage="_officer", ThisKey="officer_id", OtherKey="id", IsForeignKey=true)]
-		public officer officer
-		{
-			get
-			{
-				return this._officer.Entity;
-			}
-			set
-			{
-				officer previousValue = this._officer.Entity;
-				if (((previousValue != value) 
-							|| (this._officer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._officer.Entity = null;
-						previousValue.btracker.Remove(this);
-					}
-					this._officer.Entity = value;
-					if ((value != null))
-					{
-						value.btracker.Add(this);
-						this._officer_id = value.id;
-					}
-					else
-					{
-						this._officer_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("officer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_vest_btracker", Storage="_dev_vest1", ThisKey="vest_id", OtherKey="id", IsForeignKey=true)]
-		public dev_vest dev_vest1
-		{
-			get
-			{
-				return this._dev_vest1.Entity;
-			}
-			set
-			{
-				dev_vest previousValue = this._dev_vest1.Entity;
-				if (((previousValue != value) 
-							|| (this._dev_vest1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._dev_vest1.Entity = null;
-						previousValue.btracker1.Remove(this);
-					}
-					this._dev_vest1.Entity = value;
-					if ((value != null))
-					{
-						value.btracker1.Add(this);
-						this._vest_id = value.id;
-					}
-					else
-					{
-						this._vest_id = default(int);
-					}
-					this.SendPropertyChanged("dev_vest1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_video_btracker_r(video_btracker_r entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = this;
-		}
-		
-		private void detach_video_btracker_r(video_btracker_r entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = null;
-		}
-		
-		private void attach_dev_lockers(dev_lockers entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = this;
-		}
-		
-		private void detach_dev_lockers(dev_lockers entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = null;
-		}
-		
-		private void attach_dev_vest(dev_vest entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = this;
-		}
-		
-		private void detach_dev_vest(dev_vest entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
-	public partial class btrackerInfo : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _no;
-		
-		private string _name;
-		
-		private string _number;
-		
-		private string _sex;
-		
-		private int _vest_id;
-		
-		private System.Nullable<int> _locker_id;
-		
-		private System.Nullable<int> _officer_id;
-		
-		private System.DateTime _in_time;
-		
-		private System.Nullable<System.DateTime> _out_time;
-		
-		private int _status;
-		
-		private System.Nullable<bool> _recover;
-		
-		private string _private_goods;
-		
-		private string _officer_name;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnnoChanging(string value);
-    partial void OnnoChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OnnumberChanging(string value);
-    partial void OnnumberChanged();
-    partial void OnsexChanging(string value);
-    partial void OnsexChanged();
-    partial void Onvest_idChanging(int value);
-    partial void Onvest_idChanged();
-    partial void Onlocker_idChanging(System.Nullable<int> value);
-    partial void Onlocker_idChanged();
-    partial void Onofficer_idChanging(System.Nullable<int> value);
-    partial void Onofficer_idChanged();
-    partial void Onin_timeChanging(System.DateTime value);
-    partial void Onin_timeChanged();
-    partial void Onout_timeChanging(System.Nullable<System.DateTime> value);
-    partial void Onout_timeChanged();
-    partial void OnstatusChanging(int value);
-    partial void OnstatusChanged();
-    partial void OnrecoverChanging(System.Nullable<bool> value);
-    partial void OnrecoverChanged();
-    partial void Onprivate_goodsChanging(string value);
-    partial void Onprivate_goodsChanged();
-    partial void Onofficer_nameChanging(string value);
-    partial void Onofficer_nameChanged();
-    #endregion
-		
-		public btrackerInfo()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(36)")]
-		public string no
-		{
-			get
-			{
-				return this._no;
-			}
-			set
-			{
-				if ((this._no != value))
-				{
-					this.OnnoChanging(value);
-					this.SendPropertyChanging();
-					this._no = value;
-					this.SendPropertyChanged("no");
-					this.OnnoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="VarChar(32)")]
-		public string number
-		{
-			get
-			{
-				return this._number;
-			}
-			set
-			{
-				if ((this._number != value))
-				{
-					this.OnnumberChanging(value);
-					this.SendPropertyChanging();
-					this._number = value;
-					this.SendPropertyChanged("number");
-					this.OnnumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="VarChar(8)")]
-		public string sex
-		{
-			get
-			{
-				return this._sex;
-			}
-			set
-			{
-				if ((this._sex != value))
-				{
-					this.OnsexChanging(value);
-					this.SendPropertyChanging();
-					this._sex = value;
-					this.SendPropertyChanged("sex");
-					this.OnsexChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int NOT NULL")]
-		public int vest_id
-		{
-			get
-			{
-				return this._vest_id;
-			}
-			set
-			{
-				if ((this._vest_id != value))
-				{
-					this.Onvest_idChanging(value);
-					this.SendPropertyChanging();
-					this._vest_id = value;
-					this.SendPropertyChanged("vest_id");
-					this.Onvest_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_locker_id", DbType="Int")]
-		public System.Nullable<int> locker_id
-		{
-			get
-			{
-				return this._locker_id;
-			}
-			set
-			{
-				if ((this._locker_id != value))
-				{
-					this.Onlocker_idChanging(value);
-					this.SendPropertyChanging();
-					this._locker_id = value;
-					this.SendPropertyChanged("locker_id");
-					this.Onlocker_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_id", DbType="Int")]
-		public System.Nullable<int> officer_id
-		{
-			get
-			{
-				return this._officer_id;
-			}
-			set
-			{
-				if ((this._officer_id != value))
-				{
-					this.Onofficer_idChanging(value);
-					this.SendPropertyChanging();
-					this._officer_id = value;
-					this.SendPropertyChanged("officer_id");
-					this.Onofficer_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_time", DbType="DateTime NOT NULL")]
-		public System.DateTime in_time
-		{
-			get
-			{
-				return this._in_time;
-			}
-			set
-			{
-				if ((this._in_time != value))
-				{
-					this.Onin_timeChanging(value);
-					this.SendPropertyChanging();
-					this._in_time = value;
-					this.SendPropertyChanged("in_time");
-					this.Onin_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_out_time", DbType="DateTime")]
-		public System.Nullable<System.DateTime> out_time
-		{
-			get
-			{
-				return this._out_time;
-			}
-			set
-			{
-				if ((this._out_time != value))
-				{
-					this.Onout_timeChanging(value);
-					this.SendPropertyChanging();
-					this._out_time = value;
-					this.SendPropertyChanged("out_time");
-					this.Onout_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
-		public int status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
-		public System.Nullable<bool> recover
-		{
-			get
-			{
-				return this._recover;
-			}
-			set
-			{
-				if ((this._recover != value))
-				{
-					this.OnrecoverChanging(value);
-					this.SendPropertyChanging();
-					this._recover = value;
-					this.SendPropertyChanged("recover");
-					this.OnrecoverChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_private_goods", DbType="VarChar(512)")]
-		public string private_goods
-		{
-			get
-			{
-				return this._private_goods;
-			}
-			set
-			{
-				if ((this._private_goods != value))
-				{
-					this.Onprivate_goodsChanging(value);
-					this.SendPropertyChanging();
-					this._private_goods = value;
-					this.SendPropertyChanged("private_goods");
-					this.Onprivate_goodsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="", Storage="_officer_name", CanBeNull=false)]
-		public string officer_name
-		{
-			get
-			{
-				return this._officer_name;
-			}
-			set
-			{
-				if ((this._officer_name != value))
-				{
-					this.Onofficer_nameChanging(value);
-					this.SendPropertyChanging();
-					this._officer_name = value;
-					this.SendPropertyChanged("officer_name");
-					this.Onofficer_nameChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }

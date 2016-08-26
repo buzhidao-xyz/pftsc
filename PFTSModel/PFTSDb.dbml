@@ -1,11 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="pfts" Class="PFTSDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.10.44;Initial Catalog=pfts;Persist Security Info=True;User ID=sa" SettingsObjectName="PFTSModel.Properties.Settings" SettingsPropertyName="pftsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.btracker" Member="btracker">
+    <Type Name="btracker">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="no" Type="System.String" DbType="VarChar(36)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="number" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="vest_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="locker_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="officer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="in_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="out_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="recover" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="private_goods" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+      <Column Name="position_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="btracker_video_btracker_r" Member="video_btracker_r" ThisKey="id" OtherKey="btracker_id" Type="video_btracker_r" />
+      <Association Name="btracker_dev_lockers" Member="dev_lockers1" ThisKey="id" OtherKey="btracker_id" Type="dev_lockers" />
+      <Association Name="btracker_dev_vest" Member="dev_vest1" ThisKey="id" OtherKey="btracker_id" Type="dev_vest" />
+      <Association Name="dev_lockers_btracker" Member="dev_lockers" ThisKey="locker_id" OtherKey="id" Type="dev_lockers" IsForeignKey="true" />
+      <Association Name="dev_vest_btracker" Member="dev_vest" ThisKey="vest_id" OtherKey="id" Type="dev_vest" IsForeignKey="true" />
+      <Association Name="officer_btracker" Member="officer" ThisKey="officer_id" OtherKey="id" Type="officer" IsForeignKey="true" />
+      <Association Name="position_rfid_btracker" Member="position_rfid" ThisKey="position_id" OtherKey="id" Type="position_rfid" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.video_btracker_r" Member="video_btracker_r">
     <Type Name="video_btracker_r">
       <Column Name="video_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="btracker_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="video_video_btracker_r" Member="video" ThisKey="video_id" OtherKey="id" Type="video" IsForeignKey="true" />
       <Association Name="btracker_video_btracker_r" Member="btracker" ThisKey="btracker_id" OtherKey="id" Type="btracker" IsForeignKey="true" />
+      <Association Name="video_video_btracker_r" Member="video" ThisKey="video_id" OtherKey="id" Type="video" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.btracker_path" Member="btracker_path">
@@ -27,6 +52,8 @@
       <Column Name="ip" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
       <Column Name="port" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="create_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="admin" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
       <Association Name="dev_camera_position_camera" Member="position_camera1" ThisKey="id" OtherKey="camera_id" Type="position_camera" />
       <Association Name="dev_camera_video" Member="video" ThisKey="id" OtherKey="camera_id" Type="video" />
       <Association Name="position_camera_dev_camera" Member="position_camera" ThisKey="position_id" OtherKey="id" Type="position_camera" IsForeignKey="true" />
@@ -41,9 +68,9 @@
       <Column Name="btracker_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="officer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="create_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="dev_lockers_btracker" Member="btracker1" ThisKey="id" OtherKey="locker_id" Type="btracker" />
+      <Association Name="dev_lockers_btracker" Member="btracker" ThisKey="id" OtherKey="locker_id" Type="btracker" />
+      <Association Name="btracker_dev_lockers" Member="btracker1" ThisKey="btracker_id" OtherKey="id" Type="btracker" IsForeignKey="true" />
       <Association Name="officer_dev_lockers" Member="officer" ThisKey="officer_id" OtherKey="id" Type="officer" IsForeignKey="true" />
-      <Association Name="btracker_dev_lockers" Member="btracker" ThisKey="btracker_id" OtherKey="id" Type="btracker" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.dev_rfid" Member="dev_rfid">
@@ -66,8 +93,8 @@
       <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="btracker_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="create_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="dev_vest_btracker" Member="btracker1" ThisKey="id" OtherKey="vest_id" Type="btracker" />
-      <Association Name="btracker_dev_vest" Member="btracker" ThisKey="btracker_id" OtherKey="id" Type="btracker" IsForeignKey="true" />
+      <Association Name="dev_vest_btracker" Member="btracker" ThisKey="id" OtherKey="vest_id" Type="btracker" />
+      <Association Name="btracker_dev_vest" Member="btracker1" ThisKey="btracker_id" OtherKey="id" Type="btracker" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.officer" Member="officer">
@@ -78,8 +105,8 @@
       <Column Name="sex" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
       <Column Name="fingerprint" Type="System.Data.Linq.Binary" DbType="Binary(2048)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="create_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="officer_dev_lockers" Member="dev_lockers" ThisKey="id" OtherKey="officer_id" Type="dev_lockers" />
       <Association Name="officer_btracker" Member="btracker" ThisKey="id" OtherKey="officer_id" Type="btracker" />
+      <Association Name="officer_dev_lockers" Member="dev_lockers" ThisKey="id" OtherKey="officer_id" Type="dev_lockers" />
     </Type>
   </Table>
   <Table Name="dbo.operator" Member="operator">
@@ -119,6 +146,7 @@
       <Column Name="room_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="rfid_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="position_rfid_btracker" Member="btracker" ThisKey="id" OtherKey="position_id" Type="btracker" />
       <Association Name="position_rfid_dev_rfid" Member="dev_rfid" ThisKey="id" OtherKey="position_id" Type="dev_rfid" />
       <Association Name="position_rfid_path_rfid" Member="path_rfid" ThisKey="id" OtherKey="end_position_id" Type="path_rfid" />
       <Association Name="position_rfid_path_rfid1" Member="path_rfid1" ThisKey="id" OtherKey="start_position_id" Type="path_rfid" />
@@ -146,47 +174,6 @@
       <Association Name="video_video_btracker_r" Member="video_btracker_r" ThisKey="id" OtherKey="video_id" Type="video_btracker_r" />
       <Association Name="dev_camera_video" Member="dev_camera" ThisKey="camera_id" OtherKey="id" Type="dev_camera" IsForeignKey="true" />
       <Association Name="position_camera_video" Member="position_camera" ThisKey="position_id" OtherKey="id" Type="position_camera" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.btracker" Member="btracker">
-    <Type Name="btracker">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="no" Type="System.String" DbType="VarChar(36)" CanBeNull="true" />
-      <Column Name="name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
-      <Column Name="number" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
-      <Column Name="sex" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
-      <Column Name="vest_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="locker_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="officer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="in_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="out_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="recover" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="private_goods" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
-      <Association Name="btracker_video_btracker_r" Member="video_btracker_r" ThisKey="id" OtherKey="btracker_id" Type="video_btracker_r" />
-      <Association Name="btracker_dev_lockers" Member="dev_lockers" ThisKey="id" OtherKey="btracker_id" Type="dev_lockers" />
-      <Association Name="btracker_dev_vest" Member="dev_vest" ThisKey="id" OtherKey="btracker_id" Type="dev_vest" />
-      <Association Name="dev_lockers_btracker" Member="dev_lockers1" ThisKey="locker_id" OtherKey="id" Type="dev_lockers" IsForeignKey="true" />
-      <Association Name="officer_btracker" Member="officer" ThisKey="officer_id" OtherKey="id" Type="officer" IsForeignKey="true" />
-      <Association Name="dev_vest_btracker" Member="dev_vest1" ThisKey="vest_id" OtherKey="id" Type="dev_vest" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="" Member="btrackerInfo">
-    <Type Name="btrackerInfo">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="no" Type="System.String" DbType="VarChar(36)" CanBeNull="true" />
-      <Column Name="name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
-      <Column Name="number" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
-      <Column Name="sex" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
-      <Column Name="vest_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="locker_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="officer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="in_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="out_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="recover" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="private_goods" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
-      <Column Name="" Member="officer_name" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
