@@ -5,15 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:Element="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
       xmlns:tool="clr-namespace:PFTSTools;assembly=PFTSTools"
+      xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="500"
       xmlns:local="clr-namespace:PFTSDesktop.ViewModel"
       Title="OperatorUpPage" Background="White">
-    
+
     <Grid x:Name="OperatorNewView" Margin="0,0,0,0">
+        <Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush" Value="LightBlue"></Setter>
+                <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            </Style>
+        </Grid.Resources>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="15"></RowDefinition>
@@ -23,12 +31,12 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFECE3E3">
+        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFFFFFFF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="OperatorNewBtn"
+            <tmp:ButtonEX x:Name="OperatorNewBtn"
                     Background="White"
                     Content="新增操作员"
                     Grid.Row="0" Grid.Column="0" Width="100" Height="30"
@@ -36,7 +44,7 @@
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     Tag="View/OperatorManager/OperatorNewPage.xaml"
                     Command="{Binding OperatorNewCommand}" CommandParameter="{Binding ElementName=OperatorNewBtn}"/>
-            <Button x:Name="OperatorManageBtn"
+            <tmp:ButtonEX x:Name="OperatorManageBtn"
                     Background="White"
                     Content="操作员管理"
                     Grid.Row="0" Grid.Column="1"
@@ -47,6 +55,7 @@
                     Command="{Binding OperatorManageCommand}" CommandParameter="{Binding ElementName=OperatorManageBtn}"/>
         </Grid>
 
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">编辑操作员</TextBlock>
         <TextBlock Text="{Binding Path=GetOperatorInfo.id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Visibility="Hidden"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="账号：" Style="{StaticResource lableNameStyle}" FontSize="16" Width="90" HorizontalContentAlignment="Right"/>
@@ -78,5 +87,7 @@
                 HorizontalAlignment="Center" Content="保    存"
                 Height="30" Width="100"
                 Command="{Binding OperatorUpSaveCommand}"/>
+        
+        <Border Grid.Row="0"></Border>
     </Grid>
 </Page>
