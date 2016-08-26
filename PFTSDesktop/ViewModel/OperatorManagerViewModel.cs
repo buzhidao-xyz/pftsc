@@ -33,6 +33,8 @@ namespace PFTSDesktop.ViewModel
         public OperatorManagerViewModel()
         {
             OperatorService = new OperatorService();
+
+            OperatorInfo = new @operator();
         }
 
         public static OperatorManagerViewModel GetInstance()
@@ -71,8 +73,6 @@ namespace PFTSDesktop.ViewModel
         public @operator GetOperatorInfo
         {
             get {
-                if (OperatorInfo == null) OperatorInfo = new @operator();
-
                 return OperatorInfo;
             }
             set
