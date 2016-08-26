@@ -4,30 +4,38 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:Element="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate" x:Name="OperatorManagerPage" x:Class="PFTSDesktop.View.Pages.OperatorManangerPage" 
+      xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"  
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="500"
 	Title="操作员管理" Background="White">
 
     <Grid x:Name="OperatorView">
+        <Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush" Value="LightBlue"></Setter>
+                <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            </Style>
+        </Grid.Resources>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFECE3E3">
+        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFFFFFFF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="OperatorNewBtn"
-                    Background="White"
+            <tmp:ButtonEX x:Name="OperatorNewBtn"
                     Content="新增操作员"
                     Grid.Row="0" Grid.Column="0" Width="100" Height="30"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     Tag="View/OperatorManager/OperatorNewPage.xaml"
+                    BorderThickness="0"
                     Command="{Binding OperatorNewCommand}" CommandParameter="{Binding ElementName=OperatorNewBtn}"/>
-            <Button x:Name="OperatorManageBtn"
+            <tmp:ButtonEX x:Name="OperatorManageBtn"
                     Background="White"
                     Content="操作员管理"
                     Grid.Row="0" Grid.Column="1"
@@ -37,7 +45,7 @@
                     Tag="View/Pages/OperatorManangerPage.xaml"
                     Command="{Binding OperatorManageCommand}" CommandParameter="{Binding ElementName=OperatorManageBtn}"/>
         </Grid>
-        
+
         <Element:PageDataGridEx SelectedItem="{Binding GetOperatorInfo}" Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None" ItemsSource="{Binding GetOperatorList}">
             <Element:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="#" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding id}"/>
@@ -54,7 +62,7 @@
                 <DataGridTemplateColumn Header="操作" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Background="White"
+                            <tmp:ButtonEX Background="White"
                                     Content="编辑"
                                     Width="70" Height="20"
                                     HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -66,5 +74,7 @@
                 </DataGridTemplateColumn>
             </Element:PageDataGridEx.Columns>
         </Element:PageDataGridEx>
+
+        <Border Grid.Row="0"></Border>
     </Grid>
 </Page>
