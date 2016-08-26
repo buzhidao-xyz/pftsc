@@ -79,7 +79,7 @@ namespace PFTSUITemplate.Element
                 throw new ArgumentException();
             }
             MessageWindow msg = new MessageWindow();
-            msg.lbTitle.Content = "魔力单店系统";
+            msg.lbTitle.Content = "系统提示";
             msg.lbCaption.Content = caption;
             msg.btnCancel.Visibility = Visibility.Hidden;
             msg.btnOk.Margin = new System.Windows.Thickness(0, 0, 18, 0);

@@ -50,7 +50,7 @@ namespace PFTSDesktop.ViewModel
                     Workspace =  VestManagerViewModel.GetInstance();
                     break;
                 case "2":
-                    Workspace = new LockerManagerViewModel();
+                    Workspace =  LockerManagerViewModel.GetInstance();
                     break;
                 case "3":
                     Workspace = new RFIDManagerViewModel();
