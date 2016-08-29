@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entitys\LockerInfoEntity.cs" />
+    <Compile Include="Entitys\VestInfoEntity.cs" />
     <Compile Include="Services\BTrackerService.cs" />
     <Compile Include="Services\DevCameraService.cs" />
     <Compile Include="Services\DevLockerService.cs" />

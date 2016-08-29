@@ -2,6 +2,7 @@
 using PFTSDesktop.Model;
 using PFTSDesktop.View.DeviceManager;
 using PFTSModel;
+using PFTSModel.Entitys;
 using PFTSUITemplate.Controls;
 using PFTSUITemplate.Element;
 using System;
@@ -27,7 +28,7 @@ namespace PFTSDesktop.ViewModel
         private static LockerManagerViewModel instance;
         private DevLockerService lockerService;
         private RelayCommand _getLockerListCommand;
-        private List<dev_lockers> _lockerList;
+        private List<LockerInfoEntity> _lockerList;
         private int type;
         #endregion
 
@@ -166,11 +167,11 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<dev_lockers> LockerList
+        public List<LockerInfoEntity> LockerList
         {
             get
             {
-                _lockerList = lockerService.GetAll();
+                _lockerList = lockerService.GetLockersByStatus(null);
                 return _lockerList;
             }
             set
@@ -226,7 +227,7 @@ namespace PFTSDesktop.ViewModel
                 MessageWindow.Show("储物柜信息更新成功！", "系统提示");
                 WindowTemplet window = (WindowTemplet)obj;
                 window.Close();
-                LockerList = lockerService.GetAll();
+                LockerList = lockerService.GetLockersByStatus(null);
             }
             else
             {

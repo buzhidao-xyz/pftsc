@@ -4,12 +4,13 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
 namespace PFTSDesktop.common
 {
-    public class VestStatusConverter : MarkupExtension,IValueConverter
+    public class VestStatusConverter : MarkupExtension, IValueConverter
     {
         public VestStatusConverter() { }
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -133,6 +134,76 @@ namespace PFTSDesktop.common
             else if (status == 1)
             {
                 strType = "已安装";
+            }
+            else
+            {
+                throw new Exception("绑定类型不正确");
+            }
+            return strType;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SuspectStatusConverterToString : MarkupExtension, IValueConverter
+    {
+
+        public SuspectStatusConverterToString() { }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int status = (int)value;
+            string strType = "";
+            if (status == 0)
+            {
+                strType = "在监";
+            }
+            else if (status == 1)
+            {
+                strType = "离场";
+            }
+            else
+            {
+                throw new Exception("绑定类型不正确");
+            }
+            return strType;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SuspectStatusConverter : MarkupExtension, IValueConverter
+    {
+
+        public SuspectStatusConverter() { }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int status = (int)value;
+            Visibility strType = Visibility.Collapsed;
+            if (status == 0)
+            {
+                strType = Visibility.Visible;
+            }
+            else if (status == 1)
+            {
+                strType = Visibility.Collapsed;
             }
             else
             {

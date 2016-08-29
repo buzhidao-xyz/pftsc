@@ -22,8 +22,8 @@
                 <DataGridTextColumn Header="物品箱名称" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="识别码" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="状态" Binding="{Binding status,Converter={conver:LockerStatusConverter}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="嫌疑犯名称" Binding="{Binding btracker_id}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="警员名称" Binding="{Binding officer_id}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="嫌疑犯名称" Binding="{Binding btracker_name}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="经办警员" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="创建时间" Binding="{Binding create_time}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
