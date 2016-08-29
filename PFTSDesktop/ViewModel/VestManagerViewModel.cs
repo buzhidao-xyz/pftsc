@@ -2,6 +2,7 @@
 using PFTSDesktop.Model;
 using PFTSDesktop.View.DeviceManager;
 using PFTSModel;
+using PFTSModel.Entitys;
 using PFTSUITemplate.Controls;
 using PFTSUITemplate.Element;
 using System;
@@ -28,7 +29,7 @@ namespace PFTSDesktop.ViewModel
         private static VestManagerViewModel instance;
         private DevVestService vestService;
         private RelayCommand _getVestListCommand;
-        private List<dev_vest> _vestList;
+        private List<VestInfoEntity> _vestList;
         private int type;
         #endregion
 
@@ -138,7 +139,7 @@ namespace PFTSDesktop.ViewModel
             if (type==1)
             {
                 dev_vest model = new dev_vest();
-                model.no = _vestAddModel.No;
+                model.no_left = _vestAddModel.No;
                 model.name = _vestAddModel.Name;
                 model.create_time = DateTime.Now;
                 result = vestService.Insert(model);
@@ -146,7 +147,7 @@ namespace PFTSDesktop.ViewModel
             }
             else
             {
-                _dev_vest.no = _vestModel.No;
+                _dev_vest.no_left = _vestModel.No;
                 _dev_vest.name = _vestModel.Name;
                 result = vestService.ModifyVest(_dev_vest);
             }
@@ -155,7 +156,7 @@ namespace PFTSDesktop.ViewModel
                 MessageWindow.Show("马甲信息更新成功！", "系统提示");
                 WindowTemplet window = (WindowTemplet)obj;
                 window.Close();
-                VestList = vestService.GetAll();
+                VestList = vestService.GetVestByStatus(null);
             }
             else
             {
@@ -228,11 +229,11 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<dev_vest> VestList
+        public List<VestInfoEntity> VestList
         {
             get
             {
-                _vestList = vestService.GetAll();
+                _vestList = vestService.GetVestByStatus(null);
                 return _vestList;
             }
             set

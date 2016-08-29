@@ -2,6 +2,7 @@
 using PFTSDesktop.Model;
 using PFTSDesktop.View.DeviceManager;
 using PFTSModel;
+using PFTSModel.Entitys;
 using PFTSUITemplate.Controls;
 using PFTSUITemplate.Element;
 using System;
@@ -14,9 +15,9 @@ using System.Windows.Input;
 
 namespace PFTSDesktop.ViewModel
 {
-    public class LockerManagerViewModel : WorkspaceViewModel,IDataErrorInfo
+    public class LockerManagerViewModel : WorkspaceViewModel, IDataErrorInfo
     {
-         #region 私有变量
+        #region 私有变量
         private RelayCommand _editLockerDlgCommand;
         private RelayCommand _addLockerDlgCommand;
         private LockerModel _lockerModel;
@@ -27,7 +28,7 @@ namespace PFTSDesktop.ViewModel
         private static LockerManagerViewModel instance;
         private DevLockerService lockerService;
         private RelayCommand _getLockerListCommand;
-        private List<dev_lockers> _lockerList;
+        private List<LockerInfoEntity> _lockerList;
         private int type;
         #endregion
 
@@ -166,11 +167,11 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<dev_lockers> LockerList
+        public List<LockerInfoEntity> LockerList
         {
             get
             {
-                _lockerList = lockerService.GetAll();
+                _lockerList = lockerService.GetLockersByStatus(null);
                 return _lockerList;
             }
             set
@@ -206,7 +207,7 @@ namespace PFTSDesktop.ViewModel
         {
             bool result = false;
 
-            if (type==1)
+            if (type == 1)
             {
                 dev_lockers model = new dev_lockers();
                 model.no = _lockerAddModel.No;
@@ -226,7 +227,7 @@ namespace PFTSDesktop.ViewModel
                 MessageWindow.Show("储物柜信息更新成功！", "系统提示");
                 WindowTemplet window = (WindowTemplet)obj;
                 window.Close();
-                LockerList = lockerService.GetAll();
+                LockerList = lockerService.GetLockersByStatus(null);
             }
             else
             {
@@ -245,7 +246,7 @@ namespace PFTSDesktop.ViewModel
         }
         #endregion
 
-      
+
 
         #region IDataErrorInfo Members
 

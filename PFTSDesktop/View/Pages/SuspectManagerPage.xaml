@@ -8,6 +8,7 @@
       xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
       xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
       d:DesignHeight="800" d:DesignWidth="800"
+      xmlns:conver="clr-namespace:PFTSDesktop.common"
 	  Title="嫌疑犯管理">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -50,19 +51,20 @@
                 <DataGridTextColumn Header="身份证号" Binding="{Binding number}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="案卷号" Binding="{Binding no}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="负责民警" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="状态" Binding="{Binding status,Converter={conver:SuspectStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="收监日期" Binding="{Binding in_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <tmp:ButtonTemplet ToolTip="查看物品" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"
+                                <tmp:ButtonTemplet ToolTip="查看物品" Visibility="{Binding status,Converter={conver:SuspectStatusConverter}}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"
                                                    Command="{Binding DataContext.CheckGoodsCommand, RelativeSource={RelativeSource AncestorType=Page}}"  VerticalAlignment="Center" Margin="5,0,0,0">
                                     <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
                                 </tmp:ButtonTemplet>
                                 <tmp:ButtonTemplet ToolTip="查看视频"  VerticalAlignment="Center" Margin="5,0,0,0">
                                     <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
                                 </tmp:ButtonTemplet>
-                                <tmp:ButtonTemplet ToolTip="人员转移"  VerticalAlignment="Center" Margin="5,0,0,0">
+                                <tmp:ButtonTemplet ToolTip="人员转移" Visibility="{Binding status,Converter={conver:SuspectStatusConverter}}"  VerticalAlignment="Center" Margin="5,0,0,0">
                                     <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
                                 </tmp:ButtonTemplet>
                             </StackPanel>

@@ -22,7 +22,7 @@
                 <DataGridTextColumn Header="马甲名称" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="识别码" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="状态" Binding="{Binding status,Converter={conver:VestStatusConverter}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="穿戴者" Binding="{Binding btracker_id}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="穿戴者" Binding="{Binding btracker_name}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="创建时间" Binding="{Binding create_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>

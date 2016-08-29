@@ -2,6 +2,7 @@
 using PFTSDesktop.Model;
 using PFTSDesktop.Properties;
 using PFTSModel;
+using PFTSModel.Entitys;
 using PFTSUITemplate.Controls;
 using PFTSUITemplate.Element;
 using System;
@@ -21,11 +22,11 @@ namespace PFTSDesktop.ViewModel
         private ButtonTemplet _preBtn;
         private SuspectModel _suspectModel;
         private List<officer> _officers;
-        private List<dev_vest> _devVests;
+        private List<VestInfoEntity> _devVests;
         private OfficerService _officerService;
         private DevVestService _devVestService;
         private DevLockerService _devLockerService;
-        private List<dev_lockers> _devLockers;
+        private List<LockerInfoEntity> _devLockers;
         private dev_lockers _devLocker;
         private officer _officer;
         private dev_vest _devVert;
@@ -84,12 +85,12 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<dev_vest> DevVests
+        public List<VestInfoEntity> DevVests
         {
             get
             {
                 if (_devVests == null)
-                    _devVests = _devVestService.GetAll();
+                    _devVests = _devVestService.GetVestByStatus(0);
                 return _devVests;
             }
             set
@@ -101,12 +102,12 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<dev_lockers> DevLockers
+        public List<LockerInfoEntity> DevLockers
         {
             get
             {
                 if (_devLockers == null)
-                    _devLockers = _devLockerService.GetAll();
+                    _devLockers = _devLockerService.GetLockersByStatus(0);
                 return _devLockers;
             }
             set
@@ -119,7 +120,7 @@ namespace PFTSDesktop.ViewModel
         }
 
         public dev_lockers DevLocker
-        { 
+        {
             get
             {
                 return _devLocker;
@@ -133,7 +134,7 @@ namespace PFTSDesktop.ViewModel
                 base.OnPropertyChanged("DevLocker");
             }
         }
-        
+
         public officer OfficerInfo
         {
             get
@@ -239,14 +240,16 @@ namespace PFTSDesktop.ViewModel
             {
                 return new RelayCommand(
                     param => this.AddSupectInfo(),
-                    param=>this.CanSave
+                    param => this.CanSave
                     );
             }
         }
 
-        public ICommand CheckGoodsCommand {
+        public ICommand CheckGoodsCommand
+        {
 
-            get {
+            get
+            {
                 return new RelayCommand(param => this.CheckGoods());
             }
         }
@@ -264,7 +267,8 @@ namespace PFTSDesktop.ViewModel
             Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
-        public void AddSupectInfo() {
+        public void AddSupectInfo()
+        {
             btracker btk = new btracker();
             btk.no = _suspectModel.No;
             btk.name = _suspectModel.Name;
@@ -275,18 +279,22 @@ namespace PFTSDesktop.ViewModel
             btk.locker_id = _suspectModel.LockerId;
             btk.private_goods = _suspectModel.PirvateGoods;
             btk.in_time = DateTime.Now;
-            bool result = _supectService.Insert(btk);
+            bool result = _supectService.AddBreackerTransaction(btk);
             if (result)
             {
-                MessageWindow.Show("嫌疑人添加成功","系统提示");
-                Global.currentFrame.NavigationService.GoBack();  
+                MessageWindow.Show("嫌疑人添加成功", "系统提示");
+                Global.currentFrame.NavigationService.GoBack();
+            }
+            else
+            {
+                MessageWindow.Show("嫌疑人添加失败", "错误");
             }
 
         }
 
         bool CanSave
         {
-            get { return String.IsNullOrEmpty(this.ValidateDevVest())&&String.IsNullOrEmpty(this.ValidateOfficer()) && _suspectModel.IsValid; }
+            get { return String.IsNullOrEmpty(this.ValidateDevVest()) && String.IsNullOrEmpty(this.ValidateOfficer()) && _suspectModel.IsValid; }
         }
 
         public void GetSuspects(Object obj)
@@ -304,7 +312,8 @@ namespace PFTSDesktop.ViewModel
             {
                 Btrackers = _supectService.GetAllByIn(0);
             }
-            else {
+            else
+            {
                 Btrackers = _supectService.GetAllByIn(null);
             }
         }

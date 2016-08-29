@@ -40,13 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BtrackerInfoEntity.cs" />
-    <Compile Include="BTrackerService.cs" />
-    <Compile Include="DevLockerService.cs" />
-    <Compile Include="DevRFIDService.cs" />
-    <Compile Include="DevVestService.cs" />
-    <Compile Include="OfficerService.cs" />
-    <Compile Include="OperatorService.cs" />
+    <Compile Include="Entitys\LockerInfoEntity.cs" />
+    <Compile Include="Entitys\VestInfoEntity.cs" />
+    <Compile Include="Services\BTrackerService.cs" />
+    <Compile Include="Services\DevCameraService.cs" />
+    <Compile Include="Services\DevLockerService.cs" />
+    <Compile Include="Services\DevRFIDService.cs" />
+    <Compile Include="Services\DevVestService.cs" />
+    <Compile Include="Entitys\BtrackerInfoEntity.cs" />
+    <Compile Include="Services\DevVestService.cs" />
+    <Compile Include="Services\OfficerService.cs" />
+    <Compile Include="Services\OperatorService.cs" />
     <Compile Include="PFTSDb.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -58,8 +62,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Service.cs" />
-    <Compile Include="SuspectService.cs" />
+    <Compile Include="Services\DevRFIDService.cs" />
+    <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\SuspectService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

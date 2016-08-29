@@ -78,7 +78,7 @@ namespace PFTSDesktop.Model
                         break;
 
                     case "No":
-                        error = this.ValidatePassword();
+                        error = this.ValidateNo();
                         break;
                     default:
                         Debug.Fail("Unexpected property being validated on VestModel: " + propertyName);
@@ -99,7 +99,7 @@ namespace PFTSDesktop.Model
             return null;
         }
 
-        private string ValidatePassword()
+        private string ValidateNo()
         {
             if (String.IsNullOrEmpty(this.No))
             {

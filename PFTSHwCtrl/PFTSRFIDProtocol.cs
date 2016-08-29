@@ -107,7 +107,7 @@ namespace PFTSHwCtrl
                 if (re > rs + 5)
                 {
                     string rfidNo = str.Substring(rs + 5, re - rs - 5);
-                    var devRfid = (new PFTSModel.DevRFIDService()).GetByNo(rfidNo);
+                    var devRfid = (new PFTSModel.Services.DevRFIDService()).GetByNo(rfidNo);
                     if (devRfid != null)
                     {
                         this.DevRFID = devRfid;

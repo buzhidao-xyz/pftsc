@@ -53,10 +53,10 @@ namespace PFTSDesktop.ViewModel
                     Workspace =  LockerManagerViewModel.GetInstance();
                     break;
                 case "3":
-                    Workspace = new RFIDManagerViewModel();
+                    Workspace =  RFIDManagerViewModel.GetInstance();
                     break;
                 case "4":
-                    Workspace = new CameraManagerViewModel();
+                    Workspace = CameraManagerViewModel.GetInstance();
                     break;
             }
         }
