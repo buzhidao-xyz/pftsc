@@ -14,7 +14,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <tmp:ButtonEX Name="btnAddVest" Grid.Row="0" Content="新增储物柜" VerticalAlignment="Center"  HorizontalAlignment="Right" Tag="View/SuspectManager/AddSuspectPage.xaml"
+        <tmp:ButtonEX Name="btnAddLoeker" Grid.Row="0" Content="新增储物柜" VerticalAlignment="Center"  HorizontalAlignment="Right"
                       Margin="0,0,20,0" Width="90" Height="26" Command="{Binding AddLockerDlgCommand}"/>
         <ele:PageDataGridEx  Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None"
                              ItemsSource="{Binding LockerList}" SelectedItem="{Binding DevLocker}">
@@ -22,8 +22,8 @@
                 <DataGridTextColumn Header="物品箱名称" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="识别码" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="状态" Binding="{Binding status,Converter={conver:LockerStatusConverter}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="嫌疑犯名称" Binding="{Binding btracker_id}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="警员名称" Binding="{Binding officer_id}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="嫌疑犯名称" Binding="{Binding btracker_name}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="经办警员" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="创建时间" Binding="{Binding create_time}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>

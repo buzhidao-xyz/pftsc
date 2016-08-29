@@ -4,6 +4,7 @@
              xmlns:element="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
              xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
              xmlns:vw="clr-namespace:PFTSDesktop.View.DeviceManager"
+             xmlns:monitor="clr-namespace:PFTSDesktop.View.Monitoring"
              xmlns:vm="clr-namespace:PFTSDesktop.ViewModel">
     <Application.Resources>
         <ResourceDictionary>
@@ -26,7 +27,7 @@
             <DataTemplate DataType="{x:Type vm:VestManagerViewModel}">
                 <vw:VestManagerControl/>
             </DataTemplate>
-
+            
             <SolidColorBrush x:Key="windowStyle" Color="#17b38e" />
             <Style x:Key="dataGridStyle" TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center" />

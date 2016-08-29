@@ -1,5 +1,5 @@
 ﻿using PFTSDesktop.Properties;
-using PFTSModel;
+using PFTSModel.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,25 +10,29 @@ using System.Threading.Tasks;
 
 namespace PFTSDesktop.Model
 {
-    public class LockerModel : IDataErrorInfo
+    public class CameraModel : IDataErrorInfo
     {
-        public LockerModel(string oldName, string oldNo)
+        public CameraModel(string oldName, string oldNo)
         {
             this.OldName = oldName;
             this.OldNo = oldNo;
         }
-        public LockerModel()
+        public CameraModel()
         {
 
         }
 
         #region 变量
-        private DevLockerService service = new DevLockerService();
+        private DevCameraService service = new DevCameraService();
         public string Name { get; set; }
         public string OldName { get; set; }
         public int Id { get; set; }
         public string No { get; set; }
         public string OldNo { get; set; }
+        public string IP { get; set; }
+        public string Port { get; set; }
+        public string Admin { get; set; }
+        public string Password { get; set; }
         #endregion
 
         #region IDataErrorInfo Members
@@ -63,6 +67,10 @@ namespace PFTSDesktop.Model
         {
             "Name",
             "No",
+            "IP",
+            "Port",
+            "Admin",
+            "Password",
         };
 
         private string GetValidationError(string propertyName)
@@ -76,9 +84,20 @@ namespace PFTSDesktop.Model
                 case "Name":
                     error = this.ValidateName();
                     break;
-
                 case "No":
                     error = this.ValidateNo();
+                    break;
+                case "IP":
+                    error = this.ValidateIP();
+                    break;
+                case "Port":
+                    error = this.ValidatePort();
+                    break;
+                case "Admin":
+                    error = this.ValidateAdmin();
+                    break;
+                case "Password":
+                    error = this.ValidatePwd();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on VestModel: " + propertyName);
@@ -91,11 +110,11 @@ namespace PFTSDesktop.Model
         {
             if (String.IsNullOrEmpty(this.Name))
             {
-                return Resources.Locker_Error_MissName;
+                return Resources.Camera_Error_MissName;
             }
             else if (IsValidReName(this.Name))
             {
-                return Resources.Locker_Error_ReName;
+                return Resources.Camera_Error_ReName;
             }
             return null;
         }
@@ -104,11 +123,51 @@ namespace PFTSDesktop.Model
         {
             if (String.IsNullOrEmpty(this.No))
             {
-                return Resources.Locker_Error_MissNo;
+                return Resources.Camera_Error_MissNo;
             }
             else if (IsValidReNo(this.No))
             {
-                return Resources.Locker_Error_ReNo;
+                return Resources.Camera_Error_ReNo;
+            }
+            return null;
+        }
+
+        private string ValidateIP()
+        {
+            if (String.IsNullOrEmpty(this.IP))
+            {
+                return Resources.Camera_Error_MissIp;
+            }
+            return null;
+        }
+
+        private string ValidatePort()
+        {
+            if (string.IsNullOrEmpty(this.Port))
+            {
+                return Resources.Camera_Error_MissPort;
+            }
+            else if (!IsValidNumPort(this.Port))
+            {
+                return Resources.Canera_Error_NumPort;
+            }
+            return null;
+        }
+
+        private string ValidateAdmin()
+        {
+            if (String.IsNullOrEmpty(this.Admin))
+            {
+                return Resources.Camera_Error_MissAdmin;
+            }
+            return null;
+        }
+
+        private string ValidatePwd()
+        {
+            if (String.IsNullOrEmpty(this.Password))
+            {
+                return Resources.Camera_Error_MissPwd;
             }
             return null;
         }
@@ -127,6 +186,14 @@ namespace PFTSDesktop.Model
                 return false;
             var vestModel = service.GetByNo(no, OldNo);
             return vestModel == null ? false : true;
+        }
+        private bool IsValidNumPort(string port)
+        {
+            int result = 0;
+            if (String.IsNullOrEmpty(port))
+                return false;
+            return int.TryParse(port, out result);
+
         }
         #endregion
     }

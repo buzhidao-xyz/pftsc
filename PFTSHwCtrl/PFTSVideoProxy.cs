@@ -112,6 +112,15 @@ namespace PFTSHwCtrl
         }
 
         /// <summary>
+        /// 设置视频句柄窗口
+        /// </summary>
+        /// <param name="control"></param>
+        public void SetVideoHandle(IntPtr handle)
+        {
+            m_hPlayWnd = handle;
+        }
+
+        /// <summary>
         /// 开始实时画面
         /// </summary>
         public bool StartRealView()

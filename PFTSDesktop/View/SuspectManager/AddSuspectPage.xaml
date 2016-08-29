@@ -1,100 +1,100 @@
 ﻿<Page x:Class="PFTSDesktop.View.SuspectManager.AddSuspectPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" 
-     xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
-      d:DesignWidth="640" d:DesignHeight="500"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	  mc:Ignorable="d" 
+	 xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
+	  d:DesignWidth="640" d:DesignHeight="500"
 	  Title="AddSuspectPage">
-    <Page.Resources>
-        <Style TargetType="{x:Type ele:RegularText}" BasedOn="{StaticResource textboxStyle}">
-            <Setter Property="Margin" Value="0,0,20,0"/>
-        </Style>
+	<Page.Resources>
+		<Style TargetType="{x:Type ele:RegularText}" BasedOn="{StaticResource textboxStyle}">
+			<Setter Property="Margin" Value="0,0,20,0"/>
+		</Style>
 
-        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource lableNameStyle}"/>
-        <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource comboxStyleEx}">
-            <Setter Property="Margin" Value="0,0,20,0"/>
-        </Style>
-    </Page.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="120"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="90"/>
-            <ColumnDefinition Width="*" MinWidth="220"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal" Background="#f2f2f2" Grid.ColumnSpan="6">
-            <Label Content="您的当前位置：嫌疑犯管理  > "   VerticalContentAlignment="Center"/>
-            <Label Content="新增嫌疑人"  VerticalContentAlignment="Center" Style="{StaticResource lableProStyle}"/>
-        </StackPanel>
+		<Style TargetType="{x:Type Label}" BasedOn="{StaticResource lableNameStyle}"/>
+		<Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource comboxStyleEx}">
+			<Setter Property="Margin" Value="0,0,20,0"/>
+		</Style>
+	</Page.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="20"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="120"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="40"/>
+			<ColumnDefinition Width="90"/>
+			<ColumnDefinition Width="*" MinWidth="220"/>
+			<ColumnDefinition Width="3*"/>
+			<ColumnDefinition Width="20"/>
+		</Grid.ColumnDefinitions>
+		<StackPanel Orientation="Horizontal" Background="#f2f2f2" Grid.ColumnSpan="6">
+			<Label Content="您的当前位置：嫌疑犯管理  > "   VerticalContentAlignment="Center"/>
+			<Label Content="新增嫌疑人"  VerticalContentAlignment="Center" Style="{StaticResource lableProStyle}"/>
+		</StackPanel>
 
-        <Label Content="姓名：" Grid.Row="2" Grid.Column="1"/>
-        <ele:RegularText Name="txtUserName"  Grid.Row="2" Grid.Column="2" Validation.ErrorTemplate="{x:Null}"
-                         Text="{Binding SuspectModel.Name, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
-        <ContentPresenter Grid.Row="2" Grid.Column="3" Content="{Binding ElementName=txtUserName, Path=(Validation.Errors).CurrentItem}"/>
+		<Label Content="姓名：" Grid.Row="2" Grid.Column="1"/>
+		<ele:RegularText Name="txtUserName"  Grid.Row="2" Grid.Column="2" Validation.ErrorTemplate="{x:Null}"
+						 Text="{Binding SuspectModel.Name, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
+		<ContentPresenter Grid.Row="2" Grid.Column="3" Content="{Binding ElementName=txtUserName, Path=(Validation.Errors).CurrentItem}"/>
 
-        <Label Content="性别：" Grid.Row="3" Grid.Column="1"/>
-        <ComboBox  Grid.Row="3" Grid.Column="2" ItemsSource="{Binding SexOptions, Mode=OneTime}"
-                   SelectedItem="{Binding SuspectModel.Sex, ValidatesOnDataErrors=True}"/>
-            
+		<Label Content="性别：" Grid.Row="3" Grid.Column="1"/>
+		<ComboBox  Grid.Row="3" Grid.Column="2" ItemsSource="{Binding SexOptions, Mode=OneTime}"
+				   SelectedItem="{Binding SuspectModel.Sex, ValidatesOnDataErrors=True}"/>
+			
 
-        <Label Content="身份证：" Grid.Row="4" Grid.Column="1"/>
-        <ele:RegularText Grid.Row="4" Grid.Column="2" Text="{Binding SuspectModel.Number}"/>
+		<Label Content="身份证：" Grid.Row="4" Grid.Column="1"/>
+		<ele:RegularText Grid.Row="4" Grid.Column="2" Text="{Binding SuspectModel.Number}"/>
 
-        <Label Content="案卷号：" Grid.Row="5" Grid.Column="1"/>
-        <ele:RegularText Name="txtNo" Grid.Row="5" Grid.Column="2" Validation.ErrorTemplate="{x:Null}"
-                         Text="{Binding SuspectModel.No, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
-        <ContentPresenter Grid.Row="5" Grid.Column="3" Content="{Binding ElementName=txtNo, Path=(Validation.Errors).CurrentItem}"/>
+		<Label Content="案卷号：" Grid.Row="5" Grid.Column="1"/>
+		<ele:RegularText Name="txtNo" Grid.Row="5" Grid.Column="2" Validation.ErrorTemplate="{x:Null}"
+						 Text="{Binding SuspectModel.No, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
+		<ContentPresenter Grid.Row="5" Grid.Column="3" Content="{Binding ElementName=txtNo, Path=(Validation.Errors).CurrentItem}"/>
 
 
-        <Label Content="负责民警：" Grid.Row="6" Grid.Column="1"/>
-        <ComboBox Grid.Row="6" Grid.Column="2"
-                   ItemsSource="{Binding Officers, Mode=OneTime}"
-                   SelectedItem="{Binding OfficerInfo, ValidatesOnDataErrors=True}"
-                   DisplayMemberPath="name"
-                   Validation.ErrorTemplate="{x:Null}"/>
-        <ContentPresenter  Grid.Row="6" Grid.Column="3" Content="{Binding ElementName=cmbVest, Path=(Validation.Errors).CurrentItem}"/>
-        
-        <Label Content="RFID服装："  Grid.Row="7" Grid.Column="1"/>
-        <ComboBox  Name="cmbVest"
-            Grid.Row="7" Grid.Column="2"
-                   ItemsSource="{Binding DevVests, Mode=OneTime}"
-                   SelectedItem="{Binding DevVest, ValidatesOnDataErrors=True}"
-                   DisplayMemberPath="name"
-                   Validation.ErrorTemplate="{x:Null}"/>
-        <ContentPresenter  Grid.Row="7" Grid.Column="3" Content="{Binding ElementName=cmbVest, Path=(Validation.Errors).CurrentItem}"/>
+		<Label Content="负责民警：" Grid.Row="6" Grid.Column="1"/>
+		<ComboBox Grid.Row="6" Grid.Column="2" Name="cmbOfficer"
+				   ItemsSource="{Binding Officers, Mode=OneTime}"
+				   SelectedItem="{Binding OfficerInfo, ValidatesOnDataErrors=True}"
+				   DisplayMemberPath="name"
+				   Validation.ErrorTemplate="{x:Null}"/>
+        <ContentPresenter  Grid.Row="6" Grid.Column="3" Content="{Binding ElementName=cmbOfficer, Path=(Validation.Errors).CurrentItem}"/>
+		
+		<Label Content="RFID服装："  Grid.Row="7" Grid.Column="1"/>
+		<ComboBox  Name="cmbVest"
+			Grid.Row="7" Grid.Column="2"
+				   ItemsSource="{Binding DevVests, Mode=OneTime}"
+				   SelectedItem="{Binding DevVest, ValidatesOnDataErrors=True}"
+				   DisplayMemberPath="name"
+				   Validation.ErrorTemplate="{x:Null}"/>
+		<ContentPresenter  Grid.Row="7" Grid.Column="3" Content="{Binding ElementName=cmbVest, Path=(Validation.Errors).CurrentItem}"/>
 
-        <Label Content="个人物品：" Grid.Row="8" Grid.Column="1" />
-        <ele:RegularText Height="110" Grid.Row="8" Grid.Column="2" VerticalContentAlignment="Top" Text="{Binding SuspectModel.PirvateGoods}"
-                         TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Hidden"/>
+		<Label Content="个人物品：" Grid.Row="8" Grid.Column="1" />
+		<ele:RegularText Height="110" Grid.Row="8" Grid.Column="2" VerticalContentAlignment="Top" Text="{Binding SuspectModel.PirvateGoods}"
+						 TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Hidden"/>
 
-        <Label Content="储物柜：" Grid.Row="9" Grid.Column="1"/>
-        <ComboBox Grid.Row="9" Grid.Column="2" ItemsSource="{Binding DevLockers, Mode=OneTime}"
-                   SelectedItem="{Binding DevLocker, ValidatesOnDataErrors=True}"
-                   DisplayMemberPath="name"
-                   Validation.ErrorTemplate="{x:Null}"/>
+		<Label Content="储物柜：" Grid.Row="9" Grid.Column="1"/>
+		<ComboBox Grid.Row="9" Grid.Column="2" ItemsSource="{Binding DevLockers, Mode=OneTime}"
+				   SelectedItem="{Binding DevLocker, ValidatesOnDataErrors=True}"
+				   DisplayMemberPath="name"
+				   Validation.ErrorTemplate="{x:Null}"/>
 
-        <Button Grid.Row="10" Grid.Column="2" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
-                HorizontalAlignment="Right" Content="保    存" Command="{Binding AddSupectInfoCommand}"
-                Height="30" Width="90" Margin="0,0,10,0"/>
-        <Button Grid.Row="10" Grid.Column="2" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
-                HorizontalAlignment="Right" Content="返    回" Command="{Binding PageCloseCommand}"
-                Height="30" Width="90" Margin="0,0,110,0"/>
-    </Grid>
+		<Button Grid.Row="10" Grid.Column="2" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
+				HorizontalAlignment="Right" Content="保    存" Command="{Binding AddSupectInfoCommand}"
+				Height="30" Width="90" Margin="0,0,10,0"/>
+		<Button Grid.Row="10" Grid.Column="2" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
+				HorizontalAlignment="Right" Content="返    回" Command="{Binding PageCloseCommand}"
+				Height="30" Width="90" Margin="0,0,110,0"/>
+	</Grid>
 </Page>

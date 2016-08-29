@@ -61,6 +61,87 @@ namespace PFTSDesktop.Properties {
         }
         
         /// <summary>
+        ///   查找类似 摄像头名称不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Camera_Error_MissAdmin {
+            get {
+                return ResourceManager.GetString("Camera_Error_MissAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 摄像头ip不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Camera_Error_MissIp {
+            get {
+                return ResourceManager.GetString("Camera_Error_MissIp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 摄像头名称不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Camera_Error_MissName {
+            get {
+                return ResourceManager.GetString("Camera_Error_MissName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 摄像头识别码不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Camera_Error_MissNo {
+            get {
+                return ResourceManager.GetString("Camera_Error_MissNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 摄像头端口不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Camera_Error_MissPort {
+            get {
+                return ResourceManager.GetString("Camera_Error_MissPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 摄像头密码不能为空 的本地化字符串。
+        /// </summary>
+        internal static string Camera_Error_MissPwd {
+            get {
+                return ResourceManager.GetString("Camera_Error_MissPwd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名摄像头名称 的本地化字符串。
+        /// </summary>
+        internal static string Camera_Error_ReName {
+            get {
+                return ResourceManager.GetString("Camera_Error_ReName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名识别码 的本地化字符串。
+        /// </summary>
+        internal static string Camera_Error_ReNo {
+            get {
+                return ResourceManager.GetString("Camera_Error_ReNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 摄像头端口只能输入数字 的本地化字符串。
+        /// </summary>
+        internal static string Canera_Error_NumPort {
+            get {
+                return ResourceManager.GetString("Canera_Error_NumPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 储物柜名称不能为空 的本地化字符串。
         /// </summary>
         internal static string Locker_Error_MissName {
@@ -120,6 +201,42 @@ namespace PFTSDesktop.Properties {
         internal static string Operator_Error_MissPasswprd {
             get {
                 return ResourceManager.GetString("Operator_Error_MissPasswprd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 RIFD天线名称不能为空 的本地化字符串。
+        /// </summary>
+        internal static string RFID_Error_MissName {
+            get {
+                return ResourceManager.GetString("RFID_Error_MissName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 RFID天线识别码不能为空 的本地化字符串。
+        /// </summary>
+        internal static string RFID_Error_MissNo {
+            get {
+                return ResourceManager.GetString("RFID_Error_MissNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名RFID天线名称 的本地化字符串。
+        /// </summary>
+        internal static string RFID_Error_ReName {
+            get {
+                return ResourceManager.GetString("RFID_Error_ReName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名识别码 的本地化字符串。
+        /// </summary>
+        internal static string RFID_Error_ReNo {
+            get {
+                return ResourceManager.GetString("RFID_Error_ReNo", resourceCulture);
             }
         }
         
