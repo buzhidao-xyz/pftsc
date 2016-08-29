@@ -63,9 +63,11 @@
     <Compile Include="LoginDlg.xaml.cs">
       <DependentUpon>LoginDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CameraModel.cs" />
     <Compile Include="Model\LockerModel.cs" />
     <Compile Include="Model\OperatorModel.cs" />
     <Compile Include="Model\PoliceModel.cs" />
+    <Compile Include="Model\RFIDModel.cs" />
     <Compile Include="Model\SuspectModel.cs" />
     <Compile Include="Model\VestModel.cs" />
     <Compile Include="Video.xaml.cs">
@@ -83,6 +85,12 @@
     <Compile Include="ViewModel\VestManagerViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
+    <Compile Include="View\DeviceManager\CameraAddDlg.xaml.cs">
+      <DependentUpon>CameraAddDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\CameraEditDlg.xaml.cs">
+      <DependentUpon>CameraEditDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DeviceManager\CameraManagerControl.xaml.cs">
       <DependentUpon>CameraManagerControl.xaml</DependentUpon>
     </Compile>
@@ -95,6 +103,12 @@
     <Compile Include="View\DeviceManager\LockerManagerControl.xaml.cs">
       <DependentUpon>LockerManagerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DeviceManager\RFIDAddDlg.xaml.cs">
+      <DependentUpon>RFIDAddDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\RFIDEditDlg.xaml.cs">
+      <DependentUpon>RFIDEditDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DeviceManager\RFIDManagerControl.xaml.cs">
       <DependentUpon>RFIDManagerControl.xaml</DependentUpon>
     </Compile>
@@ -106,6 +120,9 @@
     </Compile>
     <Compile Include="View\DeviceManager\VestManagerControl.xaml.cs">
       <DependentUpon>VestManagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\VideoListWindow.xaml.cs">
+      <DependentUpon>VideoListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OperatorManager\OperatorNewPage.xaml.cs">
       <DependentUpon>OperatorNewPage.xaml</DependentUpon>
@@ -161,6 +178,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\DeviceManager\CameraAddDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DeviceManager\CameraEditDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\DeviceManager\CameraManagerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,6 +202,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DeviceManager\RFIDAddDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DeviceManager\RFIDEditDlg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\DeviceManager\RFIDManagerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +225,10 @@
     <Page Include="View\DeviceManager\VestManagerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Monitoring\VideoListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\OperatorManager\OperatorNewPage.xaml">
       <SubType>Designer</SubType>
