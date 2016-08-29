@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Model\LockerModel.cs" />
     <Compile Include="Model\OperatorModel.cs" />
+    <Compile Include="Model\PoliceModel.cs" />
     <Compile Include="Model\SuspectModel.cs" />
     <Compile Include="Model\VestModel.cs" />
     <Compile Include="Video.xaml.cs">
@@ -76,6 +77,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\OperatorManagerViewModel.cs" />
+    <Compile Include="ViewModel\PoliceManagerViewModel.cs" />
     <Compile Include="ViewModel\RFIDManagerViewModel.cs" />
     <Compile Include="ViewModel\SuspectViewModel.cs" />
     <Compile Include="ViewModel\VestManagerViewModel.cs" />
@@ -125,6 +127,12 @@
     </Compile>
     <Compile Include="View\Pages\SuspectManagerPage.xaml.cs">
       <DependentUpon>SuspectManagerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PoliceManager\PoliceNewPage.xaml.cs">
+      <DependentUpon>PoliceNewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PoliceManager\PoliceUpPage.xaml.cs">
+      <DependentUpon>PoliceUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SuspectManager\AddSuspectPage.xaml.cs">
       <DependentUpon>AddSuspectPage.xaml</DependentUpon>
@@ -210,6 +218,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\SuspectManagerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PoliceManager\PoliceNewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PoliceManager\PoliceUpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

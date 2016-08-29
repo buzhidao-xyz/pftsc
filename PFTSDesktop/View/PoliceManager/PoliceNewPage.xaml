@@ -1,0 +1,81 @@
+﻿<Page x:Class="PFTSDesktop.View.PoliceManager.PoliceNewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PFTSDesktop.View.PoliceManager"
+      xmlns:Element="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
+      xmlns:tool="clr-namespace:PFTSTools;assembly=PFTSTools"
+      xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"  
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+      Title="PoliceNewPage" Background="White">
+
+    <Grid x:Name="PoliceNewView" Margin="0,0,0,0">
+        <Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush" Value="LightBlue"></Setter>
+                <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFFFFFFF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <tmp:ButtonEX x:Name="PoliceNewBtn"
+                    Content="新增警员"
+                    Grid.Row="0" Grid.Column="0" Width="100" Height="30"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Tag="View/PoliceManager/PoliceNewPage.xaml"
+                    BorderThickness="0"
+                    Command="{Binding PoliceNewCommand}" CommandParameter="{Binding ElementName=PoliceNewBtn}"/>
+            <tmp:ButtonEX x:Name="PoliceManageBtn"
+                    Background="White"
+                    Content="警员管理"
+                    Grid.Row="0" Grid.Column="1"
+                    Width="100" Height="30"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Tag="View/Pages/PoliceManagerPage.xaml"
+                    Command="{Binding PoliceManageCommand}" CommandParameter="{Binding ElementName=PoliceManageBtn}"/>
+        </Grid>
+
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">新增警员</TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="警号：" Style="{StaticResource lableNameStyle}" FontSize="16"/>
+            <Element:RegularText Width="300" Height="30" Margin="0,0,20,0" Text="{Binding Path=GetPoliceInfo.no,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="姓名：" Style="{StaticResource lableNameStyle}" FontSize="16"/>
+            <Element:RegularText Width="300" Height="30" Margin="0,0,20,0" Text="{Binding Path=GetPoliceInfo.name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="性别：" Style="{StaticResource lableNameStyle}" FontSize="16"/>
+            <StackPanel x:Name="SexP" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Height="30"  Margin="0,0,20,0">
+                <RadioButton GroupName="Sex" x:Name="Male" VerticalAlignment="Center" Content="男" Command="{Binding SexCheckedCommand}" CommandParameter="{Binding ElementName=Male}"></RadioButton>
+                <RadioButton GroupName="Sex" x:Name="FeMale" VerticalAlignment="Center" Content="女" Command="{Binding SexCheckedCommand}" CommandParameter="{Binding ElementName=FeMale}" Margin="20,0,0,0"></RadioButton>
+                <TextBlock Name="SexC" Text="{Binding Path=GetPoliceInfo.sex}" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Grid.Row="5" Name="btnUpdate"
+                Style="{StaticResource ButtonControlTemplate}"
+                HorizontalAlignment="Center" Content="保    存"
+                Height="30" Width="100"
+                Command="{Binding PoliceNewSaveCommand}"/>
+
+        <Border Grid.Row="0"></Border>
+    </Grid>
+</Page>
