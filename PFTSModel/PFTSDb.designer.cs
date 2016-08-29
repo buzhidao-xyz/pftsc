@@ -2132,7 +2132,7 @@ namespace PFTSModel
 		
 		private int _id;
 		
-		private string _no;
+		private string _no_left;
 		
 		private string _name;
 		
@@ -2141,6 +2141,8 @@ namespace PFTSModel
 		private System.Nullable<int> _btracker_id;
 		
 		private System.Nullable<System.DateTime> _create_time;
+		
+		private string _no_right;
 		
 		private EntitySet<btracker> _btracker;
 		
@@ -2152,8 +2154,8 @@ namespace PFTSModel
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
-    partial void OnnoChanging(string value);
-    partial void OnnoChanged();
+    partial void Onno_leftChanging(string value);
+    partial void Onno_leftChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
     partial void OnstatusChanging(int value);
@@ -2162,6 +2164,8 @@ namespace PFTSModel
     partial void Onbtracker_idChanged();
     partial void Oncreate_timeChanging(System.Nullable<System.DateTime> value);
     partial void Oncreate_timeChanged();
+    partial void Onno_rightChanging(string value);
+    partial void Onno_rightChanged();
     #endregion
 		
 		public dev_vest()
@@ -2191,22 +2195,22 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(128)")]
-		public string no
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no_left", DbType="VarChar(128)")]
+		public string no_left
 		{
 			get
 			{
-				return this._no;
+				return this._no_left;
 			}
 			set
 			{
-				if ((this._no != value))
+				if ((this._no_left != value))
 				{
-					this.OnnoChanging(value);
+					this.Onno_leftChanging(value);
 					this.SendPropertyChanging();
-					this._no = value;
-					this.SendPropertyChanged("no");
-					this.OnnoChanged();
+					this._no_left = value;
+					this.SendPropertyChanged("no_left");
+					this.Onno_leftChanged();
 				}
 			}
 		}
@@ -2291,6 +2295,26 @@ namespace PFTSModel
 					this._create_time = value;
 					this.SendPropertyChanged("create_time");
 					this.Oncreate_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no_right", DbType="VarChar(128)")]
+		public string no_right
+		{
+			get
+			{
+				return this._no_right;
+			}
+			set
+			{
+				if ((this._no_right != value))
+				{
+					this.Onno_rightChanging(value);
+					this.SendPropertyChanging();
+					this._no_right = value;
+					this.SendPropertyChanged("no_right");
+					this.Onno_rightChanged();
 				}
 			}
 		}

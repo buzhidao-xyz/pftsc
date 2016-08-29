@@ -128,7 +128,7 @@ namespace PFTSDesktop.ViewModel
             type = 2;
             VestEditDlg dlg = new VestEditDlg();
             _vestModel.OldName = DevVest.name;
-            _vestModel.OldNo = DevVest.no;
+            //_vestModel.OldNo = DevVest.no;
             dlg.ShowDialog();
         }
 
@@ -139,7 +139,7 @@ namespace PFTSDesktop.ViewModel
             if (type==1)
             {
                 dev_vest model = new dev_vest();
-                model.no = _vestAddModel.No;
+                model.no_left = _vestAddModel.No;
                 model.name = _vestAddModel.Name;
                 model.create_time = DateTime.Now;
                 result = vestService.Insert(model);
@@ -147,7 +147,7 @@ namespace PFTSDesktop.ViewModel
             }
             else
             {
-                _dev_vest.no = _vestModel.No;
+                _dev_vest.no_left = _vestModel.No;
                 _dev_vest.name = _vestModel.Name;
                 result = vestService.ModifyVest(_dev_vest);
             }
@@ -193,7 +193,7 @@ namespace PFTSDesktop.ViewModel
                 _dev_vest = value;
                 _vestModel.Id = _dev_vest.id;
                 _vestModel.Name = _dev_vest.name;
-                _vestModel.No = _dev_vest.no;
+                _vestModel.No = _dev_vest.no_left;
 
                 base.OnPropertyChanged("DevVest");
             }

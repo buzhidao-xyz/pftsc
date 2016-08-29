@@ -392,13 +392,10 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
-
 rd/s/q "$(ProjectDir)$(OutDir)HCNetSDKCom"
 mkdir "$(ProjectDir)$(OutDir)HCNetSDKCom"
-
 copy "$(ProjectDir)lib\*" "$(ProjectDir)$(OutDir)"
-
-copy "$(ProjectDir)lib\HCNetSDKCom\*" "$(ProjectDir)$(OutDir)\HCNetSDKCom"</PostBuildEvent>
+copy "$(ProjectDir)lib\HCNetSDKCom\*" "$(ProjectDir)$(OutDir)HCNetSDKCom"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

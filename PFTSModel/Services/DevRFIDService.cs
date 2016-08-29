@@ -40,7 +40,7 @@ namespace PFTSModel.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public dev_rfid GetByNo(string no, string oldNo)
+        public dev_rfid GetByNo(string no, string oldNo = null)
         {
             try
             {

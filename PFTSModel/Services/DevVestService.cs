@@ -1,9 +1,9 @@
-﻿using PFTSModel.Entitys;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PFTSModel.Entitys;
 
 namespace PFTSModel
 {
@@ -25,7 +25,7 @@ namespace PFTSModel
                                 select new VestInfoEntity
                                 {
                                     id = q.id,
-                                    no = q.no,
+                                    no = q.no_left,
                                     name = q.name,
                                     create_time = q.create_time,
                                     btracker_name = q.btracker1.name,
@@ -83,16 +83,16 @@ namespace PFTSModel
         {
             try
             {
-                using (PFTSDbDataContext db = new PFTSDbDataContext())
-                {
-                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
-                    var query = from dv in db.dev_vest
-                                where dv.no == no
-                                select dv;
-                    if (!String.IsNullOrEmpty(oldNo) && oldNo == no)
-                        return null;
-                    return query.FirstOrDefault();
-                }
+                //using (PFTSDbDataContext db = new PFTSDbDataContext())
+                //{
+                //    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
+                //    var query = from dv in db.dev_vest
+                //                where dv.no == no
+                //                select dv;
+                //    if (!String.IsNullOrEmpty(oldNo) && oldNo == no)
+                //        query = query.Where(c => c.no == oldNo + no);
+                //    return query.FirstOrDefault();
+                //}
             }
             catch
             {
@@ -109,7 +109,8 @@ namespace PFTSModel
                 {
                     dev_vest vest = db.dev_vest.SingleOrDefault<dev_vest>(rec => rec.id == model.id);
                     vest.name = model.name;
-                    vest.no = model.no;
+                    vest.no_left = model.no_left;
+                    vest.no_right = model.no_right;
                     db.SubmitChanges();
                 }
                 return true;

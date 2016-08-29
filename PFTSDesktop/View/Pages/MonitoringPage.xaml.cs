@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PFTSModel;
+using PFTSModel.Services;
 
 namespace PFTSDesktop.View.Pages
 {

@@ -20,7 +20,7 @@
                              ItemsSource="{Binding RFIDList}" SelectedItem="{Binding DevRFID}">
             <ele:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="天线名称" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="识别码" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="识别码" Binding="{Binding no_left}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="状态" Binding="{Binding status,Converter={conver:RFIDStatusConverter}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="位置" Binding="{Binding position_id}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="创建时间" Binding="{Binding create_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
