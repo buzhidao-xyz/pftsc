@@ -478,9 +478,9 @@ namespace PFTSScene
                     }
                 }
             }
-            catch
+            catch (Exception es)
             {
-
+                MessageBox.Show(es.Message);
             }
         }
 

@@ -27,6 +27,7 @@ namespace PFTSDesktop.View.Monitoring
             m_videoProxy = new PFTSHwCtrl.PFTSVideoProxy("192.168.10.164", 8000, "admin", "Gt123456");
             m_videoProxy.Login();
             m_videoProxy.SetWindow(videoControl);
+            mediaElement.Source = new Uri("D:\\fff111.mp4", UriKind.Absolute);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -38,6 +39,22 @@ namespace PFTSDesktop.View.Monitoring
                     MessageBox.Show(m_videoProxy.GetLastError());
                 }
             }
+        }
+
+        //
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            videoControl.Visibility = Visibility.Hidden;
+            mediaElement.Visibility = Visibility.Visible;
+            mediaElement.LoadedBehavior = MediaState.Manual;
+            mediaElement.Play();
+        }
+
+        //real
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            videoControl.Visibility = Visibility.Visible;
+            mediaElement.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -81,7 +81,6 @@
     <Compile Include="ViewModel\RFIDManagerViewModel.cs" />
     <Compile Include="ViewModel\SuspectViewModel.cs" />
     <Compile Include="ViewModel\VestManagerViewModel.cs" />
-    <Compile Include="ViewModel\VideoListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
     <Compile Include="View\DeviceManager\CameraManagerControl.xaml.cs">

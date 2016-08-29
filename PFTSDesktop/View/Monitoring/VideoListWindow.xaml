@@ -14,11 +14,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ListBox x:Name="listBox" HorizontalAlignment="Center" Width="160">
-            <Button Background="#FF5CCD4A" Content="实时画面"/>
+            <Button Background="#FF5CCD4A" Content="实时画面" Click="Button_Click_1"/>
             <Separator/>
-            <Button Content="video20160826.mp4"/>
-            <Button Content="video20160825.mp4"/>
+            <Button Content="video20160826.mp4" Click="Button_Click"/>
+            <Button Content="video20160825.mp4" Click="Button_Click"/>
         </ListBox>
         <hwd:PFTSVideoControl x:Name="videoControl" Grid.Column="1"/>
+        <MediaElement x:Name="mediaElement" Grid.Column="1" Visibility="Hidden"/>
     </Grid>
 </Window>
