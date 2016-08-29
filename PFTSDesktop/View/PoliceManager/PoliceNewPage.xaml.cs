@@ -14,14 +14,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PFTSDesktop.View.Pages
+namespace PFTSDesktop.View.PoliceManager
 {
     /// <summary>
-    /// PoliceManagerPage.xaml 的交互逻辑
+    /// PoliceNewPage.xaml 的交互逻辑
     /// </summary>
-    public partial class PoliceManagerPage : Page
+    public partial class PoliceNewPage : Page
     {
-        public PoliceManagerPage()
+        public PoliceNewPage()
         {
             InitializeComponent();
 

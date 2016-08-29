@@ -3,11 +3,72 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Element="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
+      xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"  
+      x:Name="PoliceManagePage"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="警员管理">
 
-    <Grid>
-        <TextBlock Text="警员管理" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid x:Name="OperatorView">
+        <Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush" Value="LightBlue"></Setter>
+                <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFFFFFFF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <tmp:ButtonEX x:Name="PoliceNewBtn"
+                    Content="新增警员"
+                    Grid.Row="0" Grid.Column="0" Width="100" Height="30"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Tag="View/PoliceManager/PoliceNewPage.xaml"
+                    BorderThickness="0"
+                    Command="{Binding PoliceNewCommand}" CommandParameter="{Binding ElementName=PoliceNewBtn}"/>
+            <tmp:ButtonEX x:Name="PoliceManageBtn"
+                    Background="White"
+                    Content="警员管理"
+                    Grid.Row="0" Grid.Column="1"
+                    Width="100" Height="30"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Tag="View/Pages/PoliceManagerPage.xaml"
+                    Command="{Binding PoliceManageCommand}" CommandParameter="{Binding ElementName=PoliceManageBtn}"/>
+        </Grid>
+
+        <Element:PageDataGridEx SelectedItem="{Binding GetPoliceInfo}" Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None" ItemsSource="{Binding GetPoliceList}">
+            <Element:PageDataGridEx.Columns>
+                <DataGridTextColumn Header="#" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding id}"/>
+                <DataGridTextColumn Header="警号"  Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding no}"/>
+                <DataGridTextColumn Header="姓名" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="性别" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding sex}"/>
+                <DataGridTemplateColumn Header="操作" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <tmp:ButtonEX Background="White"
+                                    Content="编辑"
+                                    Width="70" Height="20"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                    Tag="View/OperatorManager/OperatorUpPage.xaml"
+                                    Command="{Binding DataContext.PoliceUpCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </Element:PageDataGridEx.Columns>
+        </Element:PageDataGridEx>
+
+        <Border Grid.Row="0"></Border>
     </Grid>
 </Page>

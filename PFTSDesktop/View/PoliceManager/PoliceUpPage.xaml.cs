@@ -1,5 +1,4 @@
-﻿using PFTSDesktop.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PFTSDesktop.View.Pages
+namespace PFTSDesktop.View.PoliceManager
 {
     /// <summary>
-    /// PoliceManagerPage.xaml 的交互逻辑
+    /// PoliceUpPage.xaml 的交互逻辑
     /// </summary>
-    public partial class PoliceManagerPage : Page
+    public partial class PoliceUpPage : Page
     {
-        public PoliceManagerPage()
+        public PoliceUpPage()
         {
             InitializeComponent();
-
-            var viewModel = PoliceManagerViewModel.GetInstance();
-
-            this.DataContext = viewModel;
         }
     }
 }
