@@ -120,7 +120,7 @@ namespace PFTSHwCtrl
                 if (ve > vs + 5)
                 {
                     string vestNo = str.Substring(vs + 5, ve - vs - 5);
-                    var bt = (new PFTSModel.BTrackerService()).GetByVestNo(vestNo);
+                    var bt = (new PFTSModel.Services.BTrackerService()).GetByVestNo(vestNo);
                     if (bt != null)
                     {
                         this.BTracker = bt;

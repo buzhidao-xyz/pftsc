@@ -193,7 +193,7 @@ namespace PFTSDesktop.ViewModel
                 _dev_vest = value;
                 _vestModel.Id = _dev_vest.id;
                 _vestModel.Name = _dev_vest.name;
-                _vestModel.No = _dev_vest.no;
+                _vestModel.No = _dev_vest.no_left;
 
                 base.OnPropertyChanged("DevVest");
             }

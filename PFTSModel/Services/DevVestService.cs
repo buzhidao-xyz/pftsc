@@ -3,11 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PFTSModel.Entitys;
 
 namespace PFTSModel
 {
     public class DevVestService : Service<dev_vest>
     {
+        /// <summary>
+        /// 根据物品箱状态获取数据列表
+        /// </summary>
+        /// <param name="status">状态，为null查询所有</param>
+        /// <returns></returns>
+        public List<VestInfoEntity> GetVestByStatus(System.Nullable<int> status)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
+                    var query = from q in table
+                                select new VestInfoEntity
+                                {
+                                    id = q.id,
+                                    no = q.no_left,
+                                    name = q.name,
+                                    create_time = q.create_time,
+                                    btracker_name = q.btracker1.name,
+                                    status = q.status
+                                };
+
+                    if (status != null)
+                    {
+                        query = query.Where(p => p.status == status);
+                    }
+
+                    return query.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
+        }
+
         /// <summary>
         /// 通过name获取记录值
         /// </summary>
@@ -24,7 +63,7 @@ namespace PFTSModel
                                 where dv.name == name
                                 select dv;
                     if (!String.IsNullOrEmpty(oldName) && oldName == name)
-                        query = query.Where(c => c.name == oldName + name);
+                        return null;
                     return query.FirstOrDefault();
                 }
             }

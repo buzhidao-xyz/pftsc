@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PFTSModel
+namespace PFTSModel.Services
 {
     public class BTrackerService : Service<btracker>
     {
