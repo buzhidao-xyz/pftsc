@@ -68,9 +68,9 @@ namespace PFTSModel.Services
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    dev_rfid vest = db.dev_rfid.SingleOrDefault<dev_rfid>(rec => rec.id == model.id);
-                    vest.name = model.name;
-                    vest.no = model.no;
+                    dev_rfid rfid = db.dev_rfid.SingleOrDefault<dev_rfid>(rec => rec.id == model.id);
+                    rfid.name = model.name;
+                    rfid.no = model.no;
                     db.SubmitChanges();
                 }
                 return true;

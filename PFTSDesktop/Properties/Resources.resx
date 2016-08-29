@@ -117,6 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Camera_Error_MissAdmin" xml:space="preserve">
+    <value>摄像头名称不能为空</value>
+  </data>
+  <data name="Camera_Error_MissIp" xml:space="preserve">
+    <value>摄像头ip不能为空</value>
+  </data>
+  <data name="Camera_Error_MissName" xml:space="preserve">
+    <value>摄像头名称不能为空</value>
+  </data>
+  <data name="Camera_Error_MissNo" xml:space="preserve">
+    <value>摄像头识别码不能为空</value>
+  </data>
+  <data name="Camera_Error_MissPort" xml:space="preserve">
+    <value>摄像头端口不能为空</value>
+  </data>
+  <data name="Camera_Error_MissPwd" xml:space="preserve">
+    <value>摄像头密码不能为空</value>
+  </data>
+  <data name="Camera_Error_ReName" xml:space="preserve">
+    <value>存在重名摄像头名称</value>
+  </data>
+  <data name="Camera_Error_ReNo" xml:space="preserve">
+    <value>存在重名识别码</value>
+  </data>
+  <data name="Canera_Error_NumPort" xml:space="preserve">
+    <value>摄像头端口只能输入数字</value>
+  </data>
   <data name="Locker_Error_MissName" xml:space="preserve">
     <value>储物柜名称不能为空</value>
   </data>

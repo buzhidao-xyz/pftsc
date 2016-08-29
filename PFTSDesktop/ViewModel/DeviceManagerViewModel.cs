@@ -56,7 +56,7 @@ namespace PFTSDesktop.ViewModel
                     Workspace =  RFIDManagerViewModel.GetInstance();
                     break;
                 case "4":
-                    Workspace = new CameraManagerViewModel();
+                    Workspace = CameraManagerViewModel.GetInstance();
                     break;
             }
         }

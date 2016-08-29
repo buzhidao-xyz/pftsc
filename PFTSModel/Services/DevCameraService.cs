@@ -4,23 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PFTSModel
+namespace PFTSModel.Services
 {
-    public class DevLockerService:Service<dev_lockers>
+    public class DevCameraService : Service<dev_camera>
     {
         /// <summary>
         /// 通过name获取记录值
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public dev_lockers GetByName(string name, string oldName)
+        public dev_camera GetByName(string name, string oldName)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<dev_lockers> table = db.GetTable<dev_lockers>();
-                    var query = from dv in db.dev_lockers
+                    System.Data.Linq.Table<dev_camera> table = db.GetTable<dev_camera>();
+                    var query = from dv in db.dev_camera
                                 where dv.name == name
                                 select dv;
                     if (!String.IsNullOrEmpty(oldName) && oldName == name)
@@ -40,14 +40,14 @@ namespace PFTSModel
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public dev_lockers GetByNo(string no, string oldNo)
+        public dev_camera GetByNo(string no, string oldNo)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<dev_lockers> table = db.GetTable<dev_lockers>();
-                    var query = from dv in db.dev_lockers
+                    System.Data.Linq.Table<dev_camera> table = db.GetTable<dev_camera>();
+                    var query = from dv in db.dev_camera
                                 where dv.no == no
                                 select dv;
                     if (!String.IsNullOrEmpty(oldNo) && oldNo == no)
@@ -62,15 +62,19 @@ namespace PFTSModel
             return null;
         }
 
-        public bool ModifyLocker(dev_lockers model)
+        public bool ModifyLocker(dev_camera model)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    dev_lockers locker = db.dev_lockers.SingleOrDefault<dev_lockers>(rec => rec.id == model.id);
-                    locker.name = model.name;
-                    locker.no = model.no;
+                    dev_camera camera = db.dev_camera.SingleOrDefault<dev_camera>(rec => rec.id == model.id);
+                    camera.name = model.name;
+                    camera.no = model.no;
+                    camera.ip = model.ip;
+                    camera.port = model.port;
+                    camera.admin = model.admin;
+                    camera.password = model.password;
                     db.SubmitChanges();
                 }
                 return true;

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\BTrackerService.cs" />
+    <Compile Include="Services\DevCameraService.cs" />
     <Compile Include="Services\DevLockerService.cs" />
     <Compile Include="Services\DevVestService.cs" />
     <Compile Include="Entitys\BtrackerInfoEntity.cs" />
