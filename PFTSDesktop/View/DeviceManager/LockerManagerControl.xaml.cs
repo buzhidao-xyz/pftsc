@@ -24,7 +24,6 @@ namespace PFTSDesktop.View.DeviceManager
         public LockerManagerControl()
         {
             InitializeComponent();
-            this.DataContext = LockerManagerViewModel.GetInstance();
         }
     }
 }

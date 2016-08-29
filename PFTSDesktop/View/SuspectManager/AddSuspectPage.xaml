@@ -64,12 +64,12 @@
 
 
 		<Label Content="负责民警：" Grid.Row="6" Grid.Column="1"/>
-		<ComboBox Grid.Row="6" Grid.Column="2"
+		<ComboBox Grid.Row="6" Grid.Column="2" Name="cmbOfficer"
 				   ItemsSource="{Binding Officers, Mode=OneTime}"
 				   SelectedItem="{Binding OfficerInfo, ValidatesOnDataErrors=True}"
 				   DisplayMemberPath="name"
 				   Validation.ErrorTemplate="{x:Null}"/>
-		<ContentPresenter  Grid.Row="6" Grid.Column="3" Content="{Binding ElementName=cmbVest, Path=(Validation.Errors).CurrentItem}"/>
+        <ContentPresenter  Grid.Row="6" Grid.Column="3" Content="{Binding ElementName=cmbOfficer, Path=(Validation.Errors).CurrentItem}"/>
 		
 		<Label Content="RFID服装："  Grid.Row="7" Grid.Column="1"/>
 		<ComboBox  Name="cmbVest"
