@@ -138,6 +138,18 @@
   <data name="Operator_Error_MissPasswprd" xml:space="preserve">
     <value>密码不能为空</value>
   </data>
+  <data name="RFID_Error_MissName" xml:space="preserve">
+    <value>RIFD天线名称不能为空</value>
+  </data>
+  <data name="RFID_Error_MissNo" xml:space="preserve">
+    <value>RFID天线识别码不能为空</value>
+  </data>
+  <data name="RFID_Error_ReName" xml:space="preserve">
+    <value>存在重名RFID天线名称</value>
+  </data>
+  <data name="RFID_Error_ReNo" xml:space="preserve">
+    <value>存在重名识别码</value>
+  </data>
   <data name="Suspect_Error_MissName" xml:space="preserve">
     <value>姓名不能为空</value>
   </data>

@@ -1,5 +1,5 @@
 ﻿using PFTSDesktop.Properties;
-using PFTSModel;
+using PFTSModel.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace PFTSDesktop.Model
 {
-    public class LockerModel : IDataErrorInfo
+    public class RFIDModel:IDataErrorInfo
     {
-        public LockerModel(string oldName, string oldNo)
+         public RFIDModel(string oldName, string oldNo)
         {
             this.OldName = oldName;
             this.OldNo = oldNo;
         }
-        public LockerModel()
+        public RFIDModel()
         {
 
         }
 
         #region 变量
-        private DevLockerService service = new DevLockerService();
+        private DevRFIDService service = new DevRFIDService();
         public string Name { get; set; }
         public string OldName { get; set; }
         public int Id { get; set; }
@@ -91,11 +91,11 @@ namespace PFTSDesktop.Model
         {
             if (String.IsNullOrEmpty(this.Name))
             {
-                return Resources.Locker_Error_MissName;
+                return Resources.RFID_Error_MissName;
             }
             else if (IsValidReName(this.Name))
             {
-                return Resources.Locker_Error_ReName;
+                return Resources.RFID_Error_ReName;
             }
             return null;
         }
@@ -104,11 +104,11 @@ namespace PFTSDesktop.Model
         {
             if (String.IsNullOrEmpty(this.No))
             {
-                return Resources.Locker_Error_MissNo;
+                return Resources.RFID_Error_MissNo;
             }
             else if (IsValidReNo(this.No))
             {
-                return Resources.Locker_Error_ReNo;
+                return Resources.RFID_Error_ReNo;
             }
             return null;
         }

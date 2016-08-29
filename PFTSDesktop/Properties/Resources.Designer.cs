@@ -124,6 +124,42 @@ namespace PFTSDesktop.Properties {
         }
         
         /// <summary>
+        ///   查找类似 RIFD天线名称不能为空 的本地化字符串。
+        /// </summary>
+        internal static string RFID_Error_MissName {
+            get {
+                return ResourceManager.GetString("RFID_Error_MissName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 RFID天线识别码不能为空 的本地化字符串。
+        /// </summary>
+        internal static string RFID_Error_MissNo {
+            get {
+                return ResourceManager.GetString("RFID_Error_MissNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名RFID天线名称 的本地化字符串。
+        /// </summary>
+        internal static string RFID_Error_ReName {
+            get {
+                return ResourceManager.GetString("RFID_Error_ReName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存在重名识别码 的本地化字符串。
+        /// </summary>
+        internal static string RFID_Error_ReNo {
+            get {
+                return ResourceManager.GetString("RFID_Error_ReNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 姓名不能为空 的本地化字符串。
         /// </summary>
         internal static string Suspect_Error_MissName {

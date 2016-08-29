@@ -14,9 +14,9 @@ using System.Windows.Input;
 
 namespace PFTSDesktop.ViewModel
 {
-    public class LockerManagerViewModel : WorkspaceViewModel,IDataErrorInfo
+    public class LockerManagerViewModel : WorkspaceViewModel, IDataErrorInfo
     {
-         #region 私有变量
+        #region 私有变量
         private RelayCommand _editLockerDlgCommand;
         private RelayCommand _addLockerDlgCommand;
         private LockerModel _lockerModel;
@@ -206,7 +206,7 @@ namespace PFTSDesktop.ViewModel
         {
             bool result = false;
 
-            if (type==1)
+            if (type == 1)
             {
                 dev_lockers model = new dev_lockers();
                 model.no = _lockerAddModel.No;
@@ -245,7 +245,7 @@ namespace PFTSDesktop.ViewModel
         }
         #endregion
 
-      
+
 
         #region IDataErrorInfo Members
 

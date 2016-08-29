@@ -14,7 +14,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <tmp:ButtonEX Name="btnAddVest" Grid.Row="0" Content="新增储物柜" VerticalAlignment="Center"  HorizontalAlignment="Right" Tag="View/SuspectManager/AddSuspectPage.xaml"
+        <tmp:ButtonEX Name="btnAddLoeker" Grid.Row="0" Content="新增储物柜" VerticalAlignment="Center"  HorizontalAlignment="Right"
                       Margin="0,0,20,0" Width="90" Height="26" Command="{Binding AddLockerDlgCommand}"/>
         <ele:PageDataGridEx  Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None"
                              ItemsSource="{Binding LockerList}" SelectedItem="{Binding DevLocker}">

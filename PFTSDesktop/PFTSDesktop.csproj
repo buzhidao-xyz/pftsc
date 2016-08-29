@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Model\LockerModel.cs" />
     <Compile Include="Model\OperatorModel.cs" />
+    <Compile Include="Model\RFIDModel.cs" />
     <Compile Include="Model\SuspectModel.cs" />
     <Compile Include="Model\VestModel.cs" />
     <Compile Include="Video.xaml.cs">
@@ -94,6 +95,12 @@
     </Compile>
     <Compile Include="View\DeviceManager\LockerManagerControl.xaml.cs">
       <DependentUpon>LockerManagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\RFIDAddDlg.xaml.cs">
+      <DependentUpon>RFIDAddDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeviceManager\RFIDEditDlg.xaml.cs">
+      <DependentUpon>RFIDEditDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DeviceManager\RFIDManagerControl.xaml.cs">
       <DependentUpon>RFIDManagerControl.xaml</DependentUpon>
@@ -171,6 +178,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DeviceManager\LockerManagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\RFIDAddDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeviceManager\RFIDEditDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

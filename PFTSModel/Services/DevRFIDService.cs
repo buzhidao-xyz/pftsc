@@ -4,27 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PFTSModel
+namespace PFTSModel.Services
 {
-    public class DevVestService : Service<dev_vest>
+    public class DevRFIDService : Service<dev_rfid>
     {
         /// <summary>
         /// 通过name获取记录值
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public dev_vest GetByName(string name, string oldName)
+        public dev_rfid GetByName(string name, string oldName)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
-                    var query = from dv in db.dev_vest
+                    System.Data.Linq.Table<dev_rfid> table = db.GetTable<dev_rfid>();
+                    var query = from dv in db.dev_rfid
                                 where dv.name == name
                                 select dv;
                     if (!String.IsNullOrEmpty(oldName) && oldName == name)
-                        query = query.Where(c => c.name == oldName + name);
+                        return null;
                     return query.FirstOrDefault();
                 }
             }
@@ -40,18 +40,18 @@ namespace PFTSModel
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public dev_vest GetByNo(string no, string oldNo)
+        public dev_rfid GetByNo(string no, string oldNo)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
-                    var query = from dv in db.dev_vest
+                    System.Data.Linq.Table<dev_rfid> table = db.GetTable<dev_rfid>();
+                    var query = from dv in db.dev_rfid
                                 where dv.no == no
                                 select dv;
                     if (!String.IsNullOrEmpty(oldNo) && oldNo == no)
-                        query = query.Where(c => c.no == oldNo + no);
+                        return null;
                     return query.FirstOrDefault();
                 }
             }
@@ -62,13 +62,13 @@ namespace PFTSModel
             return null;
         }
 
-        public bool ModifyVest(dev_vest model)
+        public bool ModifyLocker(dev_rfid model)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    dev_vest vest = db.dev_vest.SingleOrDefault<dev_vest>(rec => rec.id == model.id);
+                    dev_rfid vest = db.dev_rfid.SingleOrDefault<dev_rfid>(rec => rec.id == model.id);
                     vest.name = model.name;
                     vest.no = model.no;
                     db.SubmitChanges();

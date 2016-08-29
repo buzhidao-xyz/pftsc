@@ -76,4 +76,39 @@ namespace PFTSDesktop.common
             throw new NotImplementedException();
         }
     }
+
+    public class RFIDStatusConverter : MarkupExtension, IValueConverter
+    {
+
+        public RFIDStatusConverter() { }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int status = (int)value;
+            string strType = "";
+            if (status == 0)
+            {
+                strType = "新入库";
+            }
+            else if (status == 1)
+            {
+                strType = "已安装";
+            }
+            else
+            {
+                throw new Exception("绑定类型不正确");
+            }
+            return strType;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
