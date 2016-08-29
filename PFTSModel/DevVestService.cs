@@ -44,16 +44,16 @@ namespace PFTSModel
         {
             try
             {
-                using (PFTSDbDataContext db = new PFTSDbDataContext())
-                {
-                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
-                    var query = from dv in db.dev_vest
-                                where dv.no == no
-                                select dv;
-                    if (!String.IsNullOrEmpty(oldNo) && oldNo == no)
-                        query = query.Where(c => c.no == oldNo + no);
-                    return query.FirstOrDefault();
-                }
+                //using (PFTSDbDataContext db = new PFTSDbDataContext())
+                //{
+                //    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
+                //    var query = from dv in db.dev_vest
+                //                where dv.no == no
+                //                select dv;
+                //    if (!String.IsNullOrEmpty(oldNo) && oldNo == no)
+                //        query = query.Where(c => c.no == oldNo + no);
+                //    return query.FirstOrDefault();
+                //}
             }
             catch
             {
@@ -70,7 +70,8 @@ namespace PFTSModel
                 {
                     dev_vest vest = db.dev_vest.SingleOrDefault<dev_vest>(rec => rec.id == model.id);
                     vest.name = model.name;
-                    vest.no = model.no;
+                    vest.no_left = model.no_left;
+                    vest.no_right = model.no_right;
                     db.SubmitChanges();
                 }
                 return true;

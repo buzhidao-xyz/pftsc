@@ -43,6 +43,7 @@
     <Compile Include="BtrackerInfoEntity.cs" />
     <Compile Include="BTrackerService.cs" />
     <Compile Include="DevLockerService.cs" />
+    <Compile Include="DevRFIDService.cs" />
     <Compile Include="DevVestService.cs" />
     <Compile Include="OfficerService.cs" />
     <Compile Include="OperatorService.cs" />

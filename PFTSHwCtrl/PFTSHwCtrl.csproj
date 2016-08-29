@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CHCNetSDK.cs" />
+    <Compile Include="PFTSRFIDProtocol.cs" />
+    <Compile Include="PFTSRFIDServer.cs" />
     <Compile Include="PFTSVideoControl.xaml.cs">
       <DependentUpon>PFTSVideoControl.xaml</DependentUpon>
     </Compile>
@@ -83,6 +85,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PFTSModel\PFTSModel.csproj">
+      <Project>{ec79570a-25a6-4bcb-a828-ce04b0269919}</Project>
+      <Name>PFTSModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

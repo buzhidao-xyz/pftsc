@@ -127,7 +127,7 @@ namespace PFTSDesktop.ViewModel
             type = 2;
             VestEditDlg dlg = new VestEditDlg();
             _vestModel.OldName = DevVest.name;
-            _vestModel.OldNo = DevVest.no;
+            //_vestModel.OldNo = DevVest.no;
             dlg.ShowDialog();
         }
 
