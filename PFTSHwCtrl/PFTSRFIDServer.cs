@@ -41,17 +41,34 @@ namespace PFTSHwCtrl
             Socket myServer = (Socket)iar.AsyncState;
             //在原始套接字上调用EndAccept方法，返回新的套接字
             Socket client = myServer.EndAccept(iar);
-            try
+            PFTSRFIDProtocol.ProtocolBuffer pbff = new PFTSRFIDProtocol.ProtocolBuffer();
+            while (true)
             {
-                var rcvSize = client.Receive(buffer);
-                if (rcvSize > 0)
+                try
                 {
-
+                    var rcvSize = client.Receive(buffer);
+                    if (rcvSize > 0)
+                    {
+                        var rets = pbff.Put(buffer, 0, rcvSize);
+                        //string str = System.Text.Encoding.Default.GetString(data,0,len);
+                        //var rets = buffer.Put(data, 0, len);
+                        if (rets != null && rets.Count > 0)
+                        {
+                            foreach (var bt in rets)
+                            {
+                                var protocol = PFTSRFIDProtocol.Parse(bt,bt.Count());
+                                if (protocol.State == PFTSRFIDProtocol.ProtocolParseState.PPSUnParse)
+                                {
+                                    Console.Write("xx\n");
+                                }
+                            }
+                        }
+                    }
                 }
-            }
-            catch
-            {
-
+                catch
+                {
+                    break;
+                }
             }
         }
     }
