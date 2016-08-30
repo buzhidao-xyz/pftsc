@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PFTSDesktop.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,10 @@ namespace PFTSDesktop.View.PoliceManager
         public PoliceUpPage()
         {
             InitializeComponent();
+
+            var viewModel = PoliceManagerViewModel.GetInstance();
+
+            this.DataContext = viewModel;
         }
     }
 }

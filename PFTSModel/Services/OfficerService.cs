@@ -13,13 +13,13 @@ namespace PFTSModel
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public @officer GetOfficerByID(int id)
+        public officer GetOfficerByID(int id)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<@officer> table = db.GetTable<@officer>();
+                    System.Data.Linq.Table<officer> table = db.GetTable<officer>();
                     var query = from op in db.@officer
                                 where op.id == id
                                 select op;
@@ -39,15 +39,15 @@ namespace PFTSModel
         /// </summary>
         /// <param name="no"></param>
         /// <returns></returns>
-        public @officer GetOfficerByNo(string no)
+        public officer GetOfficerByNo(string no, int id)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<@officer> table = db.GetTable<@officer>();
+                    System.Data.Linq.Table<officer> table = db.GetTable<officer>();
                     var query = from op in db.@officer
-                                where op.no == no
+                                where op.no == no && op.id!=id
                                 select op;
                     return query.FirstOrDefault();
                 }
@@ -64,11 +64,11 @@ namespace PFTSModel
         /// 获取警员列表
         /// </summary>
         /// <returns></returns>
-        public List<@officer> GetOfficerList()
+        public List<officer> GetOfficerList()
         {
             try
             {
-                List<@officer> OfficerList = base.GetAll();
+                List<officer> OfficerList = base.GetAll();
 
                 return OfficerList;
             }
@@ -77,6 +77,37 @@ namespace PFTSModel
                 
             }
             return null;
+        }
+
+        public bool UpPoliceByID(officer PoliceInfo)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<officer> table = db.GetTable<officer>();
+
+                    var query = from op in db.officer
+                                where op.id == PoliceInfo.id
+                                select op;
+                    foreach (var p in query)
+                    {
+                        p.no = PoliceInfo.no;
+                        p.name = PoliceInfo.name;
+                        p.sex = PoliceInfo.sex;
+                    }
+
+                    db.SubmitChanges();
+
+                    return true;
+                }
+            }
+            catch
+            {
+
+            }
+
+            return false;
         }
     }
 }
