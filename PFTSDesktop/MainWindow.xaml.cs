@@ -22,10 +22,14 @@ namespace PFTSDesktop
     /// </summary>
     public partial class MainWindow : WindowTemplet
     {
+        private PFTSHwCtrl.PFTSRFIDServer m_rfidServer;
        
         public MainWindow()
         {
             InitializeComponent();
+            // 
+            m_rfidServer = new PFTSHwCtrl.PFTSRFIDServer("0.0.0.0",7500);
+            m_rfidServer.Start();
         }
        
         private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -19,23 +19,19 @@ namespace PFTSDesktop.ViewModel
         private OfficerService PoliceService;
 
         //警员列表
-        private List<@officer> PoliceList;
+        private List<officer> PoliceList;
         //警员信息
-        private @officer PoliceInfo;
+        private officer PoliceInfo;
 
-        //性别枚举
-        public enum Sex
-        {
-            男,
-            女
-        }
-        private Sex _sex;
+        //性别是否选中默认
+        private bool Sex_Male = true;
+        private bool Sex_FeMale = false;
 
         public PoliceManagerViewModel()
         {
             PoliceService = new OfficerService();
 
-            PoliceInfo = new @officer();
+            PoliceInfo = new officer();
         }
 
         public static PoliceManagerViewModel GetInstance()
@@ -51,7 +47,7 @@ namespace PFTSDesktop.ViewModel
         /// <summary>
         /// 获取警员列表
         /// </summary>
-        public List<@officer> GetPoliceList
+        public List<officer> GetPoliceList
         {
             get
             {
@@ -73,7 +69,7 @@ namespace PFTSDesktop.ViewModel
         /// <summary>
         /// 获取警员信息
         /// </summary>
-        public @officer GetPoliceInfo
+        public officer GetPoliceInfo
         {
             get
             {
@@ -90,20 +86,31 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        /// <summary>
-        /// 性别
-        /// </summary>
-        public Sex GetSex
+        public bool SexIsChecked_Male
         {
-            get { return _sex; }
+            get { return Sex_Male; }
             set
             {
-                if (value == _sex)
+                if (value == Sex_Male)
                     return;
 
-                _sex = value;
+                Sex_Male = value;
 
-                base.OnPropertyChanged("GetSex");
+                base.OnPropertyChanged("SexIsChecked_Male");
+            }
+        }
+
+        public bool SexIsChecked_FeMale
+        {
+            get { return Sex_FeMale; }
+            set
+            {
+                if (value == Sex_FeMale)
+                    return;
+
+                Sex_FeMale = value;
+
+                base.OnPropertyChanged("SexIsChecked_FeMale");
             }
         }
 
@@ -124,12 +131,23 @@ namespace PFTSDesktop.ViewModel
             PoliceInfo.no = PoliceInfo.no.Trim();
 
             //检查no是否已存在
-            if (PoliceService.GetOfficerByNo(PoliceInfo.no) != null)
+            if (PoliceService.GetOfficerByNo(PoliceInfo.no, PoliceInfo.id) != null)
             {
                 MessageBox.Show("警号 " + PoliceInfo.no + " 已存在！");
 
                 return false;
             }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 检查性别
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckSex()
+        {
+            if (PoliceInfo.sex == null) PoliceInfo.sex = "男";
 
             return true;
         }
@@ -220,6 +238,8 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public void PoliceNew(Object obj)
         {
+            PoliceInfo = new officer();
+
             Button btn = (Button)obj;
             Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
@@ -246,6 +266,7 @@ namespace PFTSDesktop.ViewModel
 
             if (!CheckNo()) return;
             if (!CheckName()) return;
+            if (!CheckSex()) return;
 
             bool Result = PoliceService.Insert(PoliceInfo);
             if (Result)
@@ -261,6 +282,80 @@ namespace PFTSDesktop.ViewModel
             }
 
             return;
+        }
+
+        /// <summary>
+        /// 编辑警员命令
+        /// </summary>
+        public ICommand PoliceUpCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                    new Action<Object>(this.PoliceUp)
+                    );
+            }
+        }
+
+        /// <summary>
+        /// 新增警员
+        /// </summary>
+        public void PoliceUp(Object obj)
+        {
+            if (PoliceInfo.sex == "女")
+            {
+                Sex_Male = false;
+                Sex_FeMale = true;
+            }
+            else
+            {
+                Sex_Male = true;
+                Sex_FeMale = false;
+            }
+
+            Button btn = (Button)obj;
+            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+        }
+
+        /// <summary>
+        /// 编辑警员保存命令
+        /// </summary>
+        public ICommand PoliceUpSaveCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                    new Action<Object>(this.PoliceUpSave)
+                    );
+            }
+        }
+
+        /// <summary>
+        /// 编辑警员保存
+        /// </summary>
+        public void PoliceUpSave(Object obj)
+        {
+            PoliceInfo = GetPoliceInfo;
+
+            if (!CheckNo()) return;
+            if (!CheckName()) return;
+            if (!CheckSex()) return;
+
+            bool Result = PoliceService.UpPoliceByID(PoliceInfo);
+            if (Result)
+            {
+                MessageBox.Show("保存成功！");
+
+                Button btn = (Button)obj;
+                Global.currentFrame.NavigationService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("保存失败！");
+            }
+
+            return;
+
         }
     }
 }
