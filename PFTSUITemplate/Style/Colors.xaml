@@ -30,7 +30,7 @@
     <SolidColorBrush x:Key="ControlBorderBrush" Color="#999C9F"></SolidColorBrush>
     <SolidColorBrush x:Key="MouseOverBorderBrush" Color="#F6D1D1"></SolidColorBrush>
     <SolidColorBrush x:Key="FocusBackground" Color="#365080"></SolidColorBrush>
-    <SolidColorBrush x:Key="FocusBorderBrush" Color="#EBCECE"></SolidColorBrush>
+    <SolidColorBrush x:Key="FocusBorderBrush" Color="LightBlue"></SolidColorBrush>
 
     <!--ItemsControl:DataGrid,Tree-->
     <sys:Double x:Key="HeaderFontSize">14</sys:Double>

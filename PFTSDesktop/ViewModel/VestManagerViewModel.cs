@@ -40,7 +40,9 @@ namespace PFTSDesktop.ViewModel
 
             _vestAddModel = new VestModel();
             _vestModel = new VestModel();
+            initData();
         }
+
 
         public static VestManagerViewModel GetInstance()
         {
@@ -136,7 +138,7 @@ namespace PFTSDesktop.ViewModel
         {
             bool result = false;
 
-            if (type==1)
+            if (type == 1)
             {
                 dev_vest model = new dev_vest();
                 model.no_left = _vestAddModel.No;
@@ -156,7 +158,7 @@ namespace PFTSDesktop.ViewModel
                 MessageWindow.Show("马甲信息更新成功！", "系统提示");
                 WindowTemplet window = (WindowTemplet)obj;
                 window.Close();
-                VestList = vestService.GetVestByStatus(null);
+                initData();
             }
             else
             {
@@ -233,7 +235,6 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                _vestList = vestService.GetVestByStatus(null);
                 return _vestList;
             }
             set
@@ -278,5 +279,41 @@ namespace PFTSDesktop.ViewModel
             }
         }
         #endregion // IDataErrorInfo Members
+
+        #region 分页相关事件
+      
+        private RelayCommand _nextPageSearchCommand;
+        public ICommand NextPageSearchCommand
+        {
+            get
+            {
+                if (_nextPageSearchCommand == null)
+                {
+                    _nextPageSearchCommand = new RelayCommand(
+                            param => this.QueryData()
+                            );
+                }
+                return _nextPageSearchCommand;
+            }
+        }
+        private void QueryData()
+        {
+            VestList = vestService.GetPageVestByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+        }
+
+        private void initData()
+        {
+            TotalCount = vestService.GetVestCount(null);
+            if (TotalCount == 0)
+            {
+                VestList = new List<VestInfoEntity>();
+                PageIndex = 0;
+            }
+            else
+            {
+                VestList = vestService.GetPageVestByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+            }
+        }
+        #endregion
     }
 }

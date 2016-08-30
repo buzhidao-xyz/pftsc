@@ -47,6 +47,69 @@ namespace PFTSModel
             return null;
         }
 
+        public int GetVestCount(System.Nullable<int> status)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
+                    var query = from q in table
+                                select q;
+
+                    if (status != null)
+                    {
+                        query = query.Where(p => p.status == status);
+                    }
+
+                    return query.Count();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// 根据物品箱状态获取数据列表（分页）
+        /// </summary>
+        /// <param name="status">状态，为null查询所有</param>
+        /// <returns></returns>
+        public List<VestInfoEntity> GetPageVestByStatus(System.Nullable<int> status, int pageIndex, int pageSize)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
+                    var query = from q in table
+                                 select new VestInfoEntity
+                                 {
+                                     id = q.id,
+                                     no = q.no_left,
+                                     name = q.name,
+                                     create_time = q.create_time,
+                                     btracker_name = q.btracker1.name,
+                                     status = q.status
+                                 };
+
+                    if (status != null)
+                    {
+                        query = query.Where(p => p.status == status);
+                    }
+                    query = query.Skip(pageIndex).Take(pageSize);
+                    return query.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
+        }
+
         /// <summary>
         /// 通过name获取记录值
         /// </summary>

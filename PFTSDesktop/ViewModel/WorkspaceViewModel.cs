@@ -98,5 +98,72 @@ namespace PFTSDesktop.ViewModel
 
 
         #endregion // RequestClose [event]
+
+        #region 分页属性
+        private int _totalPage = 20;
+        private int _pageSize = 5;
+        private int _pageIndex = 1;
+        private int _totalCount;
+
+        /// <summary>
+        /// 总页数
+        /// </summary>
+        public int TotalPage
+        {
+            get
+            {
+                return _totalPage;
+            }
+            set
+            {
+                _totalPage = value;
+                base.OnPropertyChanged("TotalPage");
+            }
+        }
+
+        /// <summary>
+        /// 每页显示记录数
+        /// </summary>
+        public int PageSize
+        {
+            get
+            {
+                return _pageSize;
+            }
+            set
+            {
+                _pageSize = value;
+                base.OnPropertyChanged("PageSize");
+            }
+        }
+
+        /// <summary>
+        /// 需要加载的页码
+        /// </summary>
+        public int PageIndex
+        {
+            get { return _pageIndex; }
+            set
+            {
+                _pageIndex = value;
+
+                base.OnPropertyChanged("PageIndex");
+            }
+        }
+
+        /// <summary>
+        /// 记录总数
+        /// </summary>
+        public int TotalCount
+        {
+            get { return _totalCount; }
+            set
+            {
+                _totalCount = value;
+
+                base.OnPropertyChanged("TotalCount");
+            }
+        }
+        #endregion
     }
 }

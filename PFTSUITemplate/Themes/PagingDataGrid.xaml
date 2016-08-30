@@ -108,7 +108,7 @@
                                         ImageSource="/PFTSUITemplate;component/Images/pagination_prev.gif" 
                                         GrayImageSource="/PFTSUITemplate;component/Images/pagination_prev_gray.gif" />
 
-                                    <ele:RegularText Type="PureDigital" Width="30" Text="{Binding PageIndex,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}" x:Name="PART_PageIndex" />
+                                    <ele:RegularText Type="PureDigital" Width="30" Text="{Binding PageIndex,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}" x:Name="PART_PageIndex" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     <TextBlock Text=" / "  VerticalAlignment="Center"/>
                                     <TextBlock Text="{Binding PageCount,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"  VerticalAlignment="Center"/>
                                     <TextBlock Text="页"  VerticalAlignment="Center"/>
@@ -372,9 +372,9 @@
 
                             <StackPanel Orientation="Horizontal">
                                 <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
-                                <Control SnapsToDevicePixels="false"
+                                <!--<Control SnapsToDevicePixels="false"
                                          Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=(Validation.HasError)}"
-                                         Template="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=ValidationErrorTemplate}" />
+                                         Template="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=ValidationErrorTemplate}" />-->
                             </StackPanel>
                         </theme:DataGridHeaderBorder>
                         <Thumb x:Name="PART_TopHeaderGripper"

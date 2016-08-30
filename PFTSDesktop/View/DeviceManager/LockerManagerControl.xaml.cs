@@ -1,5 +1,4 @@
-﻿using PFTSDesktop.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +16,7 @@ using System.Windows.Shapes;
 namespace PFTSDesktop.View.DeviceManager
 {
     /// <summary>
-    /// LockerManagerControl.xaml 的交互逻辑
+    /// LockerManangerControl.xaml 的交互逻辑
     /// </summary>
     public partial class LockerManagerControl : UserControl
     {

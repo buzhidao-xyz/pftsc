@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Windows.Markup;
 
 namespace PFTSUITemplate.Controls
 {
@@ -168,18 +169,27 @@ namespace PFTSUITemplate.Controls
         protected static readonly DependencyProperty PageSizeItemsSourceProperty =
             DependencyProperty.Register("PageSizeItemsSource", typeof(IList<int>), typeof(PagingDataGrid), new UIPropertyMetadata(new List<int> { 20, 40, 80 }));
 
-
         public int Total
         {
             get { return (int)GetValue(TotalProperty); }
-            set { SetValue(TotalProperty, value); }
+            set
+            {
+                SetValue(TotalProperty, value);
+            }
         }
 
         /// <summary>
         /// 总记录数
         /// </summary>
         public static readonly DependencyProperty TotalProperty =
-            DependencyProperty.Register("Total", typeof(int), typeof(PagingDataGrid), new UIPropertyMetadata(0));
+            DependencyProperty.Register("Total", typeof(int), typeof(PagingDataGrid), new UIPropertyMetadata(0, (s, e) =>
+            {
+                if (e.NewValue != e.OldValue) {
+                    PagingDataGrid dp = s as PagingDataGrid;
+                    //dp.UpdatePager();
+                    dp.Last_Click();
+                }
+            }));
 
 
         public int PageSize
@@ -210,7 +220,7 @@ namespace PFTSUITemplate.Controls
 
 
 
-        protected int PageCount
+        public int PageCount
         {
             get { return (int)GetValue(PageCountProperty); }
             set { SetValue(PageCountProperty, value); }
@@ -376,16 +386,16 @@ namespace PFTSUITemplate.Controls
                 }
                 else
                 {
-                    Start = (PageIndex - 1)*PageSize + 1;
+                    Start = (PageIndex - 1) * PageSize + 1;
                     End = Start + curCount - 1;
 
-                    if (Total%PageSize != 0)
+                    if (Total % PageSize != 0)
                     {
-                        PageCount = Total/PageSize + 1;
+                        PageCount = Total / PageSize + 1;
                     }
                     else
                     {
-                        PageCount = Total/PageSize;
+                        PageCount = Total / PageSize;
                     }
                 }
             }
@@ -483,7 +493,7 @@ namespace PFTSUITemplate.Controls
                 if (text.Name == "PART_PageIndex")
                 {
                     //text.MoveFocus(new TraversalRequest(FocusNavigationDirection.Last));
-                   // text.focus
+                    // text.focus
                 }
             }
         }

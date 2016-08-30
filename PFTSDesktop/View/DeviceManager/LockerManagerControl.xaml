@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              mc:Ignorable="d"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-            xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
              xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
-               xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
-              xmlns:conver="clr-namespace:PFTSDesktop.common"
-            d:DesignHeight="800" d:DesignWidth="800" BorderBrush="LightBlue" BorderThickness="1">
+             xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+             xmlns:conver="clr-namespace:PFTSDesktop.common"
+             d:DesignHeight="800" d:DesignWidth="800" BorderBrush="LightBlue" BorderThickness="1">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -24,7 +24,7 @@
                 <DataGridTextColumn Header="状态" Binding="{Binding status,Converter={conver:LockerStatusConverter}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="嫌疑犯名称" Binding="{Binding btracker_name}" Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="经办警员" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="创建时间" Binding="{Binding create_time}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="创建时间" Binding="{Binding create_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -34,7 +34,6 @@
                                     <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
                                 </tmp:ButtonTemplet>
                             </StackPanel>
-
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
