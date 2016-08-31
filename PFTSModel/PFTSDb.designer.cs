@@ -228,6 +228,22 @@ namespace PFTSModel
 				return this.GetTable<view_btracker_info>();
 			}
 		}
+		
+		public System.Data.Linq.Table<view_rfid_room_info> view_rfid_room_info
+		{
+			get
+			{
+				return this.GetTable<view_rfid_room_info>();
+			}
+		}
+		
+		public System.Data.Linq.Table<view_position_camera_info> view_position_camera_info
+		{
+			get
+			{
+				return this.GetTable<view_position_camera_info>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.btracker")]
@@ -3998,6 +4014,150 @@ namespace PFTSModel
 				if ((this._officer_name != value))
 				{
 					this._officer_name = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_rfid_room_info")]
+	public partial class view_rfid_room_info
+	{
+		
+		private int _id;
+		
+		private string _name;
+		
+		private bool _map_inout;
+		
+		private System.Nullable<int> _rfid_room_id;
+		
+		public view_rfid_room_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_map_inout", DbType="Bit NOT NULL")]
+		public bool map_inout
+		{
+			get
+			{
+				return this._map_inout;
+			}
+			set
+			{
+				if ((this._map_inout != value))
+				{
+					this._map_inout = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rfid_room_id", DbType="Int")]
+		public System.Nullable<int> rfid_room_id
+		{
+			get
+			{
+				return this._rfid_room_id;
+			}
+			set
+			{
+				if ((this._rfid_room_id != value))
+				{
+					this._rfid_room_id = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_position_camera_info")]
+	public partial class view_position_camera_info
+	{
+		
+		private int _id;
+		
+		private int _room_id;
+		
+		private System.Nullable<int> _dev_camera_id;
+		
+		public view_position_camera_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_id", DbType="Int NOT NULL")]
+		public int room_id
+		{
+			get
+			{
+				return this._room_id;
+			}
+			set
+			{
+				if ((this._room_id != value))
+				{
+					this._room_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dev_camera_id", DbType="Int")]
+		public System.Nullable<int> dev_camera_id
+		{
+			get
+			{
+				return this._dev_camera_id;
+			}
+			set
+			{
+				if ((this._dev_camera_id != value))
+				{
+					this._dev_camera_id = value;
 				}
 			}
 		}

@@ -195,4 +195,19 @@
       <Column Name="officer_name" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.view_rfid_room_info" Member="view_rfid_room_info">
+    <Type Name="view_rfid_room_info">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="map_inout" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="rfid_room_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.view_position_camera_info" Member="view_position_camera_info">
+    <Type Name="view_position_camera_info">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="room_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dev_camera_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

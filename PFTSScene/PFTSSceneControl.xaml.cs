@@ -260,31 +260,31 @@ namespace PFTSScene
         /// </summary>
         public void LoadConfigRFIDInfos()
         {
-            //var rfidPositions = PFTSSceneControl.sceneResourceCache.PositionRFIDs;
-            //if (rfidPositions == null) return;
-            //foreach(PFTSModel.position_rfid pr in rfidPositions)
-            //{
-            //    if (!m_mapRfids.ContainsKey(pr.id)) continue;
-            //    Image img = m_mapRfids[pr.id];
-            //    if (pr.rfid_id == null)
-            //    {
-            //        BitmapImage bi = new BitmapImage();
-            //        // BitmapImage.UriSource must be in a BeginInit/EndInit block.
-            //        bi.BeginInit();
-            //        bi.UriSource = new Uri(@"Images/rfid_gray.png", UriKind.RelativeOrAbsolute);
-            //        bi.EndInit();
-            //        img.Source = bi;
-            //    }
-            //    else
-            //    {
-            //        BitmapImage bi = new BitmapImage();
-            //        // BitmapImage.UriSource must be in a BeginInit/EndInit block.
-            //        bi.BeginInit();
-            //        bi.UriSource = new Uri(@"Images/rfid.png", UriKind.RelativeOrAbsolute);
-            //        bi.EndInit();
-            //        img.Source = bi;
-            //    }
-            //}
+            var rfidPositions = PFTSSceneControl.sceneResourceCache.RoomInfos;
+            if (rfidPositions == null) return;
+            foreach (PFTSModel.view_rfid_room_info pr in rfidPositions)
+            {
+                if (!m_mapRfids.ContainsKey(pr.id)) continue;
+                Image img = m_mapRfids[pr.id];
+                if (pr.rfid_room_id == null)
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"Images/rfid_gray.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                }
+                else
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"Images/rfid.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                }
+            }
         }
 
         /// <summary>
@@ -292,32 +292,32 @@ namespace PFTSScene
         /// </summary>
         public void LoadConfigCameraInfos()
         {
-            //var cameraPositions = PFTSSceneControl.sceneResourceCache.PositionCameras;
-            //if (cameraPositions == null) return;
-            //foreach (PFTSModel.position_camera pr in cameraPositions)
-            //{
-            //    if (!m_mapCameras.ContainsKey(pr.id)) continue;
-            //    Image img = m_mapCameras[pr.id];
-            //    if (pr.camera_id == null)
-            //    {
-            //        BitmapImage bi = new BitmapImage();
-            //        // BitmapImage.UriSource must be in a BeginInit/EndInit block.
-            //        bi.BeginInit();
-            //        bi.UriSource = new Uri(@"Images/camera_gray.png", UriKind.RelativeOrAbsolute);
-            //        bi.EndInit();
-            //        img.Source = bi;
-            //    }
-            //    else
-            //    {
-            //        BitmapImage bi = new BitmapImage();
-            //        // BitmapImage.UriSource must be in a BeginInit/EndInit block.
-            //        bi.BeginInit();
-            //        bi.UriSource = new Uri(@"Images/camera.png", UriKind.RelativeOrAbsolute);
-            //        bi.EndInit();
-            //        img.Source = bi;
-            //        img.Cursor = Cursors.Hand;   
-            //    }
-            //}
+            var camerapositions = PFTSSceneControl.sceneResourceCache.PositionCameras;
+            if (camerapositions == null) return;
+            foreach (PFTSModel.view_position_camera_info pr in camerapositions)
+            {
+                if (!m_mapCameras.ContainsKey(pr.id)) continue;
+                Image img = m_mapCameras[pr.id];
+                if (pr.dev_camera_id == null)
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // bitmapimage.urisource must be in a begininit/endinit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"images/camera_gray.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                }
+                else
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // bitmapimage.urisource must be in a begininit/endinit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"images/camera.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                    img.Cursor = Cursors.Hand;
+                }
+            }
         }
 
         /// <summary>
@@ -325,39 +325,39 @@ namespace PFTSScene
         /// </summary>
         public void LoadMonitoringCameraInfos()
         {
-            //var cameraPositions = PFTSSceneControl.sceneResourceCache.PositionCameras;
-            //if (cameraPositions == null) return;
-            //foreach (PFTSModel.position_camera pr in cameraPositions)
-            //{
-            //    if (!m_mapCameras.ContainsKey(pr.id)) continue;
-            //    Image img = m_mapCameras[pr.id];
-            //    if (pr.camera_id == null)
-            //    {
-            //        img.Visibility = Visibility.Hidden;
-            //    }
-            //    else
-            //    {
-            //        BitmapImage bi = new BitmapImage();
-            //        // BitmapImage.UriSource must be in a BeginInit/EndInit block.
-            //        bi.BeginInit();
-            //        bi.UriSource = new Uri(@"Images/camera.png", UriKind.RelativeOrAbsolute);
-            //        bi.EndInit();
-            //        img.Source = bi;
-            //        img.Cursor = Cursors.Hand;
-            //        var ctxMenu = new ContextMenu();
-            //        var menuItem1 = new MenuItem();
-            //        menuItem1.Header = "实时监控";
-            //        var menuItem2 = new MenuItem();
-            //        menuItem2.Header = "历史画面";
-            //        var menuItem3 = new MenuItem();
-            //        menuItem3.Header = "取消";
-            //        ctxMenu.Items.Add(menuItem1);
-            //        ctxMenu.Items.Add(menuItem2);
-            //        ctxMenu.Items.Add(menuItem3);
-            //        m_mapCameraMenu.Add(pr.id, ctxMenu);
-            //        img.MouseUp += ImgCamera_MouseUp;
-            //    }
-            //}
+            var cameraPositions = PFTSSceneControl.sceneResourceCache.PositionCameras;
+            if (cameraPositions == null) return;
+            foreach (PFTSModel.view_position_camera_info pr in cameraPositions)
+            {
+                if (!m_mapCameras.ContainsKey(pr.id)) continue;
+                Image img = m_mapCameras[pr.id];
+                if (pr.dev_camera_id == null)
+                {
+                    img.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"Images/camera.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    img.Source = bi;
+                    img.Cursor = Cursors.Hand;
+                    var ctxMenu = new ContextMenu();
+                    var menuItem1 = new MenuItem();
+                    menuItem1.Header = "实时监控";
+                    var menuItem2 = new MenuItem();
+                    menuItem2.Header = "历史画面";
+                    var menuItem3 = new MenuItem();
+                    menuItem3.Header = "取消";
+                    ctxMenu.Items.Add(menuItem1);
+                    ctxMenu.Items.Add(menuItem2);
+                    ctxMenu.Items.Add(menuItem3);
+                    m_mapCameraMenu.Add(pr.id, ctxMenu);
+                    img.MouseUp += ImgCamera_MouseUp;
+                }
+            }
         }
 
         /// <summary>
@@ -434,35 +434,38 @@ namespace PFTSScene
 
         public void AddAPeople(PFTSModel.btracker btracker)
         {
-            //int roomId = btracker.position_id.Value;
-            //if (m_loaded)
-            //{
-            //    if (m_mapGridRooms.ContainsKey(roomId))
-            //    {
-            //        var gr = m_mapGridRooms[roomId];
-            //        Image img = new Image();
-            //        img.Width = 30;
-            //        img.Height = 30;
-            //        img.Source = m_bmImgPeople;
-            //        gr.AddImage(img);
-            //        if (m_mapPeopleCounts.ContainsKey(roomId))
-            //        {
-            //            m_mapPeopleCounts[roomId] += 1;
-            //        }else
-            //        {
-            //            m_mapPeopleCounts[roomId] = 1;
-            //        }
-            //        img.Tag = btracker.id;
-            //        img.Cursor = Cursors.Hand;
-            //        img.MouseEnter += Img_MouseEnter;
-            //        img.MouseLeave += Img_MouseLeave;
-            //        img.MouseUp += Img_MouseUp;
-            //        m_mapBtrackers.Add(btracker.id, btracker);
-            //    }
-            //}else
-            //{
-            //    m_listUnloadPeople.Add(btracker);
-            //}
+            if (btracker.room_id == null) return;
+            int roomId = btracker.room_id.Value;
+            if (m_loaded)
+            {
+                if (m_mapGridRooms.ContainsKey(roomId))
+                {
+                    var gr = m_mapGridRooms[roomId];
+                    Image img = new Image();
+                    img.Width = 30;
+                    img.Height = 30;
+                    img.Source = m_bmImgPeople;
+                    gr.AddImage(img);
+                    if (m_mapPeopleCounts.ContainsKey(roomId))
+                    {
+                        m_mapPeopleCounts[roomId] += 1;
+                    }
+                    else
+                    {
+                        m_mapPeopleCounts[roomId] = 1;
+                    }
+                    img.Tag = btracker.id;
+                    img.Cursor = Cursors.Hand;
+                    img.MouseEnter += Img_MouseEnter;
+                    img.MouseLeave += Img_MouseLeave;
+                    img.MouseUp += Img_MouseUp;
+                    m_mapBtrackers.Add(btracker.id, btracker);
+                }
+            }
+            else
+            {
+                m_listUnloadPeople.Add(btracker);
+            }
         }
 
         private void MenuPeopleRealVideo_Click(object sender, RoutedEventArgs e)
