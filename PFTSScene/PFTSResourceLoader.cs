@@ -9,55 +9,39 @@ namespace PFTSScene
     class PFTSResourceLoader
     {
         // 所有房间
-        private List<PFTSModel.rfid_room> _rooms;
-        private List<PFTSModel.position_camera> _camera_positions;
-        //private List<PFTSModel.position_rfid> _rfid_positions;
+        private List<PFTSModel.view_rfid_room_info> _room_infos;
+        private List<PFTSModel.view_position_camera_info> _camera_positions;
         private List<PFTSModel.path_rfid> _rfid_paths;
 
         /// <summary>
         /// 获取所有room数据
         /// </summary>
-        public List<PFTSModel.rfid_room> Rooms
+        public List<PFTSModel.view_rfid_room_info> RoomInfos
         {
             get
             {
-                if (_rooms == null)
+                if (_room_infos == null)
                 {
-                    _rooms = (new PFTSModel.Service<PFTSModel.rfid_room>()).GetAll();
+                    _room_infos = (new PFTSModel.Service<PFTSModel.view_rfid_room_info>()).GetAll();
                 }
-                return _rooms;
+                return _room_infos;
             }
         }
 
         /// <summary>
         /// 获取所有摄像头位置数据
         /// </summary>
-        public List<PFTSModel.position_camera> PositionCameras
+        public List<PFTSModel.view_position_camera_info> PositionCameras
         {
             get
             {
                 if (_camera_positions == null)
                 {
-                    _camera_positions = (new PFTSModel.Service<PFTSModel.position_camera>()).GetAll();
+                    _camera_positions = (new PFTSModel.Service<PFTSModel.view_position_camera_info>()).GetAll();
                 }
                 return _camera_positions;
             }
         }
-
-        ///// <summary>
-        ///// 获取所有rfid天线位置数据
-        ///// </summary>
-        //public List<PFTSModel.position_rfid> PositionRFIDs
-        //{
-        //    get
-        //    {
-        //        if (_rfid_positions == null)
-        //        {
-        //            _rfid_positions = (new PFTSModel.Service<PFTSModel.position_rfid>()).GetAll();
-        //        }
-        //        return _rfid_positions;
-        //    }
-        //}
 
         /// <summary>
         /// 获取所有路径信息

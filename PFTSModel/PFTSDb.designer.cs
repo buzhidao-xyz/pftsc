@@ -205,11 +205,11 @@ namespace PFTSModel
 			}
 		}
 		
-		public System.Data.Linq.Table<view_locker_info> view_locker_info
+		public System.Data.Linq.Table<view_btracker_info> view_btracker_info
 		{
 			get
 			{
-				return this.GetTable<view_locker_info>();
+				return this.GetTable<view_btracker_info>();
 			}
 		}
 		
@@ -221,11 +221,43 @@ namespace PFTSModel
 			}
 		}
 		
-		public System.Data.Linq.Table<view_btracker_info> view_btracker_info
+		public System.Data.Linq.Table<view_camera_info> view_camera_info
 		{
 			get
 			{
-				return this.GetTable<view_btracker_info>();
+				return this.GetTable<view_camera_info>();
+			}
+		}
+		
+		public System.Data.Linq.Table<view_locker_info> view_locker_info
+		{
+			get
+			{
+				return this.GetTable<view_locker_info>();
+			}
+		}
+		
+		public System.Data.Linq.Table<view_position_camera_info> view_position_camera_info
+		{
+			get
+			{
+				return this.GetTable<view_position_camera_info>();
+			}
+		}
+		
+		public System.Data.Linq.Table<view_rfid_info> view_rfid_info
+		{
+			get
+			{
+				return this.GetTable<view_rfid_info>();
+			}
+		}
+		
+		public System.Data.Linq.Table<view_rfid_room_info> view_rfid_room_info
+		{
+			get
+			{
+				return this.GetTable<view_rfid_room_info>();
 			}
 		}
 	}
@@ -1151,8 +1183,6 @@ namespace PFTSModel
 		
 		private string _name;
 		
-		private int _status;
-		
 		private System.Nullable<int> _position_id;
 		
 		private string _ip;
@@ -1179,8 +1209,6 @@ namespace PFTSModel
     partial void OnnoChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
-    partial void OnstatusChanging(int value);
-    partial void OnstatusChanged();
     partial void Onposition_idChanging(System.Nullable<int> value);
     partial void Onposition_idChanged();
     partial void OnipChanging(string value);
@@ -1258,26 +1286,6 @@ namespace PFTSModel
 					this._name = value;
 					this.SendPropertyChanged("name");
 					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
-		public int status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
 				}
 			}
 		}
@@ -1660,8 +1668,6 @@ namespace PFTSModel
 		
 		private string _name;
 		
-		private int _status;
-		
 		private System.Nullable<int> _room_id;
 		
 		private System.Nullable<System.DateTime> _create_time;
@@ -1678,8 +1684,6 @@ namespace PFTSModel
     partial void OnnoChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
-    partial void OnstatusChanging(int value);
-    partial void OnstatusChanged();
     partial void Onroom_idChanging(System.Nullable<int> value);
     partial void Onroom_idChanged();
     partial void Oncreate_timeChanging(System.Nullable<System.DateTime> value);
@@ -1748,26 +1752,6 @@ namespace PFTSModel
 					this._name = value;
 					this.SendPropertyChanged("name");
 					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
-		public int status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
 				}
 			}
 		}
@@ -1885,8 +1869,6 @@ namespace PFTSModel
 		
 		private string _name;
 		
-		private int _status;
-		
 		private System.Nullable<System.DateTime> _create_time;
 		
 		private EntitySet<btracker> _btracker;
@@ -1903,8 +1885,6 @@ namespace PFTSModel
     partial void Onno_rightChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
-    partial void OnstatusChanging(int value);
-    partial void OnstatusChanged();
     partial void Oncreate_timeChanging(System.Nullable<System.DateTime> value);
     partial void Oncreate_timeChanged();
     #endregion
@@ -1991,26 +1971,6 @@ namespace PFTSModel
 					this._name = value;
 					this.SendPropertyChanged("name");
 					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
-		public int status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
 				}
 			}
 		}
@@ -3418,312 +3378,6 @@ namespace PFTSModel
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_locker_info")]
-	public partial class view_locker_info
-	{
-		
-		private int _id;
-		
-		private string _no;
-		
-		private string _name;
-		
-		private System.Nullable<System.DateTime> _create_time;
-		
-		private System.Nullable<int> _btracker_officer_id;
-		
-		private string _btracker_name;
-		
-		private string _officer_name;
-		
-		public view_locker_info()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(128)")]
-		public string no
-		{
-			get
-			{
-				return this._no;
-			}
-			set
-			{
-				if ((this._no != value))
-				{
-					this._no = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this._name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
-		public System.Nullable<System.DateTime> create_time
-		{
-			get
-			{
-				return this._create_time;
-			}
-			set
-			{
-				if ((this._create_time != value))
-				{
-					this._create_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_officer_id", DbType="Int")]
-		public System.Nullable<int> btracker_officer_id
-		{
-			get
-			{
-				return this._btracker_officer_id;
-			}
-			set
-			{
-				if ((this._btracker_officer_id != value))
-				{
-					this._btracker_officer_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_name", DbType="VarChar(32)")]
-		public string btracker_name
-		{
-			get
-			{
-				return this._btracker_name;
-			}
-			set
-			{
-				if ((this._btracker_name != value))
-				{
-					this._btracker_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_name", DbType="VarChar(32)")]
-		public string officer_name
-		{
-			get
-			{
-				return this._officer_name;
-			}
-			set
-			{
-				if ((this._officer_name != value))
-				{
-					this._officer_name = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_vest_info")]
-	public partial class view_vest_info
-	{
-		
-		private int _id;
-		
-		private string _no_left;
-		
-		private string _no_right;
-		
-		private string _name;
-		
-		private int _status;
-		
-		private System.Nullable<System.DateTime> _create_time;
-		
-		private System.Nullable<int> _btracker_vest_id;
-		
-		private System.Nullable<int> _btracker_id;
-		
-		private string _btracker_name;
-		
-		public view_vest_info()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no_left", DbType="VarChar(128)")]
-		public string no_left
-		{
-			get
-			{
-				return this._no_left;
-			}
-			set
-			{
-				if ((this._no_left != value))
-				{
-					this._no_left = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no_right", DbType="VarChar(128)")]
-		public string no_right
-		{
-			get
-			{
-				return this._no_right;
-			}
-			set
-			{
-				if ((this._no_right != value))
-				{
-					this._no_right = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this._name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
-		public int status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this._status = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
-		public System.Nullable<System.DateTime> create_time
-		{
-			get
-			{
-				return this._create_time;
-			}
-			set
-			{
-				if ((this._create_time != value))
-				{
-					this._create_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_vest_id", DbType="Int")]
-		public System.Nullable<int> btracker_vest_id
-		{
-			get
-			{
-				return this._btracker_vest_id;
-			}
-			set
-			{
-				if ((this._btracker_vest_id != value))
-				{
-					this._btracker_vest_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_id", DbType="Int")]
-		public System.Nullable<int> btracker_id
-		{
-			get
-			{
-				return this._btracker_id;
-			}
-			set
-			{
-				if ((this._btracker_id != value))
-				{
-					this._btracker_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_name", DbType="VarChar(32)")]
-		public string btracker_name
-		{
-			get
-			{
-				return this._btracker_name;
-			}
-			set
-			{
-				if ((this._btracker_name != value))
-				{
-					this._btracker_name = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_btracker_info")]
 	public partial class view_btracker_info
 	{
@@ -3998,6 +3652,744 @@ namespace PFTSModel
 				if ((this._officer_name != value))
 				{
 					this._officer_name = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_vest_info")]
+	public partial class view_vest_info
+	{
+		
+		private int _id;
+		
+		private string _no_left;
+		
+		private string _no_right;
+		
+		private string _name;
+		
+		private System.Nullable<System.DateTime> _create_time;
+		
+		private System.Nullable<int> _btracker_vest_id;
+		
+		private System.Nullable<int> _btracker_id;
+		
+		private string _btracker_name;
+		
+		public view_vest_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no_left", DbType="VarChar(128)")]
+		public string no_left
+		{
+			get
+			{
+				return this._no_left;
+			}
+			set
+			{
+				if ((this._no_left != value))
+				{
+					this._no_left = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no_right", DbType="VarChar(128)")]
+		public string no_right
+		{
+			get
+			{
+				return this._no_right;
+			}
+			set
+			{
+				if ((this._no_right != value))
+				{
+					this._no_right = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_time
+		{
+			get
+			{
+				return this._create_time;
+			}
+			set
+			{
+				if ((this._create_time != value))
+				{
+					this._create_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_vest_id", DbType="Int")]
+		public System.Nullable<int> btracker_vest_id
+		{
+			get
+			{
+				return this._btracker_vest_id;
+			}
+			set
+			{
+				if ((this._btracker_vest_id != value))
+				{
+					this._btracker_vest_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_id", DbType="Int")]
+		public System.Nullable<int> btracker_id
+		{
+			get
+			{
+				return this._btracker_id;
+			}
+			set
+			{
+				if ((this._btracker_id != value))
+				{
+					this._btracker_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_name", DbType="VarChar(32)")]
+		public string btracker_name
+		{
+			get
+			{
+				return this._btracker_name;
+			}
+			set
+			{
+				if ((this._btracker_name != value))
+				{
+					this._btracker_name = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_camera_info")]
+	public partial class view_camera_info
+	{
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private System.Nullable<int> _position_id;
+		
+		private string _ip;
+		
+		private string _admin;
+		
+		private string _password;
+		
+		private System.Nullable<int> _port;
+		
+		private System.Nullable<System.DateTime> _create_time;
+		
+		private string _room_name;
+		
+		public view_camera_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(128)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this._no = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_position_id", DbType="Int")]
+		public System.Nullable<int> position_id
+		{
+			get
+			{
+				return this._position_id;
+			}
+			set
+			{
+				if ((this._position_id != value))
+				{
+					this._position_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ip", DbType="VarChar(32)")]
+		public string ip
+		{
+			get
+			{
+				return this._ip;
+			}
+			set
+			{
+				if ((this._ip != value))
+				{
+					this._ip = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_admin", DbType="VarChar(32)")]
+		public string admin
+		{
+			get
+			{
+				return this._admin;
+			}
+			set
+			{
+				if ((this._admin != value))
+				{
+					this._admin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(32)")]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this._password = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_port", DbType="Int")]
+		public System.Nullable<int> port
+		{
+			get
+			{
+				return this._port;
+			}
+			set
+			{
+				if ((this._port != value))
+				{
+					this._port = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_time
+		{
+			get
+			{
+				return this._create_time;
+			}
+			set
+			{
+				if ((this._create_time != value))
+				{
+					this._create_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_name", DbType="VarChar(32)")]
+		public string room_name
+		{
+			get
+			{
+				return this._room_name;
+			}
+			set
+			{
+				if ((this._room_name != value))
+				{
+					this._room_name = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_locker_info")]
+	public partial class view_locker_info
+	{
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private System.Nullable<System.DateTime> _create_time;
+		
+		private System.Nullable<int> _btracker_officer_id;
+		
+		private string _btracker_name;
+		
+		private string _officer_name;
+		
+		public view_locker_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(128)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this._no = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_time
+		{
+			get
+			{
+				return this._create_time;
+			}
+			set
+			{
+				if ((this._create_time != value))
+				{
+					this._create_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_officer_id", DbType="Int")]
+		public System.Nullable<int> btracker_officer_id
+		{
+			get
+			{
+				return this._btracker_officer_id;
+			}
+			set
+			{
+				if ((this._btracker_officer_id != value))
+				{
+					this._btracker_officer_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_name", DbType="VarChar(32)")]
+		public string btracker_name
+		{
+			get
+			{
+				return this._btracker_name;
+			}
+			set
+			{
+				if ((this._btracker_name != value))
+				{
+					this._btracker_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_name", DbType="VarChar(32)")]
+		public string officer_name
+		{
+			get
+			{
+				return this._officer_name;
+			}
+			set
+			{
+				if ((this._officer_name != value))
+				{
+					this._officer_name = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_position_camera_info")]
+	public partial class view_position_camera_info
+	{
+		
+		private int _id;
+		
+		private int _room_id;
+		
+		private System.Nullable<int> _dev_camera_id;
+		
+		public view_position_camera_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_id", DbType="Int NOT NULL")]
+		public int room_id
+		{
+			get
+			{
+				return this._room_id;
+			}
+			set
+			{
+				if ((this._room_id != value))
+				{
+					this._room_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dev_camera_id", DbType="Int")]
+		public System.Nullable<int> dev_camera_id
+		{
+			get
+			{
+				return this._dev_camera_id;
+			}
+			set
+			{
+				if ((this._dev_camera_id != value))
+				{
+					this._dev_camera_id = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_rfid_info")]
+	public partial class view_rfid_info
+	{
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private System.Nullable<int> _room_id;
+		
+		private System.Nullable<System.DateTime> _create_time;
+		
+		private string _room_name;
+		
+		public view_rfid_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(128)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this._no = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_id", DbType="Int")]
+		public System.Nullable<int> room_id
+		{
+			get
+			{
+				return this._room_id;
+			}
+			set
+			{
+				if ((this._room_id != value))
+				{
+					this._room_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_time
+		{
+			get
+			{
+				return this._create_time;
+			}
+			set
+			{
+				if ((this._create_time != value))
+				{
+					this._create_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_name", DbType="VarChar(32)")]
+		public string room_name
+		{
+			get
+			{
+				return this._room_name;
+			}
+			set
+			{
+				if ((this._room_name != value))
+				{
+					this._room_name = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_rfid_room_info")]
+	public partial class view_rfid_room_info
+	{
+		
+		private int _id;
+		
+		private string _name;
+		
+		private bool _map_inout;
+		
+		private System.Nullable<int> _rfid_room_id;
+		
+		public view_rfid_room_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_map_inout", DbType="Bit NOT NULL")]
+		public bool map_inout
+		{
+			get
+			{
+				return this._map_inout;
+			}
+			set
+			{
+				if ((this._map_inout != value))
+				{
+					this._map_inout = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rfid_room_id", DbType="Int")]
+		public System.Nullable<int> rfid_room_id
+		{
+			get
+			{
+				return this._rfid_room_id;
+			}
+			set
+			{
+				if ((this._rfid_room_id != value))
+				{
+					this._rfid_room_id = value;
 				}
 			}
 		}
