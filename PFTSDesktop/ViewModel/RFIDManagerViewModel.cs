@@ -24,10 +24,10 @@ namespace PFTSDesktop.ViewModel
         private RFIDModel _rfidAddModel;
         private RelayCommand _editRFIDCommand;
         private RelayCommand _addRFIDCommand;
-        private dev_rfid _dev_rfid;
+        private view_rfid_info _dev_rfid;
         private static RFIDManagerViewModel instance;
         private DevRFIDService rfidService;
-        private List<dev_rfid> _rfidList;
+        private List<view_rfid_info> _rfidList;
         private int type;
   
         #endregion
@@ -35,8 +35,8 @@ namespace PFTSDesktop.ViewModel
         public RFIDManagerViewModel()
         {
             rfidService = new DevRFIDService();
-        
-            _dev_rfid = new dev_rfid();
+
+            _dev_rfid = new view_rfid_info();
 
             _rfidAddModel = new RFIDModel();
             _rfidModel = new RFIDModel();
@@ -134,13 +134,13 @@ namespace PFTSDesktop.ViewModel
         /// <summary>
         /// rfid天线实体
         /// </summary>
-        public dev_rfid DevRFID
+        public view_rfid_info DevRFID
         {
             get
             {
                 if (_dev_rfid == null)
                 {
-                    _dev_rfid = new dev_rfid();
+                    _dev_rfid = new view_rfid_info();
                 }
                 return _dev_rfid;
             }
@@ -196,7 +196,7 @@ namespace PFTSDesktop.ViewModel
         /// <summary>
         /// 所有rfid天线列表
         /// </summary>
-        public List<dev_rfid> RFIDList
+        public List<view_rfid_info> RFIDList
         {
             get
             {
@@ -336,7 +336,7 @@ namespace PFTSDesktop.ViewModel
             TotalCount = rfidService.GetCount(null);
             if (TotalCount == 0)
             {
-                RFIDList = new List<dev_rfid>();
+                RFIDList = new List<view_rfid_info>();
                 PageIndex = 0;
             }
             else

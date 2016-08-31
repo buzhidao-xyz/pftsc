@@ -24,18 +24,18 @@ namespace PFTSDesktop.ViewModel
         private CameraModel _cameraAddModel;
         private RelayCommand _editCameraCommand;
         private RelayCommand _addCameraCommand;
-        private dev_camera _dev_camera;
+        private view_camera_info _dev_camera;
         private static CameraManagerViewModel instance;
         private DevCameraService cameraService;
         private RelayCommand _getCamearListCommand;
-        private List<dev_camera> _cameraList;
+        private List<view_camera_info> _cameraList;
         private int type;
         #endregion
 
         public CameraManagerViewModel()
         {
             cameraService = new DevCameraService();
-            _dev_camera = new dev_camera();
+            _dev_camera = new view_camera_info();
 
             _cameraAddModel = new CameraModel();
             _cameraModel = new CameraModel();
@@ -115,13 +115,13 @@ namespace PFTSDesktop.ViewModel
         #endregion
 
         #region 属性
-        public dev_camera DevCamera
+        public view_camera_info DevCamera
         {
             get
             {
                 if (_dev_camera == null)
                 {
-                    _dev_camera = new dev_camera();
+                    _dev_camera = new view_camera_info();
                 }
                 return _dev_camera;
             }
@@ -172,7 +172,7 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<dev_camera> CameraList
+        public List<view_camera_info> CameraList
         {
             get
             {
@@ -232,7 +232,7 @@ namespace PFTSDesktop.ViewModel
                 _dev_camera.port = int.Parse(_cameraModel.Port);
                 _dev_camera.admin = _cameraModel.Admin;
                 _dev_camera.password = _cameraModel.Password;
-                result = cameraService.ModifyLocker(_dev_camera);
+                result = cameraService.ModifyCamera(_dev_camera);
             }
             if (result)
             {
@@ -318,7 +318,7 @@ namespace PFTSDesktop.ViewModel
             TotalCount = cameraService.GetCount(null);
             if (TotalCount == 0)
             {
-                CameraList = new List<dev_camera>();
+                CameraList = new List<view_camera_info>();
                 PageIndex = 0;
             }
             else

@@ -69,6 +69,7 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
@@ -84,13 +85,18 @@
 
             <Label Content="识别码：" Grid.Row="3" Grid.Column="0"/>
             <ele:RegularText Name="txtNo"  Grid.Row="3" Grid.Column="1" Validation.ErrorTemplate="{x:Null}"
-                         Text="{Binding VestModel.No, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding VestModel.NoLeft, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
             <ContentPresenter Grid.Row="3" Grid.Column="2" Content="{Binding ElementName=txtNo, Path=(Validation.Errors).CurrentItem}"/>
             
-            <Button Grid.Row="4" Grid.Column="1" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
+            <Label Content="识别码2：" Grid.Row="4" Grid.Column="0"/>
+            <ele:RegularText Name="txtNo2"  Grid.Row="4" Grid.Column="1" Validation.ErrorTemplate="{x:Null}"
+                         Text="{Binding VestModel.NoRight, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
+            <ContentPresenter Grid.Row="4" Grid.Column="2" Content="{Binding ElementName=txtNo2, Path=(Validation.Errors).CurrentItem}"/>
+            
+            <Button Grid.Row="5" Grid.Column="1" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
                 HorizontalAlignment="Right" Content="保    存" Command="{Binding EditVestCommand}"  CommandParameter="{Binding ElementName=main}"
                 Height="30" Width="90" Margin="0,0,20,0"/>
-            <Button Grid.Row="4" Grid.Column="1" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
+            <Button Grid.Row="5" Grid.Column="1" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
                 HorizontalAlignment="Right" Content="返    回" Command="{Binding CloseCommand}"  CommandParameter="{Binding ElementName=main}"
                 Height="30" Width="90" Margin="0,0,120,0"/>
         </Grid>

@@ -25,7 +25,8 @@ namespace PFTSModel
                         var query = from q in table
                                     select q;
                         return query.ToList();
-                    }else if (used.Value)
+                    }
+                    else if (used.Value)
                     {
                         var query = from q in table
                                     where q.btracker_vest_id != null
@@ -175,20 +176,20 @@ namespace PFTSModel
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public dev_vest GetByNo(string no, string oldNo)
+        public dev_vest GetByNo(string no, string oldNo1, string oldNo2)
         {
             try
             {
-                //using (PFTSDbDataContext db = new PFTSDbDataContext())
-                //{
-                //    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
-                //    var query = from dv in db.dev_vest
-                //                where dv.no == no
-                //                select dv;
-                //    if (!String.IsNullOrEmpty(oldNo) && oldNo == no)
-                //        query = query.Where(c => c.no == oldNo + no);
-                //    return query.FirstOrDefault();
-                //}
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
+                    var query = from dv in db.dev_vest
+                                where dv.no_left == no || dv.no_right == no
+                                select dv;
+                    if ((!String.IsNullOrEmpty(oldNo1) && oldNo1 == no) || (!String.IsNullOrEmpty(oldNo2) && oldNo2 == no))
+                        return null;
+                    return query.FirstOrDefault();
+                }
             }
             catch
             {

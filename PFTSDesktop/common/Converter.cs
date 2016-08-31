@@ -51,19 +51,15 @@ namespace PFTSDesktop.common
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int status = (int)value;
+            int? status = (int?)value;
             string strType = "";
-            if (status == 0)
+            if (status == null)
             {
                 strType = "未使用";
             }
-            else if (status == 1)
-            {
-                strType = "已使用";
-            }
             else
             {
-                throw new Exception("绑定类型不正确");
+                strType = "已使用";
             }
             return strType;
         }
@@ -86,19 +82,15 @@ namespace PFTSDesktop.common
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int status = (int)value;
+            int? status = (int?)value;
             string strType = "";
-            if (status == 0)
+            if (status == null)
             {
                 strType = "新入库";
             }
-            else if (status == 1)
+            else 
             {
                 strType = "已安装";
-            }
-            else
-            {
-                throw new Exception("绑定类型不正确");
             }
             return strType;
         }
@@ -121,19 +113,15 @@ namespace PFTSDesktop.common
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int status = (int)value;
+            int? status = (int?)value;
             string strType = "";
-            if (status == 0)
+            if (status == null)
             {
                 strType = "新入库";
             }
-            else if (status == 1)
+            else 
             {
                 strType = "已安装";
-            }
-            else
-            {
-                throw new Exception("绑定类型不正确");
             }
             return strType;
         }
@@ -156,19 +144,15 @@ namespace PFTSDesktop.common
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int status = (int)value;
+            int? status = (int?)value;
             string strType = "";
             if (status == 0)
             {
                 strType = "在监";
             }
-            else if (status == 1)
+            else 
             {
                 strType = "离场";
-            }
-            else
-            {
-                throw new Exception("绑定类型不正确");
             }
             return strType;
         }
@@ -191,20 +175,17 @@ namespace PFTSDesktop.common
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int status = (int)value;
+            int? status = (int?)value;
             Visibility strType = Visibility.Collapsed;
             if (status == 0)
             {
                 strType = Visibility.Visible;
             }
-            else if (status == 1)
+            else 
             {
                 strType = Visibility.Collapsed;
             }
-            else
-            {
-                throw new Exception("绑定类型不正确");
-            }
+           
             return strType;
         }
 

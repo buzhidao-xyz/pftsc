@@ -75,14 +75,14 @@ namespace PFTSModel.Services
         /// </summary>
         /// <param name="status">状态，为null查询所有</param>
         /// <returns></returns>
-        public List<dev_camera> GetPageByStatus(bool? used, int pageIndex, int pageSize)
+        public List<view_camera_info> GetPageByStatus(bool? used, int pageIndex, int pageSize)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<dev_camera> table = db.GetTable<dev_camera>();
-                    IQueryable<dev_camera> query = null;
+                    System.Data.Linq.Table<view_camera_info> table = db.GetTable<view_camera_info>();
+                    IQueryable<view_camera_info> query = null;
                     if (used == null)
                     {
                          query = from q in table
@@ -138,7 +138,7 @@ namespace PFTSModel.Services
             return null;
         }
 
-        public bool ModifyLocker(dev_camera model)
+        public bool ModifyCamera(view_camera_info model)
         {
             try
             {

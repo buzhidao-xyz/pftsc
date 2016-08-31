@@ -103,13 +103,13 @@ namespace PFTSModel.Services
         /// </summary>
         /// <param name="status">状态，为null查询所有</param>
         /// <returns></returns>
-        public List<dev_rfid> GetPageByStatus(bool? used, int pageIndex, int pageSize)
+        public List<view_rfid_info> GetPageByStatus(bool? used, int pageIndex, int pageSize)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<dev_rfid> table = db.GetTable<dev_rfid>();
+                    System.Data.Linq.Table<view_rfid_info> table = db.GetTable<view_rfid_info>();
                     if (used == null)
                     {
                         var query = from q in table
@@ -142,7 +142,7 @@ namespace PFTSModel.Services
             return null;
         }
 
-        public bool ModifyLocker(dev_rfid model)
+        public bool ModifyLocker(view_rfid_info model)
         {
             try
             {

@@ -12,23 +12,15 @@ namespace PFTSDesktop.Model
 {
     public class VestModel : IDataErrorInfo
     {
-        public VestModel(string oldName, string oldNo)
-        {
-            this.OldName = oldName;
-            this.OldNo = oldNo;
-        }
-        public VestModel()
-        {
-           
-        }
-
         #region 变量
         private DevVestService service = new DevVestService();
         public string Name { get; set; }
         public string OldName { get; set; }
         public int Id { get; set; }
-        public string No { get; set; }
-        public string OldNo { get; set; }
+        public string NoLeft { get; set; }
+        public string OldNoLeft { get; set; }
+        public string NoRight { get; set; }
+        public string OldNoRight { get; set; }
         #endregion
 
         #region IDataErrorInfo Members
@@ -62,7 +54,8 @@ namespace PFTSDesktop.Model
         static readonly string[] ValidatedProperties = 
         {
             "Name",
-            "No",
+            "NoLeft",
+            "NoRight",
         };
 
         private string GetValidationError(string propertyName)
@@ -77,8 +70,11 @@ namespace PFTSDesktop.Model
                         error = this.ValidateName();
                         break;
 
-                    case "No":
-                        error = this.ValidateNo();
+                    case "NoLeft":
+                        error = this.ValidateNoLeft();
+                        break;
+                    case "NoRight":
+                        error = this.ValidateNoRight();
                         break;
                     default:
                         Debug.Fail("Unexpected property being validated on VestModel: " + propertyName);
@@ -99,13 +95,26 @@ namespace PFTSDesktop.Model
             return null;
         }
 
-        private string ValidateNo()
+        private string ValidateNoLeft()
         {
-            if (String.IsNullOrEmpty(this.No))
+            if (String.IsNullOrEmpty(this.NoLeft))
             {
                 return Resources.Vest_Error_MissNo;
             }
-            else if (IsValidReNo(this.No))
+            else if (IsValidReNo(this.NoLeft))
+            {
+                return Resources.Vest_Error_ReNo;
+            }
+            return null;
+        }
+
+        private string ValidateNoRight()
+        {
+            if (String.IsNullOrEmpty(this.NoRight))
+            {
+                return Resources.Vest_Error_MissNo;
+            }
+            else if (IsValidReNo(this.NoRight))
             {
                 return Resources.Vest_Error_ReNo;
             }
@@ -123,7 +132,7 @@ namespace PFTSDesktop.Model
         {
             if (String.IsNullOrEmpty(no))
                 return false;
-            var vestModel = service.GetByNo(no,OldNo);
+            var vestModel = service.GetByNo(no, OldNoLeft,OldNoRight);
             return vestModel == null ? false : true;
         }
         #endregion
