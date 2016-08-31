@@ -2,7 +2,6 @@
 using PFTSDesktop.Model;
 using PFTSDesktop.View.DeviceManager;
 using PFTSModel;
-using PFTSModel.Entitys;
 using PFTSUITemplate.Controls;
 using PFTSUITemplate.Element;
 using System;
@@ -24,19 +23,19 @@ namespace PFTSDesktop.ViewModel
         private VestModel _vestAddModel;
         private RelayCommand _editVestCommand;
         private RelayCommand _addVestCommand;
-        private VestInfoEntity _dev_vest;
+        private view_vest_info _dev_vest;
         private string _title;
         private static VestManagerViewModel instance;
         private DevVestService vestService;
         private RelayCommand _getVestListCommand;
-        private List<VestInfoEntity> _vestList;
+        private List<view_vest_info> _vestList;
         private int type;
         #endregion
 
         public VestManagerViewModel()
         {
             vestService = new DevVestService();
-            _dev_vest = new VestInfoEntity();
+            _dev_vest = new view_vest_info();
 
             _vestAddModel = new VestModel();
             _vestModel = new VestModel();
@@ -178,13 +177,13 @@ namespace PFTSDesktop.ViewModel
         #endregion
 
         #region 属性
-        public VestInfoEntity DevVest
+        public view_vest_info DevVest
         {
             get
             {
                 if (_dev_vest == null)
                 {
-                    _dev_vest = new VestInfoEntity();
+                    _dev_vest = new view_vest_info();
                 }
                 return _dev_vest;
             }
@@ -231,7 +230,7 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<VestInfoEntity> VestList
+        public List<view_vest_info> VestList
         {
             get
             {
@@ -306,7 +305,7 @@ namespace PFTSDesktop.ViewModel
             TotalCount = vestService.GetVestCount(null);
             if (TotalCount == 0)
             {
-                VestList = new List<VestInfoEntity>();
+                VestList = new List<view_vest_info>();
                 PageIndex = 0;
             }
             else
