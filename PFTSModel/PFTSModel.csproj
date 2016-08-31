@@ -61,6 +61,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\PositionRFIDService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\SuspectService.cs" />
   </ItemGroup>

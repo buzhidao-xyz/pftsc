@@ -10,7 +10,7 @@ namespace PFTSModel
     public class DevVestService : Service<dev_vest>
     {
         /// <summary>
-        /// 根据物品箱状态获取数据列表
+        /// 根据服装状态获取数据列表
         /// </summary>
         /// <param name="status">状态，为null查询所有</param>
         /// <returns></returns>
@@ -47,6 +47,11 @@ namespace PFTSModel
             return null;
         }
 
+        /// <summary>
+        /// 获取服装记录总数
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
         public int GetVestCount(System.Nullable<int> status)
         {
             try
@@ -73,7 +78,7 @@ namespace PFTSModel
         }
 
         /// <summary>
-        /// 根据物品箱状态获取数据列表（分页）
+        /// 根据服装状态获取数据列表（分页）
         /// </summary>
         /// <param name="status">状态，为null查询所有</param>
         /// <returns></returns>
