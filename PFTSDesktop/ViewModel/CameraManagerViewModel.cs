@@ -39,6 +39,7 @@ namespace PFTSDesktop.ViewModel
 
             _cameraAddModel = new CameraModel();
             _cameraModel = new CameraModel();
+            initData();
         }
 
         public static CameraManagerViewModel GetInstance()
@@ -175,7 +176,6 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                _cameraList = cameraService.GetAll();
                 return _cameraList;
             }
             set
@@ -239,7 +239,7 @@ namespace PFTSDesktop.ViewModel
                 MessageWindow.Show("摄像头信息更新成功！", "系统提示");
                 WindowTemplet window = (WindowTemplet)obj;
                 window.Close();
-                CameraList = cameraService.GetAll();
+                initData();
             }
             else
             {
@@ -291,5 +291,41 @@ namespace PFTSDesktop.ViewModel
             }
         }
         #endregion // IDataErrorInfo Members
+
+        #region 分页相关事件
+
+        private RelayCommand _nextPageSearchCommand;
+        public ICommand NextPageSearchCommand
+        {
+            get
+            {
+                if (_nextPageSearchCommand == null)
+                {
+                    _nextPageSearchCommand = new RelayCommand(
+                            param => this.QueryData()
+                            );
+                }
+                return _nextPageSearchCommand;
+            }
+        }
+        private void QueryData()
+        {
+            CameraList = cameraService.GetPageByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+        }
+
+        private void initData()
+        {
+            TotalCount = cameraService.GetCount(null);
+            if (TotalCount == 0)
+            {
+                CameraList = new List<dev_camera>();
+                PageIndex = 0;
+            }
+            else
+            {
+                CameraList = cameraService.GetPageByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+            }
+        }
+        #endregion
     }
 }

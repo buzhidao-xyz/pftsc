@@ -17,7 +17,13 @@
         <tmp:ButtonEX Name="btnAddRFID" Grid.Row="0" Content="新增天线" VerticalAlignment="Center"  HorizontalAlignment="Right"
                       Margin="0,0,20,0" Width="90" Height="26" Command="{Binding AddRIFDDlgCommand}"/>
         <ele:PageDataGridEx  Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None"
-                             ItemsSource="{Binding RFIDList}" SelectedItem="{Binding DevRFID}">
+                             ItemsSource="{Binding RFIDList}" SelectedItem="{Binding DevRFID}" Total="{Binding TotalCount,Mode=TwoWay}"
+                             PageIndex="{Binding PageIndex,Mode=TwoWay}" PageSize="{Binding PageSize,Mode=TwoWay}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PagingChanged">
+                    <i:InvokeCommandAction  Command="{Binding NextPageSearchCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ele:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="天线名称" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="识别码" Binding="{Binding no_left}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>

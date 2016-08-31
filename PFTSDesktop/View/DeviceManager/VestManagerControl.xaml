@@ -17,7 +17,7 @@
         <tmp:ButtonEX Name="btnAddVest" Grid.Row="0" Content="新增服装" VerticalAlignment="Center"  HorizontalAlignment="Right"
                       Margin="0,0,20,0" Width="90" Height="26" Command="{Binding AddVestDlgCommand}" />
         <ele:PageDataGridEx  Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None"
-                             ItemsSource="{Binding VestList,Mode=TwoWay}" SelectedItem="{Binding DevVest,Mode=TwoWay}" Total="{Binding TotalCount,Mode=TwoWay}"
+                             ItemsSource="{Binding VestList}" SelectedItem="{Binding DevVest}" Total="{Binding TotalCount,Mode=TwoWay}"
                              PageIndex="{Binding PageIndex,Mode=TwoWay}" PageSize="{Binding PageSize,Mode=TwoWay}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PagingChanged">

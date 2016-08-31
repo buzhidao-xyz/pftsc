@@ -39,6 +39,7 @@ namespace PFTSDesktop.ViewModel
 
             _lockerAddModel = new LockerModel();
             _lockerModel = new LockerModel();
+            initData();
         }
 
         public static LockerManagerViewModel GetInstance()
@@ -171,7 +172,6 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                _lockerList = lockerService.GetLockersByStatus(null);
                 return _lockerList;
             }
             set
@@ -227,7 +227,7 @@ namespace PFTSDesktop.ViewModel
                 MessageWindow.Show("储物柜信息更新成功！", "系统提示");
                 WindowTemplet window = (WindowTemplet)obj;
                 window.Close();
-                LockerList = lockerService.GetLockersByStatus(null);
+                initData();
             }
             else
             {
@@ -279,6 +279,42 @@ namespace PFTSDesktop.ViewModel
             }
         }
         #endregion // IDataErrorInfo Members
+
+        #region 分页相关事件
+
+        private RelayCommand _nextPageSearchCommand;
+        public ICommand NextPageSearchCommand
+        {
+            get
+            {
+                if (_nextPageSearchCommand == null)
+                {
+                    _nextPageSearchCommand = new RelayCommand(
+                            param => this.QueryData()
+                            );
+                }
+                return _nextPageSearchCommand;
+            }
+        }
+        private void QueryData()
+        {
+            LockerList = lockerService.GetPageLockerByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+        }
+
+        private void initData()
+        {
+            TotalCount = lockerService.GetLockerCount(null);
+            if (TotalCount == 0)
+            {
+                LockerList = new List<LockerInfoEntity>();
+                PageIndex = 0;
+            }
+            else
+            {
+                LockerList = lockerService.GetPageLockerByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+            }
+        }
+        #endregion
     }
 
 }

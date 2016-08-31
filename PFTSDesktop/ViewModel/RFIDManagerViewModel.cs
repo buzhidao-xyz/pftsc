@@ -27,18 +27,22 @@ namespace PFTSDesktop.ViewModel
         private dev_rfid _dev_rfid;
         private static RFIDManagerViewModel instance;
         private DevRFIDService rfidService;
-        private RelayCommand _getRFIDListCommand;
         private List<dev_rfid> _rfidList;
         private int type;
+        private PositionRFIDService positionService;
+        private List<position_rfid> _positionList;
+        private position_rfid _position_rfid;
         #endregion
 
         public RFIDManagerViewModel()
         {
             rfidService = new DevRFIDService();
+            positionService = new PositionRFIDService();
             _dev_rfid = new dev_rfid();
 
             _rfidAddModel = new RFIDModel();
             _rfidModel = new RFIDModel();
+            initData();
         }
 
         public static RFIDManagerViewModel GetInstance()
@@ -53,6 +57,9 @@ namespace PFTSDesktop.ViewModel
         }
 
         #region command
+        /// <summary>
+        /// 打开添加框命令
+        /// </summary>
         public ICommand AddRIFDDlgCommand
         {
             get
@@ -67,6 +74,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 打开编辑框命令
+        /// </summary>
         public ICommand EditRFIDDlgCommand
         {
             get
@@ -81,6 +91,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 编辑rfid天线命令
+        /// </summary>
         public ICommand EditRFIDCommand
         {
             get
@@ -96,6 +109,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 添加rfid天线命令
+        /// </summary>
         public ICommand AddRFIDCommand
         {
             get
@@ -114,6 +130,27 @@ namespace PFTSDesktop.ViewModel
         #endregion
 
         #region 属性
+
+        public position_rfid PositionRfid
+        {
+            get
+            {
+                return _position_rfid;
+            }
+            set
+            {
+                if (value == _position_rfid || value == null)
+                    return;
+                _position_rfid = value;
+                _rfidModel.position_id = _position_rfid.id;
+                _rfidAddModel.position_id = _position_rfid.id;
+                base.OnPropertyChanged("PositionRfid");
+            }
+        }
+
+        /// <summary>
+        /// rfid天线实体
+        /// </summary>
         public dev_rfid DevRFID
         {
             get
@@ -137,6 +174,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 修改用的rifd天线实体
+        /// </summary>
         public RFIDModel GetRFIDModel
         {
             get
@@ -152,6 +192,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 添加rfid天线的实体
+        /// </summary>
         public RFIDModel RFIDAddModel
         {
             get
@@ -167,11 +210,13 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 所有rfid天线列表
+        /// </summary>
         public List<dev_rfid> RFIDList
         {
             get
             {
-                _rfidList = rfidService.GetAll();
                 return _rfidList;
             }
             set
@@ -180,6 +225,26 @@ namespace PFTSDesktop.ViewModel
                     return;
                 _rfidList = value;
                 base.OnPropertyChanged("RFIDList");
+            }
+        }
+
+        /// <summary>
+        /// 所有未安装天线的位置列表
+        /// </summary>
+        public List<position_rfid> PositionList
+        {
+            get
+            {
+                if (_positionList == null)
+                    _positionList = positionService.GetAllByStatus(0);
+                return _positionList;
+            }
+            set
+            {
+                if (value == _positionList)
+                    return;
+                _positionList = value;
+                base.OnPropertyChanged("PositionList");
             }
         }
 
@@ -213,6 +278,7 @@ namespace PFTSDesktop.ViewModel
                 model.no = _rfidAddModel.No;
                 model.name = _rfidAddModel.Name;
                 model.create_time = DateTime.Now;
+                model.position_id = _rfidAddModel.position_id;
                 result = rfidService.Insert(model);
 
             }
@@ -220,6 +286,7 @@ namespace PFTSDesktop.ViewModel
             {
                 _dev_rfid.no = _rfidModel.No;
                 _dev_rfid.name = _rfidModel.Name;
+                _dev_rfid.position_id = _rfidModel.position_id;
                 result = rfidService.ModifyLocker(_dev_rfid);
             }
             if (result)
@@ -227,7 +294,7 @@ namespace PFTSDesktop.ViewModel
                 MessageWindow.Show("RFID天线信息更新成功！", "系统提示");
                 WindowTemplet window = (WindowTemplet)obj;
                 window.Close();
-                RFIDList = rfidService.GetAll();
+                initData();
             }
             else
             {
@@ -279,5 +346,41 @@ namespace PFTSDesktop.ViewModel
             }
         }
         #endregion // IDataErrorInfo Members
+
+        #region 分页相关事件
+
+        private RelayCommand _nextPageSearchCommand;
+        public ICommand NextPageSearchCommand
+        {
+            get
+            {
+                if (_nextPageSearchCommand == null)
+                {
+                    _nextPageSearchCommand = new RelayCommand(
+                            param => this.QueryData()
+                            );
+                }
+                return _nextPageSearchCommand;
+            }
+        }
+        private void QueryData()
+        {
+            RFIDList = rfidService.GetPageByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+        }
+
+        private void initData()
+        {
+            TotalCount = rfidService.GetCount(null);
+            if (TotalCount == 0)
+            {
+                RFIDList = new List<dev_rfid>();
+                PageIndex = 0;
+            }
+            else
+            {
+                RFIDList = rfidService.GetPageByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+            }
+        }
+        #endregion
     }
 }

@@ -6,7 +6,7 @@
                    xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
                    Width="600"
-                   Height="400"
+                   Height="440"
                    BorderBrush="{DynamicResource windowStyle}"
                    xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
                    BorderThickness="1"
@@ -72,6 +72,7 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -86,7 +87,7 @@
                          Text="{Binding GetCameraModel.Name, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
             <ContentPresenter Grid.Row="2" Grid.Column="2" Content="{Binding ElementName=txtName, Path=(Validation.Errors).CurrentItem}"/>
 
-            <Label Content="识别码：" Grid.Row="3" Grid.Column="0"/>
+            <Label Content="识 别 码：" Grid.Row="3" Grid.Column="0"/>
             <ele:RegularText Name="txtNo"  Grid.Row="3" Grid.Column="1" Validation.ErrorTemplate="{x:Null}"
                          Text="{Binding GetCameraModel.No, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
             <ContentPresenter Grid.Row="3" Grid.Column="2" Content="{Binding ElementName=txtNo, Path=(Validation.Errors).CurrentItem}"/>
@@ -96,7 +97,7 @@
                          Text="{Binding GetCameraModel.IP, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
             <ContentPresenter Grid.Row="4" Grid.Column="2" Content="{Binding ElementName=txtIp, Path=(Validation.Errors).CurrentItem}"/>
 
-            <Label Content="端口：" Grid.Row="5" Grid.Column="0"/>
+            <Label Content="端 口：" Grid.Row="5" Grid.Column="0"/>
             <ele:RegularText Name="txtPort" Grid.Row="5" Grid.Column="1" Validation.ErrorTemplate="{x:Null}"
                          Text="{Binding GetCameraModel.Port, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
             <ContentPresenter Grid.Row="5" Grid.Column="2" Content="{Binding ElementName=txtPort, Path=(Validation.Errors).CurrentItem}"/>
@@ -106,15 +107,19 @@
                          Text="{Binding GetCameraModel.Admin, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
             <ContentPresenter Grid.Row="6" Grid.Column="2" Content="{Binding ElementName=txtAccount, Path=(Validation.Errors).CurrentItem}"/>
 
-            <Label Content="密码：" Grid.Row="7" Grid.Column="0"/>
+            <Label Content="密 码：" Grid.Row="7" Grid.Column="0"/>
             <ele:RegularText Name="txtPwd" Grid.Row="7" Grid.Column="1" Validation.ErrorTemplate="{x:Null}"
                          Text="{Binding GetCameraModel.Password, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
             <ContentPresenter Grid.Row="7" Grid.Column="2" Content="{Binding ElementName=txtPwd, Path=(Validation.Errors).CurrentItem}"/>
-
-            <Button Grid.Row="8" Grid.Column="1" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
+            <Label Content="位 置：" Grid.Row="8" Grid.Column="0"/>
+            <ComboBox Grid.Row="8" Grid.Column="1" Name="cmbOfficer" Style="{StaticResource comboxStyleEx}"
+				   ItemsSource="{Binding PositionList, Mode=OneTime}" Margin="0,0,20,0"
+				   SelectedItem="{Binding PositionRfid, ValidatesOnDataErrors=True}"
+				   DisplayMemberPath="name"/>
+            <Button Grid.Row="9" Grid.Column="1" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
                 HorizontalAlignment="Right" Content="保    存" Command="{Binding EditCameraCommand}"  CommandParameter="{Binding ElementName=main}"
                 Height="30" Width="90" Margin="0,0,20,0"/>
-            <Button Grid.Row="8" Grid.Column="1" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
+            <Button Grid.Row="9" Grid.Column="1" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
                 HorizontalAlignment="Right" Content="返    回" Command="{Binding CloseCommand}"  CommandParameter="{Binding ElementName=main}"
                 Height="30" Width="90" Margin="0,0,120,0"/>
         </Grid>
