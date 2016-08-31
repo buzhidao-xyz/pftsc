@@ -24,7 +24,7 @@ namespace PFTSDesktop.ViewModel
         private VestModel _vestAddModel;
         private RelayCommand _editVestCommand;
         private RelayCommand _addVestCommand;
-        private dev_vest _dev_vest;
+        private VestInfoEntity _dev_vest;
         private string _title;
         private static VestManagerViewModel instance;
         private DevVestService vestService;
@@ -36,7 +36,7 @@ namespace PFTSDesktop.ViewModel
         public VestManagerViewModel()
         {
             vestService = new DevVestService();
-            _dev_vest = new dev_vest();
+            _dev_vest = new VestInfoEntity();
 
             _vestAddModel = new VestModel();
             _vestModel = new VestModel();
@@ -178,13 +178,13 @@ namespace PFTSDesktop.ViewModel
         #endregion
 
         #region 属性
-        public dev_vest DevVest
+        public VestInfoEntity DevVest
         {
             get
             {
                 if (_dev_vest == null)
                 {
-                    _dev_vest = new dev_vest();
+                    _dev_vest = new VestInfoEntity();
                 }
                 return _dev_vest;
             }

@@ -24,7 +24,7 @@ namespace PFTSDesktop.ViewModel
         private LockerModel _lockerAddModel;
         private RelayCommand _editLockerCommand;
         private RelayCommand _addLockerCommand;
-        private dev_lockers _dev_locker;
+        private LockerInfoEntity _dev_locker;
         private static LockerManagerViewModel instance;
         private DevLockerService lockerService;
         private RelayCommand _getLockerListCommand;
@@ -35,7 +35,7 @@ namespace PFTSDesktop.ViewModel
         public LockerManagerViewModel()
         {
             lockerService = new DevLockerService();
-            _dev_locker = new dev_lockers();
+            _dev_locker = new LockerInfoEntity();
 
             _lockerAddModel = new LockerModel();
             _lockerModel = new LockerModel();
@@ -114,13 +114,13 @@ namespace PFTSDesktop.ViewModel
         #endregion
 
         #region 属性
-        public dev_lockers DevLocker
+        public LockerInfoEntity DevLocker
         {
             get
             {
                 if (_dev_locker == null)
                 {
-                    _dev_locker = new dev_lockers();
+                    _dev_locker = new LockerInfoEntity();
                 }
                 return _dev_locker;
             }

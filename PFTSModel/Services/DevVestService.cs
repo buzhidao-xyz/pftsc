@@ -25,7 +25,7 @@ namespace PFTSModel
                                 select new VestInfoEntity
                                 {
                                     id = q.id,
-                                    no = q.no_left,
+                                    no_left = q.no_left,
                                     name = q.name,
                                     create_time = q.create_time,
                                     btracker_name = q.btracker1.name,
@@ -88,7 +88,7 @@ namespace PFTSModel
                                  select new VestInfoEntity
                                  {
                                      id = q.id,
-                                     no = q.no_left,
+                                     no_left = q.no_left,
                                      name = q.name,
                                      create_time = q.create_time,
                                      btracker_name = q.btracker1.name,
@@ -164,7 +164,7 @@ namespace PFTSModel
             return null;
         }
 
-        public bool ModifyVest(dev_vest model)
+        public bool ModifyVest(VestInfoEntity model)
         {
             try
             {

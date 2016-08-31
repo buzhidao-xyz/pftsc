@@ -102,7 +102,7 @@ namespace PFTSModel
             return null;
         }
 
-        public bool ModifyLocker(dev_lockers model)
+        public bool ModifyLocker(LockerInfoEntity model)
         {
             try
             {

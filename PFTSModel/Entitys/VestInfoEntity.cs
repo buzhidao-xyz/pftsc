@@ -10,7 +10,9 @@ namespace PFTSModel.Entitys
     {
         public int id { get; set; }
 
-        public string no { get; set; }
+        public string no_left { get; set; }
+
+        public string no_right { get; set; }
 
         public string name { get; set; }
 

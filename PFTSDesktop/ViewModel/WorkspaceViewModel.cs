@@ -101,7 +101,7 @@ namespace PFTSDesktop.ViewModel
 
         #region 分页属性
         private int _totalPage = 20;
-        private int _pageSize = 5;
+        private int _pageSize = 20;
         private int _pageIndex = 1;
         private int _totalCount;
 
