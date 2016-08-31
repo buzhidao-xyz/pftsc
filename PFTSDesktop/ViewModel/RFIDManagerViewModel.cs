@@ -29,15 +29,13 @@ namespace PFTSDesktop.ViewModel
         private DevRFIDService rfidService;
         private List<dev_rfid> _rfidList;
         private int type;
-        private PositionRFIDService positionService;
-        private List<position_rfid> _positionList;
-        private position_rfid _position_rfid;
+  
         #endregion
 
         public RFIDManagerViewModel()
         {
             rfidService = new DevRFIDService();
-            positionService = new PositionRFIDService();
+        
             _dev_rfid = new dev_rfid();
 
             _rfidAddModel = new RFIDModel();
@@ -131,22 +129,7 @@ namespace PFTSDesktop.ViewModel
 
         #region 属性
 
-        public position_rfid PositionRfid
-        {
-            get
-            {
-                return _position_rfid;
-            }
-            set
-            {
-                if (value == _position_rfid || value == null)
-                    return;
-                _position_rfid = value;
-                _rfidModel.position_id = _position_rfid.id;
-                _rfidAddModel.position_id = _position_rfid.id;
-                base.OnPropertyChanged("PositionRfid");
-            }
-        }
+        
 
         /// <summary>
         /// rfid天线实体
@@ -228,26 +211,6 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        /// <summary>
-        /// 所有未安装天线的位置列表
-        /// </summary>
-        public List<position_rfid> PositionList
-        {
-            get
-            {
-                if (_positionList == null)
-                    _positionList = positionService.GetAllByStatus(0);
-                return _positionList;
-            }
-            set
-            {
-                if (value == _positionList)
-                    return;
-                _positionList = value;
-                base.OnPropertyChanged("PositionList");
-            }
-        }
-
         #endregion
 
         #region 方法
@@ -278,7 +241,7 @@ namespace PFTSDesktop.ViewModel
                 model.no = _rfidAddModel.No;
                 model.name = _rfidAddModel.Name;
                 model.create_time = DateTime.Now;
-                model.position_id = _rfidAddModel.position_id;
+               
                 result = rfidService.Insert(model);
 
             }
@@ -286,7 +249,7 @@ namespace PFTSDesktop.ViewModel
             {
                 _dev_rfid.no = _rfidModel.No;
                 _dev_rfid.name = _rfidModel.Name;
-                _dev_rfid.position_id = _rfidModel.position_id;
+                
                 result = rfidService.ModifyLocker(_dev_rfid);
             }
             if (result)

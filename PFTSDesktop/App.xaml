@@ -19,15 +19,15 @@
             <DataTemplate DataType="{x:Type vm:CameraManagerViewModel}">
                 <vw:CameraManagerControl/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type vm:RFIDManagerViewModel}">
                 <vw:RFIDManagerControl/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type vm:VestManagerViewModel}">
                 <vw:VestManagerControl/>
             </DataTemplate>
-            
+
             <SolidColorBrush x:Key="windowStyle" Color="#17b38e" />
             <Style x:Key="dataGridStyle" TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center" />

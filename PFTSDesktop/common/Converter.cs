@@ -15,19 +15,15 @@ namespace PFTSDesktop.common
         public VestStatusConverter() { }
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            int status = (int)value;
+            int? status = (int?)value;
             string strType = "";
-            if (status == 0)
+            if (status == null)
             {
                 strType = "未穿戴";
             }
-            else if (status == 1)
-            {
-                strType = "已穿戴";
-            }
             else
             {
-                throw new Exception("绑定类型不正确");
+                strType = "已穿戴";
             }
             return strType;
         }

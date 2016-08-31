@@ -9,21 +9,21 @@ namespace PFTSScene
     class PFTSResourceLoader
     {
         // 所有房间
-        private List<PFTSModel.room> _rooms;
+        private List<PFTSModel.rfid_room> _rooms;
         private List<PFTSModel.position_camera> _camera_positions;
-        private List<PFTSModel.position_rfid> _rfid_positions;
+        //private List<PFTSModel.position_rfid> _rfid_positions;
         private List<PFTSModel.path_rfid> _rfid_paths;
 
         /// <summary>
         /// 获取所有room数据
         /// </summary>
-        public List<PFTSModel.room> Rooms
+        public List<PFTSModel.rfid_room> Rooms
         {
             get
             {
                 if (_rooms == null)
                 {
-                    _rooms = (new PFTSModel.Service<PFTSModel.room>()).GetAll();
+                    _rooms = (new PFTSModel.Service<PFTSModel.rfid_room>()).GetAll();
                 }
                 return _rooms;
             }
@@ -44,20 +44,20 @@ namespace PFTSScene
             }
         }
 
-        /// <summary>
-        /// 获取所有rfid天线位置数据
-        /// </summary>
-        public List<PFTSModel.position_rfid> PositionRFIDs
-        {
-            get
-            {
-                if (_rfid_positions == null)
-                {
-                    _rfid_positions = (new PFTSModel.Service<PFTSModel.position_rfid>()).GetAll();
-                }
-                return _rfid_positions;
-            }
-        }
+        ///// <summary>
+        ///// 获取所有rfid天线位置数据
+        ///// </summary>
+        //public List<PFTSModel.position_rfid> PositionRFIDs
+        //{
+        //    get
+        //    {
+        //        if (_rfid_positions == null)
+        //        {
+        //            _rfid_positions = (new PFTSModel.Service<PFTSModel.position_rfid>()).GetAll();
+        //        }
+        //        return _rfid_positions;
+        //    }
+        //}
 
         /// <summary>
         /// 获取所有路径信息

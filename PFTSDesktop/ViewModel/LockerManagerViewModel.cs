@@ -2,7 +2,6 @@
 using PFTSDesktop.Model;
 using PFTSDesktop.View.DeviceManager;
 using PFTSModel;
-using PFTSModel.Entitys;
 using PFTSUITemplate.Controls;
 using PFTSUITemplate.Element;
 using System;
@@ -24,18 +23,18 @@ namespace PFTSDesktop.ViewModel
         private LockerModel _lockerAddModel;
         private RelayCommand _editLockerCommand;
         private RelayCommand _addLockerCommand;
-        private LockerInfoEntity _dev_locker;
+        private view_locker_info _dev_locker;
         private static LockerManagerViewModel instance;
         private DevLockerService lockerService;
         private RelayCommand _getLockerListCommand;
-        private List<LockerInfoEntity> _lockerList;
+        private List<view_locker_info> _lockerList;
         private int type;
         #endregion
 
         public LockerManagerViewModel()
         {
             lockerService = new DevLockerService();
-            _dev_locker = new LockerInfoEntity();
+            _dev_locker = new view_locker_info();
 
             _lockerAddModel = new LockerModel();
             _lockerModel = new LockerModel();
@@ -115,13 +114,13 @@ namespace PFTSDesktop.ViewModel
         #endregion
 
         #region 属性
-        public LockerInfoEntity DevLocker
+        public view_locker_info DevLocker
         {
             get
             {
                 if (_dev_locker == null)
                 {
-                    _dev_locker = new LockerInfoEntity();
+                    _dev_locker = new view_locker_info();
                 }
                 return _dev_locker;
             }
@@ -168,7 +167,7 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<LockerInfoEntity> LockerList
+        public List<view_locker_info> LockerList
         {
             get
             {
@@ -298,20 +297,20 @@ namespace PFTSDesktop.ViewModel
         }
         private void QueryData()
         {
-            LockerList = lockerService.GetPageLockerByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+            LockerList = lockerService.GetPageByStatus(null, (PageIndex - 1) * PageSize, PageSize);
         }
 
         private void initData()
         {
-            TotalCount = lockerService.GetLockerCount(null);
+            TotalCount = lockerService.GetCount(null);
             if (TotalCount == 0)
             {
-                LockerList = new List<LockerInfoEntity>();
+                LockerList = new List<view_locker_info>();
                 PageIndex = 0;
             }
             else
             {
-                LockerList = lockerService.GetPageLockerByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+                LockerList = lockerService.GetPageByStatus(null, (PageIndex - 1) * PageSize, PageSize);
             }
         }
         #endregion

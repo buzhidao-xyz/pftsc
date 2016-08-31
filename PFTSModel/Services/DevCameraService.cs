@@ -34,25 +34,30 @@ namespace PFTSModel.Services
             }
             return null;
         }
-
-        /// <summary>
-        /// 获取摄像头记录总数
-        /// </summary>
-        /// <param name="status"></param>
-        /// <returns></returns>
-        public int GetCount(System.Nullable<int> status)
+        public int GetCount(bool? used)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
                     System.Data.Linq.Table<dev_camera> table = db.GetTable<dev_camera>();
-                    var query = from q in table
-                                select q;
-
-                    if (status != null)
+                    IQueryable<dev_camera> query = null;
+                    if (used == null)
                     {
-                        query = query.Where(p => p.status == status);
+                        query = from q in table
+                                select q;
+                    }
+                    else if (used.Value)
+                    {
+                        query = from q in table
+                                where q.position_id != null
+                                select q;
+                    }
+                    else
+                    {
+                        query = from q in table
+                                where q.position_id == null
+                                select q;
                     }
 
                     return query.Count();
@@ -66,23 +71,35 @@ namespace PFTSModel.Services
         }
 
         /// <summary>
-        /// 根据R摄像头状态获取数据列表（分页）
+        /// 根据状态获取数据列表（分页）
         /// </summary>
         /// <param name="status">状态，为null查询所有</param>
         /// <returns></returns>
-        public List<dev_camera> GetPageByStatus(System.Nullable<int> status, int pageIndex, int pageSize)
+        public List<dev_camera> GetPageByStatus(bool? used, int pageIndex, int pageSize)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
                     System.Data.Linq.Table<dev_camera> table = db.GetTable<dev_camera>();
-                    var query = from q in table
-                                select q;
-
-                    if (status != null)
+                    IQueryable<dev_camera> query = null;
+                    if (used == null)
                     {
-                        query = query.Where(p => p.status == status);
+                         query = from q in table
+                                    select q;
+                    }
+                    else if (used.Value)
+                    {
+                         query = from q in table
+                                 where q.position_id != null
+                                    select q;
+                    }
+                    else
+                    {
+                         query = from q in table
+                                 where q.position_id == null
+                                    select q;
+                       
                     }
                     query = query.Skip(pageIndex).Take(pageSize);
                     return query.ToList();
@@ -94,7 +111,6 @@ namespace PFTSModel.Services
             }
             return null;
         }
-
         /// <summary>
         /// 通过no获取记录值
         /// </summary>

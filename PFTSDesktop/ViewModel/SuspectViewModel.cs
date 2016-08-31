@@ -2,7 +2,6 @@
 using PFTSDesktop.Model;
 using PFTSDesktop.Properties;
 using PFTSModel;
-using PFTSModel.Entitys;
 using PFTSUITemplate.Controls;
 using PFTSUITemplate.Element;
 using System;
@@ -22,16 +21,16 @@ namespace PFTSDesktop.ViewModel
         private ButtonTemplet _preBtn;
         private SuspectModel _suspectModel;
         private List<officer> _officers;
-        private List<VestInfoEntity> _devVests;
+        private List<view_vest_info> _devVests;
         private OfficerService _officerService;
         private DevVestService _devVestService;
         private DevLockerService _devLockerService;
-        private List<LockerInfoEntity> _devLockers;
-        private dev_lockers _devLocker;
+        private List<view_locker_info> _devLockers;
+        private view_locker_info _devLocker;
         private officer _officer;
-        private dev_vest _devVert;
+        private view_vest_info _devVert;
         private SuspectService _supectService;
-        private List<BtrackerInfoEntity> _btrackers;
+        private List<view_btracker_info> _btrackers;
         private string[] _sexOpetions;
 
         public SuspectViewModel()
@@ -43,8 +42,8 @@ namespace PFTSDesktop.ViewModel
             _supectService = new SuspectService();
 
             _officer = new officer();
-            _devVert = new dev_vest();
-            _devLocker = new dev_lockers();
+            _devVert = new view_vest_info();
+            _devLocker = new view_locker_info();
         }
 
         #region 属性
@@ -85,12 +84,12 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<VestInfoEntity> DevVests
+        public List<view_vest_info> DevVests
         {
             get
             {
                 if (_devVests == null)
-                    _devVests = _devVestService.GetVestByStatus(0);
+                    _devVests = _devVestService.GetVestByStatus(false);
                 return _devVests;
             }
             set
@@ -102,12 +101,12 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<LockerInfoEntity> DevLockers
+        public List<view_locker_info> DevLockers
         {
             get
             {
                 if (_devLockers == null)
-                    _devLockers = _devLockerService.GetLockersByStatus(0);
+                    _devLockers = _devLockerService.GetLockersByStatus(false);
                 return _devLockers;
             }
             set
@@ -119,7 +118,7 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public dev_lockers DevLocker
+        public view_locker_info DevLocker
         {
             get
             {
@@ -151,7 +150,7 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public dev_vest DevVest
+        public view_vest_info DevVest
         {
             get
             {
@@ -183,7 +182,7 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
-        public List<BtrackerInfoEntity> Btrackers
+        public List<view_btracker_info> Btrackers
         {
             get
             {
@@ -279,7 +278,9 @@ namespace PFTSDesktop.ViewModel
             btk.locker_id = _suspectModel.LockerId;
             btk.private_goods = _suspectModel.PirvateGoods;
             btk.in_time = DateTime.Now;
-            bool result = _supectService.AddBreackerTransaction(btk);
+            btk.room_id = 1;
+
+            bool result = (new PFTSModel.Services.BTrackerService()).Insert(btk);
             if (result)
             {
                 MessageWindow.Show("嫌疑人添加成功", "系统提示");

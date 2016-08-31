@@ -3,41 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PFTSModel.Entitys;
 
 namespace PFTSModel
 {
     public class DevVestService : Service<dev_vest>
     {
         /// <summary>
-        /// 根据服装状态获取数据列表
+        /// 通过马甲使用状态查询马甲
         /// </summary>
-        /// <param name="status">状态，为null查询所有</param>
+        /// <param name="used"></param>
         /// <returns></returns>
-        public List<VestInfoEntity> GetVestByStatus(System.Nullable<int> status)
+        public List<view_vest_info> GetVestByStatus(bool? used)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
-                    var query = from q in table
-                                select new VestInfoEntity
-                                {
-                                    id = q.id,
-                                    no_left = q.no_left,
-                                    name = q.name,
-                                    create_time = q.create_time,
-                                    btracker_name = q.btracker1.name,
-                                    status = q.status
-                                };
-
-                    if (status != null)
+                    System.Data.Linq.Table<view_vest_info> table = db.GetTable<view_vest_info>();
+                    if (used == null)
                     {
-                        query = query.Where(p => p.status == status);
-                    }
+                        var query = from q in table
+                                    select q;
+                        return query.ToList();
+                    }else if (used.Value)
+                    {
+                        var query = from q in table
+                                    where q.btracker_vest_id != null
+                                    select q;
+                        return query.ToList();
 
-                    return query.ToList();
+                    }
+                    else
+                    {
+                        var query = from q in table
+                                    where q.btracker_vest_id == null
+                                    select q;
+                        return query.ToList();
+
+                    }
                 }
             }
             catch (Exception e)
@@ -47,11 +50,6 @@ namespace PFTSModel
             return null;
         }
 
-        /// <summary>
-        /// 获取服装记录总数
-        /// </summary>
-        /// <param name="status"></param>
-        /// <returns></returns>
         public int GetVestCount(System.Nullable<int> status)
         {
             try
@@ -78,34 +76,57 @@ namespace PFTSModel
         }
 
         /// <summary>
-        /// 根据服装状态获取数据列表（分页）
+        /// 根据物品箱状态获取数据列表（分页）
         /// </summary>
         /// <param name="status">状态，为null查询所有</param>
         /// <returns></returns>
-        public List<VestInfoEntity> GetPageVestByStatus(System.Nullable<int> status, int pageIndex, int pageSize)
+        public List<view_vest_info> GetPageVestByStatus(bool? used, int pageIndex, int pageSize)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
-                    var query = from q in table
-                                 select new VestInfoEntity
-                                 {
-                                     id = q.id,
-                                     no_left = q.no_left,
-                                     name = q.name,
-                                     create_time = q.create_time,
-                                     btracker_name = q.btracker1.name,
-                                     status = q.status
-                                 };
-
-                    if (status != null)
+                    System.Data.Linq.Table<view_vest_info> table = db.GetTable<view_vest_info>();
+                    if (used == null)
                     {
-                        query = query.Where(p => p.status == status);
+                        var query = from q in table
+                                    select q;
+                        query = query.Skip(pageIndex).Take(pageSize);
+                        return query.ToList();
                     }
-                    query = query.Skip(pageIndex).Take(pageSize);
-                    return query.ToList();
+                    else if (used.Value)
+                    {
+                        var query = from q in table
+                                    where q.btracker_vest_id != null
+                                    select q;
+                        query = query.Skip(pageIndex).Take(pageSize);
+                        return query.ToList();
+                    }
+                    else
+                    {
+                        var query = from q in table
+                                    where q.btracker_vest_id == null
+                                    select q;
+                        query = query.Skip(pageIndex).Take(pageSize);
+                        return query.ToList();
+                    }
+                    //var query = from q in table
+                    //             select new VestInfoEntity
+                    //             {
+                    //                 id = q.id,
+                    //                 no_left = q.no_left,
+                    //                 name = q.name,
+                    //                 create_time = q.create_time,
+                    //                 btracker_name = q.btracker1.name,
+                    //                 status = q.status
+                    //             };
+
+                    //if (status != null)
+                    //{
+                    //    query = query.Where(p => p.status == status);
+                    //}
+                    //query = query.Skip(pageIndex).Take(pageSize);
+                    //return query.ToList();
                 }
             }
             catch (Exception e)
@@ -169,7 +190,7 @@ namespace PFTSModel
             return null;
         }
 
-        public bool ModifyVest(VestInfoEntity model)
+        public bool ModifyVest(view_vest_info model)
         {
             try
             {
