@@ -50,19 +50,26 @@ namespace PFTSModel
             return null;
         }
 
-        public int GetVestCount(System.Nullable<int> status)
+        public int GetVestCount(bool? used)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    System.Data.Linq.Table<dev_vest> table = db.GetTable<dev_vest>();
+                    System.Data.Linq.Table<view_vest_info> table = db.GetTable<view_vest_info>();
                     var query = from q in table
                                 select q;
 
-                    if (status != null)
+                    if (used != null)
                     {
-                        query = query.Where(p => p.status == status);
+                        if (used.Value)
+                        {
+                            query = query.Where(p => p.btracker_vest_id != null);
+                        }
+                        else
+                        {
+                            query = query.Where(p => p.btracker_vest_id == null);
+                        }
                     }
 
                     return query.Count();
