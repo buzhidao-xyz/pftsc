@@ -62,6 +62,26 @@ namespace PFTSModel.Services
             return null;
         }
 
+        public view_rfid_info GetInfoByNo(string no)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<view_rfid_info> table = db.GetTable<view_rfid_info>();
+                    var query = from dv in table
+                                where dv.no == no
+                                select dv;
+                    return query.FirstOrDefault();
+                }
+            }
+            catch
+            {
+
+            }
+            return null;
+        }
+
         public int GetCount(bool? used)
         {
             try
