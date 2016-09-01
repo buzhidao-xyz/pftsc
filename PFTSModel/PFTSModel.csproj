@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\BTrackerService.cs" />
+    <Compile Include="Services\CameraPositionService.cs" />
     <Compile Include="Services\DevCameraService.cs" />
     <Compile Include="Services\DevLockerService.cs" />
     <Compile Include="Services\DevRFIDService.cs" />
@@ -58,6 +59,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\RFIDRoomService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\SuspectService.cs" />
   </ItemGroup>

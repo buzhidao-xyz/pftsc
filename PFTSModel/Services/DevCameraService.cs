@@ -85,21 +85,21 @@ namespace PFTSModel.Services
                     IQueryable<view_camera_info> query = null;
                     if (used == null)
                     {
-                         query = from q in table
-                                    select q;
+                        query = from q in table
+                                select q;
                     }
                     else if (used.Value)
                     {
-                         query = from q in table
-                                 where q.position_id != null
-                                    select q;
+                        query = from q in table
+                                where q.position_id != null
+                                select q;
                     }
                     else
                     {
-                         query = from q in table
-                                 where q.position_id == null
-                                    select q;
-                       
+                        query = from q in table
+                                where q.position_id == null
+                                select q;
+
                     }
                     query = query.Skip(pageIndex).Take(pageSize);
                     return query.ToList();
@@ -151,6 +151,7 @@ namespace PFTSModel.Services
                     camera.port = model.port;
                     camera.admin = model.admin;
                     camera.password = model.password;
+                    camera.position_id = model.position_id;
                     db.SubmitChanges();
                 }
                 return true;

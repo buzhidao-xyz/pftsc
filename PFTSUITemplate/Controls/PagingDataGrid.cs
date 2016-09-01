@@ -184,10 +184,11 @@ namespace PFTSUITemplate.Controls
         public static readonly DependencyProperty TotalProperty =
             DependencyProperty.Register("Total", typeof(int), typeof(PagingDataGrid), new UIPropertyMetadata(0, (s, e) =>
             {
-                if (e.NewValue != e.OldValue) {
+                if (e.NewValue != e.OldValue)
+                {
                     PagingDataGrid dp = s as PagingDataGrid;
                     //dp.UpdatePager();
-                    dp.Last_Click();
+                    //dp.Last_Click();
                 }
             }));
 

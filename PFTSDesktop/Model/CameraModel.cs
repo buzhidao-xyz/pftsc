@@ -33,6 +33,7 @@ namespace PFTSDesktop.Model
         public string Port { get; set; }
         public string Admin { get; set; }
         public string Password { get; set; }
+        public int? Position_id { get; set; }
         #endregion
 
         #region IDataErrorInfo Members

@@ -29,7 +29,7 @@ namespace PFTSDesktop.Model
         public int Id { get; set; }
         public string No { get; set; }
         public string OldNo { get; set; }
-        public int position_id { get; set; }
+        public int? Position_id { get; set; }
         #endregion
 
         #region IDataErrorInfo Members
