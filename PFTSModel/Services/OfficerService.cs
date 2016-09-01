@@ -64,13 +64,20 @@ namespace PFTSModel
         /// 获取警员列表
         /// </summary>
         /// <returns></returns>
-        public List<officer> GetOfficerList()
+        public List<officer> GetOfficerList(int skip, int limit)
         {
             try
             {
-                List<officer> OfficerList = base.GetAll();
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<officer> table = db.GetTable<officer>();
+                    var query = from q in table
+                                select q;
 
-                return OfficerList;
+                    query = query.Skip(skip).Take(limit);
+
+                    return query.ToList();
+                }
             }
             catch
             {
@@ -79,6 +86,11 @@ namespace PFTSModel
             return null;
         }
 
+        /// <summary>
+        /// 更新警员
+        /// </summary>
+        /// <param name="PoliceInfo"></param>
+        /// <returns></returns>
         public bool UpPoliceByID(officer PoliceInfo)
         {
             try
@@ -108,6 +120,26 @@ namespace PFTSModel
             }
 
             return false;
+        }
+
+        public int GetOfficerCount()
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<officer> table = db.GetTable<officer>();
+                    var query = from q in table
+                                select q;
+
+                    return query.Count();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return 0;
         }
     }
 }

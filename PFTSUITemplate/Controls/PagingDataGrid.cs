@@ -188,7 +188,7 @@ namespace PFTSUITemplate.Controls
                 {
                     PagingDataGrid dp = s as PagingDataGrid;
                     //dp.UpdatePager();
-                    dp.Last_Click();
+                    //dp.Last_Click();
                 }
             }));
 
