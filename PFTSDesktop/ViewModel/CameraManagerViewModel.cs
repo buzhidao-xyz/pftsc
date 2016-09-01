@@ -39,7 +39,7 @@ namespace PFTSDesktop.ViewModel
             cameraService = new DevCameraService();
             positionService = new CameraPositionService();
             _dev_camera = new view_camera_info();
-
+            _positionModel = new view_position_camera_info();
             _cameraAddModel = new CameraModel();
             _cameraModel = new CameraModel();
             initData();
@@ -118,14 +118,27 @@ namespace PFTSDesktop.ViewModel
         #endregion
 
         #region 属性
+        private int _positionId;
+        public int PositionId
+        {
+            get
+            {
+                return _positionId;
+            }
+            set
+            {
+                if (value == _positionId)
+                    return;
+                _positionId = value;
+
+                base.OnPropertyChanged("PositionId");
+            }
+        }
+
         public view_position_camera_info PositionModel
         {
             get
             {
-                if (_positionModel == null)
-                {
-                    _positionModel = new view_position_camera_info();
-                }
                 return _positionModel;
             }
             set
@@ -133,8 +146,7 @@ namespace PFTSDesktop.ViewModel
                 if (value == _positionModel || value == null)
                     return;
                 _positionModel = value;
-                _cameraModel.Position_id = _positionModel.id;
-                _cameraAddModel.Position_id = _positionModel.id;
+
                 base.OnPropertyChanged("PositionModel");
             }
         }
@@ -143,7 +155,7 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                _positionList = positionService.GetPositionByStatus(false);
+                _positionList = positionService.GetPositionByStatus(null);
                 return _positionList;
             }
             set
@@ -177,7 +189,6 @@ namespace PFTSDesktop.ViewModel
                 _cameraModel.Port = _dev_camera.port.ToString();
                 _cameraModel.Admin = _dev_camera.admin;
                 _cameraModel.Password = _dev_camera.password;
-
                 base.OnPropertyChanged("DevCamera");
             }
         }
@@ -261,9 +272,8 @@ namespace PFTSDesktop.ViewModel
                 model.admin = _cameraAddModel.Admin;
                 model.password = _cameraAddModel.Password;
                 model.create_time = DateTime.Now;
-                model.position_id = _cameraAddModel.Position_id;
+                model.position_id = _positionModel.id;
                 result = cameraService.Insert(model);
-
             }
             else
             {
@@ -273,7 +283,7 @@ namespace PFTSDesktop.ViewModel
                 _dev_camera.port = int.Parse(_cameraModel.Port);
                 _dev_camera.admin = _cameraModel.Admin;
                 _dev_camera.password = _cameraModel.Password;
-                _dev_camera.position_id = _cameraModel.Position_id;
+                _dev_camera.position_id = _positionModel.id;
                 result = cameraService.ModifyCamera(_dev_camera);
             }
             if (result)

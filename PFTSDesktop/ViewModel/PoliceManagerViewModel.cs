@@ -302,19 +302,20 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public void PoliceUp(Object obj)
         {
+            Button btn = (Button)obj;
+            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+
             if (PoliceInfo.sex == "女")
             {
-                Sex_Male = false;
+                SexIsChecked_Male = false;
                 Sex_FeMale = true;
             }
             else
             {
-                Sex_Male = true;
+                SexIsChecked_Male = true;
                 Sex_FeMale = false;
             }
 
-            Button btn = (Button)obj;
-            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
         /// <summary>
