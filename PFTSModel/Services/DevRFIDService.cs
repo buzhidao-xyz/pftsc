@@ -142,6 +142,9 @@ namespace PFTSModel.Services
             return null;
         }
 
+
+       
+
         public bool ModifyLocker(view_rfid_info model)
         {
             try
@@ -151,6 +154,7 @@ namespace PFTSModel.Services
                     dev_rfid rfid = db.dev_rfid.SingleOrDefault<dev_rfid>(rec => rec.id == model.id);
                     rfid.name = model.name;
                     rfid.no = model.no;
+                    rfid.room_id = model.room_id;
                     db.SubmitChanges();
                 }
                 return true;

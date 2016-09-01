@@ -237,14 +237,6 @@ namespace PFTSModel
 			}
 		}
 		
-		public System.Data.Linq.Table<view_position_camera_info> view_position_camera_info
-		{
-			get
-			{
-				return this.GetTable<view_position_camera_info>();
-			}
-		}
-		
 		public System.Data.Linq.Table<view_rfid_info> view_rfid_info
 		{
 			get
@@ -258,6 +250,14 @@ namespace PFTSModel
 			get
 			{
 				return this.GetTable<view_rfid_room_info>();
+			}
+		}
+		
+		public System.Data.Linq.Table<view_position_camera_info> view_position_camera_info
+		{
+			get
+			{
+				return this.GetTable<view_position_camera_info>();
 			}
 		}
 	}
@@ -4134,69 +4134,6 @@ namespace PFTSModel
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_position_camera_info")]
-	public partial class view_position_camera_info
-	{
-		
-		private int _id;
-		
-		private int _room_id;
-		
-		private System.Nullable<int> _dev_camera_id;
-		
-		public view_position_camera_info()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_id", DbType="Int NOT NULL")]
-		public int room_id
-		{
-			get
-			{
-				return this._room_id;
-			}
-			set
-			{
-				if ((this._room_id != value))
-				{
-					this._room_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dev_camera_id", DbType="Int")]
-		public System.Nullable<int> dev_camera_id
-		{
-			get
-			{
-				return this._dev_camera_id;
-			}
-			set
-			{
-				if ((this._dev_camera_id != value))
-				{
-					this._dev_camera_id = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_rfid_info")]
 	public partial class view_rfid_info
 	{
@@ -4390,6 +4327,105 @@ namespace PFTSModel
 				if ((this._rfid_room_id != value))
 				{
 					this._rfid_room_id = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_position_camera_info")]
+	public partial class view_position_camera_info
+	{
+		
+		private int _id;
+		
+		private int _room_id;
+		
+		private System.Nullable<int> _position_id;
+		
+		private System.Nullable<int> _dev_camera_id;
+		
+		private string _name;
+		
+		public view_position_camera_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_id", DbType="Int NOT NULL")]
+		public int room_id
+		{
+			get
+			{
+				return this._room_id;
+			}
+			set
+			{
+				if ((this._room_id != value))
+				{
+					this._room_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_position_id", DbType="Int")]
+		public System.Nullable<int> position_id
+		{
+			get
+			{
+				return this._position_id;
+			}
+			set
+			{
+				if ((this._position_id != value))
+				{
+					this._position_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dev_camera_id", DbType="Int")]
+		public System.Nullable<int> dev_camera_id
+		{
+			get
+			{
+				return this._dev_camera_id;
+			}
+			set
+			{
+				if ((this._dev_camera_id != value))
+				{
+					this._dev_camera_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
 				}
 			}
 		}

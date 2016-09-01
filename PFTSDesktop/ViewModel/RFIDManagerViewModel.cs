@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace PFTSDesktop.ViewModel
 {
-    public class RFIDManagerViewModel :  WorkspaceViewModel, IDataErrorInfo
+    public class RFIDManagerViewModel : WorkspaceViewModel, IDataErrorInfo
     {
         #region 私有变量
         private RelayCommand _ediRFIDDlgCommand;
@@ -29,13 +29,16 @@ namespace PFTSDesktop.ViewModel
         private DevRFIDService rfidService;
         private List<view_rfid_info> _rfidList;
         private int type;
-  
+        private view_rfid_room_info _positionModel;
+        private List<view_rfid_room_info> _positionList;
+        private RFIDRoomService positionService;
+
         #endregion
 
         public RFIDManagerViewModel()
         {
             rfidService = new DevRFIDService();
-
+            positionService = new RFIDRoomService();
             _dev_rfid = new view_rfid_info();
 
             _rfidAddModel = new RFIDModel();
@@ -129,7 +132,42 @@ namespace PFTSDesktop.ViewModel
 
         #region 属性
 
-        
+        public view_rfid_room_info PositionModel
+        {
+            get
+            {
+                if (_positionModel == null)
+                {
+                    _positionModel = new view_rfid_room_info();
+                }
+                return _positionModel;
+            }
+            set
+            {
+                if (value == _positionModel || value == null)
+                    return;
+                _positionModel = value;
+                _rfidModel.Position_id = _positionModel.id;
+                _rfidAddModel.Position_id = _positionModel.id;
+                base.OnPropertyChanged("PositionModel");
+            }
+        }
+
+        public List<view_rfid_room_info> PositionList
+        {
+            get
+            {
+                _positionList = positionService.GetPositionByStatus(false);
+                return _positionList;
+            }
+            set
+            {
+                if (value == _positionList)
+                    return;
+                _positionList = value;
+                base.OnPropertyChanged("PositionList");
+            }
+        }
 
         /// <summary>
         /// rfid天线实体
@@ -241,7 +279,7 @@ namespace PFTSDesktop.ViewModel
                 model.no = _rfidAddModel.No;
                 model.name = _rfidAddModel.Name;
                 model.create_time = DateTime.Now;
-               
+                model.room_id = _rfidAddModel.Position_id;
                 result = rfidService.Insert(model);
 
             }
@@ -249,7 +287,7 @@ namespace PFTSDesktop.ViewModel
             {
                 _dev_rfid.no = _rfidModel.No;
                 _dev_rfid.name = _rfidModel.Name;
-                
+                _dev_rfid.room_id = _rfidModel.Position_id;
                 result = rfidService.ModifyLocker(_dev_rfid);
             }
             if (result)

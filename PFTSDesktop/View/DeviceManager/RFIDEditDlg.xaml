@@ -90,7 +90,7 @@
             <Label Content="位 置：" Grid.Row="4" Grid.Column="0"/>
             <ComboBox Grid.Row="4" Grid.Column="1" Name="cmbOfficer" Style="{StaticResource comboxStyleEx}"
 				   ItemsSource="{Binding PositionList, Mode=OneTime}" Margin="0,0,20,0"
-				   SelectedItem="{Binding PositionRfid, ValidatesOnDataErrors=True}"
+				   SelectedItem="{Binding PositionModel, ValidatesOnDataErrors=True}"
 				   DisplayMemberPath="name"/>
             <Button Grid.Row="5" Grid.Column="1" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
                 HorizontalAlignment="Right" Content="保    存" Command="{Binding EditRFIDCommand}"  CommandParameter="{Binding ElementName=main}"
