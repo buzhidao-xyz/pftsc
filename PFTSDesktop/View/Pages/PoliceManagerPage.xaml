@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:Element="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
       xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"  
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
       x:Name="PoliceManagePage"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -47,7 +48,13 @@
                     Command="{Binding PoliceManageCommand}" CommandParameter="{Binding ElementName=PoliceManageBtn}"/>
         </Grid>
 
-        <Element:PageDataGridEx SelectedItem="{Binding GetPoliceInfo}" Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None" ItemsSource="{Binding GetPoliceList}">
+        <Element:PageDataGridEx SelectedItem="{Binding GetPoliceInfo}" Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None" ItemsSource="{Binding GetPoliceList}"
+                                 Total="{Binding TotalCount,Mode=TwoWay}" PageIndex="{Binding PageIndex,Mode=TwoWay}" PageSize="{Binding PageSize,Mode=TwoWay}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PagingChanged">
+                    <i:InvokeCommandAction  Command="{Binding NextPageSearchCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <Element:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="#" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding id}"/>
                 <DataGridTextColumn Header="警号"  Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding no}"/>

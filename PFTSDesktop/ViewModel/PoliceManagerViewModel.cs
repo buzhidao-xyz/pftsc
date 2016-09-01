@@ -32,6 +32,8 @@ namespace PFTSDesktop.ViewModel
             PoliceService = new OfficerService();
 
             PoliceInfo = new officer();
+
+            this.initData();
         }
 
         public static PoliceManagerViewModel GetInstance()
@@ -51,8 +53,6 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                PoliceList = PoliceService.GetOfficerList();
-
                 return PoliceList;
             }
             set
@@ -171,6 +171,44 @@ namespace PFTSDesktop.ViewModel
             return true;
         }
 
+
+        #region 分页相关事件
+
+        private RelayCommand _nextPageSearchCommand;
+        public ICommand NextPageSearchCommand
+        {
+            get
+            {
+                if (_nextPageSearchCommand == null)
+                {
+                    _nextPageSearchCommand = new RelayCommand(
+                            param => this.QueryData()
+                            );
+                }
+                return _nextPageSearchCommand;
+            }
+        }
+
+        private void QueryData()
+        {
+            PoliceList = PoliceService.GetOfficerList((PageIndex - 1) * PageSize, PageSize);
+        }
+
+        private void initData()
+        {
+            TotalCount = PoliceService.GetOfficerCount();
+            if (TotalCount == 0)
+            {
+                PoliceList = new List<officer>();
+                PageIndex = 0;
+            }
+            else
+            {
+                PoliceList = PoliceService.GetOfficerList((PageIndex - 1) * PageSize, PageSize);
+            }
+        }
+        #endregion
+
         /// <summary>
         /// 警员管理命令
         /// </summary>
@@ -192,7 +230,6 @@ namespace PFTSDesktop.ViewModel
             Button btn = (Button)obj;
             Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
-
 
         /// <summary>
         /// 性别选中命令
@@ -273,6 +310,9 @@ namespace PFTSDesktop.ViewModel
             {
                 MessageBox.Show("保存成功！");
 
+                //刷新列表数据
+                this.initData();
+
                 Button btn = (Button)obj;
                 Global.currentFrame.NavigationService.GoBack();
             }
@@ -345,6 +385,9 @@ namespace PFTSDesktop.ViewModel
             if (Result)
             {
                 MessageBox.Show("保存成功！");
+
+                //刷新列表数据
+                this.initData();
 
                 Button btn = (Button)obj;
                 Global.currentFrame.NavigationService.GoBack();
