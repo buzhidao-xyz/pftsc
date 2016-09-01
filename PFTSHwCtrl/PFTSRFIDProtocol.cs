@@ -44,7 +44,7 @@ namespace PFTSHwCtrl
         private ProtocolParseState m_state;
         // 嫌疑人参数
         private btracker m_paramBTracker;
-        private dev_rfid m_paramRFID;
+        private view_rfid_info m_paramRFID;
         #endregion
 
 
@@ -72,8 +72,8 @@ namespace PFTSHwCtrl
                 return m_paramBTracker;
             }
         }
-        
-        public dev_rfid DevRFID
+
+        public view_rfid_info DevRFID
         {
             private set
             {
@@ -111,7 +111,7 @@ namespace PFTSHwCtrl
             if (len < 5) return;
             this.State = ProtocolParseState.PPSParsing;
             string rfidNo = string.Format("{0:X2}",data[0]);
-            var devRfid = (new PFTSModel.Services.DevRFIDService()).GetByNo(rfidNo);
+            var devRfid = (new PFTSModel.Services.DevRFIDService()).GetInfoByNo(rfidNo);
             if (devRfid != null)
             {
                 this.DevRFID = devRfid;

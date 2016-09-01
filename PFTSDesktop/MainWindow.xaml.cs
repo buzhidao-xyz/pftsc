@@ -30,8 +30,14 @@ namespace PFTSDesktop
             // 
             m_rfidServer = new PFTSHwCtrl.PFTSRFIDServer("0.0.0.0",7500);
             m_rfidServer.Start();
+            m_rfidServer.BTrackerMove += M_rfidServer_BTrackerMove;
         }
-       
+
+        private void M_rfidServer_BTrackerMove(btracker btracker, view_rfid_info position)
+        {
+            MessageBox.Show(btracker.name + "移动到了" + position.room_name);
+        }
+
         private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton != MouseButton.Left) return;

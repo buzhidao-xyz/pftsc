@@ -8,12 +8,20 @@ using System.Threading.Tasks;
 
 namespace PFTSHwCtrl
 {
+    #region handler
+    // 点击实时画面
+    public delegate void BTrackerMoveToHandler(PFTSModel.btracker btracker, PFTSModel.view_rfid_info position);
+    #endregion
+
+
     public class PFTSRFIDServer
     {
         #region private member
         private string m_ipAddress;
         private int m_port;
         #endregion
+
+        public event BTrackerMoveToHandler BTrackerMove;
 
         /// <summary>
         /// 构造函数
@@ -50,19 +58,25 @@ namespace PFTSHwCtrl
                     if (rcvSize > 0)
                     {
                         var rets = pbff.Put(buffer, 0, rcvSize);
-                        //string str = System.Text.Encoding.Default.GetString(data,0,len);
-                        //var rets = buffer.Put(data, 0, len);
                         if (rets != null && rets.Count > 0)
                         {
                             foreach (var bt in rets)
                             {
                                 var protocol = PFTSRFIDProtocol.Parse(bt,bt.Count());
-                                if (protocol.State == PFTSRFIDProtocol.ProtocolParseState.PPSUnParse)
+                                if (protocol.State == PFTSRFIDProtocol.ProtocolParseState.PPSParsed)
                                 {
-                                    Console.Write("xx\n");
+                                    if (this.BTrackerMove != null)
+                                    {
+                                        this.BTrackerMove(protocol.BTracker, protocol.DevRFID);
+                                    }
                                 }
                             }
                         }
+                    }
+                    else
+                    {
+                        client.EndConnect(iar);
+                        break;
                     }
                 }
                 catch
