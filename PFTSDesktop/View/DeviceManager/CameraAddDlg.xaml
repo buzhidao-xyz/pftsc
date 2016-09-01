@@ -114,7 +114,7 @@
             <Label Content="位 置：" Grid.Row="8" Grid.Column="0"/>
             <ComboBox Grid.Row="8" Grid.Column="1" Name="cmbOfficer" Style="{StaticResource comboxStyleEx}"
 				   ItemsSource="{Binding PositionList, Mode=OneTime}" Margin="0,0,20,0"
-				   SelectedItem="{Binding PositionModel}"
+				   SelectedItem="{Binding PositionModel}" 
 				   DisplayMemberPath="name"/>
             <Button Grid.Row="9" Grid.Column="1" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
                 HorizontalAlignment="Right" Content="保    存" Command="{Binding AddCameraCommand}"  CommandParameter="{Binding ElementName=main}"
