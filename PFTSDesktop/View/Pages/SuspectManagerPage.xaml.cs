@@ -25,7 +25,7 @@ namespace PFTSDesktop.View.Pages
         {
             InitializeComponent();
 
-            this.DataContext = new SuspectViewModel();
+            this.DataContext =  SuspectViewModel.GetInstance();
         }
     }
 }

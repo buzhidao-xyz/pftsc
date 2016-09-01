@@ -1,6 +1,7 @@
 ﻿using PFTSDesktop.Command;
 using PFTSDesktop.Model;
 using PFTSDesktop.Properties;
+using PFTSDesktop.View.SuspectManager;
 using PFTSModel;
 using PFTSUITemplate.Controls;
 using PFTSUITemplate.Element;
@@ -32,6 +33,8 @@ namespace PFTSDesktop.ViewModel
         private SuspectService _supectService;
         private List<view_btracker_info> _btrackers;
         private string[] _sexOpetions;
+        private static SuspectViewModel instance;
+        private view_btracker_info _selectedBtracker;
 
         public SuspectViewModel()
         {
@@ -44,6 +47,16 @@ namespace PFTSDesktop.ViewModel
             _officer = new officer();
             _devVert = new view_vest_info();
             _devLocker = new view_locker_info();
+        }
+
+        public static SuspectViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new SuspectViewModel();
+            }
+
+            return instance;
         }
 
         #region 属性
@@ -196,6 +209,19 @@ namespace PFTSDesktop.ViewModel
                 base.OnPropertyChanged("Btrackers");
             }
         }
+
+        public view_btracker_info SelectedBreacker
+        {
+            get {
+                return _selectedBtracker;
+            }
+            set {
+                if (value == _selectedBtracker)
+                    return;
+                _selectedBtracker = value;
+                base.OnPropertyChanged("SelectedBreacker");
+            }
+        }
         #endregion
 
         #region command
@@ -258,7 +284,8 @@ namespace PFTSDesktop.ViewModel
 
         public void CheckGoods()
         {
-            MessageWindow.Show("ccccc");
+            CheckGoodsDlg dlg = new CheckGoodsDlg();
+            dlg.ShowDialog();
         }
         public void AddSupectPage(Object obj)
         {
