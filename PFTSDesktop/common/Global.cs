@@ -8,6 +8,7 @@ using System.Windows.Controls;
 
 namespace PFTSDesktop
 {
+
     public class Global
     {
         /// <summary>
@@ -18,6 +19,7 @@ namespace PFTSDesktop
         /// <summary>
         /// 程序主窗体
         /// </summary>
-        public static MainWindowViewModel currentMainWindow { get; set; }
+        public static MainWindow currentMainWindow { get; set; }
+
     }
 }

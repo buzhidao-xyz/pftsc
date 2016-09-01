@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace PFTSScene
 {
@@ -60,6 +62,7 @@ namespace PFTSScene
         private Dictionary<int, Tools.GridRoom> m_mapGridRooms = new Dictionary<int, Tools.GridRoom>();
         private Dictionary<int, int> m_mapPeopleCounts = new Dictionary<int, int>();
         private Dictionary<int, PFTSModel.btracker> m_mapBtrackers = new Dictionary<int, PFTSModel.btracker>();
+        private Dictionary<int, Image> m_mapPeopleImage = new Dictionary<int, Image>();
         private List<PFTSModel.btracker> m_listUnloadPeople = new List<PFTSModel.btracker>();
 
         private CameraMode m_cameraMode;
@@ -460,11 +463,98 @@ namespace PFTSScene
                     img.MouseLeave += Img_MouseLeave;
                     img.MouseUp += Img_MouseUp;
                     m_mapBtrackers.Add(btracker.id, btracker);
+                    m_mapPeopleImage.Add(btracker.id, img);
                 }
             }
             else
             {
                 m_listUnloadPeople.Add(btracker);
+            }
+        }
+
+        public void RefreshPeople(int id)
+        {
+            //异步刷新界面
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,(ThreadStart)delegate (){
+                PFTSModel.btracker btracker = (new PFTSModel.Services.BTrackerService()).Get(id);
+                if (btracker == null) return;
+                if (m_mapBtrackers.ContainsKey(id))
+                {
+                    PFTSModel.btracker oldBt = m_mapBtrackers[id];
+                    // same room
+                    if (oldBt.room_id == btracker.room_id) return;
+                    // leave
+
+                    if (btracker.room_id == null)
+                    {
+                        RemovePeople(btracker.id, oldBt.room_id.Value);
+                    }
+                    else
+                    {
+                        MovePeople(btracker, oldBt.room_id.Value);
+                    }
+                }
+                else if (btracker.status == 0 && btracker.room_id != null)
+                {
+                    AddAPeople(btracker);
+                }
+            });
+
+            
+        }
+
+        public void RemovePeople(int id,int roomId)
+        {
+            if (m_mapPeopleCounts.ContainsKey(roomId))
+            {
+                m_mapPeopleCounts[roomId] = m_mapPeopleCounts[roomId] - 1;
+                if (m_mapPeopleCounts[roomId] <= 0)
+                {
+                    m_mapPeopleCounts.Remove(roomId);
+                }
+                if (m_mapPeopleImage.ContainsKey(id))
+                {
+                    Image img = m_mapPeopleImage[id];
+                    Grid gd = (Grid)img.Parent;
+                    gd.Children.Remove(img);
+                    m_mapPeopleImage.Remove(id);
+                }
+                m_mapBtrackers.Remove(id);
+            }
+        }
+
+        public void MovePeople(PFTSModel.btracker newBtracker,int oldRoom)
+        {
+            if (oldRoom == newBtracker.room_id) return;
+            //if (m_mapPeopleCounts.ContainsKey(oldRoom))
+            //{
+            //    m_mapPeopleCounts[oldRoom] = m_mapPeopleCounts[oldRoom] - 1;
+            //    if (m_mapPeopleCounts[oldRoom] <= 0)
+            //    {
+            //        m_mapPeopleCounts.Remove(oldRoom);
+            //    }
+            //    if (m_mapPeopleImage.ContainsKey(newBtracker.id))
+            //    {
+            //        Image img = m_mapPeopleImage[newBtracker.id];
+            //        Grid gd = (Grid)img.Parent;
+            //        gd.Children.Remove(img);
+            //    }
+            //}
+            RemovePeople(newBtracker.id, oldRoom);
+            AddAPeople(newBtracker);
+        }
+
+        public void RefreshPeoples()
+        {
+            foreach (int i in m_mapPeopleImage.Keys)
+            {
+                Image img = m_mapPeopleImage[i];
+                Grid gd = (Grid)img.Parent;
+                gd.Children.Remove(img);
+            }
+            foreach (var bt in m_listUnloadPeople)
+            {
+                AddAPeople(bt);
             }
         }
 

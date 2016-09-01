@@ -30,12 +30,20 @@ namespace PFTSDesktop.View.Pages
             controlScene.RFIDMode = PFTSScene.RFIDMode.Monitoring;
             controlScene.BTrackerRealVideo += ControlScene_BTrackerRealVideo;
 
+            Global.currentMainWindow.BTrackerMoveDelegete += CurrentMainWindow_BTrackerMoveDelegete;
+
             var btrackers = new BTrackerService();
             var bs = btrackers.GetAllInscene();
             foreach (var b in bs)
             {
                 controlScene.AddAPeople(b);
             }
+        }
+
+        private void CurrentMainWindow_BTrackerMoveDelegete(int btrackerId)
+        {
+            controlScene.RefreshPeople(btrackerId);
+            //throw new NotImplementedException();
         }
 
         private void ControlScene_BTrackerRealVideo(btracker btracker)

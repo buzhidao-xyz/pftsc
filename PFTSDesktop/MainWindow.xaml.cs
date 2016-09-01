@@ -17,17 +17,31 @@ using PFTSUITemplate.Controls;
 
 namespace PFTSDesktop
 {
+    #region handler
+    // 点击实时画面
+    public delegate void BTrackerMoveHandler(int btrackerId);
+    #endregion
+
+
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : WindowTemplet
     {
         private PFTSHwCtrl.PFTSRFIDServer m_rfidServer;
-       
+
+        /// <summary>
+        /// 移动回调
+        /// </summary>
+        public event BTrackerMoveHandler BTrackerMoveDelegete;
+
+
         public MainWindow()
         {
             InitializeComponent();
             // 
+            Global.currentMainWindow = this;
+
             m_rfidServer = new PFTSHwCtrl.PFTSRFIDServer("0.0.0.0",7500);
             m_rfidServer.Start();
             m_rfidServer.BTrackerMove += M_rfidServer_BTrackerMove;
@@ -35,7 +49,16 @@ namespace PFTSDesktop
 
         private void M_rfidServer_BTrackerMove(btracker btracker, view_rfid_info position)
         {
-            MessageBox.Show(btracker.name + "移动到了" + position.room_name);
+            bool r = (new PFTSModel.Services.BTrackerService()).MoveTo(btracker.id, position);
+            if (!r)
+            {
+                MessageBox.Show(btracker.name + "移动至" + position.room_name + "失败");
+            }else
+            {
+//                MessageBox.Show(btracker.name + "移动到了" + position.room_name);
+                if (BTrackerMoveDelegete != null)
+                    BTrackerMoveDelegete(btracker.id);
+            }
         }
 
         private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
