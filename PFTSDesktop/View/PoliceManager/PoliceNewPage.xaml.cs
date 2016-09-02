@@ -38,23 +38,37 @@ namespace PFTSDesktop.View.PoliceManager
 
             this.DataContext = m_model;
 
-            m_fingerProxy = new PFTSHwCtrl.PFTSZKFingerProxy();
+            m_fingerProxy = PFTSHwCtrl.PFTSZKFingerProxy.GetInstance();
+
+            m_fingerProxy.FingerAcquire += M_fingerProxy_FingerAcquire;
+        }
+
+        private void M_fingerProxy_FingerAcquire(Bitmap img, byte[] buffer)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                imgFinger.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+                var officer = m_model.GetPoliceInfo;
+                officer.fingerprint1 = new Binary(buffer);
+                m_model.GetPoliceInfo = officer;
+            });
+//            throw new NotImplementedException();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Thread captureThread = new Thread(new ThreadStart(DoCapture));
-            captureThread.IsBackground = true;
-            captureThread.Start();
-            m_bIsTimeToDie = false;
+            //Thread captureThread = new Thread(new ThreadStart(DoCapture));
+            //captureThread.IsBackground = true;
+            //captureThread.Start();
+            //m_bIsTimeToDie = false;
 
-            try
-            {
-                m_fingerProxy.Open();
-            }catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //try
+            //{
+            //    m_fingerProxy.Open();
+            //}catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void DoCapture()

@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 using libzkfpcsharp;
 using System.IO;
 using System.Drawing;
+using System.Threading;
 
 namespace PFTSHwCtrl
 {
+
+    public delegate void FingerAcquireHander(Bitmap img,byte[] buffer);
+
     /// <summary>
     /// 只是识别器
     /// </summary>
@@ -18,6 +22,7 @@ namespace PFTSHwCtrl
         private bool m_bInit = false;
         private int m_devCount = 0;
         private bool m_bOpen = false;
+        private bool m_bIsTimeToDie = false;
         /// <summary>
         /// 指纹图谱缓存
         /// </summary>
@@ -25,12 +30,27 @@ namespace PFTSHwCtrl
         private byte[] m_capTmp = new byte[2048];
         private int m_cbCmbTmp;
 
+
+        public event FingerAcquireHander FingerAcquire;
+
         /// <summary>
         /// contructor
         /// </summary>
         public PFTSZKFingerProxy()
         {
             Init();
+        }
+
+        static PFTSZKFingerProxy m_instance;
+        public static PFTSZKFingerProxy GetInstance()
+        {
+            if (m_instance == null)
+            {
+                m_instance = new PFTSZKFingerProxy();
+                m_instance.Open();
+                m_instance.StartAcquireThread();
+            }
+            return m_instance;
         }
 
         /// <summary>
@@ -113,20 +133,51 @@ namespace PFTSHwCtrl
             }
         }
 
+
+        public void StartAcquireThread()
+        {
+            Thread captureThread = new Thread(new ThreadStart(DoCapture));
+            captureThread.IsBackground = true;
+            captureThread.Start();
+            m_bIsTimeToDie = false;
+        }
+
+        private void DoCapture()
+        {
+            while (!m_bIsTimeToDie)
+            {
+                var b = AcquireFingerprint();
+                if (b)
+                {
+                    var img = GetFingerImage();
+                    int size = 2048;
+                    var buffer = GetRaw(ref size);
+                    if (FingerAcquire != null)
+                    {
+                        FingerAcquire(img, buffer);
+                    }
+                    //this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    //{
+                    //    int size = 2048;
+                    //    var img = m_fingerProxy.GetFingerImage();
+                    //    var buffer = m_fingerProxy.GetRaw(ref size);
+                    //    imgFinger.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+
+                    //    var officer = m_model.GetPoliceInfo;
+                    //    officer.fingerprint1 = new Binary(buffer);
+                    //    m_model.GetPoliceInfo = officer;
+                    //});
+                }
+                Thread.Sleep(200);
+            }
+        }
+
         /// <summary>
         /// 获取指纹图片
         /// </summary>
         /// <returns></returns>
         public Bitmap GetFingerImage()
         {
-            //System.IO.MemoryStream ms = new System.IO.MemoryStream(buffer);
-            //BitmapImage bitmapImage = new BitmapImage();
-            //bitmapImage.BeginInit();
-            //bitmapImage.StreamSource = ms;
-            //bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            //bitmapImage.EndInit();
-            //ms.Dispose();
-            //return bitmapImage;
             MemoryStream ms = new MemoryStream();
             BitmapFormat.GetBitmap(m_FPBuffer, m_fpInstance.imageWidth, m_fpInstance.imageHeight, ref ms);
             Bitmap bmp = new Bitmap(ms);
