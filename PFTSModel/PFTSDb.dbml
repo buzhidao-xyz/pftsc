@@ -16,7 +16,9 @@
       <Column Name="private_goods" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
       <Column Name="room_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="recover" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="in_room_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="btracker_video_btracker_r" Member="video_btracker_r" ThisKey="id" OtherKey="btracker_id" Type="video_btracker_r" />
+      <Association Name="btracker_btracker_path" Member="btracker_path" ThisKey="id" OtherKey="btracker_id" Type="btracker_path" />
       <Association Name="dev_lockers_btracker" Member="dev_lockers" ThisKey="locker_id" OtherKey="id" Type="dev_lockers" IsForeignKey="true" />
       <Association Name="dev_vest_btracker" Member="dev_vest" ThisKey="vest_id" OtherKey="id" Type="dev_vest" IsForeignKey="true" />
       <Association Name="officer_btracker" Member="officer" ThisKey="officer_id" OtherKey="id" Type="officer" IsForeignKey="true" />
@@ -34,9 +36,11 @@
   <Table Name="dbo.btracker_path" Member="btracker_path">
     <Type Name="btracker_path">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="btracker_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="path_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="start_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="btracker_btracker_path" Member="btracker" ThisKey="btracker_id" OtherKey="id" Type="btracker" IsForeignKey="true" />
       <Association Name="path_rfid_btracker_path" Member="path_rfid" ThisKey="path_id" OtherKey="id" Type="path_rfid" IsForeignKey="true" />
     </Type>
   </Table>
@@ -149,6 +153,26 @@
       <Association Name="position_camera_video" Member="position_camera" ThisKey="position_id" OtherKey="id" Type="position_camera" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.view_btracker_info" Member="view_btracker_info">
+    <Type Name="view_btracker_info">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="no" Type="System.String" DbType="VarChar(36)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="number" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="vest_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="locker_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="officer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="in_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="out_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="private_goods" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+      <Column Name="room_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="recover" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="in_room_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="officer_name" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.view_vest_info" Member="view_vest_info">
     <Type Name="view_vest_info">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -186,6 +210,15 @@
       <Column Name="officer_name" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.view_position_camera_info" Member="view_position_camera_info">
+    <Type Name="view_position_camera_info">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="room_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="position_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dev_camera_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.view_rfid_info" Member="view_rfid_info">
     <Type Name="view_rfid_info">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -202,35 +235,6 @@
       <Column Name="name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
       <Column Name="map_inout" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="rfid_room_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.view_position_camera_info" Member="view_position_camera_info">
-    <Type Name="view_position_camera_info">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="room_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="position_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="dev_camera_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.view_btracker_info" Member="view_btracker_info">
-    <Type Name="view_btracker_info">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="no" Type="System.String" DbType="VarChar(36)" CanBeNull="true" />
-      <Column Name="name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
-      <Column Name="number" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
-      <Column Name="sex" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
-      <Column Name="vest_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="locker_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="officer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="in_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="out_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="private_goods" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
-      <Column Name="room_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="recover" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="officer_name" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
-      <Column Name="locker_name" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

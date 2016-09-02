@@ -55,7 +55,6 @@ namespace PFTSDesktop
                 MessageBox.Show(btracker.name + "移动至" + position.room_name + "失败");
             }else
             {
-//                MessageBox.Show(btracker.name + "移动到了" + position.room_name);
                 if (BTrackerMoveDelegete != null)
                     BTrackerMoveDelegete(btracker.id);
             }

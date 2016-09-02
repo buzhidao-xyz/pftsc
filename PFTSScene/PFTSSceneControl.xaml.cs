@@ -47,6 +47,7 @@ namespace PFTSScene
     #region handler
     // 点击实时画面
     public delegate void BTrackerRealVideoHandler(PFTSModel.btracker btracker);
+    public delegate void BTrackerPathHandler(int btrackerId);
     #endregion
 
     /// <summary>
@@ -75,9 +76,16 @@ namespace PFTSScene
         private ContextMenu m_peopleMenu;
         private bool m_loaded = false;
 
-        public event BTrackerRealVideoHandler BTrackerRealVideo;
-        //private List<InArrow> paths;
-        //private Tools.GridRoom gridRoom1;
+        /// <summary>
+        /// 实时画面回调
+        /// </summary>
+        public event BTrackerRealVideoHandler BTrackerRealVideoDelegate;
+        /// <summary>
+        /// 路径回调
+        /// </summary>
+        public event BTrackerPathHandler BTrackerPathDelegate;
+
+        private List<InArrow> m_paths = new List<InArrow>();
 
         /// <summary>
         /// 构造函数
@@ -107,6 +115,7 @@ namespace PFTSScene
             menuItem1.Click += MenuPeopleRealVideo_Click;
             var menuItem2 = new MenuItem();
             menuItem2.Header = "历史轨迹";
+            menuItem2.Click += MenuPeoplePath_Click;
             var menuItem3 = new MenuItem();
             menuItem3.Header = "取消";
             m_peopleMenu.Items.Add(menuItem1);
@@ -417,10 +426,10 @@ namespace PFTSScene
             ia.ArrowD = arrow;
             ia.RoomOrigin = origin;
             ia.RoomDest = dest;
-//            paths.Add(ia);
+            m_paths.Add(ia);
         }
 
-        private void RefreshPosition(InArrow ia)
+        private void RefreshPath(InArrow ia)
         {
             var transformStart = ia.RoomOrigin.TransformToAncestor(this.baseGrid);
             Point pointStart = transformStart.Transform(new Point(ia.RoomOrigin.ActualWidth / 2, ia.RoomOrigin.ActualHeight / 2));
@@ -515,9 +524,15 @@ namespace PFTSScene
                 if (m_mapPeopleImage.ContainsKey(id))
                 {
                     Image img = m_mapPeopleImage[id];
-                    Grid gd = (Grid)img.Parent;
-                    gd.Children.Remove(img);
-                    m_mapPeopleImage.Remove(id);
+                    if (img != null)
+                    {
+                        Grid gd = img.Parent as Grid;
+                        if (gd != null)
+                        {
+                            gd.Children.Remove(img);
+                        }
+                        m_mapPeopleImage.Remove(id);
+                    }
                 }
                 m_mapBtrackers.Remove(id);
             }
@@ -526,20 +541,6 @@ namespace PFTSScene
         public void MovePeople(PFTSModel.btracker newBtracker,int oldRoom)
         {
             if (oldRoom == newBtracker.room_id) return;
-            //if (m_mapPeopleCounts.ContainsKey(oldRoom))
-            //{
-            //    m_mapPeopleCounts[oldRoom] = m_mapPeopleCounts[oldRoom] - 1;
-            //    if (m_mapPeopleCounts[oldRoom] <= 0)
-            //    {
-            //        m_mapPeopleCounts.Remove(oldRoom);
-            //    }
-            //    if (m_mapPeopleImage.ContainsKey(newBtracker.id))
-            //    {
-            //        Image img = m_mapPeopleImage[newBtracker.id];
-            //        Grid gd = (Grid)img.Parent;
-            //        gd.Children.Remove(img);
-            //    }
-            //}
             RemovePeople(newBtracker.id, oldRoom);
             AddAPeople(newBtracker);
         }
@@ -558,6 +559,20 @@ namespace PFTSScene
             }
         }
 
+        public void PathOut(int btrackerId)
+        {
+            var paths = (new PFTSModel.Services.BTrackerService()).GetPaths(btrackerId);
+            foreach (var p in paths)
+            {
+                int o = p.start_room_id;
+                int d = p.end_room_id;
+                if (m_mapRooms.ContainsKey(o) && m_mapRooms.ContainsKey(d))
+                {
+                    PathTo(m_mapRooms[o], m_mapRooms[d]);
+                }
+            }
+        }
+
         private void MenuPeopleRealVideo_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -565,10 +580,27 @@ namespace PFTSScene
                 int id = (int)m_peopleMenu.Tag;
                 if (m_mapBtrackers.ContainsKey(id))
                 {
-                    if (BTrackerRealVideo != null)
+                    if (BTrackerRealVideoDelegate != null)
                     {
-                        this.BTrackerRealVideo(m_mapBtrackers[id]);
+                        this.BTrackerRealVideoDelegate(m_mapBtrackers[id]);
                     }
+                }
+            }
+            catch (Exception es)
+            {
+                MessageBox.Show(es.Message);
+            }
+        }
+
+        private void MenuPeoplePath_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int id = (int)m_peopleMenu.Tag;
+                PathOut(id);
+                if (BTrackerPathDelegate != null)
+                {
+                    this.BTrackerPathDelegate(id);
                 }
             }
             catch (Exception es)
@@ -644,6 +676,10 @@ namespace PFTSScene
                         m_mapGridRooms[pc.Key].Resize();
                     }
                 }
+            }
+            foreach (var p in m_paths)
+            {
+                RefreshPath(p);
             }
         }
 

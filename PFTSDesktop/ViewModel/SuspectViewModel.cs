@@ -30,7 +30,7 @@ namespace PFTSDesktop.ViewModel
         private view_locker_info _devLocker;
         private officer _officer;
         private view_vest_info _devVert;
-        private SuspectService _supectService;
+        private PFTSModel.Services.BTrackerService _supectService;
         private List<view_btracker_info> _btrackers;
         private string[] _sexOpetions;
         private static SuspectViewModel instance;
@@ -42,7 +42,7 @@ namespace PFTSDesktop.ViewModel
             _officerService = new OfficerService();
             _devVestService = new DevVestService();
             _devLockerService = new DevLockerService();
-            _supectService = new SuspectService();
+            _supectService = new PFTSModel.Services.BTrackerService();
 
             _officer = new officer();
             _devVert = new view_vest_info();
@@ -304,7 +304,9 @@ namespace PFTSDesktop.ViewModel
             btk.vest_id = _suspectModel.VestId;
             btk.locker_id = _suspectModel.LockerId;
             btk.private_goods = _suspectModel.PirvateGoods;
-            btk.in_time = DateTime.Now;
+            var now = DateTime.Now;
+            btk.in_time = now;
+            btk.in_room_time = now;
             btk.room_id = 1;
 
             bool result = (new PFTSModel.Services.BTrackerService()).Insert(btk);
