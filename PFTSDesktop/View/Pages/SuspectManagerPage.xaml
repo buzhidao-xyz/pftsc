@@ -44,7 +44,7 @@
         <tmp:ButtonEX Name="btnAddSuspect" Grid.Row="1" Content="新增嫌疑人" VerticalAlignment="Top"  HorizontalAlignment="Right" Tag="View/SuspectManager/AddSuspectPage.xaml"
                       Margin="0,12,100,0" Width="90" Height="26" Command="{Binding AddSupcetPageCommand}" CommandParameter="{Binding ElementName=btnAddSuspect}"/>
         <ele:PageDataGridEx  Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None"
-                             ItemsSource="{Binding Btrackers}">
+                             ItemsSource="{Binding Btrackers}" SelectedItem="{Binding SelectedBreacker}">
             <ele:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="姓名" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="性别" Binding="{Binding sex}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
