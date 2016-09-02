@@ -11,7 +11,7 @@
         WindowStyle="None"
         x:Name="main"
         FocusManager.FocusedElement="{Binding ElementName=txtUserName}"
-        ShowInTaskbar="True" AllowsTransparency="True">
+        ShowInTaskbar="True" AllowsTransparency="True" Loaded="main_Loaded">
 
     <Grid>
         <Grid.Background>

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="BitmapFormat.cs" />
     <Compile Include="CHCNetSDK.cs" />
+    <Compile Include="PFTSRFIDNoReaderProxy.cs" />
     <Compile Include="PFTSRFIDProtocol.cs" />
     <Compile Include="PFTSRFIDServer.cs" />
     <Compile Include="PFTSVideoControl.xaml.cs">

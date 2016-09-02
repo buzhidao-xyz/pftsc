@@ -156,17 +156,6 @@ namespace PFTSHwCtrl
                     {
                         FingerAcquire(img, buffer);
                     }
-                    //this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-                    //{
-                    //    int size = 2048;
-                    //    var img = m_fingerProxy.GetFingerImage();
-                    //    var buffer = m_fingerProxy.GetRaw(ref size);
-                    //    imgFinger.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
-
-                    //    var officer = m_model.GetPoliceInfo;
-                    //    officer.fingerprint1 = new Binary(buffer);
-                    //    m_model.GetPoliceInfo = officer;
-                    //});
                 }
                 Thread.Sleep(200);
             }

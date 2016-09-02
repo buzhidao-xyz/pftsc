@@ -52,23 +52,6 @@ namespace PFTSDesktop.View.PoliceManager
                 officer.fingerprint1 = new Binary(buffer);
                 m_model.GetPoliceInfo = officer;
             });
-//            throw new NotImplementedException();
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            //Thread captureThread = new Thread(new ThreadStart(DoCapture));
-            //captureThread.IsBackground = true;
-            //captureThread.Start();
-            //m_bIsTimeToDie = false;
-
-            //try
-            //{
-            //    m_fingerProxy.Open();
-            //}catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
         }
 
         private void DoCapture()
