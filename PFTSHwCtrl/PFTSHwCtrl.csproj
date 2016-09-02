@@ -32,8 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="libzkfpcsharp">
+      <HintPath>C:\Windows\SysWOW64\libzkfpcsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +53,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapFormat.cs" />
     <Compile Include="CHCNetSDK.cs" />
     <Compile Include="PFTSRFIDProtocol.cs" />
     <Compile Include="PFTSRFIDServer.cs" />
@@ -56,6 +61,7 @@
       <DependentUpon>PFTSVideoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PFTSVideoProxy.cs" />
+    <Compile Include="PFTSZKFingerProxy.cs" />
     <Compile Include="PlayCtrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
