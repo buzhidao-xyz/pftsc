@@ -1,161 +1,134 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows;
 
 namespace PFTSScene.Tools
 {
-    class GridRoom : Grid
+    public class GridRoom : Grid
     {
-        private int m_rows;
-        private int m_cols;
-        private double m_metaWidth;
-        private double m_metaHeight;
+        private List<Image> m_images = new List<Image>();
+        private List<GridUtil.Point> m_pointsStack;
+        private int m_preCount = 10;
+        private GridUtil m_util;
+        private double m_metaX;
+        private double m_metaY;
 
-        // 预定义的位置
-        private List<InPosition> m_positionStack = new List<InPosition>();
+        private List<Image> m_cacheImages = new List<Image>();
 
-        public Size MetaSize
+        public GridRoom(double mx,double my)
         {
-            set
-            {
-                int c = (int)(this.ActualWidth / value.Width);
-                int r = (int)(this.ActualHeight / value.Height);
-                this.m_metaWidth = value.Width;
-                this.m_metaHeight = value.Height;
-                int m = c <= r ? c : r;
-                m_rows = m;
-                m_cols = m;
-                // col
-                ColumnDefinition cols = new ColumnDefinition();
-                cols.Width = new GridLength((this.ActualWidth - ((double)m * value.Width)) / 2);
-                this.ColumnDefinitions.Add(cols);
-                for (var i= 0;i < m; i++)
-                {
-                    ColumnDefinition col = new ColumnDefinition();
-                    col.Width = new GridLength(value.Width);
-                    this.ColumnDefinitions.Add(col);
-                }
-                ColumnDefinition cole = new ColumnDefinition();
-                cole.Width = new GridLength((this.ActualWidth - ((double)m * value.Width)) / 2);
-                this.ColumnDefinitions.Add(cole);
-                // row
-                RowDefinition rows = new RowDefinition();
-                rows.Height = new GridLength((this.ActualHeight - ((double)m * value.Height)) / 2);
-                this.RowDefinitions.Add(rows);
-                for (var i = 0; i < m; i++)
-                {
-                    RowDefinition row = new RowDefinition();
-                    row.Height = new GridLength(value.Height);
-                    this.RowDefinitions.Add(row);
-                }
-                RowDefinition rowe = new RowDefinition();
-                rowe.Height = new GridLength((this.ActualHeight - ((double)m * value.Height)) / 2);
-                this.RowDefinitions.Add(rowe);
+            m_metaX = mx;
+            m_metaY = my;
+            this.SizeChanged += GridRoom_SizeChanged;
+            this.Loaded += GridRoom_Loaded;
+        }
 
-                int startR = this.RowDefinitions.Count / 2;
-                int startC = this.ColumnDefinitions.Count / 2;
-                List<List<int>> tag = new List<List<int>>();
-                for (int i = 0;i < m+2; i++)
+        private void GridRoom_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            m_util = new Tools.GridUtil(this.ActualHeight, this.ActualWidth, m_metaX, m_metaY);
+            m_pointsStack = m_util.Product(m_preCount);
+            if (m_cacheImages.Count > 0)
+            {
+                foreach(var img in m_cacheImages)
                 {
-                    var itag = new List<int>();
-                    for (int j = 0;j < m+2; j++)
-                    {
-                        itag.Add(0);
-                    }
-                    tag.Add(itag);
+                    addAImage(img);
                 }
-                int xpos = -1;
-                int ypos = 0;
-                while (true)
+                m_cacheImages = new List<Image>();
+            }
+        }
+
+        private void GridRoom_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        {
+            if (!this.IsLoaded)
+            {
+                return;
+            }
+            m_util = new Tools.GridUtil(this.ActualHeight, this.ActualWidth, m_metaX, m_metaY);
+            m_pointsStack = m_util.Product(m_preCount);
+            for (int i = 0;i < m_images.Count;i++)
+            {
+                GridUtil.Point p = m_pointsStack[i];
+                Image img = m_images[i];
+                img.Margin = new System.Windows.Thickness(p.CenterY - p.SizeY / 2, p.CenterX - p.SizeX / 2,
+                    this.ActualWidth - (p.CenterY + p.SizeY / 2), this.ActualHeight - (p.CenterX + p.SizeX / 2));
+            }
+        }
+
+        public void AddAImage(Image img)
+        {
+            if (!this.IsLoaded)
+            {
+                m_cacheImages.Add(img);
+                return;
+            }
+            if (m_cacheImages.Count > 0)
+            {
+                foreach(var aImg in m_cacheImages)
                 {
-                    if (startR <= 0 || startR > m || startC <= 0 || startC > m)
+                    addAImage(aImg);
+                }
+                m_cacheImages = new List<Image>();
+            }
+            addAImage(img);
+        }
+
+        private void addAImage(Image img)
+        {
+            int idx = m_images.Count;
+            if (idx >= m_pointsStack.Count)
+            {
+                //数量不够，继续申请
+                m_preCount = (idx / 10 + 1) * 10;
+                m_pointsStack = m_util.Product(m_preCount);
+            }
+            GridUtil.Point p = m_pointsStack[idx];
+            img.Width = m_metaY;
+            img.Height = m_metaX;
+            img.Margin = new System.Windows.Thickness(p.CenterY - p.SizeY / 2,p.CenterX - p.SizeX / 2,
+                this.ActualWidth - (p.CenterY + p.SizeY / 2),this.ActualHeight - (p.CenterX + p.SizeX / 2));
+            this.Children.Add(img);
+            m_images.Add(img);
+        }
+
+        public void RemoveAImage(Image img)
+        {
+            if (!this.IsLoaded)
+            {
+                foreach( var i in m_cacheImages)
+                {
+                    if (img == i)
                     {
+                        m_cacheImages.Remove(img);
+                        return;
+                    }
+                }
+            }else
+            {
+                int idx = -1;
+                for(var i = 0;i < m_images.Count;i++)
+                {
+                    if (m_images[i] == img)
+                    {
+                        this.Children.Remove(img);
+                        idx = i;
                         break;
                     }
-                    if (tag[startR][startC] == 1) break;
-                    InPosition s = new InPosition();
-                    s.x = startR;
-                    s.y = startC;
-                    m_positionStack.Add(s);
-                    tag[startR][startC] = 1;
-                    startR += xpos;
-                    startC += ypos;
-                    int nx = -1;
-                    int ny = 0;
-                    if (xpos == -1 && ypos == 0)
-                    {
-                        nx = 0;
-                        ny = -1;
-                    }
-                    if (xpos == 0 && ypos == -1)
-                    {
-                        nx = 1;
-                        ny = 0;
-                    }
-                    if (xpos == 1 && ypos == 0)
-                    {
-                        nx = 0;
-                        ny = 1;
-                    }
-                    if (xpos == 0 && ypos == 1)
-                    {
-                        nx = -1;
-                        ny = 0;
-                    }
-                    if (tag[startR + nx][startC+ny] == 0)
-                    {
-                        xpos = nx;
-                        ypos = ny;
-                    }
                 }
-            }
-        }
-
-        public void AddImage(Image img)
-        {
-            for (int i = 0;i < m_positionStack.Count;i++)
-            {
-                var ip = m_positionStack[i];
-                if (!ip.used)
+                if (idx >= 0)
                 {
-                    this.Children.Add(img);
-                    Grid.SetRow(img,ip.x);
-                    Grid.SetColumn(img,ip.y);
-                    m_positionStack[i].used = true;
-                    break;
+                    m_images.Remove(img);
+                    for (var i = idx;i < m_images.Count; i++)
+                    {
+                        GridUtil.Point p = m_pointsStack[i];
+                        Image ig = m_images[i];
+                        ig.Margin = new System.Windows.Thickness(p.CenterY - p.SizeY / 2, p.CenterX - p.SizeX / 2,
+                            this.ActualWidth - (p.CenterY + p.SizeY / 2), this.ActualHeight - (p.CenterX + p.SizeX / 2));
+                    }
                 }
             }
-        }
-
-        public void Resize()
-        {
-            if (this.ActualHeight < 1 || this.ActualHeight < 1 || m_metaHeight < 1 || m_metaWidth < 1) return;
-            // col
-            this.ColumnDefinitions[0].Width = new GridLength((this.ActualWidth - ((double)m_cols * m_metaWidth)) / 2);
-            for (var i = 0; i < m_cols; i++)
-            {
-                this.ColumnDefinitions[1+i].Width = new GridLength(m_metaWidth);
-            }
-            this.ColumnDefinitions[m_cols + 1].Width = new GridLength((this.ActualWidth - ((double)m_cols * m_metaWidth)) / 2);
-            // row
-            this.RowDefinitions[0].Height = new GridLength((this.ActualWidth - ((double)m_rows * m_metaHeight)) / 2);
-            for (var i = 0; i < m_rows; i++)
-            {
-                this.RowDefinitions[1 + i].Height = new GridLength(m_metaHeight);
-            }
-            this.RowDefinitions[m_rows + 1].Height = new GridLength((this.ActualWidth - ((double)m_rows * m_metaHeight)) / 2);
-        }
-
-        public class InPosition
-        {
-            public int x;
-            public int y;
-            public bool used;
         }
     }
 }

@@ -28,22 +28,6 @@ namespace PFTSDesktop
 
         private void main_Loaded(object sender, RoutedEventArgs e)
         {
-            //PFTSHwCtrl.PFTSRFIDNoReaderProxy proxy = new PFTSHwCtrl.PFTSRFIDNoReaderProxy("COM3");
-            //proxy.Open();
-            //proxy.StartAcquireRFIDNo();
-            //proxy.RFIDNoReaderDelegate += Proxy_RFIDNoReaderDelegate;
         }
-
-        //private void Proxy_RFIDNoReaderDelegate(List<string> rfidNos)
-        //{
-        //    //throw new NotImplementedException();
-        //    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate ()
-        //    {
-        //        foreach (var l in rfidNos)
-        //        {
-        //            MessageBox.Show(l);
-        //        }
-        //    });
-        //}
     }
 }
