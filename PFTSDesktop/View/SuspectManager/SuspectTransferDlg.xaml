@@ -1,0 +1,114 @@
+﻿<tmp:WindowTemplet x:Class="PFTSDesktop.View.SuspectManager.SuspectTransferDlg"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+                   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+                   Width="600"
+                   Height="440"
+                   BorderBrush="{DynamicResource windowStyle}"
+                   xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
+                   BorderThickness="1"
+                   MoveHeight="114"
+                   WindowStartupLocation="CenterScreen"
+                   xmlns:conver="clr-namespace:PFTSDesktop.common"
+                   x:Name="main"
+                   mc:Ignorable="d">
+    <tmp:WindowTemplet.Resources>
+        <Style TargetType="{x:Type ele:RegularText}" BasedOn="{StaticResource textboxStyle}">
+            <Setter Property="Margin" Value="0,0,20,0"/>
+        </Style>
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource lableNameStyle}"/>
+    </tmp:WindowTemplet.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="gridTitleBar" Background="{DynamicResource winGridStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="1" Content="人员转移" Foreground="White" Margin="0,2,0,0"  HorizontalAlignment="Left"/>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+                <tmp:ButtonTemplet x:Name="btnMin" VerticalAlignment="Top" Width="27" Height="22"
+                                   Command="{Binding WindowMinCommand}" CommandParameter="{Binding ElementName=main}">
+                    <tmp:ButtonTemplet.MyMoverBrush>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mim.png"/>
+                    </tmp:ButtonTemplet.MyMoverBrush>
+                    <tmp:ButtonTemplet.MyEnterBrush>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mie.png"/>
+                    </tmp:ButtonTemplet.MyEnterBrush>
+                    <tmp:ButtonTemplet.Background>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/min.png"/>
+                    </tmp:ButtonTemplet.Background>
+                </tmp:ButtonTemplet>
+                <tmp:ButtonTemplet x:Name="btnExit" VerticalAlignment="Top" Width="27" Height="22"
+                                   Command="{Binding Path=CloseCommand}"  CommandParameter="{Binding ElementName=main}">
+                    <tmp:ButtonTemplet.MyMoverBrush>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xm.png" />
+                    </tmp:ButtonTemplet.MyMoverBrush>
+                    <tmp:ButtonTemplet.MyEnterBrush>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xe.png"/>
+                    </tmp:ButtonTemplet.MyEnterBrush>
+                    <tmp:ButtonTemplet.Background>
+                        <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xn.png"/>
+                    </tmp:ButtonTemplet.Background>
+                </tmp:ButtonTemplet>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Background="{DynamicResource winConStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label Name="registerTitle" Grid.Row="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" 
+                   VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="25" FontWeight="Bold"  Content="人 员 转 移" Margin="0,0,50,0"></Label>
+            <Label Content="姓 名：" Grid.Row="2" Grid.Column="0"/>
+            <ele:RegularText Name="txtName"  Grid.Row="2" Grid.Column="1"
+                         Text="{Binding SelectedBreacker.name, Mode=OneWay}"/>
+
+            <Label Content="个人物品：" Grid.Row="3" Grid.Column="0"/>
+            <ele:RegularText Grid.Row="3" Height="90" Grid.Column="1"  VerticalContentAlignment="Top"
+                             Text="{Binding SelectedBreacker.private_goods, Mode=OneWay}"
+						 TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Hidden"/>
+
+            <Label Content="转移备注：" Grid.Row="4" Grid.Column="0"/>
+            <ele:RegularText Grid.Row="4" Height="90" Grid.Column="1"  VerticalContentAlignment="Top"
+                             Text="{Binding Remark}"
+						 TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Hidden"/>
+
+            <Label Content="储 物 柜：" Grid.Row="5" Grid.Column="0"/>
+            <ele:RegularText  Grid.Row="5" Grid.Column="1" Text="{Binding SelectedBreacker.locker_name, Mode=OneWay}"/>
+
+            <Label Content="物品已取：" Grid.Row="6" Grid.Column="0"/>
+            <StackPanel  Grid.Row="6" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <CheckBox Content="{Binding Recover,Converter={conver:RecoverStatusConverter}}" 
+                          Margin="5,0,0,0" IsChecked="{Binding Recover}" Style="{StaticResource checkBoxStyle}"/>
+            </StackPanel>
+            <Button Grid.Row="7" Grid.Column="1" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
+				HorizontalAlignment="Right" Content="转    移" Height="30" Width="90" Margin="0,0,20,0"
+                    Command="{Binding SuspectTransferCommand}"  CommandParameter="{Binding ElementName=main}"/>
+            <Button Grid.Row="7" Grid.Column="1" IsCancel="True" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
+                HorizontalAlignment="Right" Content="关    闭" Command="{Binding CloseCommand}"  CommandParameter="{Binding ElementName=main}"
+                Height="30" Width="90" Margin="0,0,120,0"/>
+        </Grid>
+    </Grid>
+</tmp:WindowTemplet>

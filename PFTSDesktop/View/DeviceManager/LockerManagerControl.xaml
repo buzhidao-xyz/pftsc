@@ -34,11 +34,10 @@
                 <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <tmp:ButtonTemplet ToolTip="编辑"  VerticalAlignment="Center" Margin="5,0,0,0"
-                                                   Command="{Binding DataContext.EditLockerDlgCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                                    <Image Height="15" Width="13" Source="/PFTSDesktop;component/Images/Button/xm.png"/>
-                                </tmp:ButtonTemplet>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <tmp:FButton ToolTip="编辑" FIcon="&#xe654;" Style="{StaticResource FButton_Edit}" 
+                                                   Command="{Binding DataContext.EditLockerDlgCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                  
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

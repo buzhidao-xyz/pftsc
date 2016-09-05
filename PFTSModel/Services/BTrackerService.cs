@@ -33,6 +33,29 @@ namespace PFTSModel.Services
             return null;
         }
 
+        public bool TransferSuspect(int id, bool recover, string remark)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    btracker btk = db.btracker.SingleOrDefault<btracker>(rec => rec.id == id);
+                    btk.status = 1;
+                    btk.remark = remark;
+                    btk.recover = recover;
+                    btk.out_time = DateTime.Now;
+                    if (recover)
+                        btk.locker_id = null;
+                    db.SubmitChanges();
+                }
+                return true;
+            }
+            catch
+            {
+
+            }
+            return false;
+        }
         /// <summary>
         /// 通过马甲RFID序列号获取疑犯信息
         /// </summary>
@@ -47,7 +70,7 @@ namespace PFTSModel.Services
                     System.Data.Linq.Table<btracker> table = db.GetTable<btracker>();
                     var query = from q in table
                                 from vt in db.GetTable<dev_vest>()
-                                where q.vest_id == vt.id && ( vt.no_left == no || vt.no_right == no)
+                                where q.vest_id == vt.id && (vt.no_left == no || vt.no_right == no)
                                 select q;
                     return query.FirstOrDefault<btracker>();
                 }
@@ -107,7 +130,7 @@ namespace PFTSModel.Services
             return null;
         }
 
-        public bool MoveTo(int id,view_rfid_info position)
+        public bool MoveTo(int id, view_rfid_info position)
         {
             PFTSDbDataContext db = new PFTSDbDataContext();
             if (db.Connection.State != ConnectionState.Open)
@@ -164,6 +187,72 @@ namespace PFTSModel.Services
                                 where q.btracker_id == id && q.path_id == p.id
                                 orderby q.start_time ascending
                                 select p;
+                    return query.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
+        }
+
+        public int GetCount(int? status)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<btracker> table = db.GetTable<btracker>();
+                    IQueryable<btracker> query = null;
+                    if (status == null)
+                    {
+                        query = from q in table
+                                select q;
+                    }
+                    else
+                    {
+                        query = from q in table
+                                where q.status == status
+                                select q;
+                    }
+
+                    return query.Count();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// 根据状态获取数据列表（分页）
+        /// </summary>
+        /// <param name="status">状态，为null查询所有</param>
+        /// <returns></returns>
+        public List<view_btracker_info> GetPageByStatus(int? status, int pageIndex, int pageSize)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<view_btracker_info> table = db.GetTable<view_btracker_info>();
+                    IQueryable<view_btracker_info> query = null;
+                    if (status == null)
+                    {
+                        query = from q in table
+                                select q;
+                    }
+                    else
+                    {
+                        query = from q in table
+                                where q.status == status
+                                select q;
+
+                    }
+                    query = query.Skip(pageIndex).Take(pageSize);
                     return query.ToList();
                 }
             }

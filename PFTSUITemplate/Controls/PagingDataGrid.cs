@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Windows.Markup;
+using System.Threading;
 
 namespace PFTSUITemplate.Controls
 {
@@ -187,8 +188,8 @@ namespace PFTSUITemplate.Controls
                 if (e.NewValue != e.OldValue)
                 {
                     PagingDataGrid dp = s as PagingDataGrid;
+                    dp.Last_Click();
                     //dp.UpdatePager();
-                    //dp.Last_Click();
                 }
             }));
 
@@ -407,9 +408,12 @@ namespace PFTSUITemplate.Controls
             }
 
             //调整图片的显示
-            btnFirst.IsEnabled = btnPrevious.IsEnabled = (PageIndex != 1);
-            btnNext.IsEnabled = btnLast.IsEnabled = (PageIndex != PageCount);
-            txtPageIndex.IsEnabled = (PageCount != 1);
+            if (btnFirst != null)
+            {
+                btnFirst.IsEnabled = btnPrevious.IsEnabled = (PageIndex != 1);
+                btnNext.IsEnabled = btnLast.IsEnabled = (PageIndex != PageCount);
+                txtPageIndex.IsEnabled = (PageCount != 1);
+            }
         }
 
         void PagingDataGrid_Loaded(object sender, RoutedEventArgs e)
