@@ -83,9 +83,9 @@ namespace PFTSHwCtrl
             System.Threading.Thread.Sleep(50);      //延时一定时间用于接收数据
 
             int len;
-            len = m_serialPort.BytesToRead;//获得接收缓冲区中的字节数
             try
             {
+                len = m_serialPort.BytesToRead;//获得接收缓冲区中的字节数
                 byte[] receiveArray = new byte[len];
                 //从输入缓冲区中读取len个字节
                 //并将其放入ReceiveArray中,并清除缓冲区
@@ -102,7 +102,7 @@ namespace PFTSHwCtrl
                             string s = "";
                             foreach (var ll in l)
                             {
-                                s += string.Format("{0:X2}", ll);
+                                s += string.Format("{0:x2}", ll);
                             }
                             ss.Add(s);
                         }

@@ -21,10 +21,53 @@ namespace PFTSDesktop.View.SuspectManager
     /// </summary>
     public partial class AddSuspectPage : Page
     {
+        private PFTSHwCtrl.PFTSRFIDNoReaderProxy rfidReader;
+        private string m_lastVestNo;
+        private SuspectViewModel m_model;
+
         public AddSuspectPage()
         {
             InitializeComponent();
-            this.DataContext = new SuspectViewModel();
+            m_model = new SuspectViewModel();
+            this.DataContext = m_model;
+
+            rfidReader = new PFTSHwCtrl.PFTSRFIDNoReaderProxy("COM3");
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            rfidReader.Open();
+            rfidReader.StartAcquireRFIDNo();
+            rfidReader.RFIDNoReaderDelegate += RfidReader_RFIDNoReaderDelegate;
+        }
+
+        private void RfidReader_RFIDNoReaderDelegate(List<string> rfidNos)
+        {
+            foreach (var l in rfidNos)
+            {
+                if (m_lastVestNo == l) { continue; }
+                //TODO: for test
+                var no = l.Substring(0, 8);
+                var vest = (new PFTSModel.DevVestService()).GetByNo(no,null,null);
+                if (vest != null)
+                {
+                    foreach( var v in m_model.DevVests)
+                    {
+                        if (v.id == vest.id)
+                        {
+                            m_model.DevVest = v;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            rfidReader.RFIDNoReaderDelegate -= RfidReader_RFIDNoReaderDelegate;
+            rfidReader.Close();
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PFTSDesktop.View.DeviceManager
 {
@@ -21,10 +22,68 @@ namespace PFTSDesktop.View.DeviceManager
     /// </summary>
     public partial class VestAddDlg : WindowTemplet
     {
+        private bool m_bFocusNo1 = false;
+        private bool m_bFocusNo2 = false;
+        private PFTSHwCtrl.PFTSRFIDNoReaderProxy rfidReader;
+
         public VestAddDlg()
         {
             InitializeComponent();
             this.DataContext = VestManagerViewModel.GetInstance();
+            rfidReader = new PFTSHwCtrl.PFTSRFIDNoReaderProxy("COM3");
+        }
+
+        private void txtNo_GotFocus(object sender, RoutedEventArgs e)
+        {
+            rfidReader.Open();
+            rfidReader.StartAcquireRFIDNo();
+            rfidReader.RFIDNoReaderDelegate += Proxy_RFIDNoReaderDelegate;
+            m_bFocusNo1 = true;
+        }
+
+        private void Proxy_RFIDNoReaderDelegate(List<string> rfidNos)
+        {
+            //throw new NotImplementedException();
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate ()
+            {
+                if (m_bFocusNo1)
+                {
+                    foreach (var l in rfidNos)
+                    {
+                        //MessageBox.Show(l);
+                        txtNo.Text = l.Substring(0,8);
+                    }
+                }else if (m_bFocusNo2)
+                {
+                    foreach (var l in rfidNos)
+                    {
+                        //MessageBox.Show(l);
+                        txtNo2.Text = l.Substring(0,8);
+                    }
+                }
+            });
+        }
+
+        private void txtNo_LostFocus(object sender, RoutedEventArgs e)
+        {
+            rfidReader.RFIDNoReaderDelegate -= Proxy_RFIDNoReaderDelegate;
+            rfidReader.Close();
+            m_bFocusNo1 = false;
+        }
+
+        private void txtNo2_GotFocus(object sender, RoutedEventArgs e)
+        {
+            rfidReader.Open();
+            rfidReader.StartAcquireRFIDNo();
+            rfidReader.RFIDNoReaderDelegate += Proxy_RFIDNoReaderDelegate;
+            m_bFocusNo2 = true;
+        }
+
+        private void txtNo2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            rfidReader.RFIDNoReaderDelegate -= Proxy_RFIDNoReaderDelegate;
+            rfidReader.Close();
+            m_bFocusNo2 = false;
         }
     }
 }

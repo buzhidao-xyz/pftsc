@@ -6,7 +6,7 @@
 	  mc:Ignorable="d" 
 	 xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
 	  d:DesignWidth="640" d:DesignHeight="500"
-	  Title="AddSuspectPage">
+	  Title="AddSuspectPage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 	<Page.Resources>
 		<Style TargetType="{x:Type ele:RegularText}" BasedOn="{StaticResource textboxStyle}">
 			<Setter Property="Margin" Value="0,0,20,0"/>
