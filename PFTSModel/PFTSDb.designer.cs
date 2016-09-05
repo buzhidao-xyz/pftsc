@@ -245,19 +245,19 @@ namespace PFTSModel
 			}
 		}
 		
-		public System.Data.Linq.Table<btracker> btracker
-		{
-			get
-			{
-				return this.GetTable<btracker>();
-			}
-		}
-		
 		public System.Data.Linq.Table<view_btracker_info> view_btracker_info
 		{
 			get
 			{
 				return this.GetTable<view_btracker_info>();
+			}
+		}
+		
+		public System.Data.Linq.Table<btracker> btracker
+		{
+			get
+			{
+				return this.GetTable<btracker>();
 			}
 		}
 	}
@@ -1668,7 +1668,7 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint1", DbType="Binary(2048)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint1", DbType="Binary(2048)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary fingerprint1
 		{
 			get
@@ -1688,7 +1688,7 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint2", DbType="Binary(2048)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fingerprint2", DbType="Binary(2048)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary fingerprint2
 		{
 			get
@@ -3651,6 +3651,339 @@ namespace PFTSModel
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_btracker_info")]
+	public partial class view_btracker_info
+	{
+		
+		private int _id;
+		
+		private string _no;
+		
+		private string _name;
+		
+		private string _number;
+		
+		private string _sex;
+		
+		private int _vest_id;
+		
+		private System.Nullable<int> _locker_id;
+		
+		private System.Nullable<int> _officer_id;
+		
+		private System.DateTime _in_time;
+		
+		private System.Nullable<System.DateTime> _out_time;
+		
+		private int _status;
+		
+		private string _private_goods;
+		
+		private System.Nullable<int> _room_id;
+		
+		private System.Nullable<bool> _recover;
+		
+		private System.Nullable<System.DateTime> _in_room_time;
+		
+		private string _remark;
+		
+		private string _officer_name;
+		
+		private string _locker_name;
+		
+		public view_btracker_info()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(36)")]
+		public string no
+		{
+			get
+			{
+				return this._no;
+			}
+			set
+			{
+				if ((this._no != value))
+				{
+					this._no = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="VarChar(32)")]
+		public string number
+		{
+			get
+			{
+				return this._number;
+			}
+			set
+			{
+				if ((this._number != value))
+				{
+					this._number = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="VarChar(8)")]
+		public string sex
+		{
+			get
+			{
+				return this._sex;
+			}
+			set
+			{
+				if ((this._sex != value))
+				{
+					this._sex = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int NOT NULL")]
+		public int vest_id
+		{
+			get
+			{
+				return this._vest_id;
+			}
+			set
+			{
+				if ((this._vest_id != value))
+				{
+					this._vest_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_locker_id", DbType="Int")]
+		public System.Nullable<int> locker_id
+		{
+			get
+			{
+				return this._locker_id;
+			}
+			set
+			{
+				if ((this._locker_id != value))
+				{
+					this._locker_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_id", DbType="Int")]
+		public System.Nullable<int> officer_id
+		{
+			get
+			{
+				return this._officer_id;
+			}
+			set
+			{
+				if ((this._officer_id != value))
+				{
+					this._officer_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_time", DbType="DateTime NOT NULL")]
+		public System.DateTime in_time
+		{
+			get
+			{
+				return this._in_time;
+			}
+			set
+			{
+				if ((this._in_time != value))
+				{
+					this._in_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_out_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> out_time
+		{
+			get
+			{
+				return this._out_time;
+			}
+			set
+			{
+				if ((this._out_time != value))
+				{
+					this._out_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this._status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_private_goods", DbType="VarChar(512)")]
+		public string private_goods
+		{
+			get
+			{
+				return this._private_goods;
+			}
+			set
+			{
+				if ((this._private_goods != value))
+				{
+					this._private_goods = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_id", DbType="Int")]
+		public System.Nullable<int> room_id
+		{
+			get
+			{
+				return this._room_id;
+			}
+			set
+			{
+				if ((this._room_id != value))
+				{
+					this._room_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
+		public System.Nullable<bool> recover
+		{
+			get
+			{
+				return this._recover;
+			}
+			set
+			{
+				if ((this._recover != value))
+				{
+					this._recover = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_room_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> in_room_time
+		{
+			get
+			{
+				return this._in_room_time;
+			}
+			set
+			{
+				if ((this._in_room_time != value))
+				{
+					this._in_room_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_remark", DbType="VarChar(128)")]
+		public string remark
+		{
+			get
+			{
+				return this._remark;
+			}
+			set
+			{
+				if ((this._remark != value))
+				{
+					this._remark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_name", DbType="VarChar(32)")]
+		public string officer_name
+		{
+			get
+			{
+				return this._officer_name;
+			}
+			set
+			{
+				if ((this._officer_name != value))
+				{
+					this._officer_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_locker_name", DbType="VarChar(32)")]
+		public string locker_name
+		{
+			get
+			{
+				return this._locker_name;
+			}
+			set
+			{
+				if ((this._locker_name != value))
+				{
+					this._locker_name = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.btracker")]
 	public partial class btracker : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3667,7 +4000,7 @@ namespace PFTSModel
 		
 		private string _sex;
 		
-		private int _vest_id;
+		private System.Nullable<int> _vest_id;
 		
 		private System.Nullable<int> _locker_id;
 		
@@ -3715,7 +4048,7 @@ namespace PFTSModel
     partial void OnnumberChanged();
     partial void OnsexChanging(string value);
     partial void OnsexChanged();
-    partial void Onvest_idChanging(int value);
+    partial void Onvest_idChanging(System.Nullable<int> value);
     partial void Onvest_idChanged();
     partial void Onlocker_idChanging(System.Nullable<int> value);
     partial void Onlocker_idChanged();
@@ -3850,8 +4183,8 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int NOT NULL")]
-		public int vest_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int")]
+		public System.Nullable<int> vest_id
 		{
 			get
 			{
@@ -4241,7 +4574,7 @@ namespace PFTSModel
 					}
 					else
 					{
-						this._vest_id = default(int);
+						this._vest_id = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("dev_vest");
 				}
@@ -4290,339 +4623,6 @@ namespace PFTSModel
 		{
 			this.SendPropertyChanging();
 			entity.btracker = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_btracker_info")]
-	public partial class view_btracker_info
-	{
-		
-		private int _id;
-		
-		private string _no;
-		
-		private string _name;
-		
-		private string _number;
-		
-		private string _sex;
-		
-		private int _vest_id;
-		
-		private System.Nullable<int> _locker_id;
-		
-		private System.Nullable<int> _officer_id;
-		
-		private System.DateTime _in_time;
-		
-		private System.Nullable<System.DateTime> _out_time;
-		
-		private int _status;
-		
-		private string _private_goods;
-		
-		private System.Nullable<int> _room_id;
-		
-		private System.Nullable<bool> _recover;
-		
-		private System.Nullable<System.DateTime> _in_room_time;
-		
-		private string _remark;
-		
-		private string _officer_name;
-		
-		private string _locker_name;
-		
-		public view_btracker_info()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_no", DbType="VarChar(36)")]
-		public string no
-		{
-			get
-			{
-				return this._no;
-			}
-			set
-			{
-				if ((this._no != value))
-				{
-					this._no = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this._name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number", DbType="VarChar(32)")]
-		public string number
-		{
-			get
-			{
-				return this._number;
-			}
-			set
-			{
-				if ((this._number != value))
-				{
-					this._number = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="VarChar(8)")]
-		public string sex
-		{
-			get
-			{
-				return this._sex;
-			}
-			set
-			{
-				if ((this._sex != value))
-				{
-					this._sex = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int NOT NULL")]
-		public int vest_id
-		{
-			get
-			{
-				return this._vest_id;
-			}
-			set
-			{
-				if ((this._vest_id != value))
-				{
-					this._vest_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_locker_id", DbType="Int")]
-		public System.Nullable<int> locker_id
-		{
-			get
-			{
-				return this._locker_id;
-			}
-			set
-			{
-				if ((this._locker_id != value))
-				{
-					this._locker_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_id", DbType="Int")]
-		public System.Nullable<int> officer_id
-		{
-			get
-			{
-				return this._officer_id;
-			}
-			set
-			{
-				if ((this._officer_id != value))
-				{
-					this._officer_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_time", DbType="DateTime NOT NULL")]
-		public System.DateTime in_time
-		{
-			get
-			{
-				return this._in_time;
-			}
-			set
-			{
-				if ((this._in_time != value))
-				{
-					this._in_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_out_time", DbType="DateTime")]
-		public System.Nullable<System.DateTime> out_time
-		{
-			get
-			{
-				return this._out_time;
-			}
-			set
-			{
-				if ((this._out_time != value))
-				{
-					this._out_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
-		public int status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this._status = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_private_goods", DbType="VarChar(512)")]
-		public string private_goods
-		{
-			get
-			{
-				return this._private_goods;
-			}
-			set
-			{
-				if ((this._private_goods != value))
-				{
-					this._private_goods = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_room_id", DbType="Int")]
-		public System.Nullable<int> room_id
-		{
-			get
-			{
-				return this._room_id;
-			}
-			set
-			{
-				if ((this._room_id != value))
-				{
-					this._room_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
-		public System.Nullable<bool> recover
-		{
-			get
-			{
-				return this._recover;
-			}
-			set
-			{
-				if ((this._recover != value))
-				{
-					this._recover = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_room_time", DbType="DateTime")]
-		public System.Nullable<System.DateTime> in_room_time
-		{
-			get
-			{
-				return this._in_room_time;
-			}
-			set
-			{
-				if ((this._in_room_time != value))
-				{
-					this._in_room_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_remark", DbType="VarChar(128)")]
-		public string remark
-		{
-			get
-			{
-				return this._remark;
-			}
-			set
-			{
-				if ((this._remark != value))
-				{
-					this._remark = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_officer_name", DbType="VarChar(32)")]
-		public string officer_name
-		{
-			get
-			{
-				return this._officer_name;
-			}
-			set
-			{
-				if ((this._officer_name != value))
-				{
-					this._officer_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_locker_name", DbType="VarChar(32)")]
-		public string locker_name
-		{
-			get
-			{
-				return this._locker_name;
-			}
-			set
-			{
-				if ((this._locker_name != value))
-				{
-					this._locker_name = value;
-				}
-			}
 		}
 	}
 }

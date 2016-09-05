@@ -44,6 +44,7 @@ namespace PFTSModel.Services
                     btk.remark = remark;
                     btk.recover = recover;
                     btk.out_time = DateTime.Now;
+                    btk.vest_id = null;
                     if (recover)
                         btk.locker_id = null;
                     db.SubmitChanges();
