@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PFTSHwCtrl
@@ -40,7 +41,24 @@ namespace PFTSHwCtrl
             m_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             m_server.Bind(iep);
             m_server.Listen(20);
-            m_server.BeginAccept(new AsyncCallback(Accept), m_server);
+
+            Thread tcpThread = new Thread(new ThreadStart(TcpListen));
+            tcpThread.Start();
+        }
+
+        private void TcpListen()
+        {
+            while (true)
+            {
+                try
+                {
+                    Socket client = m_server.Accept();
+                    ClientThread newClient = new ClientThread(this,client);
+                    Thread newThread = new Thread(new ThreadStart(newClient.ClientService));
+                    newThread.Start();
+                }
+                catch { }
+            }
         }
 
         void Accept(IAsyncResult iar)
@@ -126,5 +144,54 @@ namespace PFTSHwCtrl
 
             }
         }
+
+        class ClientThread
+        {
+            private PFTSRFIDServer m_server;
+            private Socket m_client = null;
+            private byte[] m_buffer = new byte[4096];
+            //public Socket socket;
+            private PFTSRFIDProtocol.ProtocolBuffer m_pbf = new PFTSRFIDProtocol.ProtocolBuffer();
+
+            public ClientThread(PFTSRFIDServer server,Socket k)
+            {
+                m_server = server;
+                m_client = k;
+            }
+            public void ClientService()
+            {
+                try
+                {
+                    while (true)
+                    {
+                        int bytesRead = m_client.Receive(m_buffer);
+                        if (bytesRead > 0)
+                        {
+                            var rets = m_pbf.Put(m_buffer, 0, bytesRead);
+                            if (rets != null && rets.Count > 0)
+                            {
+                                foreach (var bt in rets)
+                                {
+                                    var protocol = PFTSRFIDProtocol.Parse(bt, bt.Count());
+                                    if (protocol.State == PFTSRFIDProtocol.ProtocolParseState.PPSParsed)
+                                    {
+                                        if (this.m_server.BTrackerMove != null)
+                                        {
+                                            this.m_server.BTrackerMove(protocol.BTracker, protocol.DevRFID);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (System.Exception exp)
+                {
+                    Console.WriteLine(exp.ToString());
+                }
+                m_client.Close();
+            }
+        }
+
     }
 }
