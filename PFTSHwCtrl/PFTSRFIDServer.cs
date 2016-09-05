@@ -56,30 +56,6 @@ namespace PFTSHwCtrl
                 try
                 {
                     Receive(client, pbff);
-                    //        var rcvSize = client.Receive(buffer);
-                    //        if (rcvSize > 0)
-                    //        {
-                    //            var rets = pbff.Put(buffer, 0, rcvSize);
-                    //            if (rets != null && rets.Count > 0)
-                    //            {
-                    //                foreach (var bt in rets)
-                    //                {
-                    //                    var protocol = PFTSRFIDProtocol.Parse(bt,bt.Count());
-                    //                    if (protocol.State == PFTSRFIDProtocol.ProtocolParseState.PPSParsed)
-                    //                    {
-                    //                        if (this.BTrackerMove != null)
-                    //                        {
-                    //                            this.BTrackerMove(protocol.BTracker, protocol.DevRFID);
-                    //                        }
-                    //                    }
-                    //                }
-                    //            }
-                    //        }
-                    //        else
-                    //        {
-                    //            client.Disconnect(false);
-                    //            break;
-                    //        }
                 }
                 catch
                 {

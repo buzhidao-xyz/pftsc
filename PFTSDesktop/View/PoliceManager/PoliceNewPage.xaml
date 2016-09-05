@@ -8,7 +8,7 @@
       xmlns:tool="clr-namespace:PFTSTools;assembly=PFTSTools"
       xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"  
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="500"
+      d:DesignHeight="500" d:DesignWidth="750"
       Title="PoliceNewPage" Background="White">
 
     <Grid x:Name="PoliceNewView" Margin="0,0,0,0">
@@ -30,8 +30,12 @@
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFFFFFFF">
+        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFFFFFFF"  Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -55,7 +59,7 @@
                     Command="{Binding PoliceManageCommand}" CommandParameter="{Binding ElementName=PoliceManageBtn}"/>
         </Grid>
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">新增警员</TextBlock>
+        <TextBlock Grid.Row="1"  Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">新增警员</TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="警号：" Style="{StaticResource lableNameStyle}" FontSize="16"/>
             <Element:RegularText Width="300" Height="30" Margin="0,0,20,0" Text="{Binding Path=GetPoliceInfo.no,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
@@ -75,7 +79,16 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center">
         </StackPanel>
-        <Button Grid.Row="7" Name="btnUpdate"
+        <Image Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" Width="100" Stretch="Fill" x:Name="imgFinger">
+            <Image.OpacityMask>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FF8ECD43" Offset="1"/>
+                </LinearGradientBrush>
+            </Image.OpacityMask>
+
+        </Image>
+        <Button Grid.Row="7" Name="btnUpdate"  Grid.ColumnSpan="2"
                 Style="{StaticResource ButtonControlTemplate}"
                 HorizontalAlignment="Center" Content="保    存"
                 Height="30" Width="100"

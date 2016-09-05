@@ -1,8 +1,11 @@
 ﻿using PFTSDesktop.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.Data.Linq;
 
 namespace PFTSDesktop.View.PoliceManager
 {
@@ -21,13 +26,79 @@ namespace PFTSDesktop.View.PoliceManager
     /// </summary>
     public partial class PoliceNewPage : Page
     {
+        PFTSHwCtrl.PFTSZKFingerProxy m_fingerProxy;
+        private bool m_bIsTimeToDie = false;
+        private PoliceManagerViewModel m_model;
+
         public PoliceNewPage()
         {
             InitializeComponent();
 
-            var viewModel = PoliceManagerViewModel.GetInstance();
+            m_model = PoliceManagerViewModel.GetInstance();
 
-            this.DataContext = viewModel;
+            this.DataContext = m_model;
+
+            m_fingerProxy = PFTSHwCtrl.PFTSZKFingerProxy.GetInstance();
+
+            m_fingerProxy.FingerAcquire += M_fingerProxy_FingerAcquire;
+        }
+
+        private void M_fingerProxy_FingerAcquire(Bitmap img, byte[] buffer)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                imgFinger.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+                var officer = m_model.GetPoliceInfo;
+                officer.fingerprint1 = new Binary(buffer);
+                m_model.GetPoliceInfo = officer;
+            });
+        }
+
+        private void DoCapture()
+        {
+            while (!m_bIsTimeToDie)
+            {
+                var b = m_fingerProxy.AcquireFingerprint();
+                if (b)
+                {
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        int size = 2048;
+                        var img = m_fingerProxy.GetFingerImage();
+                        var buffer = m_fingerProxy.GetRaw(ref size);
+                        imgFinger.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+
+                        var officer = m_model.GetPoliceInfo;
+                        officer.fingerprint1 = new Binary(buffer);
+                        m_model.GetPoliceInfo = officer;
+                    });
+                }
+                Thread.Sleep(200);
+            }
+        }
+
+        [DllImport("gdi32.dll", SetLastError = true)]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        /// <summary>  
+        /// 从bitmap转换成ImageSource  
+        /// </summary>  
+        /// <param name="icon"></param>  
+        /// <returns></returns>  
+        public static ImageSource ChangeBitmapToImageSource(Bitmap bitmap)
+        {
+            //Bitmap bitmap = icon.ToBitmap();  
+            IntPtr hBitmap = bitmap.GetHbitmap();
+            ImageSource wpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                hBitmap,
+                IntPtr.Zero,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
+            if (!DeleteObject(hBitmap))
+            {
+                throw new System.ComponentModel.Win32Exception();
+            }
+            return wpfBitmap;
         }
     }
 }

@@ -85,12 +85,12 @@
 
             <Label Content="识别码1：" Grid.Row="3" Grid.Column="0"/>
             <ele:RegularText Name="txtNo"  Grid.Row="3" Grid.Column="1" Validation.ErrorTemplate="{x:Null}"
-                         Text="{Binding VestAddModel.NoLeft, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding VestAddModel.NoLeft, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" GotFocus="txtNo_GotFocus" LostFocus="txtNo_LostFocus"/>
             <ContentPresenter Grid.Row="3" Grid.Column="2" Content="{Binding ElementName=txtNo, Path=(Validation.Errors).CurrentItem}"/>
 
             <Label Content="识别码2：" Grid.Row="4" Grid.Column="0"/>
             <ele:RegularText Name="txtNo2"  Grid.Row="4" Grid.Column="1" Validation.ErrorTemplate="{x:Null}"
-                         Text="{Binding VestAddModel.NoRight, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding VestAddModel.NoRight, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" GotFocus="txtNo2_GotFocus" LostFocus="txtNo2_LostFocus"/>
             <ContentPresenter Grid.Row="4" Grid.Column="2" Content="{Binding ElementName=txtNo2, Path=(Validation.Errors).CurrentItem}"/>
             
             <Button Grid.Row="5" Grid.Column="1" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
