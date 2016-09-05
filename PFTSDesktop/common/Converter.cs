@@ -194,4 +194,36 @@ namespace PFTSDesktop.common
             throw new NotImplementedException();
         }
     }
+
+    public class RecoverStatusConverter : MarkupExtension, IValueConverter
+    {
+
+        public RecoverStatusConverter() { }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool? status = (bool?)value;
+            string strType = "";
+            if (status == true)
+            {
+                strType = "已取";
+            }
+            else
+            {
+                strType = "未取";
+            }
+
+            return strType;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

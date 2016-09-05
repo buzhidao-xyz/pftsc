@@ -17,8 +17,10 @@ namespace PFTSDesktop.ViewModel
 {
     public class SuspectViewModel : WorkspaceViewModel, IDataErrorInfo
     {
+        #region 私有变量
         private RelayCommand _addSupcetCommand;
         private RelayCommand _getSuspectsCommand;
+        private RelayCommand _transferCommand;
         private ButtonTemplet _preBtn;
         private SuspectModel _suspectModel;
         private List<officer> _officers;
@@ -35,6 +37,10 @@ namespace PFTSDesktop.ViewModel
         private string[] _sexOpetions;
         private static SuspectViewModel instance;
         private view_btracker_info _selectedBtracker;
+        private bool _recover;
+        private string _remark;
+        private int? status = 0;
+        #endregion
 
         public SuspectViewModel()
         {
@@ -47,6 +53,7 @@ namespace PFTSDesktop.ViewModel
             _officer = new officer();
             _devVert = new view_vest_info();
             _devLocker = new view_locker_info();
+            initData();
         }
 
         public static SuspectViewModel GetInstance()
@@ -60,6 +67,9 @@ namespace PFTSDesktop.ViewModel
         }
 
         #region 属性
+        /// <summary>
+        /// 嫌疑犯实体
+        /// </summary>
         public SuspectModel SuspectModel
         {
             get
@@ -79,7 +89,25 @@ namespace PFTSDesktop.ViewModel
                 base.OnPropertyChanged("SuspectModel");
             }
         }
+        /// <summary>
+        /// 物品是否已取出
+        /// </summary>
+        public bool Recover
+        {
+            get
+            {
+                return _recover;
+            }
+            set
+            {
+                _recover = value;
+                base.OnPropertyChanged("Recover");
+            }
+        }
 
+        /// <summary>
+        /// 警察列表
+        /// </summary>
         public List<officer> Officers
         {
             get
@@ -97,6 +125,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 马甲列表
+        /// </summary>
         public List<view_vest_info> DevVests
         {
             get
@@ -114,6 +145,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 储物柜列表
+        /// </summary>
         public List<view_locker_info> DevLockers
         {
             get
@@ -130,7 +164,9 @@ namespace PFTSDesktop.ViewModel
                 base.OnPropertyChanged("DevLockers");
             }
         }
-
+        /// <summary>
+        /// 储物柜实体
+        /// </summary>
         public view_locker_info DevLocker
         {
             get
@@ -147,6 +183,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 警察实体
+        /// </summary>
         public officer OfficerInfo
         {
             get
@@ -163,6 +202,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 马甲实体
+        /// </summary>
         public view_vest_info DevVest
         {
             get
@@ -179,6 +221,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 性别
+        /// </summary>
         public string[] SexOptions
         {
             get
@@ -195,6 +240,10 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+
+        /// <summary>
+        /// 嫌疑犯列表
+        /// </summary>
         public List<view_btracker_info> Btrackers
         {
             get
@@ -210,17 +259,41 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 选中的嫌疑犯
+        /// </summary>
         public view_btracker_info SelectedBreacker
         {
-            get {
+            get
+            {
                 return _selectedBtracker;
             }
-            set {
-                if (value == _selectedBtracker)
+            set
+            {
+                if (value == _selectedBtracker || value == null)
                     return;
                 _selectedBtracker = value;
                 base.OnPropertyChanged("SelectedBreacker");
             }
+        }
+
+        /// <summary>
+        /// 转移备注
+        /// </summary>
+        public string Remark
+        {
+            get
+            {
+                return _remark;
+            }
+            set
+            {
+                if (value == _remark)
+                    return;
+                _remark = value;
+                base.OnPropertyChanged("Remark");
+            }
+
         }
         #endregion
 
@@ -259,6 +332,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 添加嫌疑人事件
+        /// </summary>
         public ICommand AddSupectInfoCommand
         {
             get
@@ -270,6 +346,9 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        /// <summary>
+        /// 物品清单事件
+        /// </summary>
         public ICommand CheckGoodsCommand
         {
 
@@ -278,10 +357,63 @@ namespace PFTSDesktop.ViewModel
                 return new RelayCommand(param => this.CheckGoods());
             }
         }
+
+        /// <summary>
+        /// 人员转移窗体打开事件
+        /// </summary>
+        /// 
+        public ICommand SuspectTransferDlgCommand
+        {
+            get
+            {
+                if (_transferCommand == null)
+                {
+                    _transferCommand = new RelayCommand(
+                         new Action<Object>(this.SuspectTransferDlg)
+                        );
+                }
+                return _transferCommand;
+            }
+        }
+
+        /// <summary>
+        /// 嫌疑犯转移事件
+        /// </summary>
+        public ICommand SuspectTransferCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                     new Action<Object>(this.SuspectTransfer)
+                    );
+            }
+        }
         #endregion
 
         #region 方法
 
+        public void SuspectTransferDlg(Object obj)
+        {
+            Remark = _selectedBtracker.remark;
+            Recover = SelectedBreacker.recover == null ? false : (bool)SelectedBreacker.recover;
+            SuspectTransferDlg dlg = new SuspectTransferDlg();
+            dlg.ShowDialog();
+        }
+        public void SuspectTransfer(Object obj)
+        {
+            bool result = _supectService.TransferSuspect(_selectedBtracker.id, _recover, Remark);
+            if (result)
+            {
+                MessageWindow.Show("嫌疑人转移成功", "系统提示");
+                WindowTemplet window = (WindowTemplet)obj;
+                window.Close();
+                initData();
+            }
+            else
+            {
+                MessageWindow.Show("嫌疑人转移失败", "错误");
+            }
+        }
         public void CheckGoods()
         {
             CheckGoodsDlg dlg = new CheckGoodsDlg();
@@ -309,7 +441,7 @@ namespace PFTSDesktop.ViewModel
             btk.in_room_time = now;
             btk.room_id = 1;
 
-            bool result = (new PFTSModel.Services.BTrackerService()).Insert(btk);
+            bool result = _supectService.Insert(btk);
             if (result)
             {
                 MessageWindow.Show("嫌疑人添加成功", "系统提示");
@@ -329,7 +461,7 @@ namespace PFTSDesktop.ViewModel
 
         public void GetSuspects(Object obj)
         {
-            ButtonTemplet btn = (ButtonTemplet)obj;
+             ButtonTemplet btn = (ButtonTemplet)obj;
             if (_preBtn != null)
             {
                 if (btn == _preBtn)
@@ -340,12 +472,13 @@ namespace PFTSDesktop.ViewModel
             btn.SelectEd = true;
             if (btn.Tag.ToString() == "0")
             {
-                Btrackers = _supectService.GetAllByIn(0);
+                status = 0;
             }
             else
             {
-                Btrackers = _supectService.GetAllByIn(null);
+                status = null;
             }
+            initData();
         }
         #endregion
         #region IDataErrorInfo Members
@@ -397,5 +530,41 @@ namespace PFTSDesktop.ViewModel
         }
 
         #endregion // IDataErrorInfo Members
+
+        #region 分页相关事件
+
+        private RelayCommand _nextPageSearchCommand;
+        public ICommand NextPageSearchCommand
+        {
+            get
+            {
+                if (_nextPageSearchCommand == null)
+                {
+                    _nextPageSearchCommand = new RelayCommand(
+                            param => this.QueryData()
+                            );
+                }
+                return _nextPageSearchCommand;
+            }
+        }
+        private void QueryData()
+        {
+            Btrackers = _supectService.GetPageByStatus(status, (PageIndex - 1) * PageSize, PageSize);
+        }
+
+        private void initData()
+        {
+            TotalCount = _supectService.GetCount(status);
+            if (TotalCount == 0)
+            {
+                Btrackers = new List<view_btracker_info>();
+                PageIndex = 0;
+            }
+            else
+            {
+                Btrackers = _supectService.GetPageByStatus(status, (PageIndex - 1) * PageSize, PageSize);
+            }
+        }
+        #endregion
     }
 }

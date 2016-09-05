@@ -18,11 +18,12 @@ namespace PFTSDesktop.Model
         public string Number { get; set; }
         public string Sex { get; set; }
         public int VestId { get; set; }
-        public int LockerId { get; set; }
+        public int? LockerId { get; set; }
         public System.Nullable<int> OfficerId { get; set; }
         public string Status { get; set; }
         public string Recover { get; set; }
         public string PirvateGoods { set; get; }
+        public string remark { get; set; }
         #endregion
 
 

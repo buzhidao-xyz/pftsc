@@ -29,6 +29,7 @@
             </DataTemplate>
 
             <SolidColorBrush x:Key="windowStyle" Color="#17b38e" />
+            
             <Style x:Key="dataGridStyle" TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />

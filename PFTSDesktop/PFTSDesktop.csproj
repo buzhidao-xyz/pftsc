@@ -162,6 +162,9 @@
     <Compile Include="View\SuspectManager\SuspectsInfoPage.xaml.cs">
       <DependentUpon>SuspectsInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SuspectManager\SuspectTransferDlg.xaml.cs">
+      <DependentUpon>SuspectTransferDlg.xaml</DependentUpon>
+    </Compile>
     <Page Include="LoginDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -280,6 +283,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SuspectManager\SuspectsInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SuspectManager\SuspectTransferDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
