@@ -203,7 +203,7 @@ namespace PFTSScene
         {
             foreach (int k in m_mapRooms.Keys)
             {
-                var gridRoom = new Tools.GridRoom();
+                var gridRoom = new Tools.GridRoom(30,30);
                 m_mapRooms[k].Children.Add(gridRoom);
                 m_mapGridRooms[k] = gridRoom;
             }
@@ -448,16 +448,14 @@ namespace PFTSScene
         {
             if (btracker.room_id == null) return;
             int roomId = btracker.room_id.Value;
-            if (m_loaded)
-            {
+            //if (m_loaded)
+            //{
                 if (m_mapGridRooms.ContainsKey(roomId))
                 {
                     var gr = m_mapGridRooms[roomId];
                     Image img = new Image();
-                    img.Width = 30;
-                    img.Height = 30;
                     img.Source = m_bmImgPeople;
-                    gr.AddImage(img);
+                    gr.AddAImage(img);
                     if (m_mapPeopleCounts.ContainsKey(roomId))
                     {
                         m_mapPeopleCounts[roomId] += 1;
@@ -474,42 +472,38 @@ namespace PFTSScene
                     m_mapBtrackers.Add(btracker.id, btracker);
                     m_mapPeopleImage.Add(btracker.id, img);
                 }
-            }
-            else
-            {
-                m_listUnloadPeople.Add(btracker);
-            }
+            //}
+            //else
+            //{
+            //    m_listUnloadPeople.Add(btracker);
+            //}
         }
 
         public void RefreshPeople(int id)
         {
             //异步刷新界面
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,(ThreadStart)delegate (){
-                PFTSModel.btracker btracker = (new PFTSModel.Services.BTrackerService()).Get(id);
-                if (btracker == null) return;
-                if (m_mapBtrackers.ContainsKey(id))
-                {
-                    PFTSModel.btracker oldBt = m_mapBtrackers[id];
-                    // same room
-                    if (oldBt.room_id == btracker.room_id) return;
-                    // leave
+            PFTSModel.btracker btracker = (new PFTSModel.Services.BTrackerService()).Get(id);
+            if (btracker == null) return;
+            if (m_mapBtrackers.ContainsKey(id))
+            {
+                PFTSModel.btracker oldBt = m_mapBtrackers[id];
+                // same room
+                if (oldBt.room_id == btracker.room_id) return;
+                // leave
 
-                    if (btracker.room_id == null)
-                    {
-                        RemovePeople(btracker.id, oldBt.room_id.Value);
-                    }
-                    else
-                    {
-                        MovePeople(btracker, oldBt.room_id.Value);
-                    }
-                }
-                else if (btracker.status == 0 && btracker.room_id != null)
+                if (btracker.room_id == null)
                 {
-                    AddAPeople(btracker);
+                    RemovePeople(btracker.id, oldBt.room_id.Value);
                 }
-            });
-
-            
+                else
+                {
+                    MovePeople(btracker, oldBt.room_id.Value);
+                }
+            }
+            else if (btracker.status == 0 && btracker.room_id != null)
+            {
+                AddAPeople(btracker);
+            }
         }
 
         public void RemovePeople(int id,int roomId)
@@ -524,13 +518,13 @@ namespace PFTSScene
                 if (m_mapPeopleImage.ContainsKey(id))
                 {
                     Image img = m_mapPeopleImage[id];
+                    if (m_mapGridRooms.ContainsKey(roomId))
+                    {
+                        Tools.GridRoom gd = m_mapGridRooms[roomId];
+                        gd.RemoveAImage(img);
+                    }
                     if (img != null)
                     {
-                        Grid gd = img.Parent as Grid;
-                        if (gd != null)
-                        {
-                            gd.Children.Remove(img);
-                        }
                         m_mapPeopleImage.Remove(id);
                     }
                 }
@@ -571,6 +565,7 @@ namespace PFTSScene
                     PathTo(m_mapRooms[o], m_mapRooms[d]);
                 }
             }
+            gridBack.Visibility = Visibility.Visible;
         }
 
         private void MenuPeopleRealVideo_Click(object sender, RoutedEventArgs e)
@@ -654,29 +649,29 @@ namespace PFTSScene
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             m_loaded = true;
-            foreach (var gr in m_mapGridRooms)
-            {
-                gr.Value.MetaSize = new Size(30, 30);
-            }
-            foreach (var bt in m_listUnloadPeople)
-            {
-                AddAPeople(bt);
-            }
-            m_listUnloadPeople = new List<PFTSModel.btracker>();
+            //foreach (var gr in m_mapGridRooms)
+            //{
+            //    gr.Value.MetaSize = new Size(30, 30);
+            //}
+            //foreach (var bt in m_listUnloadPeople)
+            //{
+            //    AddAPeople(bt);
+            //}
+            //m_listUnloadPeople = new List<PFTSModel.btracker>();
         }
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            foreach (var pc in m_mapPeopleCounts)
-            {
-                if (pc.Value > 0)
-                {
-                    if (m_mapGridRooms.ContainsKey(pc.Key))
-                    {
-                        m_mapGridRooms[pc.Key].Resize();
-                    }
-                }
-            }
+            //foreach (var pc in m_mapPeopleCounts)
+            //{
+            //    if (pc.Value > 0)
+            //    {
+            //        if (m_mapGridRooms.ContainsKey(pc.Key))
+            //        {
+            //            m_mapGridRooms[pc.Key].Resize();
+            //        }
+            //    }
+            //}
             foreach (var p in m_paths)
             {
                 RefreshPath(p);
@@ -688,6 +683,17 @@ namespace PFTSScene
             public Tools.Arrow ArrowD;
             public Grid RoomOrigin;
             public Grid RoomDest;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var p in m_paths)
+            {
+                Grid g = (Grid)p.ArrowD.Parent;
+                g.Children.Remove(p.ArrowD);
+            }
+            m_paths = new List<InArrow>();
+            gridBack.Visibility = Visibility.Hidden;
         }
     }
 }

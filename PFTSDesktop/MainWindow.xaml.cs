@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PFTSModel;
 using PFTSUITemplate.Controls;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace PFTSDesktop
 {
@@ -49,15 +51,19 @@ namespace PFTSDesktop
 
         private void M_rfidServer_BTrackerMove(btracker btracker, view_rfid_info position)
         {
-            bool r = (new PFTSModel.Services.BTrackerService()).MoveTo(btracker.id, position);
-            if (!r)
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
-                MessageBox.Show(btracker.name + "移动至" + position.room_name + "失败");
-            }else
-            {
-                if (BTrackerMoveDelegete != null)
-                    BTrackerMoveDelegete(btracker.id);
-            }
+                bool r = (new PFTSModel.Services.BTrackerService()).MoveTo(btracker.id, position);
+                if (!r)
+                {
+                    MessageBox.Show(btracker.name + "移动至" + position.room_name + "失败");
+                }
+                else
+                {
+                    if (BTrackerMoveDelegete != null)
+                        BTrackerMoveDelegete(btracker.id);
+                }
+            });            
         }
 
         private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
