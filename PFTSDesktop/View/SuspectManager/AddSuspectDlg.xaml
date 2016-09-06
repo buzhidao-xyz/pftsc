@@ -12,7 +12,8 @@
                    BorderThickness="1"
                    MoveHeight="114"
                    WindowStartupLocation="CenterScreen"
-                   x:Name="main"
+                   x:Name="main" Title="AddSuspectDlg"
+                    Loaded="Page_Loaded" Unloaded="Page_Unloaded"
                    mc:Ignorable="d">
     <tmp:WindowTemplet.Resources>
         <Style TargetType="{x:Type ele:RegularText}" BasedOn="{StaticResource textboxStyle}">
@@ -138,7 +139,7 @@
             <Button Grid.Row="10" Grid.Column="2" Name="btnUpdate" Style="{StaticResource ButtonControlTemplate}"  
 				HorizontalAlignment="Right" Content="保    存" Command="{Binding AddSupectInfoCommand}"
 				Height="30" Width="90" Margin="0,0,10,0"  CommandParameter="{Binding ElementName=main}"/>
-            <Button Grid.Row="10" Grid.Column="2" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
+            <Button Grid.Row="10" IsCancel="True" Grid.Column="2" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
 				HorizontalAlignment="Right" Content="返    回" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=main}"
 				Height="30" Width="90" Margin="0,0,110,0"/>
         </Grid>

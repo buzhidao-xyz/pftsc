@@ -71,9 +71,16 @@ namespace PFTSDesktop.View.SuspectManager
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            rfidReader.RFIDNoReaderDelegate -= RfidReader_RFIDNoReaderDelegate;
-            rfidReader.EndAcquireRFIDNo();
-            rfidReader.Close();
+            try
+            {
+                rfidReader.RFIDNoReaderDelegate -= RfidReader_RFIDNoReaderDelegate;
+                rfidReader.EndAcquireRFIDNo();
+                rfidReader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
         }
     }
 }
