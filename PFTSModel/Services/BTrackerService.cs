@@ -413,21 +413,22 @@ namespace PFTSModel.Services
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
                     System.Data.Linq.Table<view_btracker_info> table = db.GetTable<view_btracker_info>();
-                    IQueryable<view_btracker_info> query = null;
+                  
                     if (status == null)
                     {
-                        query = from q in table
-                                select q;
+                        var query = from q in table
+                                    select q;
+                        query = query.Skip(pageIndex).Take(pageSize);
+                        return query.ToList();
                     }
                     else
                     {
-                        query = from q in table
+                        var query = from q in table
                                 where q.status == status
                                 select q;
-
+                        query = query.Skip(pageIndex).Take(pageSize);
+                        return query.ToList();
                     }
-                    query = query.Skip(pageIndex).Take(pageSize);
-                    return query.ToList();
                 }
             }
             catch (Exception e)
