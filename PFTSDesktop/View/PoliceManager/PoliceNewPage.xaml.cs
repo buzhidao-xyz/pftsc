@@ -57,7 +57,7 @@ namespace PFTSDesktop.View.PoliceManager
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
-                imgFinger.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+                imgFinger1.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
                 var officer = m_model.GetPoliceInfo;
                 officer.fingerprint1 = new Binary(buffer);
                 m_model.GetPoliceInfo = officer;
@@ -76,7 +76,7 @@ namespace PFTSDesktop.View.PoliceManager
                         int size = 2048;
                         var img = m_fingerProxy.GetFingerImage();
                         var buffer = m_fingerProxy.GetRaw(ref size);
-                        imgFinger.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+                        imgFinger1.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
 
                         var officer = m_model.GetPoliceInfo;
                         officer.fingerprint1 = new Binary(buffer);
@@ -111,6 +111,19 @@ namespace PFTSDesktop.View.PoliceManager
             return wpfBitmap;
         }
 
-        
+        /// <summary>
+        /// 鼠标点击事件 - 左键
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void imgFinger1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("1");
+        }
+
+        private void imgFinger1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("1");
+        }
     }
 }

@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CodeMAP.dat" />
     <None Include="PFTSDb.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>PFTSDb.designer.cs</LastGenOutput>
