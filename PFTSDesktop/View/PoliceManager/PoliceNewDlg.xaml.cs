@@ -29,6 +29,7 @@ namespace PFTSDesktop.View.PoliceManager
         PFTSHwCtrl.PFTSZKFingerProxy m_fingerProxy;
         private bool m_bIsTimeToDie = false;
         private PoliceManagerViewModel m_model;
+        private int m_idx = -1;
         public PoliceNewDlg()
         {
             InitializeComponent();
@@ -56,35 +57,57 @@ namespace PFTSDesktop.View.PoliceManager
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate()
             {
-                imgFinger1.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
-                var officer = m_model.GetPoliceInfo;
-                officer.fingerprint1 = new Binary(buffer);
-                m_model.GetPoliceInfo = officer;
+                if (m_idx == 1)
+                {
+                    imgFinger1.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+                    var officer = m_model.GetPoliceInfo;
+                    officer.fingerprint1 = new Binary(buffer);
+                    m_model.GetPoliceInfo = officer;
+                }else if (m_idx == 2)
+                {
+                    imgFinger2.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+                    var officer = m_model.GetPoliceInfo;
+                    officer.fingerprint2 = new Binary(buffer);
+                    m_model.GetPoliceInfo = officer;
+                }
             });
         }
 
-        private void DoCapture()
-        {
-            while (!m_bIsTimeToDie)
-            {
-                var b = m_fingerProxy.AcquireFingerprint();
-                if (b)
-                {
-                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate()
-                    {
-                        int size = 2048;
-                        var img = m_fingerProxy.GetFingerImage();
-                        var buffer = m_fingerProxy.GetRaw(ref size);
-                        imgFinger1.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+        //private void DoCapture()
+        //{
+        //    while (!m_bIsTimeToDie)
+        //    {
+        //        var b = m_fingerProxy.AcquireFingerprint();
+        //        if (b)
+        //        {
+        //            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate()
+        //            {
+        //                int size = 2048;
+        //                if (m_idx == 1)
+        //                {
+        //                    var img = m_fingerProxy.GetFingerImage();
+        //                    var buffer = m_fingerProxy.GetRaw(ref size);
+        //                    imgFinger1.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
 
-                        var officer = m_model.GetPoliceInfo;
-                        officer.fingerprint1 = new Binary(buffer);
-                        m_model.GetPoliceInfo = officer;
-                    });
-                }
-                Thread.Sleep(200);
-            }
-        }
+        //                    var officer = m_model.GetPoliceInfo;
+        //                    officer.fingerprint1 = new Binary(buffer);
+        //                    m_model.GetPoliceInfo = officer;
+        //                }
+        //                else if (m_idx == 2)
+        //                {
+        //                    var img = m_fingerProxy.GetFingerImage();
+        //                    var buffer = m_fingerProxy.GetRaw(ref size);
+        //                    imgFinger2.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+
+        //                    var officer = m_model.GetPoliceInfo;
+        //                    officer.fingerprint2 = new Binary(buffer);
+        //                    m_model.GetPoliceInfo = officer;
+        //                }
+        //            });
+        //        }
+        //        Thread.Sleep(200);
+        //    }
+        //}
 
         [DllImport("gdi32.dll", SetLastError = true)]
         private static extern bool DeleteObject(IntPtr hObject);
@@ -118,11 +141,15 @@ namespace PFTSDesktop.View.PoliceManager
         private void imgFinger1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             imgFinger1_Border.BorderBrush = System.Windows.Media.Brushes.Blue;
+            imgFinger2_Border.BorderBrush = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xff,0xab,0xad,0xb3));
+            m_idx = 1;
         }
 
         private void imgFinger2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            imgFinger1_Border.BorderBrush = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0xff, 0xab, 0xad, 0xb3));
             imgFinger2_Border.BorderBrush = System.Windows.Media.Brushes.Blue;
+            m_idx = 2;
         }
     }
 }
