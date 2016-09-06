@@ -5,6 +5,10 @@
         xmlns:tool="clr-namespace:PFTSTools;assembly=PFTSTools"           
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Name="main"
+        BorderBrush="{DynamicResource windowStyle}"
+        BorderThickness="1"
+        MoveHeight="114"
+        WindowStartupLocation="CenterScreen"            
         Title="PoliceUpDlg" Width="600" Height="500"  Background="White" Loaded="Page_Loaded">
     <Grid>
         <Grid.RowDefinitions>
