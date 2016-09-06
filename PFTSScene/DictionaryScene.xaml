@@ -12,6 +12,6 @@
         <Setter Property="Source" Value="Images/camera.png"></Setter>
         <Setter Property="Height" Value="30"></Setter>
         <Setter Property="Width" Value="30"></Setter>
-        <Setter Property="Visibility" Value="{Binding CameraImageVisiable, ElementName=userControl}"></Setter>
+        <Setter Property="Visibility" Value="{Binding CameraImageVisible, ElementName=userControl}"></Setter>
     </Style>
 </ResourceDictionary>

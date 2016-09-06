@@ -101,7 +101,7 @@ namespace PFTSScene
 
             m_bmImgPeople = new BitmapImage();
             m_bmImgPeople.BeginInit();
-            m_bmImgPeople.UriSource = new Uri(@"Images/people.png", UriKind.RelativeOrAbsolute);
+            m_bmImgPeople.UriSource = new Uri(@"Images/person_normal.png", UriKind.RelativeOrAbsolute);
             m_bmImgPeople.EndInit();
 
             m_toolTip = new ToolTip();
@@ -201,9 +201,13 @@ namespace PFTSScene
 
         public void initGridRooms()
         {
+            var rooms = (new PFTSModel.Services.RFIDRoomService()).GetAll();
             foreach (int k in m_mapRooms.Keys)
             {
-                var gridRoom = new Tools.GridRoom(30,30);
+                var rfrm = from rm in rooms
+                           where rm.id == k
+                           select rm;
+                var gridRoom = new Tools.GridRoom(30,30,rfrm.SingleOrDefault());
                 m_mapRooms[k].Children.Add(gridRoom);
                 m_mapGridRooms[k] = gridRoom;
             }
@@ -644,6 +648,7 @@ namespace PFTSScene
             }
             m_toolTip.PlacementTarget = img;
             m_toolTip.IsOpen = true;
+            e.Handled = true;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
