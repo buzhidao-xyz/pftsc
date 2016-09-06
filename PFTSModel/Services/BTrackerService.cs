@@ -131,6 +131,139 @@ namespace PFTSModel.Services
             return null;
         }
 
+        private static List<int[]> s_paths;
+        public static List<int[]> SPaths
+        {
+            get
+            {
+                if (s_paths == null)
+                {
+                    s_paths = new List<int[]>();
+                    s_paths.Add(new int[] {1,2,33,34,35,36,38,39,41,42,32,31,30,29 });
+                    s_paths.Add(new int[] { 1, 2, 33,34,35,36,37});
+                    s_paths.Add(new int[] { 1, 2, 33,34,35,36,38,39,40});
+                    s_paths.Add(new int[] {37,38,39,40});
+                    s_paths.Add(new int[] {37,38,39,41,42});
+                    s_paths.Add(new int[] {40,41,42});
+                }
+                return s_paths;
+            }
+        }
+
+        // 不存在的路径需要优化
+        // 1 : 1 2 33 34 35 36 38 39 41 42 32 31 30 29
+        // 2 : 1 2 33 34 35 36 37 
+        // 3 : 1 2 33 34 35 36 38 39 40
+        // 4 : 37 38 39 40 
+        // 5 : 37 38 39 41 42
+        // 6 : 40 41 42
+        // 返回ids
+        private List<int> OptimizationPath(PFTSDbDataContext db, int startRoomId,int endRoomId)
+        {
+            var pathSs = from q in db.GetTable<path_rfid>()
+                         where q.start_room_id == startRoomId
+                         select q;
+            List<path_rfid> pss = pathSs.ToList();
+            var pathEs = from q in db.GetTable<path_rfid>()
+                         where q.end_room_id == endRoomId
+                         select q;
+            List<path_rfid> pes = pathEs.ToList();
+
+            int min = 100;
+            bool asc = true;
+            int spos = 0, epos = 0;
+            int index = -1;
+
+            // 查找最短路径
+            for( var x = 0; x < BTrackerService.SPaths.Count;x++)
+            {
+                var ips = BTrackerService.SPaths[x];
+                int smin = ips.Length, smax = -1;
+                int emin = ips.Length, emax = -1;
+                bool ascTemp = true;    //正向 or 反向
+                int sposTemp, eposTemp;
+                foreach(var ps in pss)
+                {
+                    for (var i = 0;i < ips.Length;i++)
+                    {
+                        if (ps.end_room_id == ips[i])
+                        {
+                            if (i < smin) smin = i;
+                            if (i > smax) smax = i;
+                        }
+                    }
+                }
+                foreach(var pe in pes)
+                {
+                    for (var i = 0;i < ips.Length; i++)
+                    {
+                        if (pe.start_room_id == ips[i])
+                        {
+                            if (i < emin) emin = i;
+                            if (i > emax) emax = i;
+                        }
+                    }
+                }
+                int minPath = smin > emin ? smin - emin : emin - smin;
+                sposTemp = smin;
+                eposTemp = emin;
+                ascTemp = smin < emin;
+                int temp = smin > emax ? smin - emax : emax - smin;
+                if (temp < minPath)
+                {
+                    minPath = temp;
+                    sposTemp = smin;
+                    eposTemp = emax;
+                    ascTemp = smin < emax;
+                }
+                temp = smax > emin ? smax - emin : emin - smax;
+                if (temp < minPath)
+                {
+                    minPath = temp;
+                    sposTemp = smax;
+                    eposTemp = emin;
+                    ascTemp = smax < emin;
+                }
+                temp = smax > emax ? smax - emax : emax - smax;
+                if (temp < minPath)
+                {
+                    minPath = temp;
+                    sposTemp = smax;
+                    eposTemp = emax;
+                    ascTemp = smax < emax;
+                }
+                if (sposTemp >= 0 && sposTemp < ips.Length && eposTemp >= 0 && eposTemp < ips.Length && minPath < min)
+                {
+                    index = x;
+                    min = minPath;
+                    spos = sposTemp;
+                    epos = eposTemp;
+                    asc = ascTemp;
+                }
+            }
+            // not found
+            if (min == 100)
+            {
+                return (new List<int>());
+            }
+            var rets = new List<int>();
+            if (asc)
+            {
+                for (int i = spos; i <= epos; i++)
+                {
+                    rets.Add(BTrackerService.SPaths[index][i]);
+                }
+            }
+            else
+            {
+                for (int i = spos; i >= epos; i--)
+                {
+                    rets.Add(BTrackerService.SPaths[index][i]);
+                }
+            }
+            return rets;
+        }
+
         public bool MoveTo(int id, view_rfid_info position)
         {
             PFTSDbDataContext db = new PFTSDbDataContext();
@@ -150,8 +283,48 @@ namespace PFTSModel.Services
                                 where q.start_room_id == bt.room_id && q.end_room_id == position.room_id
                                 select q;
                 path_rfid path = pathQuery.FirstOrDefault<path_rfid>();
-
                 var n = DateTime.Now;
+
+                if (path == null && bt.room_id != null && position.room_id != null)
+                {
+                    var optPaths = OptimizationPath(db, bt.room_id.Value, position.room_id.Value);
+                    if (optPaths.Count > 0)
+                    {
+                        optPaths.Add(position.room_id.Value);
+                        for (int i = 0; i < optPaths.Count - 1; i++)
+                        {
+                            var apathq = from q in db.GetTable<path_rfid>()
+                                        where q.start_room_id == optPaths[i] && q.end_room_id == optPaths[i+1]
+                                        select q;
+                            path_rfid apath = apathq.SingleOrDefault<path_rfid>();
+                            if (apath == null)
+                            {
+                                tran.Rollback();
+                                return false;
+                            }
+                            var abp = new btracker_path();
+                            abp.btracker_id = bt.id;
+                            abp.path_id = apath.id;
+                            if (i == 0)
+                                abp.start_time = bt.in_room_time.Value;
+                            else
+                                abp.start_time = n;
+                            abp.end_time = n;
+
+                            db.btracker_path.InsertOnSubmit(abp);
+                            db.SubmitChanges();
+                        }
+                        bt.room_id = position.room_id;
+                        bt.in_room_time = n;
+                        db.SubmitChanges();
+
+                        tran.Commit();
+                        return true;
+                    }
+                    tran.Rollback();
+                    return false;
+                }
+
 
                 var bp = new btracker_path();
                 bp.btracker_id = bt.id;
