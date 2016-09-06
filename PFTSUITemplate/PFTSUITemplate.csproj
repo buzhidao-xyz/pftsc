@@ -159,7 +159,9 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\white_bg.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\ImageButton.xaml">
       <SubType>Designer</SubType>
