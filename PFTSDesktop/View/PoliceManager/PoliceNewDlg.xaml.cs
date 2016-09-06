@@ -122,7 +122,7 @@ namespace PFTSDesktop.View.PoliceManager
 
         private void imgFinger2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("2");
+            imgFinger2_Border.BorderBrush = System.Windows.Media.Brushes.Blue;
         }
     }
 }

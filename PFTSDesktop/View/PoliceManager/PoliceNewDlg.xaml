@@ -10,6 +10,9 @@
         MoveHeight="114"
         WindowStartupLocation="CenterScreen"           
         Title="PoliceNewDlg"   Width="600" Height="500"  Background="White" Loaded="Page_Loaded">
+    <tmp:WindowTemplet.Resources>
+        <Color x:Key="PoliceFinger_Image_Border">#FFABADB3</Color>
+    </tmp:WindowTemplet.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
