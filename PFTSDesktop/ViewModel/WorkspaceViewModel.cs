@@ -72,6 +72,7 @@ namespace PFTSDesktop.ViewModel
         public void windowClose(Object obj)
         {
             WindowTemplet win = (WindowTemplet)obj;
+            System.Environment.Exit(0);
             win.Close();
         }
 

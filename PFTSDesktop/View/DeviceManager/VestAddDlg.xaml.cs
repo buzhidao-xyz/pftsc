@@ -67,6 +67,7 @@ namespace PFTSDesktop.View.DeviceManager
         private void txtNo_LostFocus(object sender, RoutedEventArgs e)
         {
             rfidReader.RFIDNoReaderDelegate -= Proxy_RFIDNoReaderDelegate;
+            rfidReader.EndAcquireRFIDNo();
             rfidReader.Close();
             m_bFocusNo1 = false;
         }
@@ -82,6 +83,7 @@ namespace PFTSDesktop.View.DeviceManager
         private void txtNo2_LostFocus(object sender, RoutedEventArgs e)
         {
             rfidReader.RFIDNoReaderDelegate -= Proxy_RFIDNoReaderDelegate;
+            rfidReader.EndAcquireRFIDNo();
             rfidReader.Close();
             m_bFocusNo2 = false;
         }

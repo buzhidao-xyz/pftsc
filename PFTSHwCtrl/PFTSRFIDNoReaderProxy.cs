@@ -19,6 +19,7 @@ namespace PFTSHwCtrl
         private int m_baudRate = 57600;
         private SerialPort m_serialPort;
         private bool m_bIsTimeToDie = false;
+        private Thread m_captureThread;
 
         public event RFIDNoReaderHandler RFIDNoReaderDelegate;
 
@@ -26,6 +27,7 @@ namespace PFTSHwCtrl
         {
             m_com = com;
             m_serialPort = new SerialPort();
+            //m_captureThread = new Thread(new ThreadStart(DoRead));
         }
 
         public void Open()
@@ -56,10 +58,28 @@ namespace PFTSHwCtrl
 
         public void StartAcquireRFIDNo()
         {
-            Thread captureThread = new Thread(new ThreadStart(DoRead));
-            captureThread.IsBackground = true;
-            captureThread.Start();
+            //Thread captureThread = new Thread(new ThreadStart(DoRead));
+            m_captureThread = new Thread(new ThreadStart(DoRead));
+            m_captureThread.IsBackground = true;
+            m_captureThread.Start();
             m_bIsTimeToDie = false;
+        }
+
+        public void EndAcquireRFIDNo()
+        {
+            while (true)
+            {
+                // run
+                if ((m_captureThread.ThreadState & ThreadState.Running) != 0)
+                {
+                    Thread.Sleep(20);
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         private void DoRead()
