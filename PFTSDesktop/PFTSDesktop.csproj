@@ -404,6 +404,7 @@
     <Resource Include="Images\Login\登陆框.png" />
     <Resource Include="Images\Login\背景.png" />
     <Resource Include="Images\btnImage.png" />
+    <Resource Include="Images\white_bg.png" />
     <Content Include="lib\AudioRender.dll" />
     <Content Include="lib\HCCore.dll" />
     <Content Include="lib\HCNetSDK.dll" />
