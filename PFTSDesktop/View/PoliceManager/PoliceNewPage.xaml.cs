@@ -38,9 +38,19 @@ namespace PFTSDesktop.View.PoliceManager
 
             this.DataContext = m_model;
 
-            m_fingerProxy = PFTSHwCtrl.PFTSZKFingerProxy.GetInstance();
+        }
 
-            m_fingerProxy.FingerAcquire += M_fingerProxy_FingerAcquire;
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                m_fingerProxy = PFTSHwCtrl.PFTSZKFingerProxy.GetInstance();
+                m_fingerProxy.FingerAcquire += M_fingerProxy_FingerAcquire;
+
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void M_fingerProxy_FingerAcquire(Bitmap img, byte[] buffer)
@@ -100,5 +110,7 @@ namespace PFTSDesktop.View.PoliceManager
             }
             return wpfBitmap;
         }
+
+        
     }
 }

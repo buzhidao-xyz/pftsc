@@ -67,7 +67,8 @@ namespace PFTSHwCtrl
             while (!m_bIsTimeToDie)
             {
                 byte[] queryCmd = { 0x09, 0x00, 0x01, 0x04, 0x00, 0x00, 0x80, 0x0A, 0x22, 0xDA };
-                SendData(queryCmd);
+                var b = SendData(queryCmd);
+                if (!b) return; //连接关闭
                 Thread.Sleep(200);
             }
         }
