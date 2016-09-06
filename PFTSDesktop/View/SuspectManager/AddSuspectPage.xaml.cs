@@ -30,16 +30,21 @@ namespace PFTSDesktop.View.SuspectManager
             InitializeComponent();
             m_model = new SuspectViewModel();
             this.DataContext = m_model;
-
             rfidReader = new PFTSHwCtrl.PFTSRFIDNoReaderProxy("COM3");
-
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            rfidReader.Open();
-            rfidReader.StartAcquireRFIDNo();
-            rfidReader.RFIDNoReaderDelegate += RfidReader_RFIDNoReaderDelegate;
+            try
+            {
+                rfidReader.Open();
+                rfidReader.StartAcquireRFIDNo();
+                rfidReader.RFIDNoReaderDelegate += RfidReader_RFIDNoReaderDelegate;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
         }
 
         private void RfidReader_RFIDNoReaderDelegate(List<string> rfidNos)
@@ -49,10 +54,10 @@ namespace PFTSDesktop.View.SuspectManager
                 if (m_lastVestNo == l) { continue; }
                 //TODO: for test
                 var no = l.Substring(0, 8);
-                var vest = (new PFTSModel.DevVestService()).GetByNo(no,null,null);
+                var vest = (new PFTSModel.DevVestService()).GetByNo(no, null, null);
                 if (vest != null)
                 {
-                    foreach( var v in m_model.DevVests)
+                    foreach (var v in m_model.DevVests)
                     {
                         if (v.id == vest.id)
                         {

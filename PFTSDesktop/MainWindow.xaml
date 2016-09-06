@@ -80,7 +80,7 @@
                 </tmp:ButtonTemplet.Background>
             </tmp:ButtonTemplet>
             <tmp:ButtonTemplet  Grid.Column="4" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" 
-                                Width="27" Height="22" Command="{Binding Path=CloseCommand}" CommandParameter="{Binding ElementName=main}">
+                                Width="27" Height="22" Command="{Binding Path=WindowCloseCommand}" CommandParameter="{Binding ElementName=main}">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xm.png" />
                 </tmp:ButtonTemplet.MyMoverBrush>

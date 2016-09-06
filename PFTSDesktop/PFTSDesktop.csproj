@@ -153,6 +153,9 @@
     <Compile Include="View\PoliceManager\PoliceUpPage.xaml.cs">
       <DependentUpon>PoliceUpPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SuspectManager\AddSuspectDlg.xaml.cs">
+      <DependentUpon>AddSuspectDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SuspectManager\AddSuspectPage.xaml.cs">
       <DependentUpon>AddSuspectPage.xaml</DependentUpon>
     </Compile>
@@ -271,6 +274,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PoliceManager\PoliceUpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SuspectManager\AddSuspectDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

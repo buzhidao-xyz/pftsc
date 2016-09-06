@@ -35,30 +35,39 @@ namespace PFTSDesktop.View.DeviceManager
 
         private void txtNo_GotFocus(object sender, RoutedEventArgs e)
         {
-            rfidReader.Open();
-            rfidReader.StartAcquireRFIDNo();
-            rfidReader.RFIDNoReaderDelegate += Proxy_RFIDNoReaderDelegate;
-            m_bFocusNo1 = true;
+            try
+            {
+                rfidReader.Open();
+                rfidReader.StartAcquireRFIDNo();
+                rfidReader.RFIDNoReaderDelegate += Proxy_RFIDNoReaderDelegate;
+                m_bFocusNo1 = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+
         }
 
         private void Proxy_RFIDNoReaderDelegate(List<string> rfidNos)
         {
             //throw new NotImplementedException();
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate ()
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (System.Threading.ThreadStart)delegate()
             {
                 if (m_bFocusNo1)
                 {
                     foreach (var l in rfidNos)
                     {
                         //MessageBox.Show(l);
-                        txtNo.Text = l.Substring(0,8);
+                        txtNo.Text = l.Substring(0, 8);
                     }
-                }else if (m_bFocusNo2)
+                }
+                else if (m_bFocusNo2)
                 {
                     foreach (var l in rfidNos)
                     {
                         //MessageBox.Show(l);
-                        txtNo2.Text = l.Substring(0,8);
+                        txtNo2.Text = l.Substring(0, 8);
                     }
                 }
             });
@@ -66,26 +75,47 @@ namespace PFTSDesktop.View.DeviceManager
 
         private void txtNo_LostFocus(object sender, RoutedEventArgs e)
         {
-            rfidReader.RFIDNoReaderDelegate -= Proxy_RFIDNoReaderDelegate;
-            rfidReader.EndAcquireRFIDNo();
-            rfidReader.Close();
-            m_bFocusNo1 = false;
+            try
+            {
+                rfidReader.RFIDNoReaderDelegate -= Proxy_RFIDNoReaderDelegate;
+                rfidReader.EndAcquireRFIDNo();
+                rfidReader.Close();
+                m_bFocusNo1 = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
         }
 
         private void txtNo2_GotFocus(object sender, RoutedEventArgs e)
         {
-            rfidReader.Open();
-            rfidReader.StartAcquireRFIDNo();
-            rfidReader.RFIDNoReaderDelegate += Proxy_RFIDNoReaderDelegate;
-            m_bFocusNo2 = true;
+            try
+            {
+                rfidReader.Open();
+                rfidReader.StartAcquireRFIDNo();
+                rfidReader.RFIDNoReaderDelegate += Proxy_RFIDNoReaderDelegate;
+                m_bFocusNo2 = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
         }
 
         private void txtNo2_LostFocus(object sender, RoutedEventArgs e)
         {
-            rfidReader.RFIDNoReaderDelegate -= Proxy_RFIDNoReaderDelegate;
-            rfidReader.EndAcquireRFIDNo();
-            rfidReader.Close();
-            m_bFocusNo2 = false;
+            try
+            {
+                rfidReader.RFIDNoReaderDelegate -= Proxy_RFIDNoReaderDelegate;
+                rfidReader.EndAcquireRFIDNo();
+                rfidReader.Close();
+                m_bFocusNo2 = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
         }
     }
 }

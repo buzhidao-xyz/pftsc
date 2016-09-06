@@ -53,6 +53,14 @@ namespace PFTSDesktop.ViewModel
             }
         }
 
+        public ICommand WindowCloseCommand
+        {
+            get
+            {
+                return new RelayCommand(new Action<Object>(this.mainWindowClose));
+            }
+        }
+
         public ICommand PageCloseCommand
         {
             get
@@ -72,9 +80,16 @@ namespace PFTSDesktop.ViewModel
         public void windowClose(Object obj)
         {
             WindowTemplet win = (WindowTemplet)obj;
+            win.Close();
+        }
+
+        public void mainWindowClose(Object obj)
+        {
+            WindowTemplet win = (WindowTemplet)obj;
             System.Environment.Exit(0);
             win.Close();
         }
+
 
         public void PageClose()
         {

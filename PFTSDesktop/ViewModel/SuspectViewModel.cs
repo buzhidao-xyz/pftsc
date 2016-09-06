@@ -340,7 +340,7 @@ namespace PFTSDesktop.ViewModel
             get
             {
                 return new RelayCommand(
-                    param => this.AddSupectInfo(),
+                    new Action<Object>(this.AddSupectInfo),
                     param => this.CanSave
                     );
             }
@@ -421,11 +421,13 @@ namespace PFTSDesktop.ViewModel
         }
         public void AddSupectPage(Object obj)
         {
-            ButtonEX btn = (ButtonEX)obj;
-            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            AddSuspectDlg dlg = new AddSuspectDlg();
+            dlg.ShowDialog();
+            //ButtonEX btn = (ButtonEX)obj;
+            //Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
-        public void AddSupectInfo()
+        public void AddSupectInfo(Object obj)
         {
             btracker btk = new btracker();
             btk.no = _suspectModel.No;
@@ -445,7 +447,9 @@ namespace PFTSDesktop.ViewModel
             if (result)
             {
                 MessageWindow.Show("嫌疑人添加成功", "系统提示");
-                Global.currentFrame.NavigationService.GoBack();
+                WindowTemplet window = (WindowTemplet)obj;
+                window.Close();
+                initData();
             }
             else
             {
