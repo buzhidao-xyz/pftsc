@@ -13,7 +13,7 @@
         <ResourceDictionary Source="DictionaryScene.xaml"/>
     </UserControl.Resources>
     <UserControl.Background>
-        <ImageBrush ImageSource="Images/background.png"/>
+        <ImageBrush ImageSource="Images/scene_bg.png"/>
     </UserControl.Background>
     <Grid>
         <Grid x:Name="baseGrid">
