@@ -9,6 +9,8 @@ using PFTSDesktop.Command;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows;
+using PFTSDesktop.View.PoliceManager;
+using PFTSUITemplate.Controls;
 
 namespace PFTSDesktop.ViewModel
 {
@@ -191,7 +193,7 @@ namespace PFTSDesktop.ViewModel
 
         private void QueryData()
         {
-            PoliceList = PoliceService.GetOfficerList((PageIndex - 1) * PageSize, PageSize);
+            GetPoliceList = PoliceService.GetOfficerList((PageIndex - 1) * PageSize, PageSize);
         }
 
         private void initData()
@@ -199,12 +201,12 @@ namespace PFTSDesktop.ViewModel
             TotalCount = PoliceService.GetOfficerCount();
             if (TotalCount == 0)
             {
-                PoliceList = new List<officer>();
+                GetPoliceList = new List<officer>();
                 PageIndex = 0;
             }
             else
             {
-                PoliceList = PoliceService.GetOfficerList((PageIndex - 1) * PageSize, PageSize);
+                GetPoliceList = PoliceService.GetOfficerList((PageIndex - 1) * PageSize, PageSize);
             }
         }
         #endregion
@@ -277,8 +279,10 @@ namespace PFTSDesktop.ViewModel
         {
             PoliceInfo = new officer();
 
-            Button btn = (Button)obj;
-            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            // Button btn = (Button)obj;
+            //Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            PoliceNewDlg dlg = new PoliceNewDlg();
+            dlg.ShowDialog();
         }
 
         /// <summary>
@@ -310,11 +314,14 @@ namespace PFTSDesktop.ViewModel
             {
                 MessageBox.Show("保存成功！");
 
+               
+                WindowTemplet window = (WindowTemplet)obj;
+                window.Close();
+
                 //刷新列表数据
                 this.initData();
-
-                Button btn = (Button)obj;
-                Global.currentFrame.NavigationService.GoBack();
+                //Button btn = (Button)obj;
+               // Global.currentFrame.NavigationService.Refresh();
             }
             else
             {
@@ -342,9 +349,6 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public void PoliceUp(Object obj)
         {
-            Button btn = (Button)obj;
-            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
-
             if (PoliceInfo.sex == "女")
             {
                 SexIsChecked_Male = false;
@@ -355,6 +359,13 @@ namespace PFTSDesktop.ViewModel
                 SexIsChecked_Male = true;
                 Sex_FeMale = false;
             }
+
+            PoliceUpDlg dlg = new PoliceUpDlg();
+            dlg.ShowDialog();
+            //Button btn = (Button)obj;
+            //Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+
+           
 
         }
 
@@ -390,8 +401,10 @@ namespace PFTSDesktop.ViewModel
                 //刷新列表数据
                 this.initData();
 
-                Button btn = (Button)obj;
-                Global.currentFrame.NavigationService.GoBack();
+                WindowTemplet window = (WindowTemplet)obj;
+                window.Close();
+                //Button btn = (Button)obj;
+                //Global.currentFrame.NavigationService.GoBack();
             }
             else
             {
