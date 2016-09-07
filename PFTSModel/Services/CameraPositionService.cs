@@ -73,5 +73,26 @@ namespace PFTSModel.Services
             }
             return null;
         }
+
+        public dev_camera GetByRoomId(int roomId)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<dev_camera> table = db.GetTable<dev_camera>();
+                        var query = from c in db.GetTable<dev_camera>()
+                                    from p in db.GetTable<position_camera>()
+                                    where c.position_id != null && c.position_id == p.id && p.room_id == roomId
+                                    select c;
+                        return query.SingleOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
+        }
     }
 }
