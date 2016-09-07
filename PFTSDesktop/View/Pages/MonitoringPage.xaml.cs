@@ -29,6 +29,7 @@ namespace PFTSDesktop.View.Pages
             controlScene.CameraMode = PFTSScene.CameraMode.Hidden;
             controlScene.RFIDMode = PFTSScene.RFIDMode.Monitoring;
             controlScene.BTrackerRealVideoDelegate += ControlScene_BTrackerRealVideo;
+            controlScene.RoomRealVideoDelegate += ControlScene_RoomRealVideoDelegate;
 
             Global.currentMainWindow.BTrackerMoveDelegete += CurrentMainWindow_BTrackerMoveDelegete;
 
@@ -47,6 +48,12 @@ namespace PFTSDesktop.View.Pages
         }
 
         private void ControlScene_BTrackerRealVideo(btracker btracker)
+        {
+            Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow();
+            vw.Show();
+        }
+
+        private void ControlScene_RoomRealVideoDelegate(view_rfid_room_info room)
         {
             Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow();
             vw.Show();

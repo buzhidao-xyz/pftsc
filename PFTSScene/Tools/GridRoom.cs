@@ -12,6 +12,10 @@ using System.Windows.Shapes;
 
 namespace PFTSScene.Tools
 {
+    #region hander
+    public delegate void GridRoomMenuRealVideoHandler(PFTSModel.view_rfid_room_info room);
+    #endregion
+
     public class GridRoom : Grid
     {
         private List<Image> m_images = new List<Image>();
@@ -24,6 +28,7 @@ namespace PFTSScene.Tools
         private ContextMenu m_menu;
         private ToolTip m_toolTip;
         private Label m_lblToolTip;
+        public event GridRoomMenuRealVideoHandler RealVideoDelegate;
         //        private Rectangle m_rectangle;
 
         private List<Image> m_cacheImages = new List<Image>();
@@ -48,6 +53,7 @@ namespace PFTSScene.Tools
             m_menu = new ContextMenu();
             var menuItem1 = new MenuItem();
             menuItem1.Header = "实时画面";
+            menuItem1.Click += MenuItem1_Click;
             var menuItem2 = new MenuItem();
             menuItem2.Header = "取消";
             m_menu.Items.Add(menuItem1);
@@ -55,6 +61,14 @@ namespace PFTSScene.Tools
             m_menu.Placement = PlacementMode.Center;
             this.MouseEnter += GridRoom_MouseEnter;
             this.MouseLeave += GridRoom_MouseLeave;
+        }
+
+        private void MenuItem1_Click(object sender, RoutedEventArgs e)
+        {
+            if (RealVideoDelegate != null)
+            {
+                RealVideoDelegate(m_room);
+            }
         }
 
         private void GridRoom_MouseUp(object sender, MouseButtonEventArgs e)
@@ -65,13 +79,13 @@ namespace PFTSScene.Tools
 
         private void GridRoom_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            m_toolTip.PlacementTarget = this;
-            m_toolTip.IsOpen = true;
+            //m_toolTip.PlacementTarget = this;
+            //m_toolTip.IsOpen = true;
         }
 
         private void GridRoom_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            m_toolTip.IsOpen = false;
+            //m_toolTip.IsOpen = false;
         }
 
         private void GridRoom_Loaded(object sender, System.Windows.RoutedEventArgs e)

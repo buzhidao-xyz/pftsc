@@ -45,9 +45,12 @@ namespace PFTSScene
     }
 
     #region handler
-    // 点击实时画面
+    // 点击嫌疑犯实时画面
     public delegate void BTrackerRealVideoHandler(PFTSModel.btracker btracker);
-    public delegate void BTrackerPathHandler(int btrackerId);
+    // 点击嫌疑犯路径
+    public delegate void BTrackerPathHandler(PFTSModel.btracker btracker);
+    // 点击房间实时画面
+    public delegate void RoomRealVideoHandler(PFTSModel.view_rfid_room_info room);
     #endregion
 
     /// <summary>
@@ -84,6 +87,11 @@ namespace PFTSScene
         /// 路径回调
         /// </summary>
         public event BTrackerPathHandler BTrackerPathDelegate;
+
+        /// <summary>
+        /// 房间实时画面
+        /// </summary>
+        public event RoomRealVideoHandler RoomRealVideoDelegate;
 
         private List<InArrow> m_paths = new List<InArrow>();
 
@@ -208,8 +216,17 @@ namespace PFTSScene
                            where rm.id == k
                            select rm;
                 var gridRoom = new Tools.GridRoom(30,30,rfrm.SingleOrDefault());
+                gridRoom.RealVideoDelegate += GridRoom_RealVideoDelegate;
                 m_mapRooms[k].Children.Add(gridRoom);
                 m_mapGridRooms[k] = gridRoom;
+            }
+        }
+
+        private void GridRoom_RealVideoDelegate(PFTSModel.view_rfid_room_info room)
+        {
+            if (RoomRealVideoDelegate != null)
+            {
+                RoomRealVideoDelegate(room);
             }
         }
 
@@ -597,9 +614,9 @@ namespace PFTSScene
             {
                 int id = (int)m_peopleMenu.Tag;
                 PathOut(id);
-                if (BTrackerPathDelegate != null)
+                if (BTrackerPathDelegate != null && m_mapBtrackers.ContainsKey(id))
                 {
-                    this.BTrackerPathDelegate(id);
+                    this.BTrackerPathDelegate(m_mapBtrackers[id]);
                 }
             }
             catch (Exception es)
@@ -623,6 +640,7 @@ namespace PFTSScene
             this.Img_MouseLeave(sender, null);
             m_peopleMenu.PlacementTarget = (Image)sender;
             m_peopleMenu.IsOpen = true;
+            e.Handled = true;
         }
 
         private void Img_MouseLeave(object sender, MouseEventArgs e)
@@ -648,7 +666,7 @@ namespace PFTSScene
             }
             m_toolTip.PlacementTarget = img;
             m_toolTip.IsOpen = true;
-            e.Handled = true;
+            //e.Handled = true;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
