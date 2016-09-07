@@ -11,7 +11,7 @@ using System.Threading;
 namespace PFTSHwCtrl
 {
 
-    public delegate void FingerAcquireHander(Bitmap img,byte[] buffer);
+    public delegate void FingerAcquireHander(Bitmap img,byte[] buffer,byte[] imgBuffer);
 
     /// <summary>
     /// 只是识别器
@@ -154,7 +154,7 @@ namespace PFTSHwCtrl
                     var buffer = GetRaw(ref size);
                     if (FingerAcquire != null)
                     {
-                        FingerAcquire(img, buffer);
+                        FingerAcquire(img, buffer, m_FPBuffer);
                     }
                 }
                 Thread.Sleep(200);
