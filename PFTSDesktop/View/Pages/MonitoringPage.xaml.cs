@@ -53,7 +53,7 @@ namespace PFTSDesktop.View.Pages
             PFTSModel.dev_camera camera = (new PFTSModel.Services.CameraPositionService()).GetByRoomId(btracker.room_id.Value);
             if (camera == null)
             {
-                MessageBox.Show("未检测到该嫌疑人所在房间的摄像头信息");
+                MessageBox.Show("未检测到该嫌疑人所在区域的摄像头信息");
                 return;
             }
             Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow();
@@ -65,7 +65,7 @@ namespace PFTSDesktop.View.Pages
             PFTSModel.dev_camera camera = (new PFTSModel.Services.CameraPositionService()).GetByRoomId(room.id);
             if (camera == null)
             {
-                MessageBox.Show("未检测到该房间的摄像头信息");
+                MessageBox.Show("未检测到该区域的摄像头信息");
                 return;
             }
             Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow();
