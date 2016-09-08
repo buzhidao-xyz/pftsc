@@ -165,8 +165,17 @@
     <Compile Include="View\SuspectManager\AddSuspectPage.xaml.cs">
       <DependentUpon>AddSuspectPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SuspectManager\AllSuspectControl.xaml.cs">
+      <DependentUpon>AllSuspectControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SuspectManager\CheckGoodsDlg.xaml.cs">
       <DependentUpon>CheckGoodsDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SuspectManager\HistoricalTrackDlg.xaml.cs">
+      <DependentUpon>HistoricalTrackDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SuspectManager\InSuspectControl.xaml.cs">
+      <DependentUpon>InSuspectControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SuspectManager\SuspectsInfoPage.xaml.cs">
       <DependentUpon>SuspectsInfoPage.xaml</DependentUpon>
@@ -299,7 +308,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\SuspectManager\AllSuspectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SuspectManager\CheckGoodsDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SuspectManager\HistoricalTrackDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SuspectManager\InSuspectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

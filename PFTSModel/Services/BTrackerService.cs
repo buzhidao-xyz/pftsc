@@ -33,6 +33,13 @@ namespace PFTSModel.Services
             return null;
         }
 
+        /// <summary>
+        /// 人员转移
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="recover"></param>
+        /// <param name="remark"></param>
+        /// <returns></returns>
         public bool TransferSuspect(int id, bool recover, string remark)
         {
             try
@@ -57,6 +64,55 @@ namespace PFTSModel.Services
             }
             return false;
         }
+
+        /// <summary>
+        /// 更改采集状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool GatherSuspect(int id)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    btracker btk = db.btracker.SingleOrDefault<btracker>(rec => rec.id == id);
+                    btk.gather_status = 1;
+                    db.SubmitChanges();
+                }
+                return true;
+            }
+            catch
+            {
+
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 更改搜身状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool FriskSuspect(int id)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    btracker btk = db.btracker.SingleOrDefault<btracker>(rec => rec.id == id);
+                    btk.frisk_status = 1;
+                    db.SubmitChanges();
+                }
+                return true;
+            }
+            catch
+            {
+
+            }
+            return false;
+        }
+
         /// <summary>
         /// 通过马甲RFID序列号获取疑犯信息
         /// </summary>

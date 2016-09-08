@@ -1,6 +1,7 @@
 ﻿using PFTSDesktop.Command;
 using PFTSDesktop.Model;
 using PFTSDesktop.Properties;
+using PFTSDesktop.View.Monitoring;
 using PFTSDesktop.View.SuspectManager;
 using PFTSModel;
 using PFTSUITemplate.Controls;
@@ -11,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace PFTSDesktop.ViewModel
@@ -40,6 +42,13 @@ namespace PFTSDesktop.ViewModel
         private bool _recover;
         private string _remark;
         private int? status = 0;
+        private ContentControl _workSpace;
+        private AllSuspectControl allSuspectControl;
+        private InSuspectControl insuspectContrl;
+        private RelayCommand _gatherCommand;
+        private RelayCommand _friskCommand;
+        private RelayCommand _videoCommand;
+        private RelayCommand _trackCommand;
         #endregion
 
         public SuspectViewModel()
@@ -295,6 +304,21 @@ namespace PFTSDesktop.ViewModel
             }
 
         }
+
+        public ContentControl Workspace
+        {
+            get
+            {
+                return _workSpace;
+            }
+            set
+            {
+                if (value == _workSpace)
+                    return;
+                _workSpace = value;
+                base.OnPropertyChanged("Workspace");
+            }
+        }
         #endregion
 
         #region command
@@ -388,6 +412,72 @@ namespace PFTSDesktop.ViewModel
                     );
             }
         }
+
+        /// <summary>
+        /// 嫌疑人采集事件
+        /// </summary>
+        public ICommand SuspectGatherCommand
+        {
+            get
+            {
+                if (_gatherCommand == null)
+                {
+                    _gatherCommand = new RelayCommand(
+                     param => this.SuspectGather()
+                    );
+                }
+                return _gatherCommand;
+            }
+        }
+
+        /// <summary>
+        /// 嫌疑人采集事件
+        /// </summary>
+        public ICommand SuspectFriskCommand
+        {
+            get
+            {
+                if (_friskCommand == null)
+                {
+                    _friskCommand = new RelayCommand(
+                     param => this.SuspectFrisk()
+                    );
+                }
+                return _friskCommand;
+            }
+        }
+        /// <summary>
+        /// 查看监控视频事件
+        /// </summary>
+        public ICommand SuspectVideoCommand
+        {
+            get {
+                if (_videoCommand == null)
+                {
+                    _videoCommand = new RelayCommand(
+                     param => this.SuspectVideo()
+                    );
+                }
+                return _videoCommand;
+            }
+        }
+
+        /// <summary>
+        /// 查看历史轨迹事件
+        /// </summary>
+        public ICommand SuspectTrackCommand
+        {
+            get
+            {
+                if (_trackCommand == null)
+                {
+                    _trackCommand = new RelayCommand(
+                     param => this.SuspectTrack()
+                    );
+                }
+                return _trackCommand;
+            }
+        }
         #endregion
 
         #region 方法
@@ -462,7 +552,7 @@ namespace PFTSDesktop.ViewModel
         {
             get { return String.IsNullOrEmpty(this.ValidateDevVest()) && String.IsNullOrEmpty(this.ValidateOfficer()) && _suspectModel.IsValid; }
         }
-
+      
         public void GetSuspects(Object obj)
         {
              ButtonTemplet btn = (ButtonTemplet)obj;
@@ -476,13 +566,71 @@ namespace PFTSDesktop.ViewModel
             btn.SelectEd = true;
             if (btn.Tag.ToString() == "0")
             {
+                if (insuspectContrl == null)
+                    insuspectContrl = new InSuspectControl(); ;
+                Workspace = insuspectContrl;
                 status = 0;
             }
             else
             {
+                if (allSuspectControl == null)
+                    allSuspectControl = new AllSuspectControl(); ;
+                Workspace = allSuspectControl;
                 status = null;
             }
             initData();
+        }
+
+        /// <summary>
+        /// 嫌疑人采集操作
+        /// </summary>
+        public void SuspectGather()
+        {
+            bool result = _supectService.GatherSuspect(_selectedBtracker.id);
+            if (result)
+            {
+                initData();
+            }
+            else
+            {
+                MessageWindow.Show("操作失败", "错误");
+            }
+        }
+        /// <summary>
+        /// 嫌疑人搜身
+        /// </summary>
+        public void SuspectFrisk()
+        {
+            bool result = _supectService.FriskSuspect(_selectedBtracker.id);
+            if (result)
+            {
+                initData();
+            }
+            else
+            {
+                MessageWindow.Show("操作失败", "错误");
+            }
+        }
+
+        /// <summary>
+        /// 查看监控视频
+        /// </summary>
+        public void SuspectVideo()
+        {
+            VideoListWindow vw = new VideoListWindow();
+            vw.Show();
+        }
+        /// <summary>
+        /// 查看历史轨迹
+        /// </summary>
+        public void SuspectTrack()
+        { 
+            btracker model = new btracker();
+            model.id= SelectedBreacker.id;
+            model.name=SelectedBreacker.name;
+            model.room_id = SelectedBreacker.room_id;
+            HistoricalTrackDlg dlg = new HistoricalTrackDlg(model);
+            dlg.Show();
         }
         #endregion
         #region IDataErrorInfo Members

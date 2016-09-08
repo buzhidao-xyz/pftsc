@@ -163,6 +163,68 @@ namespace PFTSDesktop.common
         }
     }
 
+    public class GatherStatusConverterToString : MarkupExtension, IValueConverter
+    {
+
+        public GatherStatusConverterToString() { }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int? status = (int?)value;
+            string strType = "";
+            if (status == 1)
+            {
+                strType = "已搜身";
+            }
+            else
+            {
+                strType = "未搜身";
+            }
+            return strType;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class FriskStatusConverterToString : MarkupExtension, IValueConverter
+    {
+
+        public FriskStatusConverterToString() { }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int? status = (int?)value;
+            string strType = "";
+            if (status == 1)
+            {
+                strType = "已采集";
+            }
+            else
+            {
+                strType = "未采集";
+            }
+            return strType;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class SuspectStatusConverter : MarkupExtension, IValueConverter
     {
 

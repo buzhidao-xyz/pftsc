@@ -14,6 +14,7 @@
                    MouseDoubleClick="MainWindow_OnMouseDoubleClick"
                    MoveHeight="114"
                    WindowStartupLocation="CenterScreen"
+                   WindowState="Maximized"
                    x:Name="main"
                    mc:Ignorable="d">
     <i:Interaction.Triggers>
@@ -57,7 +58,7 @@
                 </tmp:ButtonTemplet.Background>
             </tmp:ButtonTemplet>
 
-            <tmp:ButtonTemplet  Grid.Column="3" x:Name="btnNomalMax" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
+            <tmp:ButtonTemplet  Grid.Column="3" Visibility="Hidden" x:Name="btnNomalMax" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxm.png"/>
                 </tmp:ButtonTemplet.MyMoverBrush>
@@ -68,7 +69,7 @@
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxn.png"/>
                 </tmp:ButtonTemplet.Background>
             </tmp:ButtonTemplet>
-            <tmp:ButtonTemplet  Grid.Column="3" x:Name="btnMax" Visibility="Hidden" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
+            <tmp:ButtonTemplet  Grid.Column="3" x:Name="btnMax" Visibility="Visible" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/maa.png"/>
                 </tmp:ButtonTemplet.MyMoverBrush>

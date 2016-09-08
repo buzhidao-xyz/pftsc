@@ -3689,6 +3689,10 @@ namespace PFTSModel
 		
 		private string _remark;
 		
+		private int _gather_status;
+		
+		private int _frisk_status;
+		
 		private EntitySet<video_btracker_r> _video_btracker_r;
 		
 		private EntitySet<btracker_path> _btracker_path;
@@ -3737,6 +3741,10 @@ namespace PFTSModel
     partial void Onin_room_timeChanged();
     partial void OnremarkChanging(string value);
     partial void OnremarkChanged();
+    partial void Ongather_statusChanging(int value);
+    partial void Ongather_statusChanged();
+    partial void Onfrisk_statusChanging(int value);
+    partial void Onfrisk_statusChanged();
     #endregion
 		
 		public btracker()
@@ -4086,6 +4094,46 @@ namespace PFTSModel
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gather_status", DbType="Int NOT NULL")]
+		public int gather_status
+		{
+			get
+			{
+				return this._gather_status;
+			}
+			set
+			{
+				if ((this._gather_status != value))
+				{
+					this.Ongather_statusChanging(value);
+					this.SendPropertyChanging();
+					this._gather_status = value;
+					this.SendPropertyChanged("gather_status");
+					this.Ongather_statusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_frisk_status", DbType="Int NOT NULL")]
+		public int frisk_status
+		{
+			get
+			{
+				return this._frisk_status;
+			}
+			set
+			{
+				if ((this._frisk_status != value))
+				{
+					this.Onfrisk_statusChanging(value);
+					this.SendPropertyChanging();
+					this._frisk_status = value;
+					this.SendPropertyChanged("frisk_status");
+					this.Onfrisk_statusChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_video_btracker_r", Storage="_video_btracker_r", ThisKey="id", OtherKey="btracker_id")]
 		public EntitySet<video_btracker_r> video_btracker_r
 		{
@@ -4329,6 +4377,10 @@ namespace PFTSModel
 		
 		private string _remark;
 		
+		private int _gather_status;
+		
+		private int _frisk_status;
+		
 		private string _officer_name;
 		
 		private string _locker_name;
@@ -4417,7 +4469,7 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_id", DbType="Int")]
 		public System.Nullable<int> vest_id
 		{
 			get
@@ -4589,6 +4641,38 @@ namespace PFTSModel
 				if ((this._remark != value))
 				{
 					this._remark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gather_status", DbType="Int NOT NULL")]
+		public int gather_status
+		{
+			get
+			{
+				return this._gather_status;
+			}
+			set
+			{
+				if ((this._gather_status != value))
+				{
+					this._gather_status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_frisk_status", DbType="Int NOT NULL")]
+		public int frisk_status
+		{
+			get
+			{
+				return this._frisk_status;
+			}
+			set
+			{
+				if ((this._frisk_status != value))
+				{
+					this._frisk_status = value;
 				}
 			}
 		}

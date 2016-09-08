@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="PFTSDesktop.View.SuspectManager.InSuspectControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+             xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate"
+             xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+             xmlns:conver="clr-namespace:PFTSDesktop.common"
+             d:DesignHeight="800" d:DesignWidth="800">
+    <Grid>
+        <ele:PageDataGridEx  Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None"
+                             ItemsSource="{Binding Btrackers}" SelectedItem="{Binding SelectedBreacker}" Total="{Binding TotalCount,Mode=TwoWay}"
+                             PageIndex="{Binding PageIndex,Mode=TwoWay}" PageSize="{Binding PageSize,Mode=TwoWay}" MouseRightButtonDown="dataGridSuspect_MouseRightButtonDown">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PagingChanged">
+                    <i:InvokeCommandAction  Command="{Binding NextPageSearchCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ele:PageDataGridEx.ContextMenu>
+                <ContextMenu StaysOpen="true">
+                    <MenuItem Header="搜  身" Command="{Binding SuspectGatherCommand}"/>
+                    <MenuItem Header="采  集" Command="{Binding SuspectFriskCommand}"/>
+                    <MenuItem Command="{Binding CheckGoodsCommand}"
+                              Header="查看物品"/>
+                    <MenuItem Command="{Binding SuspectTransferDlgCommand}"
+                              Header="人员转移"/>
+                    <MenuItem Header="查看视频" Command="{Binding SuspectVideoCommand}"/>
+                    <MenuItem Header="历史轨迹" Command="{Binding SuspectTrackCommand}"/>
+                </ContextMenu>
+            </ele:PageDataGridEx.ContextMenu>
+            <ele:PageDataGridEx.Columns>
+                <DataGridTextColumn Header="姓名" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="性别" Binding="{Binding sex}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="案卷号" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="负责民警" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="搜身状态" Binding="{Binding gather_status,Converter={conver:GatherStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="采集状态" Binding="{Binding frisk_status,Converter={conver:FriskStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="在监状态" Binding="{Binding status,Converter={conver:SuspectStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="储物柜" Binding="{Binding locker_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="收监日期" Binding="{Binding in_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+            </ele:PageDataGridEx.Columns>
+        </ele:PageDataGridEx>
+    </Grid>
+</UserControl>

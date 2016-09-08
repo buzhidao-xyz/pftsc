@@ -43,39 +43,7 @@
         </StackPanel>
         <tmp:ButtonEX Name="btnAddSuspect" Grid.Row="1" Content="新增嫌疑人" VerticalAlignment="Top"  HorizontalAlignment="Right" Tag="View/SuspectManager/AddSuspectPage.xaml"
                       Margin="0,12,100,0" Width="90" Height="26" Command="{Binding AddSupcetPageCommand}" CommandParameter="{Binding ElementName=btnAddSuspect}"/>
-        <ele:PageDataGridEx  Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None"
-                             ItemsSource="{Binding Btrackers}" SelectedItem="{Binding SelectedBreacker}" Total="{Binding TotalCount,Mode=TwoWay}"
-                             PageIndex="{Binding PageIndex,Mode=TwoWay}" PageSize="{Binding PageSize,Mode=TwoWay}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PagingChanged">
-                    <i:InvokeCommandAction  Command="{Binding NextPageSearchCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <ele:PageDataGridEx.Columns>
-                <DataGridTextColumn Header="姓名" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="性别" Binding="{Binding sex}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="身份证号" Binding="{Binding number}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="案卷号" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="负责民警" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="状态" Binding="{Binding status,Converter={conver:SuspectStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="储物柜" Binding="{Binding locker_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="收监日期" Binding="{Binding in_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTemplateColumn Header="操作" Width="80">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
-                                <tmp:FButton  ToolTip="查看物品" Style="{StaticResource FButton_Edit}" 
-                                              FIcon="&#xe652;"  Command="{Binding DataContext.CheckGoodsCommand, RelativeSource={RelativeSource AncestorType=Page}}"/>
-                                <tmp:FButton ToolTip="查看视频" FIcon="&#xe602;" Style="{StaticResource FButton_Edit}"/>
-                                <tmp:FButton ToolTip="人员转移" FIcon="&#xe749;" Visibility="{Binding status,Converter={conver:SuspectStatusConverter}}" 
-                                             Style="{StaticResource FButton_Edit}"  Command="{Binding DataContext.SuspectTransferDlgCommand,RelativeSource={RelativeSource AncestorType=Page}}" />
-                            </StackPanel>
 
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-            </ele:PageDataGridEx.Columns>
-        </ele:PageDataGridEx>
+        <ContentControl Content="{Binding Workspace}" Grid.Row="2"/>
     </Grid>
 </Page>
