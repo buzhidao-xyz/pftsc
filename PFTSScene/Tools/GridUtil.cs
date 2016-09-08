@@ -23,7 +23,7 @@ namespace PFTSScene.Tools
         /// <param name="oy">宽带</param>
         /// <param name="dx">基本方格的高度</param>
         /// <param name="dy">基本方格的宽度</param>
-        public GridUtil(double ox,double oy,double dx,double dy)
+        public GridUtil(double ox, double oy, double dx, double dy)
         {
             m_ox = ox;
             m_oy = oy;
@@ -58,27 +58,21 @@ namespace PFTSScene.Tools
                 if (first)
                 { // 第一次从中心点
                     startIndex = 0;
-//                    ix = 0;
-//                    iy = 0;
                     first = false;
-                    //                    dx = m_dx;
-                    //                    dy = m_dy;
-                }else
+                }
+                else
                 {
                     startIndex = points.Count;
                 }
-                //else { //后面 1/2 1/4 1/8
-                    ix = m * m_dx;
-                    iy = m * m_dy;
-                    dx = m * 2 * m_dx;
-                    dy = m * 2 * m_dy;
-                //}
-//                int startIndex = points.Count;
+                ix = m * m_dx;
+                iy = m * m_dy;
+                dx = m * 2 * m_dx;
+                dy = m * 2 * m_dy;
 
                 //left up
-                for (double i = centerX - ix;i >= 0;i = i - dx)
+                for (double i = centerX - ix; i >= 0; i = i - dx)
                 {
-                    for (double j = centerY - iy;j >= 0;j = j - dy)
+                    for (double j = centerY - iy; j >= 0; j = j - dy)
                     {
                         points.Add(Point.Product(i, j, centerX, centerY, m_dx, m_dy));
                     }
@@ -122,7 +116,7 @@ namespace PFTSScene.Tools
             return points;
         }
 
-        private void QuickSort(ref List<Point> datas,int startIndex,int endIndex)
+        private void QuickSort(ref List<Point> datas, int startIndex, int endIndex)
         {
             int q;
             if (startIndex < endIndex)
@@ -162,14 +156,15 @@ namespace PFTSScene.Tools
         /// <summary>
         /// 点对象
         /// </summary>
-        public struct Point{
+        public struct Point
+        {
             public double CenterX;
             public double CenterY;
             public double SizeX;
             public double SizeY;
             public double CenterLength;    //距离中间区域的长度
 
-            public static Point Product(double i,double j,double centerX,double centerY,double dx,double dy)
+            public static Point Product(double i, double j, double centerX, double centerY, double dx, double dy)
             {
                 Point p = new Point();
                 p.CenterX = i;

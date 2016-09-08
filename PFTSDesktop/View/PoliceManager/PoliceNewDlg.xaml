@@ -10,6 +10,9 @@
         MoveHeight="114"
         WindowStartupLocation="CenterScreen"           
         Title="PoliceNewDlg"   Width="600" Height="500"  Background="White" Loaded="Page_Loaded">
+    <tmp:WindowTemplet.Resources>
+        <Color x:Key="PoliceFinger_Image_Border">#FFABADB3</Color>
+    </tmp:WindowTemplet.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -113,8 +116,8 @@
             <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label Content="指纹一：" Style="{StaticResource lableNameStyle}" FontSize="16" Padding="0,0,10,0"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="310" Height="130" Margin="0,0,20,0">
-                    <Border Width="100" BorderBrush="#FFABADB3" BorderThickness="1">
-                        <Image Grid.Row="5" Width="100" Stretch="Fill" x:Name="imgFinger1" MouseLeftButtonUp="imgFinger1_MouseLeftButtonUp">
+                    <Border Width="100" BorderBrush="#FFABADB3" BorderThickness="1" Name="imgFinger1_Border">
+                        <Image Grid.Row="5" Width="100" Stretch="Fill" x:Name="imgFinger1" MouseLeftButtonUp="imgFinger1_MouseLeftButtonUp" Source="/PFTSDesktop;component/Images/white_bg.png">
                             <Image.OpacityMask>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="Black" Offset="0"/>
@@ -124,8 +127,8 @@
                         </Image>
                     </Border>
                     <Label Content="指纹二：" Style="{StaticResource lableNameStyle}" FontSize="16" Margin="30,0,0,0"/>
-                    <Border Width="100" BorderBrush="#FFABADB3" BorderThickness="1">
-                        <Image Grid.Row="5" Width="100" Stretch="Fill" x:Name="imgFinger2">
+                    <Border Width="100" BorderBrush="#FFABADB3" BorderThickness="1" Name="imgFinger2_Border">
+                        <Image Grid.Row="5" Width="100" Stretch="Fill" x:Name="imgFinger2" MouseLeftButtonUp="imgFinger2_MouseLeftButtonUp" Source="/PFTSDesktop;component/Images/white_bg.png">
                             <Image.OpacityMask>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="Black" Offset="0"/>

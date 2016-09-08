@@ -215,6 +215,11 @@
                 <Image x:Name="imgRfid17" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
                 <Image x:Name="imgCamera17" Tag="17" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Grid>
+            
+            <Grid x:Name="room16" Tag="16" Grid.Row="0" Grid.RowSpan="2" Grid.Column="6" Grid.ColumnSpan="1">
+                <Image x:Name="imgRfid16" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                <Image x:Name="imgCamera16" Tag="16" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Right"  VerticalAlignment="Bottom"/>
+            </Grid>
 
             <Grid x:Name="room39" Tag="39" Grid.Row="2" Grid.RowSpan="1" Grid.Column="5" Grid.ColumnSpan="1">
                 <Image x:Name="imgRfid39" Style="{StaticResource ResourceKey=imageRfidStyle}"/>

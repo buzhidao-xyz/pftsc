@@ -53,7 +53,7 @@ namespace PFTSDesktop.View.PoliceManager
             }
         }
 
-        private void M_fingerProxy_FingerAcquire(Bitmap img, byte[] buffer)
+        private void M_fingerProxy_FingerAcquire(Bitmap img, byte[] buffer, byte[] imgBuffer)
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {

@@ -30,7 +30,8 @@ namespace PFTSDesktop.View.DeviceManager
         {
             InitializeComponent();
             this.DataContext = VestManagerViewModel.GetInstance();
-            rfidReader = new PFTSHwCtrl.PFTSRFIDNoReaderProxy("COM3");
+            var com = System.Configuration.ConfigurationManager.AppSettings["rfid_reader_com"];
+            rfidReader = new PFTSHwCtrl.PFTSRFIDNoReaderProxy(com);
         }
 
         private void txtNo_GotFocus(object sender, RoutedEventArgs e)

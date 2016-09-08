@@ -26,9 +26,10 @@ namespace PFTSDesktop.View.Pages
         {
             InitializeComponent();
             // 监控模式
-            controlScene.CameraMode = PFTSScene.CameraMode.Monitoring;
+            controlScene.CameraMode = PFTSScene.CameraMode.Hidden;
             controlScene.RFIDMode = PFTSScene.RFIDMode.Monitoring;
             controlScene.BTrackerRealVideoDelegate += ControlScene_BTrackerRealVideo;
+            controlScene.RoomRealVideoDelegate += ControlScene_RoomRealVideoDelegate;
 
             Global.currentMainWindow.BTrackerMoveDelegete += CurrentMainWindow_BTrackerMoveDelegete;
 
@@ -48,6 +49,25 @@ namespace PFTSDesktop.View.Pages
 
         private void ControlScene_BTrackerRealVideo(btracker btracker)
         {
+            if (btracker.room_id == null) return;
+            PFTSModel.dev_camera camera = (new PFTSModel.Services.CameraPositionService()).GetByRoomId(btracker.room_id.Value);
+            if (camera == null)
+            {
+                MessageBox.Show("未检测到该嫌疑人所在区域的摄像头信息");
+                return;
+            }
+            Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow();
+            vw.Show();
+        }
+
+        private void ControlScene_RoomRealVideoDelegate(view_rfid_room_info room)
+        {
+            PFTSModel.dev_camera camera = (new PFTSModel.Services.CameraPositionService()).GetByRoomId(room.id);
+            if (camera == null)
+            {
+                MessageBox.Show("未检测到该区域的摄像头信息");
+                return;
+            }
             Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow();
             vw.Show();
         }

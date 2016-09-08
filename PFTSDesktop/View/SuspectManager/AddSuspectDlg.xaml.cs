@@ -30,7 +30,8 @@ namespace PFTSDesktop.View.SuspectManager
             InitializeComponent();
             m_model = new SuspectViewModel();
             this.DataContext = m_model;
-            rfidReader = new PFTSHwCtrl.PFTSRFIDNoReaderProxy("COM3");
+            var com = System.Configuration.ConfigurationManager.AppSettings["rfid_reader_com"];
+            rfidReader = new PFTSHwCtrl.PFTSRFIDNoReaderProxy(com);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

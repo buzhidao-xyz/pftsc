@@ -30,7 +30,11 @@ namespace PFTSModel.Properties {
             "=sa;Password=Xlh123456")]
         public string pftsConnectionString {
             get {
-                return ((string)(this["pftsConnectionString"]));
+                var server = System.Configuration.ConfigurationManager.AppSettings["db_server"];
+                var name = System.Configuration.ConfigurationManager.AppSettings["db_name"];
+                var user = System.Configuration.ConfigurationManager.AppSettings["db_user"];
+                var pwd = System.Configuration.ConfigurationManager.AppSettings["db_password"];
+                return "Data Source = " + server + "; Initial Catalog = " + name + "; Persist Security Info = True; User ID=" + user + ";Password=" + pwd;
             }
         }
     }

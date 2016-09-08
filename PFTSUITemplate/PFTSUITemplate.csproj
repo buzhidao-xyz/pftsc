@@ -159,7 +159,6 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="Controls\ImageButton.xaml">
       <SubType>Designer</SubType>

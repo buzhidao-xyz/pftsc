@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace PFTSScene.Tools
 {
+    #region hander
+    public delegate void GridRoomMenuRealVideoHandler(PFTSModel.view_rfid_room_info room);
+    #endregion
+
     public class GridRoom : Grid
     {
         private List<Image> m_images = new List<Image>();
@@ -15,15 +24,68 @@ namespace PFTSScene.Tools
         private GridUtil m_util;
         private double m_metaX;
         private double m_metaY;
+        private PFTSModel.view_rfid_room_info m_room;
+        private ContextMenu m_menu;
+        private ToolTip m_toolTip;
+        private Label m_lblToolTip;
+        public event GridRoomMenuRealVideoHandler RealVideoDelegate;
+        //        private Rectangle m_rectangle;
 
         private List<Image> m_cacheImages = new List<Image>();
 
-        public GridRoom(double mx,double my)
+        public GridRoom(double mx, double my, PFTSModel.view_rfid_room_info room)
         {
             m_metaX = mx;
             m_metaY = my;
+            m_room = room;
+            this.Background = Brushes.Transparent;
+            this.Cursor = Cursors.Hand;
             this.SizeChanged += GridRoom_SizeChanged;
             this.Loaded += GridRoom_Loaded;
+            this.MouseUp += GridRoom_MouseUp;
+
+            m_toolTip = new ToolTip();
+            m_lblToolTip = new Label();
+            m_toolTip.Content = m_lblToolTip;
+            m_lblToolTip.Content = room.name;
+            m_toolTip.Placement = PlacementMode.Center;
+
+            m_menu = new ContextMenu();
+            var menuItem1 = new MenuItem();
+            menuItem1.Header = "实时画面";
+            menuItem1.Click += MenuItem1_Click;
+            var menuItem2 = new MenuItem();
+            menuItem2.Header = "取消";
+            m_menu.Items.Add(menuItem1);
+            m_menu.Items.Add(menuItem2);
+            m_menu.Placement = PlacementMode.Center;
+            this.MouseEnter += GridRoom_MouseEnter;
+            this.MouseLeave += GridRoom_MouseLeave;
+        }
+
+        private void MenuItem1_Click(object sender, RoutedEventArgs e)
+        {
+            if (RealVideoDelegate != null)
+            {
+                RealVideoDelegate(m_room);
+            }
+        }
+
+        private void GridRoom_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            m_menu.PlacementTarget = this;
+            m_menu.IsOpen = true;
+        }
+
+        private void GridRoom_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            //m_toolTip.PlacementTarget = this;
+            //m_toolTip.IsOpen = true;
+        }
+
+        private void GridRoom_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            //m_toolTip.IsOpen = false;
         }
 
         private void GridRoom_Loaded(object sender, System.Windows.RoutedEventArgs e)
