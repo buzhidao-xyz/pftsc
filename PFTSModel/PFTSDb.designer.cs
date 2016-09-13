@@ -305,8 +305,6 @@ namespace PFTSModel
 		
 		private System.Nullable<int> _room_id;
 		
-		private System.Nullable<bool> _recover;
-		
 		private System.Nullable<System.DateTime> _in_room_time;
 		
 		private string _remark;
@@ -315,17 +313,7 @@ namespace PFTSModel
 		
 		private int _frisk_status;
 		
-		private EntitySet<btracker_path> _btracker_path;
-		
-		private EntitySet<video_btracker_r> _video_btracker_r;
-		
-		private EntityRef<dev_lockers> _dev_lockers;
-		
-		private EntityRef<dev_vest> _dev_vest;
-		
-		private EntityRef<officer> _officer;
-		
-		private EntityRef<rfid_room> _rfid_room;
+		private System.Nullable<bool> _recover;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -357,8 +345,6 @@ namespace PFTSModel
     partial void Onprivate_goodsChanged();
     partial void Onroom_idChanging(System.Nullable<int> value);
     partial void Onroom_idChanged();
-    partial void OnrecoverChanging(System.Nullable<bool> value);
-    partial void OnrecoverChanged();
     partial void Onin_room_timeChanging(System.Nullable<System.DateTime> value);
     partial void Onin_room_timeChanged();
     partial void OnremarkChanging(string value);
@@ -367,16 +353,12 @@ namespace PFTSModel
     partial void Ongather_statusChanged();
     partial void Onfrisk_statusChanging(int value);
     partial void Onfrisk_statusChanged();
+    partial void OnrecoverChanging(System.Nullable<bool> value);
+    partial void OnrecoverChanged();
     #endregion
 		
 		public btracker()
 		{
-			this._btracker_path = new EntitySet<btracker_path>(new Action<btracker_path>(this.attach_btracker_path), new Action<btracker_path>(this.detach_btracker_path));
-			this._video_btracker_r = new EntitySet<video_btracker_r>(new Action<video_btracker_r>(this.attach_video_btracker_r), new Action<video_btracker_r>(this.detach_video_btracker_r));
-			this._dev_lockers = default(EntityRef<dev_lockers>);
-			this._dev_vest = default(EntityRef<dev_vest>);
-			this._officer = default(EntityRef<officer>);
-			this._rfid_room = default(EntityRef<rfid_room>);
 			OnCreated();
 		}
 		
@@ -491,10 +473,6 @@ namespace PFTSModel
 			{
 				if ((this._vest_id != value))
 				{
-					if (this._dev_vest.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onvest_idChanging(value);
 					this.SendPropertyChanging();
 					this._vest_id = value;
@@ -515,10 +493,6 @@ namespace PFTSModel
 			{
 				if ((this._locker_id != value))
 				{
-					if (this._dev_lockers.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onlocker_idChanging(value);
 					this.SendPropertyChanging();
 					this._locker_id = value;
@@ -539,10 +513,6 @@ namespace PFTSModel
 			{
 				if ((this._officer_id != value))
 				{
-					if (this._officer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onofficer_idChanging(value);
 					this.SendPropertyChanging();
 					this._officer_id = value;
@@ -643,35 +613,11 @@ namespace PFTSModel
 			{
 				if ((this._room_id != value))
 				{
-					if (this._rfid_room.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onroom_idChanging(value);
 					this.SendPropertyChanging();
 					this._room_id = value;
 					this.SendPropertyChanged("room_id");
 					this.Onroom_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
-		public System.Nullable<bool> recover
-		{
-			get
-			{
-				return this._recover;
-			}
-			set
-			{
-				if ((this._recover != value))
-				{
-					this.OnrecoverChanging(value);
-					this.SendPropertyChanging();
-					this._recover = value;
-					this.SendPropertyChanged("recover");
-					this.OnrecoverChanged();
 				}
 			}
 		}
@@ -756,164 +702,22 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_btracker_path", Storage="_btracker_path", ThisKey="id", OtherKey="btracker_id")]
-		public EntitySet<btracker_path> btracker_path
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
+		public System.Nullable<bool> recover
 		{
 			get
 			{
-				return this._btracker_path;
+				return this._recover;
 			}
 			set
 			{
-				this._btracker_path.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_video_btracker_r", Storage="_video_btracker_r", ThisKey="id", OtherKey="btracker_id")]
-		public EntitySet<video_btracker_r> video_btracker_r
-		{
-			get
-			{
-				return this._video_btracker_r;
-			}
-			set
-			{
-				this._video_btracker_r.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_lockers_btracker", Storage="_dev_lockers", ThisKey="locker_id", OtherKey="id", IsForeignKey=true)]
-		public dev_lockers dev_lockers
-		{
-			get
-			{
-				return this._dev_lockers.Entity;
-			}
-			set
-			{
-				dev_lockers previousValue = this._dev_lockers.Entity;
-				if (((previousValue != value) 
-							|| (this._dev_lockers.HasLoadedOrAssignedValue == false)))
+				if ((this._recover != value))
 				{
+					this.OnrecoverChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._dev_lockers.Entity = null;
-						previousValue.btracker.Remove(this);
-					}
-					this._dev_lockers.Entity = value;
-					if ((value != null))
-					{
-						value.btracker.Add(this);
-						this._locker_id = value.id;
-					}
-					else
-					{
-						this._locker_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("dev_lockers");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_vest_btracker", Storage="_dev_vest", ThisKey="vest_id", OtherKey="id", IsForeignKey=true)]
-		public dev_vest dev_vest
-		{
-			get
-			{
-				return this._dev_vest.Entity;
-			}
-			set
-			{
-				dev_vest previousValue = this._dev_vest.Entity;
-				if (((previousValue != value) 
-							|| (this._dev_vest.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._dev_vest.Entity = null;
-						previousValue.btracker.Remove(this);
-					}
-					this._dev_vest.Entity = value;
-					if ((value != null))
-					{
-						value.btracker.Add(this);
-						this._vest_id = value.id;
-					}
-					else
-					{
-						this._vest_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("dev_vest");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_btracker", Storage="_officer", ThisKey="officer_id", OtherKey="id", IsForeignKey=true)]
-		public officer officer
-		{
-			get
-			{
-				return this._officer.Entity;
-			}
-			set
-			{
-				officer previousValue = this._officer.Entity;
-				if (((previousValue != value) 
-							|| (this._officer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._officer.Entity = null;
-						previousValue.btracker.Remove(this);
-					}
-					this._officer.Entity = value;
-					if ((value != null))
-					{
-						value.btracker.Add(this);
-						this._officer_id = value.id;
-					}
-					else
-					{
-						this._officer_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("officer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="rfid_room_btracker", Storage="_rfid_room", ThisKey="room_id", OtherKey="id", IsForeignKey=true)]
-		public rfid_room rfid_room
-		{
-			get
-			{
-				return this._rfid_room.Entity;
-			}
-			set
-			{
-				rfid_room previousValue = this._rfid_room.Entity;
-				if (((previousValue != value) 
-							|| (this._rfid_room.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._rfid_room.Entity = null;
-						previousValue.btracker.Remove(this);
-					}
-					this._rfid_room.Entity = value;
-					if ((value != null))
-					{
-						value.btracker.Add(this);
-						this._room_id = value.id;
-					}
-					else
-					{
-						this._room_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("rfid_room");
+					this._recover = value;
+					this.SendPropertyChanged("recover");
+					this.OnrecoverChanged();
 				}
 			}
 		}
@@ -936,30 +740,6 @@ namespace PFTSModel
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_btracker_path(btracker_path entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = this;
-		}
-		
-		private void detach_btracker_path(btracker_path entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = null;
-		}
-		
-		private void attach_video_btracker_r(video_btracker_r entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = this;
-		}
-		
-		private void detach_video_btracker_r(video_btracker_r entity)
-		{
-			this.SendPropertyChanging();
-			entity.btracker = null;
 		}
 	}
 	
@@ -1132,8 +912,6 @@ namespace PFTSModel
 		
 		private System.DateTime _end_time;
 		
-		private EntityRef<btracker> _btracker;
-		
 		private EntityRef<path_rfid> _path_rfid;
 		
     #region 可扩展性方法定义
@@ -1154,7 +932,6 @@ namespace PFTSModel
 		
 		public btracker_path()
 		{
-			this._btracker = default(EntityRef<btracker>);
 			this._path_rfid = default(EntityRef<path_rfid>);
 			OnCreated();
 		}
@@ -1190,10 +967,6 @@ namespace PFTSModel
 			{
 				if ((this._btracker_id != value))
 				{
-					if (this._btracker.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onbtracker_idChanging(value);
 					this.SendPropertyChanging();
 					this._btracker_id = value;
@@ -1263,40 +1036,6 @@ namespace PFTSModel
 					this._end_time = value;
 					this.SendPropertyChanged("end_time");
 					this.Onend_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_btracker_path", Storage="_btracker", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
-		public btracker btracker
-		{
-			get
-			{
-				return this._btracker.Entity;
-			}
-			set
-			{
-				btracker previousValue = this._btracker.Entity;
-				if (((previousValue != value) 
-							|| (this._btracker.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._btracker.Entity = null;
-						previousValue.btracker_path.Remove(this);
-					}
-					this._btracker.Entity = value;
-					if ((value != null))
-					{
-						value.btracker_path.Add(this);
-						this._btracker_id = value.id;
-					}
-					else
-					{
-						this._btracker_id = default(int);
-					}
-					this.SendPropertyChanged("btracker");
 				}
 			}
 		}
@@ -1693,8 +1432,6 @@ namespace PFTSModel
 		
 		private System.Nullable<System.DateTime> _create_time;
 		
-		private EntitySet<btracker> _btracker;
-		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1711,7 +1448,6 @@ namespace PFTSModel
 		
 		public dev_lockers()
 		{
-			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
 			OnCreated();
 		}
 		
@@ -1795,19 +1531,6 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_lockers_btracker", Storage="_btracker", ThisKey="id", OtherKey="locker_id")]
-		public EntitySet<btracker> btracker
-		{
-			get
-			{
-				return this._btracker;
-			}
-			set
-			{
-				this._btracker.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1826,18 +1549,6 @@ namespace PFTSModel
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_btracker(btracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.dev_lockers = this;
-		}
-		
-		private void detach_btracker(btracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.dev_lockers = null;
 		}
 	}
 	
@@ -2056,8 +1767,6 @@ namespace PFTSModel
 		
 		private System.Nullable<System.DateTime> _create_time;
 		
-		private EntitySet<btracker> _btracker;
-		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2076,7 +1785,6 @@ namespace PFTSModel
 		
 		public dev_vest()
 		{
-			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
 			OnCreated();
 		}
 		
@@ -2180,19 +1888,6 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_vest_btracker", Storage="_btracker", ThisKey="id", OtherKey="vest_id")]
-		public EntitySet<btracker> btracker
-		{
-			get
-			{
-				return this._btracker;
-			}
-			set
-			{
-				this._btracker.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2211,18 +1906,6 @@ namespace PFTSModel
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_btracker(btracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.dev_vest = this;
-		}
-		
-		private void detach_btracker(btracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.dev_vest = null;
 		}
 	}
 	
@@ -2245,8 +1928,6 @@ namespace PFTSModel
 		private System.Data.Linq.Binary _fingerprint2;
 		
 		private System.Nullable<System.DateTime> _create_time;
-		
-		private EntitySet<btracker> _btracker;
 		
 		private EntitySet<officer_fingerprint> _officer_fingerprint;
 		
@@ -2272,7 +1953,6 @@ namespace PFTSModel
 		
 		public officer()
 		{
-			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
 			this._officer_fingerprint = new EntitySet<officer_fingerprint>(new Action<officer_fingerprint>(this.attach_officer_fingerprint), new Action<officer_fingerprint>(this.detach_officer_fingerprint));
 			OnCreated();
 		}
@@ -2417,19 +2097,6 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_btracker", Storage="_btracker", ThisKey="id", OtherKey="officer_id")]
-		public EntitySet<btracker> btracker
-		{
-			get
-			{
-				return this._btracker;
-			}
-			set
-			{
-				this._btracker.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="officer_officer_fingerprint", Storage="_officer_fingerprint", ThisKey="id", OtherKey="officer_id")]
 		public EntitySet<officer_fingerprint> officer_fingerprint
 		{
@@ -2463,18 +2130,6 @@ namespace PFTSModel
 			}
 		}
 		
-		private void attach_btracker(btracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.officer = this;
-		}
-		
-		private void detach_btracker(btracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.officer = null;
-		}
-		
 		private void attach_officer_fingerprint(officer_fingerprint entity)
 		{
 			this.SendPropertyChanging();
@@ -2502,6 +2157,10 @@ namespace PFTSModel
 		
 		private System.Data.Linq.Binary _img;
 		
+		private System.Nullable<int> _img_width;
+		
+		private System.Nullable<int> _img_height;
+		
 		private EntityRef<officer> _officer;
 		
     #region 可扩展性方法定义
@@ -2516,6 +2175,10 @@ namespace PFTSModel
     partial void Onfinger_idChanged();
     partial void OnimgChanging(System.Data.Linq.Binary value);
     partial void OnimgChanged();
+    partial void Onimg_widthChanging(System.Nullable<int> value);
+    partial void Onimg_widthChanged();
+    partial void Onimg_heightChanging(System.Nullable<int> value);
+    partial void Onimg_heightChanged();
     #endregion
 		
 		public officer_fingerprint()
@@ -2604,6 +2267,46 @@ namespace PFTSModel
 					this._img = value;
 					this.SendPropertyChanged("img");
 					this.OnimgChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_img_width", DbType="Int")]
+		public System.Nullable<int> img_width
+		{
+			get
+			{
+				return this._img_width;
+			}
+			set
+			{
+				if ((this._img_width != value))
+				{
+					this.Onimg_widthChanging(value);
+					this.SendPropertyChanging();
+					this._img_width = value;
+					this.SendPropertyChanged("img_width");
+					this.Onimg_widthChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_img_height", DbType="Int")]
+		public System.Nullable<int> img_height
+		{
+			get
+			{
+				return this._img_height;
+			}
+			set
+			{
+				if ((this._img_height != value))
+				{
+					this.Onimg_heightChanging(value);
+					this.SendPropertyChanging();
+					this._img_height = value;
+					this.SendPropertyChanged("img_height");
+					this.Onimg_heightChanged();
 				}
 			}
 		}
@@ -3236,8 +2939,6 @@ namespace PFTSModel
 		
 		private bool _map_inout;
 		
-		private EntitySet<btracker> _btracker;
-		
 		private EntitySet<dev_rfid> _dev_rfid;
 		
 		private EntitySet<path_rfid> _path_rfid;
@@ -3260,7 +2961,6 @@ namespace PFTSModel
 		
 		public rfid_room()
 		{
-			this._btracker = new EntitySet<btracker>(new Action<btracker>(this.attach_btracker), new Action<btracker>(this.detach_btracker));
 			this._dev_rfid = new EntitySet<dev_rfid>(new Action<dev_rfid>(this.attach_dev_rfid), new Action<dev_rfid>(this.detach_dev_rfid));
 			this._path_rfid = new EntitySet<path_rfid>(new Action<path_rfid>(this.attach_path_rfid), new Action<path_rfid>(this.detach_path_rfid));
 			this._path_rfid1 = new EntitySet<path_rfid>(new Action<path_rfid>(this.attach_path_rfid1), new Action<path_rfid>(this.detach_path_rfid1));
@@ -3325,19 +3025,6 @@ namespace PFTSModel
 					this.SendPropertyChanged("map_inout");
 					this.Onmap_inoutChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="rfid_room_btracker", Storage="_btracker", ThisKey="id", OtherKey="room_id")]
-		public EntitySet<btracker> btracker
-		{
-			get
-			{
-				return this._btracker;
-			}
-			set
-			{
-				this._btracker.Assign(value);
 			}
 		}
 		
@@ -3411,18 +3098,6 @@ namespace PFTSModel
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_btracker(btracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.rfid_room = this;
-		}
-		
-		private void detach_btracker(btracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.rfid_room = null;
 		}
 		
 		private void attach_dev_rfid(dev_rfid entity)
@@ -3776,8 +3451,6 @@ namespace PFTSModel
 		
 		private int _btracker_id;
 		
-		private EntityRef<btracker> _btracker;
-		
 		private EntityRef<video> _video;
 		
     #region 可扩展性方法定义
@@ -3792,7 +3465,6 @@ namespace PFTSModel
 		
 		public video_btracker_r()
 		{
-			this._btracker = default(EntityRef<btracker>);
 			this._video = default(EntityRef<video>);
 			OnCreated();
 		}
@@ -3832,49 +3504,11 @@ namespace PFTSModel
 			{
 				if ((this._btracker_id != value))
 				{
-					if (this._btracker.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onbtracker_idChanging(value);
 					this.SendPropertyChanging();
 					this._btracker_id = value;
 					this.SendPropertyChanged("btracker_id");
 					this.Onbtracker_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="btracker_video_btracker_r", Storage="_btracker", ThisKey="btracker_id", OtherKey="id", IsForeignKey=true)]
-		public btracker btracker
-		{
-			get
-			{
-				return this._btracker.Entity;
-			}
-			set
-			{
-				btracker previousValue = this._btracker.Entity;
-				if (((previousValue != value) 
-							|| (this._btracker.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._btracker.Entity = null;
-						previousValue.video_btracker_r.Remove(this);
-					}
-					this._btracker.Entity = value;
-					if ((value != null))
-					{
-						value.video_btracker_r.Add(this);
-						this._btracker_id = value.id;
-					}
-					else
-					{
-						this._btracker_id = default(int);
-					}
-					this.SendPropertyChanged("btracker");
 				}
 			}
 		}
@@ -3964,8 +3598,6 @@ namespace PFTSModel
 		
 		private System.Nullable<int> _room_id;
 		
-		private System.Nullable<bool> _recover;
-		
 		private System.Nullable<System.DateTime> _in_room_time;
 		
 		private string _remark;
@@ -3973,6 +3605,8 @@ namespace PFTSModel
 		private int _gather_status;
 		
 		private int _frisk_status;
+		
+		private System.Nullable<bool> _recover;
 		
 		private string _officer_name;
 		
@@ -4190,22 +3824,6 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
-		public System.Nullable<bool> recover
-		{
-			get
-			{
-				return this._recover;
-			}
-			set
-			{
-				if ((this._recover != value))
-				{
-					this._recover = value;
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_in_room_time", DbType="DateTime")]
 		public System.Nullable<System.DateTime> in_room_time
 		{
@@ -4266,6 +3884,22 @@ namespace PFTSModel
 				if ((this._frisk_status != value))
 				{
 					this._frisk_status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_recover", DbType="Bit")]
+		public System.Nullable<bool> recover
+		{
+			get
+			{
+				return this._recover;
+			}
+			set
+			{
+				if ((this._recover != value))
+				{
+					this._recover = value;
 				}
 			}
 		}

@@ -79,15 +79,17 @@ namespace PFTSDesktop.ViewModel
             }
             set
             {
-                if (value == PoliceInfo)
+                if (value == PoliceInfo || value == null)
                     return;
 
                 PoliceInfo = value;
-
+                if (value.id != 0)
+                    OfficerFingerList = PoliceService.GetFingerPrintList(value.id);
                 base.OnPropertyChanged("GetPoliceInfo");
             }
         }
 
+        public List<officer_fingerprint> OfficerFingerList { get; set; }
         public bool SexIsChecked_Male
         {
             get { return Sex_Male; }
@@ -313,14 +315,14 @@ namespace PFTSDesktop.ViewModel
             {
                 MessageBox.Show("保存成功！");
 
-               
+
                 WindowTemplet window = (WindowTemplet)obj;
                 window.Close();
 
                 //刷新列表数据
                 this.initData();
                 //Button btn = (Button)obj;
-               // Global.currentFrame.NavigationService.Refresh();
+                // Global.currentFrame.NavigationService.Refresh();
             }
             else
             {
@@ -364,7 +366,7 @@ namespace PFTSDesktop.ViewModel
             //Button btn = (Button)obj;
             //Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
 
-           
+
 
         }
 
@@ -392,7 +394,7 @@ namespace PFTSDesktop.ViewModel
             if (!CheckName()) return;
             if (!CheckSex()) return;
 
-            bool Result = PoliceService.UpPoliceByID(PoliceInfo);
+            bool Result = PoliceService.UpPoliceByID(PoliceInfo, OfficerFingerList);
             if (Result)
             {
                 MessageBox.Show("保存成功！");

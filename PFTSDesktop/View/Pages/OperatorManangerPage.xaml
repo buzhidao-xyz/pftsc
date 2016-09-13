@@ -10,7 +10,7 @@
       d:DesignHeight="500" d:DesignWidth="500"
 	Title="操作员管理" Background="White">
 
-    <Grid x:Name="OperatorView">
+    <Grid x:Name="OperatorView" Background="#FFFFFFFF">
         <Grid.Resources>
             <Style TargetType="Border">
                 <Setter Property="BorderBrush" Value="LightBlue"></Setter>
@@ -19,24 +19,23 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFFFFFFF">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Background="#f2f2f2">
+            <Label Content="您的当前位置：设备管理  > "   VerticalContentAlignment="Center" Style="{DynamicResource lableNameStyle}"/>
+            <Label Content="操作员列表"  VerticalContentAlignment="Center" Style="{DynamicResource lableProStyle}"/>
+        </StackPanel>
+        <!--<Grid x:Name="OpBox" Grid.Row="1" Grid.Column="0" >-->
             <tmp:ButtonEX x:Name="OperatorNewBtn"
                     Content="新增操作员"
-                    Grid.Row="0" Grid.Column="0" Width="100" Height="30"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Grid.Row="1" Width="90" Height="26" Margin="0,0,100,0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
                     Tag="View/OperatorManager/OperatorNewPage.xaml"
                     BorderThickness="0"
                     Command="{Binding OperatorNewCommand}" CommandParameter="{Binding ElementName=OperatorNewBtn}"/>
-            <tmp:ButtonEX x:Name="OperatorManageBtn"
+            <!--<tmp:ButtonEX x:Name="OperatorManageBtn"
                     Background="White"
                     Content="操作员管理"
                     Grid.Row="0" Grid.Column="1"
@@ -45,7 +44,7 @@
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     Tag="View/Pages/OperatorManangerPage.xaml"
                     Command="{Binding OperatorManageCommand}" CommandParameter="{Binding ElementName=OperatorManageBtn}"/>
-        </Grid>
+        </Grid>-->
 
         <Element:PageDataGridEx SelectedItem="{Binding GetOperatorInfo}" Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None" ItemsSource="{Binding GetOperatorList}">
             <Element:PageDataGridEx.Columns>
@@ -76,6 +75,6 @@
             </Element:PageDataGridEx.Columns>
         </Element:PageDataGridEx>
 
-        <Border Grid.Row="0"></Border>
+        <Border Grid.Row="1"></Border>
     </Grid>
 </Page>

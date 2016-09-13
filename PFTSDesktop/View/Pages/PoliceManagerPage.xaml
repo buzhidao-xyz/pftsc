@@ -11,7 +11,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="警员管理">
 
-    <Grid x:Name="OperatorView">
+    <Grid x:Name="OperatorView" Background="#FFFFFFFF">
         <Grid.Resources>
             <Style TargetType="Border">
                 <Setter Property="BorderBrush" Value="LightBlue"></Setter>
@@ -20,33 +20,31 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <Grid x:Name="OpBox" Grid.Row="0" Grid.Column="0" Background="#FFFFFFFF">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <tmp:ButtonEX x:Name="PoliceNewBtn"
-                    Content="新增警员"
-                    Grid.Row="0" Grid.Column="0" Width="100" Height="30"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                    Tag="View/PoliceManager/PoliceNewPage.xaml"
+        <StackPanel Orientation="Horizontal" Background="#f2f2f2">
+            <Label Content="您的当前位置：设备管理  > "   VerticalContentAlignment="Center" Style="{DynamicResource lableNameStyle}"/>
+            <Label Content="警员列表"  VerticalContentAlignment="Center" Style="{DynamicResource lableProStyle}"/>
+        </StackPanel>
+        <!--<StackPanel x:Name="OpBox" Grid.Row="1"   Orientation="Horizontal" HorizontalAlignment="Right">-->
+            <tmp:ButtonEX x:Name="PoliceNewBtn" Grid.Row="1"
+                    Content="新增警员" Width="90" Height="26"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Tag="View/PoliceManager/PoliceNewPage.xaml" Margin="0,0,100,0"
                     BorderThickness="0"
                     Command="{Binding PoliceNewCommand}" CommandParameter="{Binding ElementName=PoliceNewBtn}"/>
-            <tmp:ButtonEX x:Name="PoliceManageBtn"
+            <!--<tmp:ButtonEX x:Name="PoliceManageBtn"
                     Background="White"
                     Content="警员管理"
                     Grid.Row="0" Grid.Column="1"
                     Width="100" Height="30"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                          Margin="0,0,100,0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
                     Tag="View/Pages/PoliceManagerPage.xaml"
-                    Command="{Binding PoliceManageCommand}" CommandParameter="{Binding ElementName=PoliceManageBtn}"/>
-        </Grid>
+                    Command="{Binding PoliceManageCommand}" CommandParameter="{Binding ElementName=PoliceManageBtn}"/>-->
+        <!--</StackPanel>-->
 
         <Element:PageDataGridEx SelectedItem="{Binding GetPoliceInfo}" Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None" ItemsSource="{Binding GetPoliceList}"
                                  Total="{Binding TotalCount,Mode=TwoWay}" PageIndex="{Binding PageIndex,Mode=TwoWay}" PageSize="{Binding PageSize,Mode=TwoWay}">
@@ -76,6 +74,6 @@
             </Element:PageDataGridEx.Columns>
         </Element:PageDataGridEx>
 
-        <Border Grid.Row="0"></Border>
+        <Border Grid.Row="1"></Border>
     </Grid>
 </Page>

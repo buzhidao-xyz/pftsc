@@ -11,7 +11,7 @@ using System.Threading;
 namespace PFTSHwCtrl
 {
 
-    public delegate void FingerAcquireHander(Bitmap img,byte[] buffer,byte[] imgBuffer);
+    public delegate void FingerAcquireHander(Bitmap img, byte[] buffer, byte[] imgBuffer, int imageHeight, int imageWidth);
 
     /// <summary>
     /// 只是识别器
@@ -154,7 +154,7 @@ namespace PFTSHwCtrl
                     var buffer = GetRaw(ref size);
                     if (FingerAcquire != null)
                     {
-                        FingerAcquire(img, buffer, m_FPBuffer);
+                        FingerAcquire(img, buffer, m_FPBuffer, m_fpInstance.imageHeight, m_fpInstance.imageWidth);
                     }
                 }
                 Thread.Sleep(200);
@@ -169,6 +169,18 @@ namespace PFTSHwCtrl
         {
             MemoryStream ms = new MemoryStream();
             BitmapFormat.GetBitmap(m_FPBuffer, m_fpInstance.imageWidth, m_fpInstance.imageHeight, ref ms);
+            Bitmap bmp = new Bitmap(ms);
+            return bmp;
+        }
+
+        /// <summary>
+        /// 获取指纹图片
+        /// </summary>
+        /// <returns></returns>
+        public Bitmap GetFingerImageByData(byte[] data)
+        {
+            MemoryStream ms = new MemoryStream();
+            BitmapFormat.GetBitmap(data, m_fpInstance.imageWidth, m_fpInstance.imageHeight, ref ms);
             Bitmap bmp = new Bitmap(ms);
             return bmp;
         }

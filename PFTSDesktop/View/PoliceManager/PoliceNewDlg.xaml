@@ -140,8 +140,6 @@
                     </Border>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center">
-            </StackPanel>
 
             <Button Grid.Row="6" Name="btnUpdate"  Grid.ColumnSpan="1"
                 Style="{StaticResource ButtonControlTemplate}"

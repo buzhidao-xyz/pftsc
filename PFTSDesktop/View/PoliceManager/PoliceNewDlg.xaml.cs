@@ -53,15 +53,16 @@ namespace PFTSDesktop.View.PoliceManager
             }
         }
 
-        private void M_fingerProxy_FingerAcquire(Bitmap img, byte[] buffer, byte[] imgBuffer)
+        private void M_fingerProxy_FingerAcquire(Bitmap img, byte[] buffer, byte[] imgBuffer, int imageHeight, int imageWidth)
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
                 if (m_idx == 1)
                 {
-                    imgFinger1.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+                    imgFinger1.Source = ChangeBitmapToImageSource(img);
                     var officer = m_model.GetPoliceInfo;
                     officer.fingerprint1 = new Binary(buffer);
+                    
                     m_model.GetPoliceInfo = officer;
                     bool bExist = false;
                     for (int i = 0; i < officer.officer_fingerprint.Count; i++)
@@ -78,13 +79,15 @@ namespace PFTSDesktop.View.PoliceManager
                         PFTSModel.officer_fingerprint fp = new PFTSModel.officer_fingerprint();
                         fp.finger_id = 1;
                         fp.officer_id = officer.id;
+                        fp.img_height = imageHeight;
+                        fp.img_width = imageWidth;
                         fp.img = new System.Data.Linq.Binary(imgBuffer);
                         officer.officer_fingerprint.Add(fp);
                     }
                 }
                 else if (m_idx == 2)
                 {
-                    imgFinger2.Source = PoliceNewPage.ChangeBitmapToImageSource(img);
+                    imgFinger2.Source = ChangeBitmapToImageSource(img);
                     var officer = m_model.GetPoliceInfo;
                     officer.fingerprint2 = new Binary(buffer);
                     m_model.GetPoliceInfo = officer;
@@ -104,6 +107,8 @@ namespace PFTSDesktop.View.PoliceManager
                         fp.finger_id = 2;
                         fp.officer_id = officer.id;
                         fp.img = new System.Data.Linq.Binary(imgBuffer);
+                        fp.img_height = imageHeight;
+                        fp.img_width = imageWidth;
                         officer.officer_fingerprint.Add(fp);
                     }
                 }
