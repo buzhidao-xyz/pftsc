@@ -307,7 +307,6 @@ namespace PFTSDesktop.ViewModel
             if (TotalCount == 0)
             {
                 VestList = new List<view_vest_info>();
-                PageIndex = 0;
             }
             else
             {

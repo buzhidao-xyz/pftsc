@@ -393,7 +393,6 @@ namespace PFTSDesktop.ViewModel
             if (TotalCount == 0)
             {
                 RFIDList = new List<view_rfid_info>();
-                PageIndex = 0;
             }
             else
             {

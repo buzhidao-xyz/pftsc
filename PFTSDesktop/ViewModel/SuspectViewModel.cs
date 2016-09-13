@@ -710,7 +710,6 @@ namespace PFTSDesktop.ViewModel
             if (TotalCount == 0)
             {
                 Btrackers = new List<view_btracker_info>();
-                PageIndex = 0;
             }
             else
             {

@@ -28,7 +28,7 @@ namespace PFTSDesktop.View.SuspectManager
         public AddSuspectDlg()
         {
             InitializeComponent();
-            m_model = new SuspectViewModel();
+            m_model = SuspectViewModel.GetInstance();
             this.DataContext = m_model;
             var com = System.Configuration.ConfigurationManager.AppSettings["rfid_reader_com"];
             rfidReader = new PFTSHwCtrl.PFTSRFIDNoReaderProxy(com);

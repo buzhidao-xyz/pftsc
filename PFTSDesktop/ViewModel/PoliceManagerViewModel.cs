@@ -202,7 +202,6 @@ namespace PFTSDesktop.ViewModel
             if (TotalCount == 0)
             {
                 GetPoliceList = new List<officer>();
-                PageIndex = 0;
             }
             else
             {

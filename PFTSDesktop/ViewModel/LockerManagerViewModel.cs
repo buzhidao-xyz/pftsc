@@ -306,7 +306,6 @@ namespace PFTSDesktop.ViewModel
             if (TotalCount == 0)
             {
                 LockerList = new List<view_locker_info>();
-                PageIndex = 0;
             }
             else
             {

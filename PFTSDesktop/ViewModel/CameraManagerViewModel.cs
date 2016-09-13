@@ -379,7 +379,6 @@ namespace PFTSDesktop.ViewModel
             if (TotalCount == 0)
             {
                 CameraList = new List<view_camera_info>();
-                PageIndex = 0;
             }
             else
             {
