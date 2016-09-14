@@ -16,6 +16,7 @@
                    WindowStartupLocation="CenterScreen"
                    WindowState="Maximized"
                    x:Name="main"
+                  
                    mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -26,15 +27,17 @@
         <Style TargetType="{x:Type tmp:FButton}" BasedOn="{StaticResource FButton_Transparency}">
             <Setter Property="Command" Value="{Binding OpenCommand}"/>
         </Style>
+        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
             <RowDefinition Height="24" />
             <RowDefinition Height="90" />
             <RowDefinition/>
             <RowDefinition Height="27"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="gridTitleBar" Grid.Row="0">
+        <Grid x:Name="gridTitleBar" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
@@ -94,10 +97,10 @@
             </tmp:ButtonTemplet>
 
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
 
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>

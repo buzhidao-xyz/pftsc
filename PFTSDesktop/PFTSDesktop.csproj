@@ -51,6 +51,9 @@
   <PropertyGroup>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -440,6 +443,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="logo.ico" />
     <Resource Include="Images\Login\backfocus.png" />
     <Resource Include="Images\Login\enter.png" />
     <Resource Include="Images\Login\取消.png" />
@@ -453,6 +457,12 @@
     <Resource Include="Images\Login\背景.png" />
     <Resource Include="Images\btnImage.png" />
     <Resource Include="Images\white_bg.png" />
+    <Resource Include="Images\停止.png" />
+    <Resource Include="Images\前进.png" />
+    <Resource Include="Images\后退.png" />
+    <Resource Include="Images\声音.png" />
+    <Resource Include="Images\播放.png" />
+    <Resource Include="Images\暂停.png" />
     <Content Include="lib\AudioRender.dll" />
     <Content Include="lib\HCCore.dll" />
     <Content Include="lib\HCNetSDK.dll" />

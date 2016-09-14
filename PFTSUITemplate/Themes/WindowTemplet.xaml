@@ -2,14 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:CustomWPF="clr-namespace:PFTSUITemplate.Controls">
     <Style TargetType="CustomWPF:WindowTemplet">
-        <Setter Property="AllowsTransparency" Value="true"/>
+        <Setter Property="AllowsTransparency" Value="False"/>
         <Setter Property="Background" Value="Transparent"/>
         <!--<Setter Property="ResizeMode" Value="CanResizeWithGrip"/>-->
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CustomWPF:WindowTemplet">
-                    <Grid Margin="5">
+                    <Grid >
                         <!--<Rectangle Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"    >
                             <Rectangle.Effect>
                                 <DropShadowEffect BlurRadius="5" ShadowDepth="0"/>
@@ -31,13 +31,12 @@
                                             <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1" Opacity=".1">
                                                 <GradientStop Offset="0" Color="{DynamicResource BackGroudColor}" />
                                                 <GradientStop Offset=".3" Color="{DynamicResource BackGroudColor}" />
-                                                <GradientStop Offset="1" Color="Transparent" />
+                                                <GradientStop Offset="1" Color="Transparent"/>
                                             </LinearGradientBrush>
                                         </Rectangle.Fill>
                                     </Rectangle>
                                     <Image Source="{DynamicResource BackGroudImage}"  Stretch="UniformToFill" VerticalAlignment="Top"
                                            Visibility="{DynamicResource Image_ImageOrColor}">
-                                       
                                     </Image>
                                     <ContentPresenter></ContentPresenter>
                                 </Grid>

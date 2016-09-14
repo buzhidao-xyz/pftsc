@@ -6,12 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:ele="clr-namespace:PFTSUITemplate.Element;assembly=PFTSUITemplate" BorderBrush="LightGray" BorderThickness="1"
         xmlns:tool="clr-namespace:PFTSTools;assembly=PFTSTools"
-        Height="500" Width="800" ResizeMode="NoResize" 
+        Height="500" Width="800"
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None"
+        ResizeMode="NoResize" 
         x:Name="main"
         FocusManager.FocusedElement="{Binding ElementName=txtUserName}"
-        ShowInTaskbar="True" AllowsTransparency="True" Loaded="main_Loaded">
+        ShowInTaskbar="True" Loaded="main_Loaded">
 
     <Grid>
         <Grid.Background>
