@@ -56,7 +56,7 @@ namespace PFTSDesktop.View.Pages
                 MessageBox.Show("未检测到该嫌疑人所在区域的摄像头信息");
                 return;
             }
-            Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow();
+            Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow(camera);
             vw.Show();
         }
 
@@ -68,7 +68,7 @@ namespace PFTSDesktop.View.Pages
                 MessageBox.Show("未检测到该区域的摄像头信息");
                 return;
             }
-            Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow();
+            Monitoring.VideoListWindow vw = new Monitoring.VideoListWindow(camera);
             vw.Show();
         }
     }

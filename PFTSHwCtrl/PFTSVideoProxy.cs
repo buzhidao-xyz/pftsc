@@ -39,10 +39,10 @@ namespace PFTSHwCtrl
         /// <param name="port">摄像头端口</param>
         /// <param name="username">摄像头用户名</param>
         /// <param name="password">摄像头密码</param>
-        public PFTSVideoProxy(string ip, Int16 port,string username,string password)
+        public PFTSVideoProxy(string ip, int port,string username,string password)
         {
-            this.m_ipAddress = ip;
-            this.m_port = port;
+            this.m_ipAddress =ip;
+            this.m_port = (Int16)port;
             this.m_userName = username;
             this.m_password = password;
         }

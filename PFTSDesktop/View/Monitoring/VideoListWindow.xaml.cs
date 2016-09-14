@@ -21,13 +21,13 @@ namespace PFTSDesktop.View.Monitoring
     public partial class VideoListWindow : WindowTemplet
     {
         private PFTSHwCtrl.PFTSVideoProxy m_videoProxy;
+        private PFTSModel.dev_camera m_camera;
 
-        public VideoListWindow()
+        public VideoListWindow(PFTSModel.dev_camera camera = null)
         {
             InitializeComponent();
-            m_videoProxy = new PFTSHwCtrl.PFTSVideoProxy("192.168.10.164", 8000, "admin", "Gt123456");
-            m_videoProxy.Login();
-            m_videoProxy.SetWindow(videoControl);
+            m_camera = camera;
+            //            m_videoProxy = new PFTSHwCtrl.PFTSVideoProxy("192.168.10.164", 8000, "admin", "Gt123456");
 
             timer.Tick += new EventHandler(timer_Tick);
           
@@ -36,14 +36,21 @@ namespace PFTSDesktop.View.Monitoring
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!m_videoProxy.IsRealView)
+            // 实时画面
+            if (m_camera != null)
             {
-                if (!m_videoProxy.StartRealView())
+                m_videoProxy = new PFTSHwCtrl.PFTSVideoProxy(m_camera.ip, m_camera.port == null ? 8000 : m_camera.port.Value, m_camera.admin, m_camera.password);
+                m_videoProxy.Login();
+                m_videoProxy.SetWindow(videoControl);
+                if (!m_videoProxy.IsRealView)
                 {
-                    MessageBox.Show(m_videoProxy.GetLastError());
+                    if (!m_videoProxy.StartRealView())
+                    {
+                        MessageBox.Show(m_videoProxy.GetLastError());
+                    }
                 }
-            }
-            volumeSlider.Value = 0.5;
+                volumeSlider.Value = 0.5;
+            }            
         }
 
         //
