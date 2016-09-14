@@ -98,6 +98,10 @@
       <Project>{ec79570a-25a6-4bcb-a828-ce04b0269919}</Project>
       <Name>PFTSModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PFTSTools\PFTSTools.csproj">
+      <Project>{418fa0d6-c0cf-4c3c-89cf-7ca5966f410b}</Project>
+      <Name>PFTSTools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

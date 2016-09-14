@@ -44,7 +44,15 @@ namespace PFTSDesktop
             // 
             Global.currentMainWindow = this;
 
-            m_rfidServer = new PFTSHwCtrl.PFTSRFIDServer("0.0.0.0",7500);
+            var host = System.Configuration.ConfigurationManager.AppSettings["rfid_server_host"];
+            var port = System.Configuration.ConfigurationManager.AppSettings["rfid_server_port"];
+            int iport;
+            if (!int.TryParse(port,out iport))
+            {
+                iport = 7500;
+            }
+
+            m_rfidServer = new PFTSHwCtrl.PFTSRFIDServer(host,iport);
             m_rfidServer.Start();
             m_rfidServer.BTrackerMove += M_rfidServer_BTrackerMove;
         }
@@ -57,9 +65,11 @@ namespace PFTSDesktop
                 if (!r)
                 {
                     MessageBox.Show(btracker.name + "移动至" + position.room_name + "失败");
+                    PFTSTools.ConsoleManager.SetOut(btracker.name + "移动至->" + position.room_name + "失败");
                 }
                 else
                 {
+                    PFTSTools.ConsoleManager.SetOut(btracker.name + "移动至->" + position.room_name + "成功");
                     if (BTrackerMoveDelegete != null)
                         BTrackerMoveDelegete(btracker.id);
                 }
