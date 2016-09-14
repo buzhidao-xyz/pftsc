@@ -111,17 +111,25 @@ namespace PFTSHwCtrl
             if (len < 5) return;
             this.State = ProtocolParseState.PPSParsing;
             string rfidNo = string.Format("{0:X2}",data[0]);
+            string vestNo = string.Format("{0:X2}{1:X2}{2:X2}{3:X2}", data[1], data[2], data[3], data[4]);
+            PFTSTools.ConsoleManager.SetOut("接受到数据解析：rfid天线序列号(" + rfidNo + ")" + ",马甲序列号(" + vestNo + ")");
             var devRfid = (new PFTSModel.Services.DevRFIDService()).GetInfoByNo(rfidNo);
             if (devRfid != null)
             {
                 this.DevRFID = devRfid;
+            }else
+            {
+                PFTSTools.ConsoleManager.SetOut("未找到对应的rfid天线信息");
             }
 
-            string vestNo = string.Format("{0:X2}{1:X2}{2:X2}{3:X2}", data[1], data[2], data[3], data[4]);
             var bt = (new PFTSModel.Services.BTrackerService()).GetByVestNo(vestNo);
             if (bt != null)
             {
                 this.BTracker = bt;
+            }
+            else
+            {
+                PFTSTools.ConsoleManager.SetOut("未找到对应的马甲信息");
             }
             if (this.DevRFID != null && this.BTracker != null)
             {

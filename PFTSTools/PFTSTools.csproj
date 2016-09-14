@@ -43,6 +43,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleManager.cs" />
     <Compile Include="MD5Tool.cs" />
     <Compile Include="PasswordBoxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

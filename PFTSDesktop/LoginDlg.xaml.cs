@@ -28,6 +28,11 @@ namespace PFTSDesktop
 
         private void main_Loaded(object sender, RoutedEventArgs e)
         {
+            var debug = System.Configuration.ConfigurationManager.AppSettings["debug"];
+            if (debug.ToLower() == "true")
+            {
+                PFTSTools.ConsoleManager.Toggle();
+            }
         }
     }
 }
