@@ -33,11 +33,11 @@ namespace PFTSDesktop.View.SuspectManager
             this.DataContext = SuspectViewModel.GetInstance();
 
             // 监控模式
-            controlScene.CameraMode = PFTSScene.CameraMode.Monitoring;
-            controlScene.RFIDMode = PFTSScene.RFIDMode.Monitoring;
+            controlScene.CameraMode = PFTSScene.CameraMode.Hidden;
+            controlScene.RFIDMode = PFTSScene.RFIDMode.Hidden;
 
             controlScene.AddAPeople(model);
-            controlScene.PathOut(model.id);
+            controlScene.PathOut(model.id,false);
         }
 
         private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)

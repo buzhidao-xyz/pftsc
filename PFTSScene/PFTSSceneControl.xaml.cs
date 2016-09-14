@@ -574,7 +574,7 @@ namespace PFTSScene
             }
         }
 
-        public void PathOut(int btrackerId)
+        public void PathOut(int btrackerId,bool opt = true)
         {
             var paths = (new PFTSModel.Services.BTrackerService()).GetPaths(btrackerId);
             foreach (var p in paths)
@@ -586,7 +586,8 @@ namespace PFTSScene
                     PathTo(m_mapRooms[o], m_mapRooms[d]);
                 }
             }
-            gridBack.Visibility = Visibility.Visible;
+            if (opt)
+                gridBack.Visibility = Visibility.Visible;
         }
 
         private void MenuPeopleRealVideo_Click(object sender, RoutedEventArgs e)
