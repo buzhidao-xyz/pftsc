@@ -121,8 +121,7 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                if (_officers == null)
-                    _officers = _officerService.GetAll();
+                _officers = _officerService.GetAll();
                 return _officers;
             }
             set
@@ -141,8 +140,7 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                if (_devVests == null)
-                    _devVests = _devVestService.GetVestByStatus(false);
+                _devVests = _devVestService.GetVestByStatus(false);
                 return _devVests;
             }
             set
@@ -161,8 +159,7 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
-                if (_devLockers == null)
-                    _devLockers = _devLockerService.GetLockersByStatus(false);
+                _devLockers = _devLockerService.GetLockersByStatus(false);
                 return _devLockers;
             }
             set
@@ -451,7 +448,8 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public ICommand SuspectVideoCommand
         {
-            get {
+            get
+            {
                 if (_videoCommand == null)
                 {
                     _videoCommand = new RelayCommand(
@@ -552,10 +550,10 @@ namespace PFTSDesktop.ViewModel
         {
             get { return String.IsNullOrEmpty(this.ValidateDevVest()) && String.IsNullOrEmpty(this.ValidateOfficer()) && _suspectModel.IsValid; }
         }
-      
+
         public void GetSuspects(Object obj)
         {
-             ButtonTemplet btn = (ButtonTemplet)obj;
+            ButtonTemplet btn = (ButtonTemplet)obj;
             if (_preBtn != null)
             {
                 if (btn == _preBtn)
@@ -617,17 +615,23 @@ namespace PFTSDesktop.ViewModel
         /// </summary>
         public void SuspectVideo()
         {
-            VideoListWindow vw = new VideoListWindow();
+            PFTSModel.dev_camera camera = (new PFTSModel.Services.CameraPositionService()).GetByRoomId(SelectedBreacker.room_id.Value);
+            if (camera == null)
+            {
+                MessageWindow.Show("未检测到该区域的摄像头信息","系统提示");
+                return;
+            }
+            VideoListWindow vw = new VideoListWindow(camera);
             vw.Show();
         }
         /// <summary>
         /// 查看历史轨迹
         /// </summary>
         public void SuspectTrack()
-        { 
+        {
             btracker model = new btracker();
-            model.id= SelectedBreacker.id;
-            model.name=SelectedBreacker.name;
+            model.id = SelectedBreacker.id;
+            model.name = SelectedBreacker.name;
             model.room_id = SelectedBreacker.room_id;
             HistoricalTrackDlg dlg = new HistoricalTrackDlg(model);
             dlg.Show();

@@ -1,4 +1,4 @@
-﻿<tmp:WindowTemplet x:Class="PFTSDesktop.View.Monitoring.VideoListWindow"
+﻿<blankWindow:BlankWindow x:Class="PFTSDesktop.View.Monitoring.VideoListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,15 +6,16 @@
         xmlns:hwd="clr-namespace:PFTSHwCtrl;assembly=PFTSHwCtrl"
         xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
         xmlns:local="clr-namespace:PFTSDesktop.View.Monitoring"
+                      xmlns:blankWindow="http://GFramework.org"
         mc:Ignorable="d"
         Title="涉案人员监控"  Width="950" Height="670" MinWidth="950" MinHeight="670"
+        TitleBarHeight="24"
+        MouseDoubleClick="MainWindow_OnMouseDoubleClick"
         BorderBrush="{DynamicResource windowStyle}"
         BorderThickness="1"
-        MouseDoubleClick="MainWindow_OnMouseDoubleClick"
-        MoveHeight="114"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized" Loaded="Window_Loaded">
-    <tmp:WindowTemplet.Resources>
+    <blankWindow:BlankWindow.Resources>
         <ControlTemplate x:Key="PlayButton" TargetType="{x:Type Button}">
             <Grid>
                 <Image x:Name="myImage" Source="/PFTSDesktop;component/Images/播放.png" />
@@ -40,7 +41,7 @@
                 <Image Source="/PFTSDesktop;component/Images/前进.png" />
             </Grid>
         </ControlTemplate>
-    </tmp:WindowTemplet.Resources>
+    </blankWindow:BlankWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
@@ -119,32 +120,29 @@
                 <Button Content="video20160825.mp4" Click="Button_Click"/>
             </ListBox>
             <hwd:PFTSVideoControl x:Name="videoControl" Grid.Column="1"/>
-            <Grid Name="moviePlayerGrid" Visibility="Hidden" Grid.Column="1">
+            <Grid Name="moviePlayerGrid" Visibility="Hidden" Grid.Column="1" Margin="0,2,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition MinHeight="50" />
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="55"/>
                 </Grid.RowDefinitions>
                 <Grid Name="mediaControlsGrid" Margin="0" Grid.Row="2" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="284" />
-                        <ColumnDefinition Width="98" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="37,0">
+                   
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  Margin="20,0">
                         <Button  Name="backButton" Margin="3" Width="24" Height="24"  ToolTip="后退" Template="{StaticResource backButton}" Click="backButton_Click"/>
                         <Button Name="playButton"  Margin="3" Width="40" Height="40"  ToolTip="播放" Template="{StaticResource PlayButton}" Click="playButton_Click"/>
                         <Button Name="stopButton"  Margin="3" Width="24" Height="24"  ToolTip="停止" Template="{StaticResource stopButton}" Click="stopButton_Click"/>
                         <Button  Name="forwardButton"  Margin="3" Width="24" Height="24"  ToolTip="前进"  Template="{StaticResource forwardButton}" Click="forwardButton_Click" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-                        <TextBlock Margin="3" Width="16" Height="16" ToolTip="音量" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                        <!--<TextBlock Margin="3" Width="16" Height="16" ToolTip="音量" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                             <TextBlock.Background>
                                 <ImageBrush ImageSource="/PFTSDesktop;component/Images/声音.png" />
                             </TextBlock.Background>
                         </TextBlock>
                         <Slider Name="volumeSlider" Minimum="0" Maximum="1" VerticalContentAlignment="Center"
-                                                Height="20" Width="150" ValueChanged="volumeSlider_ValueChanged" IsMoveToPointEnabled="True" />
+                                                Height="20" Width="150" ValueChanged="volumeSlider_ValueChanged" IsMoveToPointEnabled="True" />-->
                     </StackPanel>
                 </Grid>
-                <MediaElement MediaOpened="moviePlayer_MediaOpened" MediaEnded="moviePlayer_MediaEnded" Grid.Row="0" Name="mediaElement" Margin="0" Width="auto" Height="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LoadedBehavior="Manual"/>
+                <MediaElement MediaOpened="moviePlayer_MediaOpened"  MediaEnded="moviePlayer_MediaEnded" Grid.Row="0" Name="mediaElement" Margin="0" Width="auto" Height="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LoadedBehavior="Manual"/>
                 <StackPanel Grid.Row="1" Orientation="Vertical">
                     <Slider  Name="positionSlider" Width="auto" Height="auto" IsMoveToPointEnabled="True"
                                              Minimum="0" Maximum="1" Margin="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ValueChanged="positionSlider_ValueChanged" />
@@ -153,4 +151,4 @@
             </Grid>
         </Grid>
     </Grid>
-</tmp:WindowTemplet>
+</blankWindow:BlankWindow>

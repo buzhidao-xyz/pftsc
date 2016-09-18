@@ -386,6 +386,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GFramework.BlankWindow\GFramework.BlankWindow.csproj">
+      <Project>{b7107a67-a76e-4313-8c5b-3265dde238b6}</Project>
+      <Name>GFramework.BlankWindow</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PFTSHwCtrl\PFTSHwCtrl.csproj">
       <Project>{e1a1497f-ca0e-425c-8cf9-34f05cccd231}</Project>
       <Name>PFTSHwCtrl</Name>

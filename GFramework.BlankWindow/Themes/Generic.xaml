@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:behaviours1="clr-namespace:GFramework.BlankWindow.Behaviours"
+                    xmlns:local="clr-namespace:GFramework.BlankWindow">
+
+
+    <ControlTemplate x:Key="WindowTemplate"
+                     TargetType="{x:Type local:BlankWindow}">
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+            <AdornerDecorator>
+                <Grid>
+                    <Border Background="Transparent"
+                            Height="{TemplateBinding TitleBarHeight}"
+                            x:Name="PART_TitleBar"
+                            VerticalAlignment="Top"
+                            local:BlankWindow.Draggable="True" />
+                    <Image Source="{DynamicResource BackGroudImage}"  Stretch="UniformToFill" VerticalAlignment="Top"
+                                           Visibility="{DynamicResource Image_ImageOrColor}">
+                    </Image>
+                    <ContentPresenter />
+                </Grid>
+            </AdornerDecorator>
+        </Border>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type local:BlankWindow}">
+        <Setter Property="Template"
+                Value="{StaticResource WindowTemplate}" />
+        <Setter Property="UseLayoutRounding"
+                Value="True" />
+        <Setter Property="behaviours1:StylizedBehaviors.Behaviors">
+            <Setter.Value>
+                <behaviours1:StylizedBehaviorCollection>
+                    <behaviours1:BorderlessWindowBehavior />
+                    <!--<behaviours:WindowsSettingBehaviour />-->
+                </behaviours1:StylizedBehaviorCollection>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -157,7 +157,7 @@ namespace PFTSScene
         #region 保存场景界面元素
         public void loadLocalRooms()
         {
-            for(var i = 0;i < 42; i++)
+            for (var i = 0; i < 42; i++)
             {
                 object element = this.FindName("room" + (i + 1));
                 if (element == null) continue;
@@ -174,7 +174,7 @@ namespace PFTSScene
 
         public void loadLocalRFIDImages()
         {
-            for(var i = 0; i < 42; i++)
+            for (var i = 0; i < 42; i++)
             {
                 object element = this.FindName("imgRfid" + (i + 1));
                 if (element == null) continue;
@@ -215,7 +215,8 @@ namespace PFTSScene
                 var rfrm = from rm in rooms
                            where rm.id == k
                            select rm;
-                var gridRoom = new Tools.GridRoom(30,30,rfrm.SingleOrDefault());
+
+                var gridRoom = new Tools.GridRoom(30, 30, rfrm.SingleOrDefault());
                 gridRoom.RealVideoDelegate += GridRoom_RealVideoDelegate;
                 m_mapRooms[k].Children.Add(gridRoom);
                 m_mapGridRooms[k] = gridRoom;
@@ -428,7 +429,7 @@ namespace PFTSScene
         private void PathTo(Grid origin, Grid dest)
         {
             var transformStart = origin.TransformToAncestor(this.baseGrid);
-            Point pointStart = transformStart.Transform(new Point(origin.ActualWidth / 2, origin.ActualHeight/2));
+            Point pointStart = transformStart.Transform(new Point(origin.ActualWidth / 2, origin.ActualHeight / 2));
 
             var transformEnd = dest.TransformToAncestor(this.baseGrid);
             Point pointEnd = transformEnd.Transform(new Point(dest.ActualWidth / 2, dest.ActualHeight / 2));
@@ -440,7 +441,7 @@ namespace PFTSScene
             arrow.Y2 = pointEnd.Y;
             arrow.HeadWidth = 10;
             arrow.HeadHeight = 5;
-            arrow.Stroke = new SolidColorBrush(Color.FromRgb(255,0,0));
+            arrow.Stroke = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             arrow.StrokeThickness = 2;
             this.gridPaths.Children.Add(arrow);
             var ia = new InArrow();
@@ -471,28 +472,28 @@ namespace PFTSScene
             int roomId = btracker.room_id.Value;
             //if (m_loaded)
             //{
-                if (m_mapGridRooms.ContainsKey(roomId))
+            if (m_mapGridRooms.ContainsKey(roomId))
+            {
+                var gr = m_mapGridRooms[roomId];
+                Image img = new Image();
+                img.Source = m_bmImgPeople;
+                gr.AddAImage(img);
+                if (m_mapPeopleCounts.ContainsKey(roomId))
                 {
-                    var gr = m_mapGridRooms[roomId];
-                    Image img = new Image();
-                    img.Source = m_bmImgPeople;
-                    gr.AddAImage(img);
-                    if (m_mapPeopleCounts.ContainsKey(roomId))
-                    {
-                        m_mapPeopleCounts[roomId] += 1;
-                    }
-                    else
-                    {
-                        m_mapPeopleCounts[roomId] = 1;
-                    }
-                    img.Tag = btracker.id;
-                    img.Cursor = Cursors.Hand;
-                    img.MouseEnter += Img_MouseEnter;
-                    img.MouseLeave += Img_MouseLeave;
-                    img.MouseUp += Img_MouseUp;
-                    m_mapBtrackers.Add(btracker.id, btracker);
-                    m_mapPeopleImage.Add(btracker.id, img);
+                    m_mapPeopleCounts[roomId] += 1;
                 }
+                else
+                {
+                    m_mapPeopleCounts[roomId] = 1;
+                }
+                img.Tag = btracker.id;
+                img.Cursor = Cursors.Hand;
+                img.MouseEnter += Img_MouseEnter;
+                img.MouseLeave += Img_MouseLeave;
+                img.MouseUp += Img_MouseUp;
+                m_mapBtrackers.Add(btracker.id, btracker);
+                m_mapPeopleImage.Add(btracker.id, img);
+            }
             //}
             //else
             //{
@@ -527,7 +528,7 @@ namespace PFTSScene
             }
         }
 
-        public void RemovePeople(int id,int roomId)
+        public void RemovePeople(int id, int roomId)
         {
             if (m_mapPeopleCounts.ContainsKey(roomId))
             {
@@ -553,7 +554,7 @@ namespace PFTSScene
             }
         }
 
-        public void MovePeople(PFTSModel.btracker newBtracker,int oldRoom)
+        public void MovePeople(PFTSModel.btracker newBtracker, int oldRoom)
         {
             if (oldRoom == newBtracker.room_id) return;
             RemovePeople(newBtracker.id, oldRoom);
@@ -574,7 +575,7 @@ namespace PFTSScene
             }
         }
 
-        public void PathOut(int btrackerId,bool opt = true)
+        public void PathOut(int btrackerId, bool opt = true)
         {
             var paths = (new PFTSModel.Services.BTrackerService()).GetPaths(btrackerId);
             foreach (var p in paths)

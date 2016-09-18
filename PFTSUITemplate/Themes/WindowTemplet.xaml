@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:CustomWPF="clr-namespace:PFTSUITemplate.Controls">
     <Style TargetType="CustomWPF:WindowTemplet">
-        <Setter Property="AllowsTransparency" Value="False"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="Background" Value="Transparent"/>
         <!--<Setter Property="ResizeMode" Value="CanResizeWithGrip"/>-->
         <Setter Property="WindowStyle" Value="None"/>

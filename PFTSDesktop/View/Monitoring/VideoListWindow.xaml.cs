@@ -1,4 +1,5 @@
-﻿using PFTSUITemplate.Controls;
+﻿using GFramework.BlankWindow;
+using PFTSUITemplate.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace PFTSDesktop.View.Monitoring
     /// <summary>
     /// VideoListWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class VideoListWindow : WindowTemplet
+    public partial class VideoListWindow : BlankWindow
     {
         private PFTSHwCtrl.PFTSVideoProxy m_videoProxy;
         private PFTSModel.dev_camera m_camera;
@@ -30,7 +31,7 @@ namespace PFTSDesktop.View.Monitoring
             //            m_videoProxy = new PFTSHwCtrl.PFTSVideoProxy("192.168.10.164", 8000, "admin", "Gt123456");
 
             timer.Tick += new EventHandler(timer_Tick);
-          
+
 
         }
 
@@ -49,8 +50,8 @@ namespace PFTSDesktop.View.Monitoring
                         MessageBox.Show(m_videoProxy.GetLastError());
                     }
                 }
-                volumeSlider.Value = 0.5;
-            }            
+                //volumeSlider.Value = 0.5;
+            }
         }
 
         //
@@ -84,26 +85,17 @@ namespace PFTSDesktop.View.Monitoring
                 return;
             }
 
-
-            IInputElement feSource = e.MouseDevice.DirectlyOver;
-
-
-            Point pt = e.MouseDevice.GetPosition(this);
-            if (pt.Y < MoveHeight)
+            if (this.WindowState == WindowState.Normal)
             {
-                if (this.WindowState == WindowState.Normal)
-                {
-                    this.WindowState = WindowState.Maximized;
-                    this.btnNomalMax.Visibility = Visibility.Hidden;
-                    this.btnMax.Visibility = Visibility.Visible;
-                }
-                else if (this.WindowState == WindowState.Maximized)
-                {
-                    this.WindowState = WindowState.Normal;
-                    this.btnNomalMax.Visibility = Visibility.Visible;
-                    this.btnMax.Visibility = Visibility.Hidden;
-                }
+                this.btnNomalMax.Visibility = Visibility.Hidden;
+                this.btnMax.Visibility = Visibility.Visible;
             }
+            else if (this.WindowState == WindowState.Maximized)
+            {
+                this.btnNomalMax.Visibility = Visibility.Visible;
+                this.btnMax.Visibility = Visibility.Hidden;
+            }
+
         }
         /// <summary>
         /// 窗口关闭
@@ -169,6 +161,8 @@ namespace PFTSDesktop.View.Monitoring
             mediaElement.Close();
         }
 
+
+
         /// <summary>
         /// 播放视频
         /// </summary>
@@ -176,7 +170,7 @@ namespace PFTSDesktop.View.Monitoring
         /// <param name="e"></param>
         private void moviePlayer_MediaOpened(object sender, RoutedEventArgs e)
         {
-            mediaElement.Volume = (double)volumeSlider.Value;
+            //mediaElement.Volume = (double)volumeSlider.Value;
             positionSlider.Maximum =
               mediaElement.NaturalDuration.TimeSpan.TotalMilliseconds;
             timer.Interval = new TimeSpan(0, 0, 1);
@@ -193,7 +187,6 @@ namespace PFTSDesktop.View.Monitoring
         private void moviePlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
             StopMovie();
-            timer.Stop();
         }
 
         /// <summary>
@@ -258,7 +251,7 @@ namespace PFTSDesktop.View.Monitoring
         /// </summary>
         private void volumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            mediaElement.Volume = (double)volumeSlider.Value;
+            //mediaElement.Volume = (double)volumeSlider.Value;
         }
 
         #region 公共方法
@@ -296,6 +289,8 @@ namespace PFTSDesktop.View.Monitoring
             mediaElement.Position = TimeSpan.Zero;
             positionSlider.Value =
               mediaElement.Position.TotalMilliseconds;
+            ControlTemplate tmpl = (ControlTemplate)this.FindResource("PlayButton");
+            playButton.Template = tmpl;
             playButton.ToolTip = "播放";
             playing = false;
         }
