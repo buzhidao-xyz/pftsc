@@ -73,6 +73,7 @@ namespace PFTSScene
         private RFIDMode m_rfidMode;
 
         private BitmapImage m_bmImgPeople;
+        private BitmapImage m_bmImgPeopleAlert;
         // 人物提示名
         private ToolTip m_toolTip;
         private Label m_lblToolTip;
@@ -111,6 +112,11 @@ namespace PFTSScene
             m_bmImgPeople.BeginInit();
             m_bmImgPeople.UriSource = new Uri(@"Images/person_normal.png", UriKind.RelativeOrAbsolute);
             m_bmImgPeople.EndInit();
+
+            m_bmImgPeopleAlert = new BitmapImage();
+            m_bmImgPeopleAlert.BeginInit();
+            m_bmImgPeopleAlert.UriSource = new Uri(@"Images/person_alert.png", UriKind.RelativeOrAbsolute);
+            m_bmImgPeopleAlert.EndInit();
 
             m_toolTip = new ToolTip();
             m_lblToolTip = new Label();
@@ -476,7 +482,27 @@ namespace PFTSScene
             {
                 var gr = m_mapGridRooms[roomId];
                 Image img = new Image();
-                img.Source = m_bmImgPeople;
+                bool alert = false;
+                if (btracker.room_id == 2)  // 2:采集室 1:搜身室
+                {
+                    if (btracker.frisk_status != 1) //未搜身
+                    {
+                        alert = true;
+                    }
+                }else if (btracker.room_id > 2)
+                {
+                    if (btracker.frisk_status != 1 || btracker.gather_status != 1) //未搜身或者未采集
+                    {
+                        alert = true;
+                    }
+                }
+                if (alert)
+                {
+                    img.Source = m_bmImgPeopleAlert;
+                }else
+                {
+                    img.Source = m_bmImgPeople;
+                }
                 gr.AddAImage(img);
                 if (m_mapPeopleCounts.ContainsKey(roomId))
                 {
