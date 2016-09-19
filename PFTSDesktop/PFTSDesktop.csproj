@@ -145,8 +145,14 @@
     <Compile Include="View\Monitoring\VideoListWindow.xaml.cs">
       <DependentUpon>VideoListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OperatorManager\OperatorNewDlg.xaml.cs">
+      <DependentUpon>OperatorNewDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OperatorManager\OperatorNewPage.xaml.cs">
       <DependentUpon>OperatorNewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OperatorManager\OperatorUpDlg.xaml.cs">
+      <DependentUpon>OperatorUpDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OperatorManager\OperatorUpPage.xaml.cs">
       <DependentUpon>OperatorUpPage.xaml</DependentUpon>
@@ -275,7 +281,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\OperatorManager\OperatorNewDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\OperatorManager\OperatorNewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OperatorManager\OperatorUpDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

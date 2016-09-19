@@ -50,7 +50,8 @@
         </Grid.RowDefinitions>
         <Grid x:Name="gridTitleBar" Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="370*"/>
+                <ColumnDefinition Width="61*"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -60,7 +61,7 @@
             <Label  Grid.Column="0"  Name="TilteName" Width="120" HorizontalAlignment="Left" Content="涉案人员监控" FontFamily="宋体" Foreground="AliceBlue" Margin="5,0,0,0"/>
 
             <tmp:ButtonTemplet  Grid.Column="2" x:Name="btnMin" IsTabStop="False" VerticalAlignment="Top"
-                                Width="27" Height="22" Click="btnMin_Click">
+                                Width="27" Height="22" Click="btnMin_Click" Grid.ColumnSpan="2">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mim.png"/>
                 </tmp:ButtonTemplet.MyMoverBrush>
@@ -72,7 +73,7 @@
                 </tmp:ButtonTemplet.Background>
             </tmp:ButtonTemplet>
 
-            <tmp:ButtonTemplet  Grid.Column="3" Visibility="Hidden" x:Name="btnNomalMax" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
+            <tmp:ButtonTemplet  Grid.Column="4" Visibility="Hidden" x:Name="btnNomalMax" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxm.png"/>
                 </tmp:ButtonTemplet.MyMoverBrush>
@@ -83,7 +84,7 @@
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxn.png"/>
                 </tmp:ButtonTemplet.Background>
             </tmp:ButtonTemplet>
-            <tmp:ButtonTemplet  Grid.Column="3" x:Name="btnMax" Visibility="Visible" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
+            <tmp:ButtonTemplet  Grid.Column="4" x:Name="btnMax" Visibility="Visible" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/maa.png"/>
                 </tmp:ButtonTemplet.MyMoverBrush>
@@ -94,7 +95,7 @@
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/max.png"/>
                 </tmp:ButtonTemplet.Background>
             </tmp:ButtonTemplet>
-            <tmp:ButtonTemplet  Grid.Column="4" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" 
+            <tmp:ButtonTemplet  Grid.Column="5" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" 
                                 Width="27" Height="22" Click="btnExit_Click">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xm.png" />
@@ -127,7 +128,7 @@
                     <RowDefinition Height="55"/>
                 </Grid.RowDefinitions>
                 <Grid Name="mediaControlsGrid" Margin="0" Grid.Row="2" >
-                   
+
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  Margin="20,0">
                         <Button  Name="backButton" Margin="3" Width="24" Height="24"  ToolTip="后退" Template="{StaticResource backButton}" Click="backButton_Click"/>
                         <Button Name="playButton"  Margin="3" Width="40" Height="40"  ToolTip="播放" Template="{StaticResource PlayButton}" Click="playButton_Click"/>
