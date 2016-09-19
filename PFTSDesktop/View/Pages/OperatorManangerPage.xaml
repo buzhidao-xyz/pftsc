@@ -46,7 +46,7 @@
                     Command="{Binding OperatorManageCommand}" CommandParameter="{Binding ElementName=OperatorManageBtn}"/>
         </Grid>-->
 
-        <Element:PageDataGridEx SelectedItem="{Binding GetOperatorInfo}" Grid.Row="2" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None" ItemsSource="{Binding GetOperatorList}">
+        <Element:PageDataGridEx SelectedItem="{Binding GetOperatorInfo}" Grid.Row="2" IsShowPaging="False" Margin="1,0,1,1" x:Name="dataGridSuspect" SelectionMode="Single" GridLinesVisibility="None" ItemsSource="{Binding GetOperatorList}">
             <Element:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="#" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding id}"/>
                 <DataGridTextColumn Header="账号"  Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding account}"/>
@@ -59,16 +59,12 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="昵称" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding name}"/>
                 <DataGridTextColumn Header="上次登录时间"  Width="1.2*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding last_login_time}"/>
-                <DataGridTemplateColumn Header="操作" Width="*">
+                <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <tmp:ButtonEX Background="White"
-                                    Content="编辑"
-                                    Width="70" Height="20"
-                                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                    Tag="View/OperatorManager/OperatorUpPage.xaml"
-                                    Command="{Binding DataContext.OperatorUpCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"/>
+                            <tmp:FButton ToolTip="编辑" FIcon="&#xe654;" Style="{StaticResource FButton_Edit}" Tag="View/OperatorManager/OperatorUpPage.xaml"
+                                                    Command="{Binding DataContext.OperatorUpCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                         CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

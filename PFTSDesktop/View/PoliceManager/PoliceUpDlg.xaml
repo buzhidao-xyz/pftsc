@@ -140,12 +140,13 @@
             <Button Grid.Row="6" Name="btnUpdate"
                 Style="{StaticResource ButtonControlTemplate}"
                 HorizontalAlignment="Center" Content="保    存"
-                Height="30" Width="100"
+                Height="30" Width="100" Margin="150,0,0,0"
                 Command="{Binding PoliceUpSaveCommand}"
                 CommandParameter="{Binding ElementName=main}"    
                     />
-
-            <Border Grid.Row="0"></Border>
+            <Button Grid.Row="6" Grid.Column="1" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
+                HorizontalAlignment="Center" Content="返    回" Command="{Binding CloseCommand}"  CommandParameter="{Binding ElementName=main}"
+                Height="30" Width="90" Margin="0,0,50,0" IsCancel="True"/>
         </Grid>
     </Grid>
 </tmp:WindowTemplet>

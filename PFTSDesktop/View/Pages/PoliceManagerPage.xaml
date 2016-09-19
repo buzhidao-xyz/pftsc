@@ -58,16 +58,12 @@
                 <DataGridTextColumn Header="警号"  Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding no}"/>
                 <DataGridTextColumn Header="姓名" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding name}"/>
                 <DataGridTextColumn Header="性别" Width="*" ElementStyle="{DynamicResource dataGridStyle}" Binding="{Binding sex}"/>
-                <DataGridTemplateColumn Header="操作" Width="*">
+                <DataGridTemplateColumn Header="操作" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <tmp:ButtonEX Background="White"
-                                    Content="编辑"
-                                    Width="70" Height="20"
-                                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                    Tag="View/PoliceManager/PoliceUpPage.xaml"
-                                    Command="{Binding DataContext.PoliceUpCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"/>
+                            <tmp:FButton ToolTip="编辑" FIcon="&#xe654;" Style="{StaticResource FButton_Edit}" Tag="View/PoliceManager/PoliceUpPage.xaml"
+                                                    Command="{Binding DataContext.PoliceUpCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                         CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

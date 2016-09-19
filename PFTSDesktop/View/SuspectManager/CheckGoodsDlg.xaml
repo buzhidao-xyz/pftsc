@@ -92,7 +92,7 @@
            
             <Button Grid.Row="5" Grid.Column="1" IsCancel="True" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
                 HorizontalAlignment="Center" Content="关    闭" Command="{Binding CloseCommand}"  CommandParameter="{Binding ElementName=main}"
-                Height="30" Width="90" />
+                Height="30" Width="90"/>
         </Grid>
     </Grid>
 </tmp:WindowTemplet>

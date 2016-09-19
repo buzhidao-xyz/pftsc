@@ -10,6 +10,7 @@ using PFTSUITemplate.Controls;
 using System.Windows.Controls;
 using System.Windows;
 using PFTSTools;
+using PFTSDesktop.View.OperatorManager;
 
 namespace PFTSDesktop.ViewModel
 {
@@ -146,8 +147,10 @@ namespace PFTSDesktop.ViewModel
         {
             OperatorInfo = new @operator();
 
-            Button btn = (Button)obj;
-            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            OperatorNewDlg dlg = new OperatorNewDlg();
+            dlg.Show();
+            //Button btn = (Button)obj;
+            //Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
         /// <summary>
@@ -246,8 +249,11 @@ namespace PFTSDesktop.ViewModel
             {
                 MessageBox.Show("保存成功！");
 
-                Button btn = (Button)obj;
-                Global.currentFrame.NavigationService.GoBack();
+                GetOperatorList = OperatorService.GetOperatorList();
+                WindowTemplet window = (WindowTemplet)obj;
+                window.Close();
+                //Button btn = (Button)obj;
+                //Global.currentFrame.NavigationService.GoBack();
             } else
             {
                 MessageBox.Show("保存失败！");
@@ -273,9 +279,10 @@ namespace PFTSDesktop.ViewModel
         private void OperatorUp(Object obj)
         {
             GetOperatorInfo.password = "";
-
-            Button btn = (Button)obj;
-            Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
+            OperatorUpDlg dlg = new OperatorUpDlg();
+            dlg.ShowDialog();
+            //Button btn = (Button)obj;
+            //Global.currentFrame.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
 
         public ICommand OperatorUpSaveCommand
@@ -320,8 +327,10 @@ namespace PFTSDesktop.ViewModel
             {
                 MessageBox.Show("保存成功！");
 
-                Button btn = (Button)obj;
-                Global.currentFrame.NavigationService.GoBack();
+                WindowTemplet window = (WindowTemplet)obj;
+                window.Close();
+                //Button btn = (Button)obj;
+                //Global.currentFrame.NavigationService.GoBack();
             }
             else
             {

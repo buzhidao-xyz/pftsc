@@ -97,7 +97,9 @@
                     Command="{Binding PoliceManageCommand}" CommandParameter="{Binding ElementName=PoliceManageBtn}"/>
             </Grid>-->
 
-            <TextBlock Grid.Row="0"  Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">新增警员</TextBlock>
+
+            <Label Grid.Row="0"  Grid.ColumnSpan="1" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"
+                       VerticalAlignment="Center" Style="{StaticResource lableNameStyle}">新 增 警 员</Label>
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label Content="警号：" Style="{StaticResource lableNameStyle}" FontSize="16"/>
                 <Element:RegularText Width="300" Height="30" Margin="0,0,20,0" Text="{Binding Path=GetPoliceInfo.no,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
@@ -144,11 +146,12 @@
             <Button Grid.Row="6" Name="btnUpdate"  Grid.ColumnSpan="1"
                 Style="{StaticResource ButtonControlTemplate}"
                 HorizontalAlignment="Center" Content="保    存"
-                Height="30" Width="100"
+                Height="30" Width="100" Margin="150,0,0,0"
                 Command="{Binding PoliceNewSaveCommand}"
                     CommandParameter="{Binding ElementName=main}"/>
-
-            <Border Grid.Row="0"></Border>
+            <Button Grid.Row="6" Grid.Column="1" Name="btnBack" Style="{StaticResource ButtonControlTemplate}"  
+                HorizontalAlignment="Center" Content="返    回" Command="{Binding CloseCommand}"  CommandParameter="{Binding ElementName=main}"
+                Height="30" Width="90" Margin="0,0,50,0" IsCancel="True"/>
         </Grid>
     </Grid>
 </tmp:WindowTemplet>
