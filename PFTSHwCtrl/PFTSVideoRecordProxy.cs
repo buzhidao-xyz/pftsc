@@ -15,7 +15,7 @@ namespace PFTSHwCtrl
     }
 
     #region Handler
-    public delegate void VideoRecordHandler(PFTSModel.dev_camera camera, VideoRecordEvent e);
+    public delegate void VideoRecordHandler(PFTSModel.view_camera_info camera, VideoRecordEvent e);
     #endregion
 
     public class PFTSVideoRecordProxy
@@ -26,10 +26,10 @@ namespace PFTSHwCtrl
 
         public PFTSVideoRecordProxy()
         {
-            LoadRooms();
+            //LoadRooms();
         }
 
-        private void LoadRooms()
+        public void LoadRooms()
         {
             List<PFTSModel.view_camera_info> cameras = (new PFTSModel.Services.DevCameraService()).GetPageByStatus(true,0,100);
             List<PFTSModel.btracker> btrackers = (new PFTSModel.Services.BTrackerService()).GetAllInscene();
@@ -119,6 +119,10 @@ namespace PFTSHwCtrl
                 if (m_bRecoding == false && m_btrackers.Count > 0)
                 {
                     Console.WriteLine("房间(" + m_camera.room_name + ")" + "开始录制");
+                    if (VideoRecordDelegate != null)
+                    {
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord);
+                    }
                     m_bRecoding = true;
                 }
             }
@@ -129,6 +133,10 @@ namespace PFTSHwCtrl
                 if (!m_bRecoding)
                 {
                     Console.WriteLine(bt.name + "进入了"+"房间(" + m_camera.room_name + ")" + "开始录制");
+                    if (VideoRecordDelegate != null)
+                    {
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord);
+                    }
                     m_bRecoding = true;
                 }
             }
@@ -156,6 +164,11 @@ namespace PFTSHwCtrl
                         str += "房间(" + m_camera.room_name + ")没人";
                     }
                     Console.WriteLine(str + ",停止录制");
+                    if (VideoRecordDelegate != null)
+                    {
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord);
+                    }
+                    m_bRecoding = false;
                 }
             }
         }

@@ -32,6 +32,7 @@ namespace PFTSDesktop
     {
         private PFTSHwCtrl.PFTSRFIDServer m_rfidServer;
         private PFTSHwCtrl.PFTSVideoRecordProxy m_videoRecorder;
+        private VideoRecordHolder m_recordHolder;
 
         /// <summary>
         /// 移动回调
@@ -48,16 +49,37 @@ namespace PFTSDesktop
             var host = System.Configuration.ConfigurationManager.AppSettings["rfid_server_host"];
             var port = System.Configuration.ConfigurationManager.AppSettings["rfid_server_port"];
             int iport;
-            if (!int.TryParse(port,out iport))
+            if (!int.TryParse(port, out iport))
             {
                 iport = 7500;
             }
 
-            m_rfidServer = new PFTSHwCtrl.PFTSRFIDServer(host,iport);
+            m_rfidServer = new PFTSHwCtrl.PFTSRFIDServer(host, iport);
             m_rfidServer.Start();
             m_rfidServer.BTrackerMove += M_rfidServer_BTrackerMove;
 
             m_videoRecorder = new PFTSHwCtrl.PFTSVideoRecordProxy();
+
+            m_recordHolder = new VideoRecordHolder();
+            m_recordHolder.Show();
+
+            m_videoRecorder.VideoRecordDelegate += M_videoRecorder_VideoRecordDelegate;
+            m_videoRecorder.LoadRooms();
+        }
+
+        private void M_videoRecorder_VideoRecordDelegate(view_camera_info camera, PFTSHwCtrl.VideoRecordEvent e)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                if (e == PFTSHwCtrl.VideoRecordEvent.StartRecord)
+                {
+                    m_recordHolder.StartRecord(camera);
+                }
+                else
+                {
+                    m_recordHolder.StopRecord(camera);
+                }
+            });
         }
 
         private void M_rfidServer_BTrackerMove(btracker btracker, view_rfid_info position)
@@ -77,7 +99,7 @@ namespace PFTSDesktop
                         BTrackerMoveDelegete(btracker.id);
                     m_videoRecorder.BtrackerMoveTo(btracker.id, btracker.room_id, position.room_id.Value);
                 }
-            });            
+            });
         }
 
         private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)

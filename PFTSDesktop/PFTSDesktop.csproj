@@ -94,6 +94,9 @@
     <Compile Include="Video.xaml.cs">
       <DependentUpon>Video.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VideoRecordHolder.xaml.cs">
+      <DependentUpon>VideoRecordHolder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CameraManagerViewModel.cs" />
     <Compile Include="ViewModel\DeviceManagerViewModel.cs" />
     <Compile Include="ViewModel\LockerManagerViewModel.cs" />
@@ -144,6 +147,9 @@
     </Compile>
     <Compile Include="View\Monitoring\VideoListWindow.xaml.cs">
       <DependentUpon>VideoListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\VideoRecordHolderItem.xaml.cs">
+      <DependentUpon>VideoRecordHolderItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OperatorManager\OperatorNewDlg.xaml.cs">
       <DependentUpon>OperatorNewDlg.xaml</DependentUpon>
@@ -229,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="VideoRecordHolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DeviceManager\CameraAddDlg.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -280,6 +290,10 @@
     <Page Include="View\Monitoring\VideoListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Monitoring\VideoRecordHolderItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OperatorManager\OperatorNewDlg.xaml">
       <SubType>Designer</SubType>
