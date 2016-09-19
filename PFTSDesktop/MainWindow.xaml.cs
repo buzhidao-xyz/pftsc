@@ -31,6 +31,7 @@ namespace PFTSDesktop
     public partial class MainWindow : WindowTemplet
     {
         private PFTSHwCtrl.PFTSRFIDServer m_rfidServer;
+        private PFTSHwCtrl.PFTSVideoRecordProxy m_videoRecorder;
 
         /// <summary>
         /// 移动回调
@@ -55,6 +56,8 @@ namespace PFTSDesktop
             m_rfidServer = new PFTSHwCtrl.PFTSRFIDServer(host,iport);
             m_rfidServer.Start();
             m_rfidServer.BTrackerMove += M_rfidServer_BTrackerMove;
+
+            m_videoRecorder = new PFTSHwCtrl.PFTSVideoRecordProxy();
         }
 
         private void M_rfidServer_BTrackerMove(btracker btracker, view_rfid_info position)
@@ -72,6 +75,7 @@ namespace PFTSDesktop
                     PFTSTools.ConsoleManager.SetOut(btracker.name + "移动至->" + position.room_name + "成功");
                     if (BTrackerMoveDelegete != null)
                         BTrackerMoveDelegete(btracker.id);
+                    m_videoRecorder.BtrackerMoveTo(btracker.id, btracker.room_id, position.room_id.Value);
                 }
             });            
         }

@@ -373,7 +373,6 @@
     <None Include="lib\HCNetSDKCom\HCAlarm.lib" />
     <None Include="lib\HCNetSDKCom\HCGeneralCfgMgr.lib" />
     <None Include="lib\HCNetSDKCom\HCPreview.lib" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

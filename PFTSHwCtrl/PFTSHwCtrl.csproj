@@ -62,6 +62,7 @@
       <DependentUpon>PFTSVideoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PFTSVideoProxy.cs" />
+    <Compile Include="PFTSVideoRecordProxy.cs" />
     <Compile Include="PFTSZKFingerProxy.cs" />
     <Compile Include="PlayCtrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
