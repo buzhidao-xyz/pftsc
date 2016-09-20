@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="Services\RFIDRoomService.cs" />
     <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\VideoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

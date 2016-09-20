@@ -6,8 +6,20 @@
              xmlns:local="clr-namespace:PFTSDesktop.View.Monitoring"
              xmlns:hw="clr-namespace:PFTSHwCtrl;assembly=PFTSHwCtrl"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" Background="White">
     <Grid>
-            <hw:PFTSVideoControl x:Name="videoControl"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="270*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" x:Name="label" Content="测试" HorizontalAlignment="Center" d:LayoutOverrides="Width" FontSize="16" FontWeight="Bold" Foreground="#FF60CD05">
+            <Label.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FFDE3B3B" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.BorderBrush>
+        </Label>
+        <hw:PFTSVideoControl x:Name="videoControl"/>
     </Grid>
 </UserControl>

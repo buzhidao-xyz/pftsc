@@ -11,11 +11,13 @@ namespace PFTSHwCtrl
     public enum VideoRecordEvent
     {
         StartRecord,
+        ReRecord,
         EndRecord
     }
 
     #region Handler
-    public delegate void VideoRecordHandler(PFTSModel.view_camera_info camera, VideoRecordEvent e);
+    public delegate void VideoRecordCallback(PFTSModel.video video);
+    public delegate void VideoRecordHandler(PFTSModel.view_camera_info camera, VideoRecordEvent e, VideoRecordCallback callback);
     #endregion
 
     public class PFTSVideoRecordProxy
@@ -31,16 +33,17 @@ namespace PFTSHwCtrl
 
         public void LoadRooms()
         {
-            List<PFTSModel.view_camera_info> cameras = (new PFTSModel.Services.DevCameraService()).GetPageByStatus(true,0,100);
+            List<PFTSModel.view_camera_info> cameras = (new PFTSModel.Services.DevCameraService()).GetPageByStatus(true, 0, 100);
             List<PFTSModel.btracker> btrackers = (new PFTSModel.Services.BTrackerService()).GetAllInscene();
             Dictionary<int, List<PFTSModel.btracker>> mapBtrackers = new Dictionary<int, List<PFTSModel.btracker>>();
-            foreach(var b in btrackers)
+            foreach (var b in btrackers)
             {
                 if (b.room_id == null) continue;
                 if (mapBtrackers.ContainsKey(b.room_id.Value))
                 {
                     mapBtrackers[b.room_id.Value].Add(b);
-                }else
+                }
+                else
                 {
                     var list = new List<PFTSModel.btracker>();
                     list.Add(b);
@@ -55,7 +58,7 @@ namespace PFTSHwCtrl
                 {
                     list = mapBtrackers[ca.room_id.Value];
                 }
-                var room = new Room(ca,list);
+                var room = new Room(ca, list);
                 if (VideoRecordDelegate != null)
                 {
                     room.VideoRecordDelegate += VideoRecordDelegate;
@@ -64,7 +67,7 @@ namespace PFTSHwCtrl
             }
         }
 
-        public void BtrackerMoveTo(int btrackerId,int? fromRoomId,int toRoomId)
+        public void BtrackerMoveTo(int btrackerId, int? fromRoomId, int toRoomId)
         {
             if (fromRoomId != null)
             {
@@ -85,12 +88,13 @@ namespace PFTSHwCtrl
             }
         }
 
-        public class Room
+        public class Room : IDisposable
         {
             private PFTSModel.view_camera_info m_camera;
             private List<PFTSModel.btracker> m_btrackers;
             public event VideoRecordHandler VideoRecordDelegate;
             private bool m_bRecoding = false;
+            private PFTSModel.Services.VideoService m_videoService = new PFTSModel.Services.VideoService();
 
             public Room(PFTSModel.view_camera_info camera, List<PFTSModel.btracker> btrackers)
             {
@@ -98,7 +102,8 @@ namespace PFTSHwCtrl
                 if (btrackers == null)
                 {
                     m_btrackers = new List<PFTSModel.btracker>();
-                }else
+                }
+                else
                 {
                     m_btrackers = btrackers;
                 }
@@ -121,7 +126,8 @@ namespace PFTSHwCtrl
                     Console.WriteLine("房间(" + m_camera.room_name + ")" + "开始录制");
                     if (VideoRecordDelegate != null)
                     {
-                        VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord);
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord, null);
+
                     }
                     m_bRecoding = true;
                 }
@@ -132,12 +138,23 @@ namespace PFTSHwCtrl
                 m_btrackers.Add(bt);
                 if (!m_bRecoding)
                 {
-                    Console.WriteLine(bt.name + "进入了"+"房间(" + m_camera.room_name + ")" + "开始录制");
+                    Console.WriteLine(bt.name + "进入了" + "房间(" + m_camera.room_name + ")" + "开始录制");
                     if (VideoRecordDelegate != null)
                     {
-                        VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord);
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord, null);
                     }
                     m_bRecoding = true;
+                }
+                else
+                {
+                    Console.WriteLine(bt.name + "进入了" + "房间(" + m_camera.room_name + ")" + "继续录制");
+                    if (VideoRecordDelegate != null)
+                    {
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
+                        {
+                            m_videoService.AddVideo(v, m_btrackers, null, bt);
+                        });
+                    }
                 }
             }
 
@@ -159,18 +176,81 @@ namespace PFTSHwCtrl
                     if (btr != null)
                     {
                         str += btr.name + "离开了" + "房间(" + m_camera.room_name + ")";
-                    }else
+                    }
+                    else
                     {
                         str += "房间(" + m_camera.room_name + ")没人";
                     }
                     Console.WriteLine(str + ",停止录制");
                     if (VideoRecordDelegate != null)
                     {
-                        VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord);
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord, delegate (PFTSModel.video v)
+                        {
+                            m_videoService.AddVideo(v, m_btrackers, btr);
+                        });
                     }
                     m_bRecoding = false;
                 }
+                else if (m_bRecoding)
+                {
+                    string str = "";
+                    if (btr != null)
+                    {
+                        str += btr.name + "离开了" + "房间(" + m_camera.room_name + ")";
+                    }
+                    Console.WriteLine(str + ",房间还有人，继续录制");
+                    if (VideoRecordDelegate != null)
+                    {
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
+                        {
+                            m_videoService.AddVideo(v, m_btrackers, btr);
+                        });
+                    }
+                }
             }
+
+            #region IDisposable Support
+            private bool disposedValue = false; // 要检测冗余调用
+
+            protected virtual void Dispose(bool disposing)
+            {
+                if (!disposedValue)
+                {
+                    if (disposing)
+                    {
+                        Console.WriteLine("停止录制");
+                        // TODO: 释放托管状态(托管对象)。
+                        if (VideoRecordDelegate != null)
+                        {
+                            VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord, delegate (PFTSModel.video v)
+                            {
+                                m_videoService.AddVideo(v, m_btrackers);
+                            });
+                        }
+                    }
+
+                    // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
+                    // TODO: 将大型字段设置为 null。
+
+                    disposedValue = true;
+                }
+            }
+
+            // TODO: 仅当以上 Dispose(bool disposing) 拥有用于释放未托管资源的代码时才替代终结器。
+            // ~Room() {
+            //   // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
+            //   Dispose(false);
+            // }
+
+            // 添加此代码以正确实现可处置模式。
+            public void Dispose()
+            {
+                // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
+                Dispose(true);
+                // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
+                // GC.SuppressFinalize(this);
+            }
+            #endregion
         }
     }
 }
