@@ -26,7 +26,7 @@
             </i:Interaction.Triggers>
             <ele:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="摄像头名称" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="识别码" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <!--<DataGridTextColumn Header="识别码" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>-->
                 <DataGridTextColumn Header="摄像头ip" Binding="{Binding ip}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="端口" Binding="{Binding port}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="摄像头账号" Binding="{Binding admin}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
