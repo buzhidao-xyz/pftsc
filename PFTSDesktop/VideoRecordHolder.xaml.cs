@@ -60,12 +60,62 @@ namespace PFTSDesktop
             }
         }
 
-        public void StopRecord(view_camera_info camera)
+        public video ReRecord(view_camera_info camera)
+        {
+            var now = System.DateTime.Now;
+            var dir = System.Configuration.ConfigurationManager.AppSettings["video_dir"];
+            CheckDir(dir);
+            var strNow = now.ToString("yyyyMMddHHmmss");
+            string filename = string.Format("{0}REC-{1}-{2}.mp4", dir, camera.id, strNow);
+            if (m_mapCameras.ContainsKey(camera.id))
+            {
+                var item = m_mapRecordItems[camera.id];
+                video v = new video();
+                var br = item.IsRecording;
+                v.start_time = item.RecordTime;
+                v.filename = item.Filename;
+                item.VideoRecordStop();
+                item.VideoRecordStart(filename);
+                if (br)
+                {
+                    v.camera_id = camera.id;
+                    v.position_id = camera.position_id == null ? 0 : camera.position_id.Value;
+                    v.end_time = DateTime.Now;
+                    return v;
+                }
+            }
+            else
+            {
+                var item = new VideoRecordHolderItem(camera);
+                item.Height = 300;
+                item.Width = 300;
+                m_mapCameras.Add(camera.id, camera);
+                item.VideoRecordStart(filename);
+                m_mapRecordItems.Add(camera.id, item);
+                wrapPanel.Children.Add(item);
+            }
+            return null;
+        }
+
+        public video StopRecord(view_camera_info camera)
         {
             if (m_mapCameras.ContainsKey(camera.id))
             {
-                m_mapRecordItems[camera.id].VideoRecordStop();
+                var item = m_mapRecordItems[camera.id];
+                video v = new video();
+                var br = item.IsRecording;
+                v.start_time = item.RecordTime;
+                v.filename = item.Filename;
+                item.VideoRecordStop();
+                if (br)
+                {
+                    v.camera_id = camera.id;
+                    v.position_id = camera.position_id == null ? 0 : camera.position_id.Value;
+                    v.end_time = DateTime.Now;
+                    return v;
+                }
             }
+            return null;
         }
     }
 }

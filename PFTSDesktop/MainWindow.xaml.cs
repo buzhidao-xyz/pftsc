@@ -67,7 +67,7 @@ namespace PFTSDesktop
             m_videoRecorder.LoadRooms();
         }
 
-        private void M_videoRecorder_VideoRecordDelegate(view_camera_info camera, PFTSHwCtrl.VideoRecordEvent e)
+        private void M_videoRecorder_VideoRecordDelegate(view_camera_info camera, PFTSHwCtrl.VideoRecordEvent e, PFTSHwCtrl.VideoRecordCallback callback)
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
@@ -75,9 +75,20 @@ namespace PFTSDesktop
                 {
                     m_recordHolder.StartRecord(camera);
                 }
-                else
+                else if (e == PFTSHwCtrl.VideoRecordEvent.ReRecord)
                 {
-                    m_recordHolder.StopRecord(camera);
+                    var video = m_recordHolder.ReRecord(camera);
+                    if (callback != null)
+                    {
+                        callback(video);
+                    }
+                }
+                else {
+                    var video = m_recordHolder.StopRecord(camera);
+                    if (callback != null)
+                    {
+                        callback(video);
+                    }
                 }
             });
         }

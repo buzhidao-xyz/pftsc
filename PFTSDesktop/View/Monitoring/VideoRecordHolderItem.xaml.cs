@@ -30,6 +30,8 @@ namespace PFTSDesktop.View.Monitoring
         {
             InitializeComponent();
 
+            label.Content = camera.room_name;
+
             int port = 8000;
             if (camera.port != null) port = camera.port.Value;
 
@@ -60,15 +62,17 @@ namespace PFTSDesktop.View.Monitoring
             {
                 if (!m_videoProxy.StartRealView())
                 {
-                    MessageBox.Show(m_videoProxy.GetLastError());
+                    //MessageBox.Show(m_videoProxy.GetLastError());
                     return;
                 }
             }
             if (!m_videoProxy.IsRecording)
             {
+                Filename = filename;
+                RecordTime = DateTime.Now;
                 if (!m_videoProxy.StartRecord(filename))
                 {
-                    MessageBox.Show(m_videoProxy.GetLastError());
+                    //MessageBox.Show(m_videoProxy.GetLastError());
                 }
             }
         }
@@ -83,9 +87,20 @@ namespace PFTSDesktop.View.Monitoring
             {
                 if (!m_videoProxy.StopRecord())
                 {
-                    MessageBox.Show(m_videoProxy.GetLastError());
+                    //MessageBox.Show(m_videoProxy.GetLastError());
                 }
             }
         }
+
+        public bool IsRecording
+        {
+            get
+            {
+                return m_videoProxy.IsRecording;
+            }
+        }
+        public string Filename { get; set; }
+
+        public DateTime RecordTime { get; set; }
     }
 }
