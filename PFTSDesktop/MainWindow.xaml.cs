@@ -43,6 +43,7 @@ namespace PFTSDesktop
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
             // 
             Global.currentMainWindow = this;
 
@@ -58,13 +59,24 @@ namespace PFTSDesktop
             m_rfidServer.Start();
             m_rfidServer.BTrackerMove += M_rfidServer_BTrackerMove;
 
-            m_videoRecorder = new PFTSHwCtrl.PFTSVideoRecordProxy();
+        }
 
-            m_recordHolder = new VideoRecordHolder();
-            m_recordHolder.Show();
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Thread thread = new Thread(new ThreadStart(LoadThread));
+            thread.Start();
+        }
 
-            m_videoRecorder.VideoRecordDelegate += M_videoRecorder_VideoRecordDelegate;
-            m_videoRecorder.LoadRooms();
+        private void LoadThread()
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                m_videoRecorder = new PFTSHwCtrl.PFTSVideoRecordProxy();
+                m_recordHolder = new VideoRecordHolder();
+                m_recordHolder.Show();
+                m_videoRecorder.VideoRecordDelegate += M_videoRecorder_VideoRecordDelegate;
+                m_videoRecorder.LoadRooms();
+            });
         }
 
         private void M_videoRecorder_VideoRecordDelegate(view_camera_info camera, PFTSHwCtrl.VideoRecordEvent e, PFTSHwCtrl.VideoRecordCallback callback)
