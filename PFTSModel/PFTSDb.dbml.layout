@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17, 16.875" name="PFTSDb">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17, 17.25" name="PFTSDb">
   <DataContextMoniker Name="/PFTSDbDataContext" />
   <nestedChildShapes>
     <classShape Id="da052083-8ca6-4dc5-a0ca-3cf1e70f4aa3" absoluteBounds="0.75, 9.75, 2, 4.1244226074218737">
@@ -134,42 +134,42 @@
         <elementListCompartment Id="53339803-9436-4482-bbb6-a8c1902e687d" absoluteBounds="14.765, 4.21, 1.9700000000000002, 0.97730509440104174" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8.75 : 8.95344665527344); (9.5 : 8.95344665527344)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.75 : 8.95344665527344); (9.5 : 8.95344665527344)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PFTSDbDataContext/officer/officer_officer_fingerprint" />
       <nodes>
         <classShapeMoniker Id="1497dca1-b2e6-4e22-8bc5-39b3b16e0469" />
         <classShapeMoniker Id="07759430-c156-49c6-abf8-2128047f3050" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 5.30125549316406); (6.25 : 5.30125549316406)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 5.30125549316406); (6.25 : 5.30125549316406)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PFTSDbDataContext/path_rfid/path_rfid_btracker_path" />
       <nodes>
         <classShapeMoniker Id="8384412a-1145-4325-a88e-aca204432084" />
         <classShapeMoniker Id="9174bbba-8f43-455c-b810-6d9d00e7ee61" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 2.4588584391276); (6.25 : 2.4588584391276)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.4588584391276); (6.25 : 2.4588584391276)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PFTSDbDataContext/position_camera/position_camera_dev_camera" />
       <nodes>
         <classShapeMoniker Id="34270bd7-d231-45c1-bb5f-3ef2bbbabeb7" />
         <classShapeMoniker Id="8e7b8d87-7271-426f-b456-c38a11f9b32f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 5.60251098632813); (1.75 : 7.73604960123698); (3.5 : 7.73604960123698)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 5.60251098632813); (1.75 : 7.73604960123698); (3.5 : 7.73604960123698)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PFTSDbDataContext/rfid_room/rfid_room_dev_rfid" />
       <nodes>
         <classShapeMoniker Id="7dc3fdff-12ff-411e-96a0-9095f28f19c1" />
         <classShapeMoniker Id="964366f4-7cc0-40b3-b6be-c5ec05a1f925" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 5.11375549316406); (3.5 : 5.11375549316406)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 5.11375549316406); (3.5 : 5.11375549316406)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PFTSDbDataContext/rfid_room/rfid_room_path_rfid" />
       <nodes>
         <classShapeMoniker Id="7dc3fdff-12ff-411e-96a0-9095f28f19c1" />
         <classShapeMoniker Id="8384412a-1145-4325-a88e-aca204432084" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 4.80687774658203); (3.5 : 4.80687774658203)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 4.80687774658203); (3.5 : 4.80687774658203)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PFTSDbDataContext/rfid_room/rfid_room_path_rfid1" />
       <nodes>
         <classShapeMoniker Id="7dc3fdff-12ff-411e-96a0-9095f28f19c1" />
@@ -183,26 +183,32 @@
         <classShapeMoniker Id="34270bd7-d231-45c1-bb5f-3ef2bbbabeb7" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 2.45344665527344); (9 : 2.45344665527344)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 2.45344665527344); (9 : 2.45344665527344)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PFTSDbDataContext/dev_camera/dev_camera_video" />
       <nodes>
         <classShapeMoniker Id="8e7b8d87-7271-426f-b456-c38a11f9b32f" />
         <classShapeMoniker Id="9e15ad64-9126-489f-b201-eb42db990b86" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 2.1356772195638); (6 : 2.1356772195638); (6 : 1); (10 : 1); (10 : 1.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.1356772195638); (6 : 2.1356772195638); (6 : 1); (10 : 1); (10 : 1.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PFTSDbDataContext/position_camera/position_camera_video" />
       <nodes>
         <classShapeMoniker Id="34270bd7-d231-45c1-bb5f-3ef2bbbabeb7" />
         <classShapeMoniker Id="9e15ad64-9126-489f-b201-eb42db990b86" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11 : 2.4588584391276); (11.75 : 2.4588584391276)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11 : 2.4588584391276); (11.75 : 2.4588584391276)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PFTSDbDataContext/video/video_video_btracker_r" />
       <nodes>
         <classShapeMoniker Id="9e15ad64-9126-489f-b201-eb42db990b86" />
         <classShapeMoniker Id="faefd708-8170-456d-ba44-e5272c228764" />
       </nodes>
     </associationConnector>
+    <classShape Id="668e7290-6265-4399-af02-3b5347b1bf70" absoluteBounds="4, 14.75, 2, 2.2764815266927085">
+      <DataClassMoniker Name="/PFTSDbDataContext/view_btracker_video" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ed19b0b0-2dc4-4deb-a304-dc1309e31195" absoluteBounds="4.015, 15.21, 1.9700000000000002, 1.7164815266927085" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

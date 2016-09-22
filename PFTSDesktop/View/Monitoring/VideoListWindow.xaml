@@ -8,8 +8,8 @@
         xmlns:local="clr-namespace:PFTSDesktop.View.Monitoring"
                       xmlns:blankWindow="http://GFramework.org"
         mc:Ignorable="d"
-        Title="涉案人员监控"  Width="950" Height="670" MinWidth="950" MinHeight="670"
-        TitleBarHeight="24"
+        Title="涉案人员监控" 
+        TitleBarHeight="24"  Width="950" Height="670" MinWidth="950" MinHeight="670"
         MouseDoubleClick="MainWindow_OnMouseDoubleClick"
         BorderBrush="{DynamicResource windowStyle}"
         BorderThickness="1"
@@ -114,12 +114,15 @@
                 <ColumnDefinition Width="160"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ListBox x:Name="listBox" HorizontalAlignment="Center" Width="160">
-                <Button Background="#FF5CCD4A" Content="实时画面" Click="Button_Click_1"/>
-                <Separator/>
-                <Button Content="video20160826.mp4" Click="Button_Click"/>
-                <Button Content="video20160825.mp4" Click="Button_Click"/>
-            </ListBox>
+            <ListView x:Name="listBox"  HorizontalAlignment="Center" SelectedIndex="-1" Style="{StaticResource DefaultListView}" Width="160" SelectionChanged="listBox_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <TextBlock Text="{Binding Path=video_name}" Margin="0,5,0,5" HorizontalAlignment="Center"></TextBlock>
+                       
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <hwd:PFTSVideoControl x:Name="videoControl" Grid.Column="1"/>
             <Grid Name="moviePlayerGrid" Visibility="Hidden" Grid.Column="1" Margin="0,2,0,0">
                 <Grid.RowDefinitions>

@@ -1,4 +1,8 @@
 ﻿using GFramework.BlankWindow;
+using PFTSDesktop.common;
+using PFTSDesktop.Model;
+using PFTSModel;
+using PFTSModel.Services;
 using PFTSUITemplate.Controls;
 using System;
 using System.Collections.Generic;
@@ -23,20 +27,57 @@ namespace PFTSDesktop.View.Monitoring
     {
         private PFTSHwCtrl.PFTSVideoProxy m_videoProxy;
         private PFTSModel.dev_camera m_camera;
+        private BTrackerService service;
+        private int? btracker_id;
+        private List<VideoModel> videoList;
+        private int camera_id = 0;
 
-        public VideoListWindow(PFTSModel.dev_camera camera = null)
+        public VideoListWindow(PFTSModel.dev_camera camera = null, int? btracker_id = null)
         {
             InitializeComponent();
             m_camera = camera;
+            this.btracker_id = btracker_id;
+            videoList = new List<VideoModel>();
+            VideoModel videoModel = new VideoModel();
+            videoModel.id = 0;
+            videoModel.video_name = "实时画面";
+            videoList.Add(videoModel);
             //            m_videoProxy = new PFTSHwCtrl.PFTSVideoProxy("192.168.10.164", 8000, "admin", "Gt123456");
-
+          
             timer.Tick += new EventHandler(timer_Tick);
-
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+           string aa = GetVideoLength.GetMediaTimeLen(@"D:\fff111.mp4");
+            service = new BTrackerService();
+            if (btracker_id != null)
+            {
+                List<view_btracker_video> videos = service.GetVideoByBtracker(btracker_id.Value);
+                if (videos != null && videos.Count > 0)
+                {
+                    foreach (view_btracker_video entity in videos)
+                    {
+                        if (entity.camera_id == camera_id)
+                        {
+                            VideoModel videoModel = videoList.Find(c => c.id == camera_id);
+                            videoModel.videos.Add(entity.filename);
+                        }
+                        else
+                        {
+                            VideoModel videoModel = new VideoModel();
+                            videoModel.id = entity.camera_id;
+                            videoModel.video_name = entity.video_name;
+                            videoModel.videos = new List<string>();
+                            videoModel.videos.Add(entity.filename);
+                            videoList.Add(videoModel);
+                        }
+                        camera_id = entity.camera_id;
+                    }
+                }
+
+            }
+            listBox.ItemsSource = videoList;
             // 实时画面
             if (m_camera != null)
             {
@@ -52,21 +93,6 @@ namespace PFTSDesktop.View.Monitoring
                 }
                 //volumeSlider.Value = 0.5;
             }
-        }
-
-        //
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            videoControl.Visibility = Visibility.Hidden;
-            moviePlayerGrid.Visibility = Visibility.Visible;
-            PlayMovie(new Uri("D:\\fff111.mp4", UriKind.Absolute));
-        }
-
-        //real
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            videoControl.Visibility = Visibility.Visible;
-            moviePlayerGrid.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -176,6 +202,7 @@ namespace PFTSDesktop.View.Monitoring
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
             string totaltime = mediaElement.NaturalDuration.ToString().Substring(0, 8);
+
             showTime.Text = "00:00:00" + "/" + totaltime;
         }
 
@@ -296,6 +323,24 @@ namespace PFTSDesktop.View.Monitoring
         }
 
         #endregion
+
+       
         #endregion
+
+        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            VideoModel model = listBox.SelectedItem as VideoModel;
+            if (model.id == 0)
+            {
+                videoControl.Visibility = Visibility.Visible;
+                moviePlayerGrid.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                videoControl.Visibility = Visibility.Hidden;
+                moviePlayerGrid.Visibility = Visibility.Visible;
+                PlayMovie(new Uri("D:\\fff111.mp4", UriKind.Absolute));
+            }
+        }
     }
 }
