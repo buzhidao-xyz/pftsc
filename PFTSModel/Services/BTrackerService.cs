@@ -493,5 +493,32 @@ namespace PFTSModel.Services
             }
             return null;
         }
+
+
+        /// <summary>
+        /// 获取嫌疑犯的视频数据
+        /// </summary>
+        /// <returns></returns>
+        public List<view_btracker_video> GetVideoByBtracker(int btracker_id)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<view_btracker_video> table = db.GetTable<view_btracker_video>();
+                    var query = from q in table
+                                where q.btracker_id == btracker_id
+                                orderby q.start_time ascending
+                                select q;
+                    return query.ToList<view_btracker_video>();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
+        }
+
     }
 }

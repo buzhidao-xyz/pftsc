@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="common\Converter.cs" />
+    <Compile Include="common\GetVideoLength.cs" />
     <Compile Include="common\Global.cs" />
     <Compile Include="LoginDlg.xaml.cs">
       <DependentUpon>LoginDlg.xaml</DependentUpon>
@@ -91,6 +92,7 @@
     <Compile Include="Model\RFIDModel.cs" />
     <Compile Include="Model\SuspectModel.cs" />
     <Compile Include="Model\VestModel.cs" />
+    <Compile Include="Model\VideoModel.cs" />
     <Compile Include="Video.xaml.cs">
       <DependentUpon>Video.xaml</DependentUpon>
     </Compile>
@@ -401,6 +403,7 @@
     <None Include="lib\HCNetSDKCom\HCAlarm.lib" />
     <None Include="lib\HCNetSDKCom\HCGeneralCfgMgr.lib" />
     <None Include="lib\HCNetSDKCom\HCPreview.lib" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -516,6 +519,17 @@
     <Content Include="lib\HCNetSDKCom\SystemTransform.dll" />
     <Content Include="lib\PlayCtrl.dll" />
     <Content Include="lib\SuperRender.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

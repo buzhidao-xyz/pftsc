@@ -621,7 +621,7 @@ namespace PFTSDesktop.ViewModel
                 MessageWindow.Show("未检测到该区域的摄像头信息","系统提示");
                 return;
             }
-            VideoListWindow vw = new VideoListWindow(camera);
+            VideoListWindow vw = new VideoListWindow(camera,SelectedBreacker.id);
             vw.Show();
         }
         /// <summary>
