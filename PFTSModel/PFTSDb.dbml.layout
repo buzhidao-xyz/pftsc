@@ -2,200 +2,206 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17, 16.875" name="PFTSDb">
   <DataContextMoniker Name="/PFTSDbDataContext" />
   <nestedChildShapes>
-    <classShape Id="2263f1bc-818e-4ad2-a419-543827fbef0e" absoluteBounds="0.75, 9.75, 2, 4.1244226074218737">
+    <classShape Id="da052083-8ca6-4dc5-a0ca-3cf1e70f4aa3" absoluteBounds="0.75, 9.75, 2, 4.1244226074218737">
       <DataClassMoniker Name="/PFTSDbDataContext/btracker" />
       <nestedChildShapes>
-        <elementListCompartment Id="1e26cc63-3347-497c-a093-f9728268d234" absoluteBounds="0.765, 10.21, 1.9700000000000002, 3.564422607421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3cb5365f-541d-41bc-866a-3e14367f6fe3" absoluteBounds="0.765, 10.21, 1.9700000000000002, 3.564422607421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a5c3a3fb-462d-4c50-a4ed-3b04599fc5cc" absoluteBounds="8.75, 4.75, 2, 2.2764815266927094">
+    <classShape Id="454721c8-f6aa-4599-985f-b64467bc0f6d" absoluteBounds="8.75, 4.75, 2, 2.2764815266927094">
       <DataClassMoniker Name="/PFTSDbDataContext/view_vest_info" />
       <nestedChildShapes>
-        <elementListCompartment Id="3fa9c27e-8b4d-4e6c-b4b2-0b9642307839" absoluteBounds="8.765, 5.21, 1.9700000000000002, 1.7164815266927085" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7ad2f4ae-4c54-4a38-b9aa-09accef5bf28" absoluteBounds="8.765, 5.21, 1.9700000000000002, 1.7164815266927085" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8562126a-7937-4ae0-bbf3-a2880dedfc73" absoluteBounds="6.25, 4.375, 2, 1.7220992024739577">
+    <classShape Id="9174bbba-8f43-455c-b810-6d9d00e7ee61" absoluteBounds="6.25, 4.375, 2, 1.7220992024739577">
       <DataClassMoniker Name="/PFTSDbDataContext/btracker_path" />
       <nestedChildShapes>
-        <elementListCompartment Id="73980dd0-90d3-414c-94a3-ee4228e00066" absoluteBounds="6.265, 4.835, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1ff41f3a-3e18-4b27-9960-b00ef0ef7d21" absoluteBounds="6.265, 4.835, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3efd8a3b-611b-4da4-807c-42a2809ddb0f" absoluteBounds="6.25, 1.25, 2, 2.4612756347656255">
+    <classShape Id="8e7b8d87-7271-426f-b456-c38a11f9b32f" absoluteBounds="6.25, 1.25, 2, 2.4612756347656255">
       <DataClassMoniker Name="/PFTSDbDataContext/dev_camera" />
       <nestedChildShapes>
-        <elementListCompartment Id="fb930442-d54a-4372-8f83-161cf783d1f3" absoluteBounds="6.265, 1.71, 1.9700000000000002, 1.901275634765625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5e947a26-e98e-43d4-9767-668cdeee74f8" absoluteBounds="6.265, 1.71, 1.9700000000000002, 1.901275634765625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="909ceeb2-956a-4d9e-835f-e2b9e1eb1948" absoluteBounds="9.75, 10.75, 2, 1.5373050944010416">
+    <classShape Id="ed20d05e-5d82-49d2-9409-d2f3e0e3965c" absoluteBounds="9.75, 10.75, 2, 1.5373050944010416">
       <DataClassMoniker Name="/PFTSDbDataContext/dev_lockers" />
       <nestedChildShapes>
-        <elementListCompartment Id="f2aef16b-ae78-421d-b03f-31906096e830" absoluteBounds="9.765, 11.21, 1.9700000000000002, 0.97730509440104174" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d5a7ad0e-250a-4128-8367-8cdeca9321fa" absoluteBounds="9.765, 11.21, 1.9700000000000002, 0.97730509440104174" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1dc94fc3-e0dd-4cf9-8186-d7ebf63769af" absoluteBounds="3.5, 6.875, 2, 1.7220992024739585">
+    <classShape Id="964366f4-7cc0-40b3-b6be-c5ec05a1f925" absoluteBounds="3.5, 6.875, 2, 1.7220992024739585">
       <DataClassMoniker Name="/PFTSDbDataContext/dev_rfid" />
       <nestedChildShapes>
-        <elementListCompartment Id="7801eaff-3ae2-471d-a708-b41c583236af" absoluteBounds="3.515, 7.335, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c5d5d513-ba1a-442d-a285-a2bfa00bc705" absoluteBounds="3.515, 7.335, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="69a85479-12ce-4ee3-b927-0f6b5fb4ff94" absoluteBounds="3.75, 11.75, 2, 1.7220992024739594">
+    <classShape Id="b3453dbc-7f33-40e3-9ffe-9e206f957bb2" absoluteBounds="3.75, 11.75, 2, 1.7220992024739594">
       <DataClassMoniker Name="/PFTSDbDataContext/dev_vest" />
       <nestedChildShapes>
-        <elementListCompartment Id="8ef17f85-2faa-44c9-a2c7-6bb5134957af" absoluteBounds="3.765, 12.21, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f1196cc4-dcfe-44b6-97f9-a95a5060f948" absoluteBounds="3.765, 12.21, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="be84809d-4c99-4bd5-9ba8-d53ed98b69dc" absoluteBounds="6.75, 7.875, 2, 2.0916874186197916">
+    <classShape Id="1497dca1-b2e6-4e22-8bc5-39b3b16e0469" absoluteBounds="6.75, 7.875, 2, 2.0916874186197916">
       <DataClassMoniker Name="/PFTSDbDataContext/officer" />
       <nestedChildShapes>
-        <elementListCompartment Id="1b6b601d-69e4-40c9-8c64-9e82370b71fe" absoluteBounds="6.765, 8.335, 1.9700000000000002, 1.5316874186197915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7d99cae4-67b2-4d69-8e64-cafa7fef4349" absoluteBounds="6.765, 8.335, 1.9700000000000002, 1.5316874186197915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f0166216-ee4c-4698-951e-e1bf7bb4f5a7" absoluteBounds="9.5, 8, 2, 1.9068933105468737">
+    <classShape Id="07759430-c156-49c6-abf8-2128047f3050" absoluteBounds="9.5, 8, 2, 1.9068933105468737">
       <DataClassMoniker Name="/PFTSDbDataContext/officer_fingerprint" />
       <nestedChildShapes>
-        <elementListCompartment Id="40b7361c-853d-473a-bba3-5b54a9bf0cf8" absoluteBounds="9.515, 8.46, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8f84f365-9c76-45b8-b8a9-bade051041c2" absoluteBounds="9.515, 8.46, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6de3fe96-3bd8-496d-9cb5-6625b7b9a28c" absoluteBounds="11.75, 4.75, 2, 1.7220992024739577">
+    <classShape Id="e01a0b5a-2c64-434c-acc9-d4f2bc41b5e3" absoluteBounds="11.75, 4.75, 2, 1.7220992024739577">
       <DataClassMoniker Name="/PFTSDbDataContext/operator" />
       <nestedChildShapes>
-        <elementListCompartment Id="ac09ed60-cbdb-4354-b2ca-8ebee64d63d7" absoluteBounds="11.765, 5.21, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9db85ca0-a04e-445b-8f13-9c6477254ec1" absoluteBounds="11.765, 5.21, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="45d56ccc-5594-415f-83f7-5ecd19579129" absoluteBounds="3.5, 4.625, 2, 1.3525109863281255">
+    <classShape Id="8384412a-1145-4325-a88e-aca204432084" absoluteBounds="3.5, 4.625, 2, 1.3525109863281255">
       <DataClassMoniker Name="/PFTSDbDataContext/path_rfid" />
       <nestedChildShapes>
-        <elementListCompartment Id="5c298031-5b50-41dd-9420-58cefc2841ca" absoluteBounds="3.515, 5.085, 1.9700000000000002, 0.792510986328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8f0d55da-8321-4bf5-8320-5f7cf2709849" absoluteBounds="3.515, 5.085, 1.9700000000000002, 0.792510986328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="bd78ff0d-b050-44e6-bee1-bc5ff1395946" absoluteBounds="3.5, 1.875, 2, 1.1677168782552085">
+    <classShape Id="34270bd7-d231-45c1-bb5f-3ef2bbbabeb7" absoluteBounds="3.5, 1.875, 2, 1.1677168782552085">
       <DataClassMoniker Name="/PFTSDbDataContext/position_camera" />
       <nestedChildShapes>
-        <elementListCompartment Id="d584f645-03df-4521-a4ae-c8e63d36f1a0" absoluteBounds="3.515, 2.335, 1.9700000000000002, 0.60771687825520826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3c0183d6-15d0-46cb-959a-698902e4d59a" absoluteBounds="3.515, 2.335, 1.9700000000000002, 0.60771687825520826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9ace9db2-9cf0-4376-8a6f-02134742a295" absoluteBounds="0.75, 4.25, 2, 1.3525109863281255">
+    <classShape Id="7dc3fdff-12ff-411e-96a0-9095f28f19c1" absoluteBounds="0.75, 4.25, 2, 1.3525109863281255">
       <DataClassMoniker Name="/PFTSDbDataContext/rfid_room" />
       <nestedChildShapes>
-        <elementListCompartment Id="2096795c-b42d-4ba4-978c-24268ecf62cb" absoluteBounds="0.765, 4.71, 1.9700000000000002, 0.792510986328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="246c72ee-0c33-4a5f-9032-9a2f2d1a0bd1" absoluteBounds="0.765, 4.71, 1.9700000000000002, 0.792510986328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f1f74121-4f50-4186-9c98-34c7121ba8be" absoluteBounds="9, 1.5, 2, 1.9068933105468753">
+    <classShape Id="9e15ad64-9126-489f-b201-eb42db990b86" absoluteBounds="9, 1.5, 2, 1.9068933105468753">
       <DataClassMoniker Name="/PFTSDbDataContext/video" />
       <nestedChildShapes>
-        <elementListCompartment Id="3aead417-0b7b-48b7-9da1-a19cf31d5611" absoluteBounds="9.015, 1.96, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="848c6cbf-cd6d-4927-ab8f-867be98705cd" absoluteBounds="9.015, 1.96, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="31360037-8f31-47f7-a07f-d932ea19f10f" absoluteBounds="11.75, 1.875, 2, 1.1677168782552085">
+    <classShape Id="faefd708-8170-456d-ba44-e5272c228764" absoluteBounds="11.75, 1.875, 2, 1.1677168782552085">
       <DataClassMoniker Name="/PFTSDbDataContext/video_btracker_r" />
       <nestedChildShapes>
-        <elementListCompartment Id="1bd0793f-568b-43c2-8176-2ada53d16daa" absoluteBounds="11.765, 2.335, 1.9700000000000002, 0.60771687825520826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="80a8964c-6390-4579-9206-579555399f41" absoluteBounds="11.765, 2.335, 1.9700000000000002, 0.60771687825520826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fc2cbaba-8129-44a8-b4bc-a433f0d855ea" absoluteBounds="12.75, 7.75, 2, 4.4940108235677068">
+    <classShape Id="56e2f5fc-4539-4e31-ab87-8c797921e390" absoluteBounds="12.75, 7.75, 2, 4.6788049316406237">
       <DataClassMoniker Name="/PFTSDbDataContext/view_btracker_info" />
       <nestedChildShapes>
-        <elementListCompartment Id="a265fa86-5f02-4180-8409-2eb2a0b153bc" absoluteBounds="12.765, 8.21, 1.9700000000000002, 3.934010823567708" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6a4a27ea-9b3d-4658-81cf-9ace11949df8" absoluteBounds="12.765, 8.21, 1.9700000000000002, 4.118804931640625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="518ff192-b283-49ee-b9a1-e49dcb77f0be" absoluteBounds="6.75, 13.75, 2, 2.8308638509114559">
+    <classShape Id="55b5e150-b04b-45dc-a919-666ddf3d4a32" absoluteBounds="6.75, 13.75, 2, 2.2764815266927094">
+      <DataClassMoniker Name="/PFTSDbDataContext/view_btracker_video" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2a67d667-cc16-45da-8600-05e11838a705" absoluteBounds="6.765, 14.21, 1.9700000000000002, 1.7164815266927085" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e97ca9ba-3486-4b43-bb5d-81317f9b2a53" absoluteBounds="9.75, 13.75, 2, 2.8308638509114559">
       <DataClassMoniker Name="/PFTSDbDataContext/view_camera_info" />
       <nestedChildShapes>
-        <elementListCompartment Id="7dfc4f78-283f-4c44-bc85-36c088611af5" absoluteBounds="6.765, 14.21, 1.9700000000000002, 2.270863850911458" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="64a9c0fe-303d-4bb0-95dd-c0a61369c0bf" absoluteBounds="9.765, 14.21, 1.9700000000000002, 2.270863850911458" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="03e4fe9f-0c14-458f-a6e2-ea0e9a6aaf0b" absoluteBounds="9.75, 13.75, 2, 2.0916874186197916">
+    <classShape Id="f1282a5d-c0a2-4a87-a938-5c1ca016b877" absoluteBounds="12.75, 13.75, 2, 2.0916874186197916">
       <DataClassMoniker Name="/PFTSDbDataContext/view_locker_info" />
       <nestedChildShapes>
-        <elementListCompartment Id="1715d8af-e634-46b3-86a8-3254fe30254f" absoluteBounds="9.765, 14.21, 1.9700000000000002, 1.5316874186197915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b8ca61db-2918-4875-8016-feba337961f9" absoluteBounds="12.765, 14.21, 1.9700000000000002, 1.5316874186197915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b333012a-3923-44e8-96ee-d5ebf8a58571" absoluteBounds="12.75, 13.75, 2, 1.7220992024739594">
+    <classShape Id="28436784-7d14-4ef8-95f0-bb80560f1456" absoluteBounds="14.75, 0.75, 2, 1.7220992024739579">
       <DataClassMoniker Name="/PFTSDbDataContext/view_position_camera_info" />
       <nestedChildShapes>
-        <elementListCompartment Id="2cb76c77-3ca0-4b2d-953d-e070d5f28f7e" absoluteBounds="12.765, 14.21, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3224d89b-1ba0-4fa3-b91b-99ba5a6970c6" absoluteBounds="14.765, 1.21, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="47b1cb20-2846-4408-972b-7bb6f1e4f05b" absoluteBounds="14.75, 0.75, 2, 1.9068933105468753">
+    <classShape Id="39632c18-e287-4483-b2d5-0cb63ebaf56d" absoluteBounds="0.75, 14.75, 2, 1.9068933105468737">
       <DataClassMoniker Name="/PFTSDbDataContext/view_rfid_info" />
       <nestedChildShapes>
-        <elementListCompartment Id="783c69e6-5738-472b-9f82-8a8574abd5fb" absoluteBounds="14.765, 1.21, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7b624bdd-819b-4a24-bc40-fe5635b10201" absoluteBounds="0.765, 15.21, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c65f94e9-889e-46c0-b027-3414bf3b1045" absoluteBounds="0.75, 14.75, 2, 1.5373050944010416">
+    <classShape Id="0855fd81-7cd6-4161-8fc2-55066f5c5b87" absoluteBounds="14.75, 3.75, 2, 1.5373050944010416">
       <DataClassMoniker Name="/PFTSDbDataContext/view_rfid_room_info" />
       <nestedChildShapes>
-        <elementListCompartment Id="460aed79-b3ed-4148-b2ce-ea9cdbd74dcb" absoluteBounds="0.765, 15.21, 1.9700000000000002, 0.97730509440104174" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="53339803-9436-4482-bbb6-a8c1902e687d" absoluteBounds="14.765, 4.21, 1.9700000000000002, 0.97730509440104174" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(8.75 : 8.95344665527344); (9.5 : 8.95344665527344)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/officer/officer_officer_fingerprint" />
       <nodes>
-        <classShapeMoniker Id="be84809d-4c99-4bd5-9ba8-d53ed98b69dc" />
-        <classShapeMoniker Id="f0166216-ee4c-4698-951e-e1bf7bb4f5a7" />
+        <classShapeMoniker Id="1497dca1-b2e6-4e22-8bc5-39b3b16e0469" />
+        <classShapeMoniker Id="07759430-c156-49c6-abf8-2128047f3050" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 5.30125549316406); (6.25 : 5.30125549316406)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/path_rfid/path_rfid_btracker_path" />
       <nodes>
-        <classShapeMoniker Id="45d56ccc-5594-415f-83f7-5ecd19579129" />
-        <classShapeMoniker Id="8562126a-7937-4ae0-bbf3-a2880dedfc73" />
+        <classShapeMoniker Id="8384412a-1145-4325-a88e-aca204432084" />
+        <classShapeMoniker Id="9174bbba-8f43-455c-b810-6d9d00e7ee61" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 2.4588584391276); (6.25 : 2.4588584391276)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/position_camera/position_camera_dev_camera" />
       <nodes>
-        <classShapeMoniker Id="bd78ff0d-b050-44e6-bee1-bc5ff1395946" />
-        <classShapeMoniker Id="3efd8a3b-611b-4da4-807c-42a2809ddb0f" />
+        <classShapeMoniker Id="34270bd7-d231-45c1-bb5f-3ef2bbbabeb7" />
+        <classShapeMoniker Id="8e7b8d87-7271-426f-b456-c38a11f9b32f" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(1.75 : 5.60251098632813); (1.75 : 7.73604960123698); (3.5 : 7.73604960123698)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/rfid_room/rfid_room_dev_rfid" />
       <nodes>
-        <classShapeMoniker Id="9ace9db2-9cf0-4376-8a6f-02134742a295" />
-        <classShapeMoniker Id="1dc94fc3-e0dd-4cf9-8186-d7ebf63769af" />
+        <classShapeMoniker Id="7dc3fdff-12ff-411e-96a0-9095f28f19c1" />
+        <classShapeMoniker Id="964366f4-7cc0-40b3-b6be-c5ec05a1f925" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 5.11375549316406); (3.5 : 5.11375549316406)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/rfid_room/rfid_room_path_rfid" />
       <nodes>
-        <classShapeMoniker Id="9ace9db2-9cf0-4376-8a6f-02134742a295" />
-        <classShapeMoniker Id="45d56ccc-5594-415f-83f7-5ecd19579129" />
+        <classShapeMoniker Id="7dc3fdff-12ff-411e-96a0-9095f28f19c1" />
+        <classShapeMoniker Id="8384412a-1145-4325-a88e-aca204432084" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 4.80687774658203); (3.5 : 4.80687774658203)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/rfid_room/rfid_room_path_rfid1" />
       <nodes>
-        <classShapeMoniker Id="9ace9db2-9cf0-4376-8a6f-02134742a295" />
-        <classShapeMoniker Id="45d56ccc-5594-415f-83f7-5ecd19579129" />
+        <classShapeMoniker Id="7dc3fdff-12ff-411e-96a0-9095f28f19c1" />
+        <classShapeMoniker Id="8384412a-1145-4325-a88e-aca204432084" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(1.75 : 4.25); (1.75 : 2.4588584391276); (3.5 : 2.4588584391276)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/rfid_room/rfid_room_position_camera" />
       <nodes>
-        <classShapeMoniker Id="9ace9db2-9cf0-4376-8a6f-02134742a295" />
-        <classShapeMoniker Id="bd78ff0d-b050-44e6-bee1-bc5ff1395946" />
+        <classShapeMoniker Id="7dc3fdff-12ff-411e-96a0-9095f28f19c1" />
+        <classShapeMoniker Id="34270bd7-d231-45c1-bb5f-3ef2bbbabeb7" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 2.45344665527344); (9 : 2.45344665527344)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/dev_camera/dev_camera_video" />
       <nodes>
-        <classShapeMoniker Id="3efd8a3b-611b-4da4-807c-42a2809ddb0f" />
-        <classShapeMoniker Id="f1f74121-4f50-4186-9c98-34c7121ba8be" />
+        <classShapeMoniker Id="8e7b8d87-7271-426f-b456-c38a11f9b32f" />
+        <classShapeMoniker Id="9e15ad64-9126-489f-b201-eb42db990b86" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 2.1356772195638); (6 : 2.1356772195638); (6 : 1); (10 : 1); (10 : 1.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/position_camera/position_camera_video" />
       <nodes>
-        <classShapeMoniker Id="bd78ff0d-b050-44e6-bee1-bc5ff1395946" />
-        <classShapeMoniker Id="f1f74121-4f50-4186-9c98-34c7121ba8be" />
+        <classShapeMoniker Id="34270bd7-d231-45c1-bb5f-3ef2bbbabeb7" />
+        <classShapeMoniker Id="9e15ad64-9126-489f-b201-eb42db990b86" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(11 : 2.4588584391276); (11.75 : 2.4588584391276)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PFTSDbDataContext/video/video_video_btracker_r" />
       <nodes>
-        <classShapeMoniker Id="f1f74121-4f50-4186-9c98-34c7121ba8be" />
-        <classShapeMoniker Id="31360037-8f31-47f7-a07f-d932ea19f10f" />
+        <classShapeMoniker Id="9e15ad64-9126-489f-b201-eb42db990b86" />
+        <classShapeMoniker Id="faefd708-8170-456d-ba44-e5272c228764" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

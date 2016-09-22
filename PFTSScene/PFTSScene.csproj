@@ -74,6 +74,7 @@
     <Compile Include="Tools\GridRoom.cs" />
     <Compile Include="Tools\GridRoomEx.cs" />
     <Compile Include="Tools\GridUtil.cs" />
+    <Compile Include="Tools\TextBlockDebug.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

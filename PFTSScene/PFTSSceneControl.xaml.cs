@@ -489,7 +489,8 @@ namespace PFTSScene
                     {
                         alert = true;
                     }
-                }else if (btracker.room_id > 2)
+                }
+                else if (btracker.room_id > 2)
                 {
                     if (btracker.frisk_status != 1 || btracker.gather_status != 1) //未搜身或者未采集
                     {
@@ -499,7 +500,8 @@ namespace PFTSScene
                 if (alert)
                 {
                     img.Source = m_bmImgPeopleAlert;
-                }else
+                }
+                else
                 {
                     img.Source = m_bmImgPeople;
                 }
@@ -519,6 +521,7 @@ namespace PFTSScene
                 img.MouseUp += Img_MouseUp;
                 m_mapBtrackers.Add(btracker.id, btracker);
                 m_mapPeopleImage.Add(btracker.id, img);
+                textMsg.Debug(btracker.name + "进入了房间(" + gr.RoomInfo.name + ")");
             }
             //}
             //else
@@ -576,6 +579,11 @@ namespace PFTSScene
                         m_mapPeopleImage.Remove(id);
                     }
                 }
+                if (m_mapBtrackers.ContainsKey(id) && m_mapRooms.ContainsKey(roomId))
+                {
+                    var bt = m_mapBtrackers[id];
+                    textMsg.Debug(bt.name + "离开了房间("+m_mapGridRooms[roomId].RoomInfo.name+")");
+                }
                 m_mapBtrackers.Remove(id);
             }
         }
@@ -614,7 +622,16 @@ namespace PFTSScene
                 }
             }
             if (opt)
+            {
                 gridBack.Visibility = Visibility.Visible;
+                textMsg.Clear();
+                var bt = (new PFTSModel.Services.BTrackerService()).GetInfoById(btrackerId);
+                textMsg.Debug("姓名：" + bt.name, false);
+                textMsg.Debug("性别：" + bt.sex, false);
+                textMsg.Debug("档案号：" + bt.no, false);
+                if (bt.officer_id != null) textMsg.Debug("负责民警：" + bt.officer_name,false);
+                if (bt.vest_id != null) textMsg.Debug("马甲：" + bt.vest_name,false);
+            }
         }
 
         private void MenuPeopleRealVideo_Click(object sender, RoutedEventArgs e)
@@ -711,6 +728,14 @@ namespace PFTSScene
             //m_listUnloadPeople = new List<PFTSModel.btracker>();
         }
 
+        public Tools.TextBlockDebug DebugBlock
+        {
+            get
+            {
+                return textMsg;
+            }
+        }
+
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             //foreach (var pc in m_mapPeopleCounts)
@@ -745,6 +770,7 @@ namespace PFTSScene
             }
             m_paths = new List<InArrow>();
             gridBack.Visibility = Visibility.Hidden;
+            textMsg.Clear();
         }
     }
 }

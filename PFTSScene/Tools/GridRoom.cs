@@ -63,6 +63,14 @@ namespace PFTSScene.Tools
             this.MouseLeave += GridRoom_MouseLeave;
         }
 
+        public PFTSModel.view_rfid_room_info RoomInfo
+        {
+            get
+            {
+                return m_room;
+            }
+        }
+
         private void MenuItem1_Click(object sender, RoutedEventArgs e)
         {
             if (RealVideoDelegate != null)

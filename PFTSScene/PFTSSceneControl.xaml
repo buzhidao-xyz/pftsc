@@ -297,6 +297,8 @@
                     
                 </Button>
             </Grid>
+            <tools:TextBlockDebug x:Name="textMsg" Grid.Row="9" Grid.ColumnSpan="7" Grid.Column="6">
+            </tools:TextBlockDebug>
         </Grid>
     </Grid>
 </UserControl>
