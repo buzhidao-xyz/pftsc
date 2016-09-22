@@ -67,7 +67,7 @@ namespace PFTSDesktop.Model
         static readonly string[] ValidatedProperties = 
         {
             "Name",
-            "No",
+            //"No",
             "IP",
             "Port",
             "Admin",
@@ -100,7 +100,7 @@ namespace PFTSDesktop.Model
                 case "Password":
                     error = this.ValidatePwd();
                     break;
-                default:
+                 default:
                     Debug.Fail("Unexpected property being validated on VestModel: " + propertyName);
                     break;
             }
