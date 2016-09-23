@@ -3175,8 +3175,6 @@ namespace PFTSModel
 		
 		private string _filename;
 		
-		private EntitySet<video_btracker_r> _video_btracker_r;
-		
 		private EntityRef<dev_camera> _dev_camera;
 		
 		private EntityRef<position_camera> _position_camera;
@@ -3201,7 +3199,6 @@ namespace PFTSModel
 		
 		public video()
 		{
-			this._video_btracker_r = new EntitySet<video_btracker_r>(new Action<video_btracker_r>(this.attach_video_btracker_r), new Action<video_btracker_r>(this.detach_video_btracker_r));
 			this._dev_camera = default(EntityRef<dev_camera>);
 			this._position_camera = default(EntityRef<position_camera>);
 			OnCreated();
@@ -3335,19 +3332,6 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="video_video_btracker_r", Storage="_video_btracker_r", ThisKey="id", OtherKey="video_id")]
-		public EntitySet<video_btracker_r> video_btracker_r
-		{
-			get
-			{
-				return this._video_btracker_r;
-			}
-			set
-			{
-				this._video_btracker_r.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_camera_video", Storage="_dev_camera", ThisKey="camera_id", OtherKey="id", IsForeignKey=true)]
 		public dev_camera dev_camera
 		{
@@ -3435,18 +3419,6 @@ namespace PFTSModel
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_video_btracker_r(video_btracker_r entity)
-		{
-			this.SendPropertyChanging();
-			entity.video = this;
-		}
-		
-		private void detach_video_btracker_r(video_btracker_r entity)
-		{
-			this.SendPropertyChanging();
-			entity.video = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.video_btracker_r")]
@@ -3459,7 +3431,9 @@ namespace PFTSModel
 		
 		private int _btracker_id;
 		
-		private EntityRef<video> _video;
+		private System.DateTime _start_time;
+		
+		private System.DateTime _end_time;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -3469,11 +3443,14 @@ namespace PFTSModel
     partial void Onvideo_idChanged();
     partial void Onbtracker_idChanging(int value);
     partial void Onbtracker_idChanged();
+    partial void Onstart_timeChanging(System.DateTime value);
+    partial void Onstart_timeChanged();
+    partial void Onend_timeChanging(System.DateTime value);
+    partial void Onend_timeChanged();
     #endregion
 		
 		public video_btracker_r()
 		{
-			this._video = default(EntityRef<video>);
 			OnCreated();
 		}
 		
@@ -3488,10 +3465,6 @@ namespace PFTSModel
 			{
 				if ((this._video_id != value))
 				{
-					if (this._video.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onvideo_idChanging(value);
 					this.SendPropertyChanging();
 					this._video_id = value;
@@ -3521,36 +3494,42 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="video_video_btracker_r", Storage="_video", ThisKey="video_id", OtherKey="id", IsForeignKey=true)]
-		public video video
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_time", DbType="DateTime NOT NULL")]
+		public System.DateTime start_time
 		{
 			get
 			{
-				return this._video.Entity;
+				return this._start_time;
 			}
 			set
 			{
-				video previousValue = this._video.Entity;
-				if (((previousValue != value) 
-							|| (this._video.HasLoadedOrAssignedValue == false)))
+				if ((this._start_time != value))
 				{
+					this.Onstart_timeChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._video.Entity = null;
-						previousValue.video_btracker_r.Remove(this);
-					}
-					this._video.Entity = value;
-					if ((value != null))
-					{
-						value.video_btracker_r.Add(this);
-						this._video_id = value.id;
-					}
-					else
-					{
-						this._video_id = default(int);
-					}
-					this.SendPropertyChanged("video");
+					this._start_time = value;
+					this.SendPropertyChanged("start_time");
+					this.Onstart_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_time", DbType="DateTime NOT NULL")]
+		public System.DateTime end_time
+		{
+			get
+			{
+				return this._end_time;
+			}
+			set
+			{
+				if ((this._end_time != value))
+				{
+					this.Onend_timeChanging(value);
+					this.SendPropertyChanging();
+					this._end_time = value;
+					this.SendPropertyChanged("end_time");
+					this.Onend_timeChanged();
 				}
 			}
 		}

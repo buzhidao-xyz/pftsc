@@ -156,7 +156,6 @@
       <Column Name="start_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="filename" Type="System.String" DbType="VarChar(512) NOT NULL" CanBeNull="false" />
-      <Association Name="video_video_btracker_r" Member="video_btracker_r" ThisKey="id" OtherKey="video_id" Type="video_btracker_r" />
       <Association Name="dev_camera_video" Member="dev_camera" ThisKey="camera_id" OtherKey="id" Type="dev_camera" IsForeignKey="true" />
       <Association Name="position_camera_video" Member="position_camera" ThisKey="position_id" OtherKey="id" Type="position_camera" IsForeignKey="true" />
     </Type>
@@ -165,7 +164,8 @@
     <Type Name="video_btracker_r">
       <Column Name="video_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="btracker_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="video_video_btracker_r" Member="video" ThisKey="video_id" OtherKey="id" Type="video" IsForeignKey="true" />
+      <Column Name="start_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.view_btracker_info" Member="view_btracker_info">

@@ -121,6 +121,8 @@ namespace PFTSHwCtrl
             public event VideoRecordHandler VideoRecordDelegate;
             private bool m_bRecoding = false;
             private PFTSModel.Services.VideoService m_videoService = new PFTSModel.Services.VideoService();
+            private DateTime m_startTime;
+            private Dictionary<int, PFTSModel.video_btracker_r> m_mapVideoR = new Dictionary<int, PFTSModel.video_btracker_r>();
 
             public Room(PFTSModel.view_camera_info camera, List<PFTSModel.btracker> btrackers)
             {
@@ -153,7 +155,16 @@ namespace PFTSHwCtrl
                     if (VideoRecordDelegate != null)
                     {
                         VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord, null);
-
+                        var now = DateTime.Now;
+                        foreach (var b in m_btrackers)
+                        {
+                            var vr = new PFTSModel.video_btracker_r();
+                            vr.btracker_id = b.id;
+                            vr.start_time = now;
+                            vr.end_time = DateTime.MinValue;
+                            m_mapVideoR.Add(b.id,vr);
+                        }
+                        m_startTime = now;
                     }
                     m_bRecoding = true;
                 }
@@ -168,6 +179,13 @@ namespace PFTSHwCtrl
                     if (VideoRecordDelegate != null)
                     {
                         VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord, null);
+                        var now = DateTime.Now;
+                        var vr = new PFTSModel.video_btracker_r();
+                        vr.btracker_id = bt.id;
+                        vr.start_time = now;
+                        vr.end_time = DateTime.MinValue;
+                        m_startTime = now;
+                        m_mapVideoR.Add(bt.id, vr);
                     }
                     m_bRecoding = true;
                 }
@@ -176,10 +194,16 @@ namespace PFTSHwCtrl
                     Console.WriteLine(bt.name + "进入了" + "房间(" + m_camera.room_name + ")" + "继续录制");
                     if (VideoRecordDelegate != null)
                     {
-                        VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
-                        {
-                            m_videoService.AddVideo(v, m_btrackers, null, bt);
-                        });
+                        //VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
+                        //{
+                        //    m_videoService.AddVideo(v, m_btrackers, null, bt);
+                        //});
+                        var now = DateTime.Now;
+                        var vr = new PFTSModel.video_btracker_r();
+                        vr.btracker_id = bt.id;
+                        vr.start_time = now;
+                        vr.end_time = DateTime.MinValue;
+                        m_mapVideoR.Add(bt.id, vr);
                     }
                 }
             }
@@ -212,7 +236,13 @@ namespace PFTSHwCtrl
                     {
                         VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord, delegate (PFTSModel.video v)
                         {
-                            m_videoService.AddVideo(v, m_btrackers, btr);
+                            var now = DateTime.Now;
+                            foreach (var i in m_mapVideoR.Keys)
+                            {
+                                if (m_mapVideoR[i].end_time == DateTime.MinValue)
+                                    m_mapVideoR[i].end_time = now;
+                            }
+                            m_videoService.AddVideo(v, m_mapVideoR);
                         });
                     }
                     m_bRecoding = false;
@@ -227,10 +257,14 @@ namespace PFTSHwCtrl
                     Console.WriteLine(str + ",房间还有人，继续录制");
                     if (VideoRecordDelegate != null)
                     {
-                        VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
+                        //VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
+                        //{
+                        //    m_videoService.AddVideo(v, m_btrackers, btr);
+                        //});
+                        if (m_mapVideoR.ContainsKey(btId))
                         {
-                            m_videoService.AddVideo(v, m_btrackers, btr);
-                        });
+                            m_mapVideoR[btId].end_time = DateTime.Now;
+                        }
                     }
                 }
             }
@@ -244,7 +278,13 @@ namespace PFTSHwCtrl
                     {
                         VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord, delegate (PFTSModel.video v)
                         {
-                            m_videoService.AddVideo(v, m_btrackers);
+                            var now = DateTime.Now;
+                            foreach (var i in m_mapVideoR.Keys)
+                            {
+                                if (m_mapVideoR[i].end_time == DateTime.MinValue)
+                                    m_mapVideoR[i].end_time = now;
+                            }
+                            m_videoService.AddVideo(v, m_mapVideoR);
                             if (call != null)
                             {
                                 call();
