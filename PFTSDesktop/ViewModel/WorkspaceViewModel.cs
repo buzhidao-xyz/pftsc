@@ -85,9 +85,19 @@ namespace PFTSDesktop.ViewModel
 
         public void mainWindowClose(Object obj)
         {
-            WindowTemplet win = (WindowTemplet)obj;
-            System.Environment.Exit(0);
-            win.Close();
+            if (Global.currentMainWindow != null)
+            {
+                Global.currentMainWindow.StopRecord(delegate() {
+                    WindowTemplet win = (WindowTemplet)obj;
+                    System.Environment.Exit(0);
+                    win.Close();
+                });
+            }else
+            {
+                WindowTemplet win = (WindowTemplet)obj;
+                System.Environment.Exit(0);
+                win.Close();
+            }
         }
 
 
@@ -95,6 +105,7 @@ namespace PFTSDesktop.ViewModel
         {
             Global.currentFrame.NavigationService.GoBack();
         }
+
         public void OnRequestClose()
         {
             EventHandler handler = this.RequestClose;

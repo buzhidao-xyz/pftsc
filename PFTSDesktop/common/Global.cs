@@ -8,7 +8,6 @@ using System.Windows.Controls;
 
 namespace PFTSDesktop
 {
-
     public class Global
     {
         /// <summary>

@@ -159,6 +159,26 @@ namespace PFTSModel.Services
             return null;
         }
 
+
+        public view_btracker_info GetInfoById(int id)
+        {
+            try
+            {
+                using (PFTSDbDataContext db = new PFTSDbDataContext())
+                {
+                    System.Data.Linq.Table<view_btracker_info> table = db.GetTable<view_btracker_info>();
+                    var query = from q in table
+                                where q.id == id
+                                select q;
+                    return query.FirstOrDefault<view_btracker_info>();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
+        }
         /// <summary>
         /// 获取所有值
         /// </summary>

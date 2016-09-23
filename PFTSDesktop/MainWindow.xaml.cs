@@ -80,6 +80,11 @@ namespace PFTSDesktop
             });
         }
 
+        public void StopRecord(PFTSHwCtrl.StopRecordCallback call)
+        {
+            m_videoRecorder.StopAll(call);
+        }
+
         private void M_videoRecorder_VideoRecordDelegate(view_camera_info camera, PFTSHwCtrl.VideoRecordEvent e, PFTSHwCtrl.VideoRecordCallback callback)
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()

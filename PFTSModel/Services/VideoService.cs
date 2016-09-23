@@ -45,19 +45,6 @@ namespace PFTSModel.Services
                 db.video_btracker_r.InsertAllOnSubmit(vrs);
                 db.SubmitChanges();
 
-                //var bp = new btracker_path();
-                //bp.btracker_id = bt.id;
-                //bp.path_id = path.id;
-                //bp.start_time = bt.in_room_time.Value;
-                //bp.end_time = n;
-
-                //db.btracker_path.InsertOnSubmit(bp);
-                //db.SubmitChanges();
-
-                //bt.room_id = position.room_id;
-                //bt.in_room_time = n;
-                //db.SubmitChanges();
-
                 tran.Commit();
                 return true;
             }
@@ -67,6 +54,38 @@ namespace PFTSModel.Services
                 tran.Rollback();
             }
             return false;
+        }
+
+        public bool AddVideo(video vd, Dictionary<int,video_btracker_r> mvrs)
+        {
+            PFTSDbDataContext db = new PFTSDbDataContext();
+            if (db.Connection.State != ConnectionState.Open)
+            {
+                db.Connection.Open();
+            }
+
+            System.Data.Common.DbTransaction tran = db.Connection.BeginTransaction();
+            db.Transaction = tran; //初始化本地事务
+            try
+            {
+                db.video.InsertOnSubmit(vd);
+                db.SubmitChanges();
+
+                foreach( var k in mvrs.Keys)
+                {
+                    mvrs[k].video_id = vd.id;
+                }
+                db.video_btracker_r.InsertAllOnSubmit(mvrs.Values);
+                db.SubmitChanges();
+
+                tran.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                tran.Rollback();
+            }
             return false;
         }
     }

@@ -18,6 +18,7 @@ namespace PFTSHwCtrl
     #region Handler
     public delegate void VideoRecordCallback(PFTSModel.video video);
     public delegate void VideoRecordHandler(PFTSModel.view_camera_info camera, VideoRecordEvent e, VideoRecordCallback callback);
+    public delegate void StopRecordCallback();
     #endregion
 
     public class PFTSVideoRecordProxy
@@ -88,13 +89,40 @@ namespace PFTSHwCtrl
             }
         }
 
-        public class Room : IDisposable
+        public void StopAll(StopRecordCallback call)
+        {
+            int count = 0;
+            bool flag = false;
+            foreach (var r in m_mapRooms.Values)
+            {
+                if (r.StopRecord(delegate ()
+                       {
+                           count--;
+                           if (count == 0)
+                           {
+                               call();
+                           }
+                       }))
+                {
+                    flag = true;
+                    count++;
+                }
+            }
+            if (flag == false)
+            {
+                call();
+            }
+        }
+
+        public class Room
         {
             private PFTSModel.view_camera_info m_camera;
             private List<PFTSModel.btracker> m_btrackers;
             public event VideoRecordHandler VideoRecordDelegate;
             private bool m_bRecoding = false;
             private PFTSModel.Services.VideoService m_videoService = new PFTSModel.Services.VideoService();
+            private DateTime m_startTime;
+            private Dictionary<int, PFTSModel.video_btracker_r> m_mapVideoR = new Dictionary<int, PFTSModel.video_btracker_r>();
 
             public Room(PFTSModel.view_camera_info camera, List<PFTSModel.btracker> btrackers)
             {
@@ -127,7 +155,16 @@ namespace PFTSHwCtrl
                     if (VideoRecordDelegate != null)
                     {
                         VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord, null);
-
+                        var now = DateTime.Now;
+                        foreach (var b in m_btrackers)
+                        {
+                            var vr = new PFTSModel.video_btracker_r();
+                            vr.btracker_id = b.id;
+                            vr.start_time = now;
+                            vr.end_time = DateTime.MinValue;
+                            m_mapVideoR.Add(b.id,vr);
+                        }
+                        m_startTime = now;
                     }
                     m_bRecoding = true;
                 }
@@ -142,6 +179,13 @@ namespace PFTSHwCtrl
                     if (VideoRecordDelegate != null)
                     {
                         VideoRecordDelegate(m_camera, VideoRecordEvent.StartRecord, null);
+                        var now = DateTime.Now;
+                        var vr = new PFTSModel.video_btracker_r();
+                        vr.btracker_id = bt.id;
+                        vr.start_time = now;
+                        vr.end_time = DateTime.MinValue;
+                        m_startTime = now;
+                        m_mapVideoR.Add(bt.id, vr);
                     }
                     m_bRecoding = true;
                 }
@@ -150,10 +194,16 @@ namespace PFTSHwCtrl
                     Console.WriteLine(bt.name + "进入了" + "房间(" + m_camera.room_name + ")" + "继续录制");
                     if (VideoRecordDelegate != null)
                     {
-                        VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
-                        {
-                            m_videoService.AddVideo(v, m_btrackers, null, bt);
-                        });
+                        //VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
+                        //{
+                        //    m_videoService.AddVideo(v, m_btrackers, null, bt);
+                        //});
+                        var now = DateTime.Now;
+                        var vr = new PFTSModel.video_btracker_r();
+                        vr.btracker_id = bt.id;
+                        vr.start_time = now;
+                        vr.end_time = DateTime.MinValue;
+                        m_mapVideoR.Add(bt.id, vr);
                     }
                 }
             }
@@ -186,7 +236,13 @@ namespace PFTSHwCtrl
                     {
                         VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord, delegate (PFTSModel.video v)
                         {
-                            m_videoService.AddVideo(v, m_btrackers, btr);
+                            var now = DateTime.Now;
+                            foreach (var i in m_mapVideoR.Keys)
+                            {
+                                if (m_mapVideoR[i].end_time == DateTime.MinValue)
+                                    m_mapVideoR[i].end_time = now;
+                            }
+                            m_videoService.AddVideo(v, m_mapVideoR);
                         });
                     }
                     m_bRecoding = false;
@@ -201,56 +257,44 @@ namespace PFTSHwCtrl
                     Console.WriteLine(str + ",房间还有人，继续录制");
                     if (VideoRecordDelegate != null)
                     {
-                        VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
+                        //VideoRecordDelegate(m_camera, VideoRecordEvent.ReRecord, delegate (PFTSModel.video v)
+                        //{
+                        //    m_videoService.AddVideo(v, m_btrackers, btr);
+                        //});
+                        if (m_mapVideoR.ContainsKey(btId))
                         {
-                            m_videoService.AddVideo(v, m_btrackers, btr);
-                        });
-                    }
-                }
-            }
-
-            #region IDisposable Support
-            private bool disposedValue = false; // 要检测冗余调用
-
-            protected virtual void Dispose(bool disposing)
-            {
-                if (!disposedValue)
-                {
-                    if (disposing)
-                    {
-                        Console.WriteLine("停止录制");
-                        // TODO: 释放托管状态(托管对象)。
-                        if (VideoRecordDelegate != null)
-                        {
-                            VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord, delegate (PFTSModel.video v)
-                            {
-                                m_videoService.AddVideo(v, m_btrackers);
-                            });
+                            m_mapVideoR[btId].end_time = DateTime.Now;
                         }
                     }
-
-                    // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
-                    // TODO: 将大型字段设置为 null。
-
-                    disposedValue = true;
                 }
             }
 
-            // TODO: 仅当以上 Dispose(bool disposing) 拥有用于释放未托管资源的代码时才替代终结器。
-            // ~Room() {
-            //   // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            //   Dispose(false);
-            // }
-
-            // 添加此代码以正确实现可处置模式。
-            public void Dispose()
+            public bool StopRecord(StopRecordCallback call)
             {
-                // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-                Dispose(true);
-                // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
-                // GC.SuppressFinalize(this);
+                if (m_bRecoding)
+                {
+                    Console.WriteLine(m_camera.room_name + "停止录制");
+                    if (VideoRecordDelegate != null)
+                    {
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord, delegate (PFTSModel.video v)
+                        {
+                            var now = DateTime.Now;
+                            foreach (var i in m_mapVideoR.Keys)
+                            {
+                                if (m_mapVideoR[i].end_time == DateTime.MinValue)
+                                    m_mapVideoR[i].end_time = now;
+                            }
+                            m_videoService.AddVideo(v, m_mapVideoR);
+                            if (call != null)
+                            {
+                                call();
+                            }
+                        });
+                        return true;
+                    }
+                }
+                return false;
             }
-            #endregion
         }
     }
 }

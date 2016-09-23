@@ -297,6 +297,11 @@
                     
                 </Button>
             </Grid>
+            <ScrollViewer Grid.Row="9" Grid.ColumnSpan="7" Grid.Column="6"  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <tools:TextBlockDebug x:Name="textMsg">
+            </tools:TextBlockDebug>
+            </ScrollViewer>
+            
         </Grid>
     </Grid>
 </UserControl>

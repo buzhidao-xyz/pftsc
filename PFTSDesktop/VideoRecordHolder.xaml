@@ -1,15 +1,93 @@
-﻿<tmp:WindowTemplet x:Class="PFTSDesktop.VideoRecordHolder"
+﻿<blankWindow:BlankWindow x:Class="PFTSDesktop.VideoRecordHolder"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PFTSDesktop"
+        xmlns:hwd="clr-namespace:PFTSHwCtrl;assembly=PFTSHwCtrl"
         xmlns:tmp="clr-namespace:PFTSUITemplate.Controls;assembly=PFTSUITemplate"
+        xmlns:local="clr-namespace:PFTSDesktop.View.Monitoring"
+                      xmlns:blankWindow="http://GFramework.org"
         mc:Ignorable="d"
-        Title="VideoRecordHolder" Height="0" Width="0">
+        Title="涉案人员监控" 
+        TitleBarHeight="24"  Width="0" Height="0" 
+        MouseDoubleClick="MainWindow_OnMouseDoubleClick"
+        BorderBrush="{DynamicResource windowStyle}"
+        BorderThickness="1"
+        WindowStartupLocation="CenterScreen"
+        >
+    <blankWindow:BlankWindow.Resources>
+    </blankWindow:BlankWindow.Resources>
     <Grid>
-        <WrapPanel x:Name="wrapPanel">
-            
-        </WrapPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="27"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="gridTitleBar" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="370*"/>
+                <ColumnDefinition Width="61*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+            <Label  Grid.Column="0"  Name="TilteName" Width="120" HorizontalAlignment="Left" Content="实时视频列表" FontFamily="宋体" Foreground="AliceBlue" Margin="5,0,0,0"/>
+
+            <tmp:ButtonTemplet  Grid.Column="2" x:Name="btnMin" IsTabStop="False" VerticalAlignment="Top"
+                                Width="27" Height="22" Click="btnMin_Click" Grid.ColumnSpan="2">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mim.png"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+                <tmp:ButtonTemplet.MyEnterBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mie.png"/>
+                </tmp:ButtonTemplet.MyEnterBrush>
+                <tmp:ButtonTemplet.Background>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/min.png"/>
+                </tmp:ButtonTemplet.Background>
+            </tmp:ButtonTemplet>
+
+            <tmp:ButtonTemplet  Grid.Column="4" Visibility="Hidden" x:Name="btnNomalMax" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxm.png"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+                <tmp:ButtonTemplet.MyEnterBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxe.png"/>
+                </tmp:ButtonTemplet.MyEnterBrush>
+                <tmp:ButtonTemplet.Background>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxn.png"/>
+                </tmp:ButtonTemplet.Background>
+            </tmp:ButtonTemplet>
+            <tmp:ButtonTemplet  Grid.Column="4" x:Name="btnMax" Visibility="Visible" VerticalAlignment="Top" IsTabStop="False" Width="27" Height="22" Click="btnSysMax_Click">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/maa.png"/>
+                </tmp:ButtonTemplet.MyMoverBrush>
+                <tmp:ButtonTemplet.MyEnterBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/mxx.png"/>
+                </tmp:ButtonTemplet.MyEnterBrush>
+                <tmp:ButtonTemplet.Background>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/max.png"/>
+                </tmp:ButtonTemplet.Background>
+            </tmp:ButtonTemplet>
+            <!--<tmp:ButtonTemplet  Grid.Column="5" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" 
+                                Width="27" Height="22" Click="btnExit_Click">
+                <tmp:ButtonTemplet.MyMoverBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xm.png" />
+                </tmp:ButtonTemplet.MyMoverBrush>
+                <tmp:ButtonTemplet.MyEnterBrush>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xe.png"/>
+                </tmp:ButtonTemplet.MyEnterBrush>
+                <tmp:ButtonTemplet.Background>
+                    <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xn.png"/>
+                </tmp:ButtonTemplet.Background>
+            </tmp:ButtonTemplet>-->
+
+        </Grid>
+        <Grid Grid.Row="1" Background="White">
+            <WrapPanel x:Name="wrapPanel">
+
+            </WrapPanel>
+        </Grid>
     </Grid>
-</tmp:WindowTemplet>
+</blankWindow:BlankWindow>

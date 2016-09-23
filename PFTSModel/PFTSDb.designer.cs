@@ -232,6 +232,14 @@ namespace PFTSModel
 			}
 		}
 		
+		public System.Data.Linq.Table<view_btracker_video> view_btracker_video
+		{
+			get
+			{
+				return this.GetTable<view_btracker_video>();
+			}
+		}
+		
 		public System.Data.Linq.Table<view_camera_info> view_camera_info
 		{
 			get
@@ -269,14 +277,6 @@ namespace PFTSModel
 			get
 			{
 				return this.GetTable<view_rfid_room_info>();
-			}
-		}
-		
-		public System.Data.Linq.Table<view_btracker_video> view_btracker_video
-		{
-			get
-			{
-				return this.GetTable<view_btracker_video>();
 			}
 		}
 	}
@@ -3175,8 +3175,6 @@ namespace PFTSModel
 		
 		private string _filename;
 		
-		private EntitySet<video_btracker_r> _video_btracker_r;
-		
 		private EntityRef<dev_camera> _dev_camera;
 		
 		private EntityRef<position_camera> _position_camera;
@@ -3201,7 +3199,6 @@ namespace PFTSModel
 		
 		public video()
 		{
-			this._video_btracker_r = new EntitySet<video_btracker_r>(new Action<video_btracker_r>(this.attach_video_btracker_r), new Action<video_btracker_r>(this.detach_video_btracker_r));
 			this._dev_camera = default(EntityRef<dev_camera>);
 			this._position_camera = default(EntityRef<position_camera>);
 			OnCreated();
@@ -3335,19 +3332,6 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="video_video_btracker_r", Storage="_video_btracker_r", ThisKey="id", OtherKey="video_id")]
-		public EntitySet<video_btracker_r> video_btracker_r
-		{
-			get
-			{
-				return this._video_btracker_r;
-			}
-			set
-			{
-				this._video_btracker_r.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="dev_camera_video", Storage="_dev_camera", ThisKey="camera_id", OtherKey="id", IsForeignKey=true)]
 		public dev_camera dev_camera
 		{
@@ -3435,18 +3419,6 @@ namespace PFTSModel
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_video_btracker_r(video_btracker_r entity)
-		{
-			this.SendPropertyChanging();
-			entity.video = this;
-		}
-		
-		private void detach_video_btracker_r(video_btracker_r entity)
-		{
-			this.SendPropertyChanging();
-			entity.video = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.video_btracker_r")]
@@ -3459,7 +3431,9 @@ namespace PFTSModel
 		
 		private int _btracker_id;
 		
-		private EntityRef<video> _video;
+		private System.DateTime _start_time;
+		
+		private System.DateTime _end_time;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -3469,11 +3443,14 @@ namespace PFTSModel
     partial void Onvideo_idChanged();
     partial void Onbtracker_idChanging(int value);
     partial void Onbtracker_idChanged();
+    partial void Onstart_timeChanging(System.DateTime value);
+    partial void Onstart_timeChanged();
+    partial void Onend_timeChanging(System.DateTime value);
+    partial void Onend_timeChanged();
     #endregion
 		
 		public video_btracker_r()
 		{
-			this._video = default(EntityRef<video>);
 			OnCreated();
 		}
 		
@@ -3488,10 +3465,6 @@ namespace PFTSModel
 			{
 				if ((this._video_id != value))
 				{
-					if (this._video.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onvideo_idChanging(value);
 					this.SendPropertyChanging();
 					this._video_id = value;
@@ -3521,36 +3494,42 @@ namespace PFTSModel
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="video_video_btracker_r", Storage="_video", ThisKey="video_id", OtherKey="id", IsForeignKey=true)]
-		public video video
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_time", DbType="DateTime NOT NULL")]
+		public System.DateTime start_time
 		{
 			get
 			{
-				return this._video.Entity;
+				return this._start_time;
 			}
 			set
 			{
-				video previousValue = this._video.Entity;
-				if (((previousValue != value) 
-							|| (this._video.HasLoadedOrAssignedValue == false)))
+				if ((this._start_time != value))
 				{
+					this.Onstart_timeChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._video.Entity = null;
-						previousValue.video_btracker_r.Remove(this);
-					}
-					this._video.Entity = value;
-					if ((value != null))
-					{
-						value.video_btracker_r.Add(this);
-						this._video_id = value.id;
-					}
-					else
-					{
-						this._video_id = default(int);
-					}
-					this.SendPropertyChanged("video");
+					this._start_time = value;
+					this.SendPropertyChanged("start_time");
+					this.Onstart_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_time", DbType="DateTime NOT NULL")]
+		public System.DateTime end_time
+		{
+			get
+			{
+				return this._end_time;
+			}
+			set
+			{
+				if ((this._end_time != value))
+				{
+					this.Onend_timeChanging(value);
+					this.SendPropertyChanging();
+					this._end_time = value;
+					this.SendPropertyChanged("end_time");
+					this.Onend_timeChanged();
 				}
 			}
 		}
@@ -3619,6 +3598,8 @@ namespace PFTSModel
 		private string _officer_name;
 		
 		private string _locker_name;
+		
+		private string _vest_name;
 		
 		public view_btracker_info()
 		{
@@ -3940,6 +3921,175 @@ namespace PFTSModel
 				if ((this._locker_name != value))
 				{
 					this._locker_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vest_name", DbType="VarChar(32)")]
+		public string vest_name
+		{
+			get
+			{
+				return this._vest_name;
+			}
+			set
+			{
+				if ((this._vest_name != value))
+				{
+					this._vest_name = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_btracker_video")]
+	public partial class view_btracker_video
+	{
+		
+		private int _id;
+		
+		private int _position_id;
+		
+		private int _camera_id;
+		
+		private System.DateTime _start_time;
+		
+		private System.DateTime _end_time;
+		
+		private string _filename;
+		
+		private string _video_name;
+		
+		private int _btracker_id;
+		
+		public view_btracker_video()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_position_id", DbType="Int NOT NULL")]
+		public int position_id
+		{
+			get
+			{
+				return this._position_id;
+			}
+			set
+			{
+				if ((this._position_id != value))
+				{
+					this._position_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_camera_id", DbType="Int NOT NULL")]
+		public int camera_id
+		{
+			get
+			{
+				return this._camera_id;
+			}
+			set
+			{
+				if ((this._camera_id != value))
+				{
+					this._camera_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_time", DbType="DateTime NOT NULL")]
+		public System.DateTime start_time
+		{
+			get
+			{
+				return this._start_time;
+			}
+			set
+			{
+				if ((this._start_time != value))
+				{
+					this._start_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_time", DbType="DateTime NOT NULL")]
+		public System.DateTime end_time
+		{
+			get
+			{
+				return this._end_time;
+			}
+			set
+			{
+				if ((this._end_time != value))
+				{
+					this._end_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_filename", DbType="VarChar(512) NOT NULL", CanBeNull=false)]
+		public string filename
+		{
+			get
+			{
+				return this._filename;
+			}
+			set
+			{
+				if ((this._filename != value))
+				{
+					this._filename = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_video_name", DbType="VarChar(65) NOT NULL", CanBeNull=false)]
+		public string video_name
+		{
+			get
+			{
+				return this._video_name;
+			}
+			set
+			{
+				if ((this._video_name != value))
+				{
+					this._video_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_id", DbType="Int NOT NULL")]
+		public int btracker_id
+		{
+			get
+			{
+				return this._btracker_id;
+			}
+			set
+			{
+				if ((this._btracker_id != value))
+				{
+					this._btracker_id = value;
 				}
 			}
 		}
@@ -4579,159 +4729,6 @@ namespace PFTSModel
 				if ((this._rfid_room_id != value))
 				{
 					this._rfid_room_id = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.view_btracker_video")]
-	public partial class view_btracker_video
-	{
-		
-		private int _id;
-		
-		private int _position_id;
-		
-		private int _camera_id;
-		
-		private System.DateTime _start_time;
-		
-		private System.DateTime _end_time;
-		
-		private string _filename;
-		
-		private string _video_name;
-		
-		private int _btracker_id;
-		
-		public view_btracker_video()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_position_id", DbType="Int NOT NULL")]
-		public int position_id
-		{
-			get
-			{
-				return this._position_id;
-			}
-			set
-			{
-				if ((this._position_id != value))
-				{
-					this._position_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_camera_id", DbType="Int NOT NULL")]
-		public int camera_id
-		{
-			get
-			{
-				return this._camera_id;
-			}
-			set
-			{
-				if ((this._camera_id != value))
-				{
-					this._camera_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_time", DbType="DateTime NOT NULL")]
-		public System.DateTime start_time
-		{
-			get
-			{
-				return this._start_time;
-			}
-			set
-			{
-				if ((this._start_time != value))
-				{
-					this._start_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_time", DbType="DateTime NOT NULL")]
-		public System.DateTime end_time
-		{
-			get
-			{
-				return this._end_time;
-			}
-			set
-			{
-				if ((this._end_time != value))
-				{
-					this._end_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_filename", DbType="VarChar(512) NOT NULL", CanBeNull=false)]
-		public string filename
-		{
-			get
-			{
-				return this._filename;
-			}
-			set
-			{
-				if ((this._filename != value))
-				{
-					this._filename = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_video_name", DbType="VarChar(65) NOT NULL", CanBeNull=false)]
-		public string video_name
-		{
-			get
-			{
-				return this._video_name;
-			}
-			set
-			{
-				if ((this._video_name != value))
-				{
-					this._video_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_btracker_id", DbType="Int NOT NULL")]
-		public int btracker_id
-		{
-			get
-			{
-				return this._btracker_id;
-			}
-			set
-			{
-				if ((this._btracker_id != value))
-				{
-					this._btracker_id = value;
 				}
 			}
 		}
