@@ -18,6 +18,7 @@ namespace PFTSHwCtrl
     #region Handler
     public delegate void VideoRecordCallback(PFTSModel.video video);
     public delegate void VideoRecordHandler(PFTSModel.view_camera_info camera, VideoRecordEvent e, VideoRecordCallback callback);
+    public delegate void StopRecordCallback();
     #endregion
 
     public class PFTSVideoRecordProxy
@@ -88,7 +89,32 @@ namespace PFTSHwCtrl
             }
         }
 
-        public class Room : IDisposable
+        public void StopAll(StopRecordCallback call)
+        {
+            int count = 0;
+            bool flag = false;
+            foreach (var r in m_mapRooms.Values)
+            {
+                if (r.StopRecord(delegate ()
+                       {
+                           count--;
+                           if (count == 0)
+                           {
+                               call();
+                           }
+                       }))
+                {
+                    flag = true;
+                    count++;
+                }
+            }
+            if (flag == false)
+            {
+                call();
+            }
+        }
+
+        public class Room
         {
             private PFTSModel.view_camera_info m_camera;
             private List<PFTSModel.btracker> m_btrackers;
@@ -209,48 +235,26 @@ namespace PFTSHwCtrl
                 }
             }
 
-            #region IDisposable Support
-            private bool disposedValue = false; // 要检测冗余调用
-
-            protected virtual void Dispose(bool disposing)
+            public bool StopRecord(StopRecordCallback call)
             {
-                if (!disposedValue)
+                if (m_bRecoding)
                 {
-                    if (disposing)
+                    Console.WriteLine(m_camera.room_name + "停止录制");
+                    if (VideoRecordDelegate != null)
                     {
-                        Console.WriteLine("停止录制");
-                        // TODO: 释放托管状态(托管对象)。
-                        if (VideoRecordDelegate != null)
+                        VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord, delegate (PFTSModel.video v)
                         {
-                            VideoRecordDelegate(m_camera, VideoRecordEvent.EndRecord, delegate (PFTSModel.video v)
+                            m_videoService.AddVideo(v, m_btrackers);
+                            if (call != null)
                             {
-                                m_videoService.AddVideo(v, m_btrackers);
-                            });
-                        }
+                                call();
+                            }
+                        });
+                        return true;
                     }
-
-                    // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
-                    // TODO: 将大型字段设置为 null。
-
-                    disposedValue = true;
                 }
+                return false;
             }
-
-            // TODO: 仅当以上 Dispose(bool disposing) 拥有用于释放未托管资源的代码时才替代终结器。
-            // ~Room() {
-            //   // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-            //   Dispose(false);
-            // }
-
-            // 添加此代码以正确实现可处置模式。
-            public void Dispose()
-            {
-                // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
-                Dispose(true);
-                // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
-                // GC.SuppressFinalize(this);
-            }
-            #endregion
         }
     }
 }

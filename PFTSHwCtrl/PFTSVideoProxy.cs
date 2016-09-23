@@ -239,6 +239,28 @@ namespace PFTSHwCtrl
         }
 
         /// <summary>
+        /// 保存当前录制的视频
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public bool SaveRecord(string filename)
+        {
+            if (!m_bRecord) return true;
+            if (!CHCNetSDK.NET_DVR_SaveRealData(m_lRealHandle,filename))
+            {
+                m_iLastErr = CHCNetSDK.NET_DVR_GetLastError();
+                m_lastErr = "NET_DVR_StopSaveRealData failed, error code= " + m_iLastErr;
+                return false;
+            }
+            else
+            {
+                //m_lastErr = "Successful to stop recording and the saved file is " + sVideoFileName;
+                m_bRecord = false;
+                return true;
+            }
+        }
+
+        /// <summary>
         /// 当前是否处于视频录制状态
         /// </summary>
         public bool IsRecording
