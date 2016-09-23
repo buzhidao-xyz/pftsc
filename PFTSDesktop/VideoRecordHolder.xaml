@@ -70,7 +70,7 @@
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/max.png"/>
                 </tmp:ButtonTemplet.Background>
             </tmp:ButtonTemplet>
-            <tmp:ButtonTemplet  Grid.Column="5" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" 
+            <!--<tmp:ButtonTemplet  Grid.Column="5" x:Name="btnExit" VerticalAlignment="Top" IsTabStop="False" 
                                 Width="27" Height="22" Click="btnExit_Click">
                 <tmp:ButtonTemplet.MyMoverBrush>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xm.png" />
@@ -81,7 +81,7 @@
                 <tmp:ButtonTemplet.Background>
                     <ImageBrush ImageSource="/PFTSDesktop;component/Images/Button/xn.png"/>
                 </tmp:ButtonTemplet.Background>
-            </tmp:ButtonTemplet>
+            </tmp:ButtonTemplet>-->
 
         </Grid>
         <Grid Grid.Row="1" Background="White">
