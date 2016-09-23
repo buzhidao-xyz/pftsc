@@ -509,6 +509,7 @@ namespace PFTSDesktop.ViewModel
         }
         public void AddSupectPage(Object obj)
         {
+            SuspectModel = new Model.SuspectModel();
             AddSuspectDlg dlg = new AddSuspectDlg();
             dlg.ShowDialog();
             //ButtonEX btn = (ButtonEX)obj;

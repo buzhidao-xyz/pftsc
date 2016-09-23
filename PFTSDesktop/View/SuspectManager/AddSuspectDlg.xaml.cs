@@ -63,6 +63,7 @@ namespace PFTSDesktop.View.SuspectManager
                         if (v.id == vest.id)
                         {
                             m_model.DevVest = v;
+                            cmbVest.SelectedIndex = m_model.DevVests.FindIndex(c => c.id == v.id);
                             break;
                         }
                     }

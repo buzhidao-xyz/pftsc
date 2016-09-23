@@ -38,7 +38,6 @@ namespace PFTSDesktop.ViewModel
 
             _lockerAddModel = new LockerModel();
             _lockerModel = new LockerModel();
-            initData();
         }
 
         public static LockerManagerViewModel GetInstance()
@@ -171,6 +170,15 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
+                TotalCount = lockerService.GetCount(null);
+                if (TotalCount == 0)
+                {
+                    _lockerList = new List<view_locker_info>();
+                }
+                else
+                {
+                    _lockerList = lockerService.GetPageByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+                }
                 return _lockerList;
             }
             set

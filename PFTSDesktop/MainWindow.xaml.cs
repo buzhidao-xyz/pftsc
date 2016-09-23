@@ -73,6 +73,7 @@ namespace PFTSDesktop
             {
                 m_videoRecorder = new PFTSHwCtrl.PFTSVideoRecordProxy();
                 m_recordHolder = new VideoRecordHolder();
+                m_recordHolder.Visibility = Visibility.Hidden;
                 m_recordHolder.Show();
                 m_videoRecorder.VideoRecordDelegate += M_videoRecorder_VideoRecordDelegate;
                 m_videoRecorder.LoadRooms();

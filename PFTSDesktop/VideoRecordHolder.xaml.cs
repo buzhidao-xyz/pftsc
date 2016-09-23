@@ -14,13 +14,14 @@ using System.Windows.Shapes;
 using PFTSModel;
 using PFTSDesktop.View.Monitoring;
 using System.IO;
+using PFTSUITemplate.Controls;
 
 namespace PFTSDesktop
 {
     /// <summary>
     /// VideoRecordHolder.xaml 的交互逻辑
     /// </summary>
-    public partial class VideoRecordHolder : Window
+    public partial class VideoRecordHolder : WindowTemplet
     {
         private Dictionary<int, view_camera_info> m_mapCameras = new Dictionary<int, view_camera_info>();
         private Dictionary<int, VideoRecordHolderItem> m_mapRecordItems = new Dictionary<int, VideoRecordHolderItem>();

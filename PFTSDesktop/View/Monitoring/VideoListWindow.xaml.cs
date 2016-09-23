@@ -49,8 +49,8 @@ namespace PFTSDesktop.View.Monitoring
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           string aa = GetVideoLength.GetMediaTimeLen(@"D:\fff111.mp4");
-            service = new BTrackerService();
+           string aa = GetVideoLength.GetMediaTimeLen("D:\\fff111.mp4");
+            service = new BTrackerService(); 
             if (btracker_id != null)
             {
                 List<view_btracker_video> videos = service.GetVideoByBtracker(btracker_id.Value);

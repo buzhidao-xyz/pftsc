@@ -37,7 +37,6 @@ namespace PFTSDesktop.ViewModel
 
             _vestAddModel = new VestModel();
             _vestModel = new VestModel();
-            initData();
         }
 
 
@@ -235,6 +234,15 @@ namespace PFTSDesktop.ViewModel
         {
             get
             {
+                TotalCount = vestService.GetVestCount(null);
+                if (TotalCount == 0)
+                {
+                    _vestList = new List<view_vest_info>();
+                }
+                else
+                {
+                    _vestList = vestService.GetPageVestByStatus(null, (PageIndex - 1) * PageSize, PageSize);
+                }
                 return _vestList;
             }
             set
