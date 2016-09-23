@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PFTSDesktop.View.SuspectManager
 {
@@ -50,24 +52,29 @@ namespace PFTSDesktop.View.SuspectManager
 
         private void RfidReader_RFIDNoReaderDelegate(List<string> rfidNos)
         {
-            foreach (var l in rfidNos)
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
             {
-                if (m_lastVestNo == l) { continue; }
-                //TODO: for test
-                var no = l.Substring(0, 8);
-                var vest = (new PFTSModel.DevVestService()).GetByNo(no, null, null);
-                if (vest != null)
+                foreach (var l in rfidNos)
                 {
-                    foreach (var v in m_model.DevVests)
+                    if (m_lastVestNo == l) { continue; }
+                    //TODO: for test
+                    var no = l.Substring(0, 8);
+                    var vest = (new PFTSModel.DevVestService()).GetByNo(no, null, null);
+                    if (vest != null)
                     {
-                        if (v.id == vest.id)
+                        //                    foreach (var v in m_model.DevVests)
+                        for (var i = 0; i < m_model.DevVests.Count; i++)
                         {
-                            m_model.DevVest = v;
-                            break;
+                            if (m_model.DevVests[i].id == vest.id)
+                            {
+                                m_model.DevVest = m_model.DevVests[i];
+                                cmbVest.SelectedIndex = i;
+                                break;
+                            }
                         }
                     }
                 }
-            }
+            });
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)

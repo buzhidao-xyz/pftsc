@@ -120,8 +120,8 @@
             <Label Content="RFID服装："  Grid.Row="7" Grid.Column="1"/>
             <ComboBox  Name="cmbVest"
 			Grid.Row="7" Grid.Column="2"
-				   ItemsSource="{Binding DevVests, Mode=OneTime}"
-				   SelectedItem="{Binding DevVest, ValidatesOnDataErrors=True}"
+				   ItemsSource="{Binding DevVests, Mode=OneWay}"
+				   SelectedItem="{Binding DevVest, ValidatesOnDataErrors=True, Mode=TwoWay}"
 				   DisplayMemberPath="name"
 				   Validation.ErrorTemplate="{x:Null}"/>
             <ContentPresenter  Grid.Row="7" Grid.Column="3" Content="{Binding ElementName=cmbVest, Path=(Validation.Errors).CurrentItem}"/>
