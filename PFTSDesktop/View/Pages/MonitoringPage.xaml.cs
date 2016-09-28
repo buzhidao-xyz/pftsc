@@ -26,7 +26,7 @@ namespace PFTSDesktop.View.Pages
         {
             InitializeComponent();
             // 监控模式
-            controlScene.CameraMode = PFTSScene.CameraMode.Hidden;
+            controlScene.CameraMode = PFTSScene.CameraMode.Monitoring;
             controlScene.RFIDMode = PFTSScene.RFIDMode.Monitoring;
             controlScene.BTrackerRealVideoDelegate += ControlScene_BTrackerRealVideo;
             controlScene.RoomRealVideoDelegate += ControlScene_RoomRealVideoDelegate;

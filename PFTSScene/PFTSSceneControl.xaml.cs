@@ -388,16 +388,30 @@ namespace PFTSScene
                     var menuItem1 = new MenuItem();
                     menuItem1.Header = "实时监控";
                     var menuItem2 = new MenuItem();
-                    menuItem2.Header = "历史画面";
-                    var menuItem3 = new MenuItem();
-                    menuItem3.Header = "取消";
+                    menuItem2.Header = "取消";
                     ctxMenu.Items.Add(menuItem1);
                     ctxMenu.Items.Add(menuItem2);
-                    ctxMenu.Items.Add(menuItem3);
+                    menuItem1.Tag = pr.room_id;
+                    menuItem1.Click += CameraRealVideo_Click;
                     m_mapCameraMenu.Add(pr.id, ctxMenu);
                     img.MouseUp += ImgCamera_MouseUp;
                 }
             }
+        }
+
+        private void CameraRealVideo_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem mi = (MenuItem)sender;
+            var rid = (int)mi.Tag;
+            if (m_mapGridRooms.ContainsKey(rid))
+            {
+                var rm = m_mapGridRooms[rid].RoomInfo;
+                if (RoomRealVideoDelegate != null)
+                {
+                    RoomRealVideoDelegate(rm);
+                }
+            }
+            
         }
 
         /// <summary>

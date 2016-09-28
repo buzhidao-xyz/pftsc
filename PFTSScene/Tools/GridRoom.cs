@@ -38,11 +38,11 @@ namespace PFTSScene.Tools
             m_metaX = mx;
             m_metaY = my;
             m_room = room;
-            this.Background = Brushes.Transparent;
-            this.Cursor = Cursors.Hand;
+//            this.Background = Brushes.Transparent;
+//            this.Cursor = Cursors.Hand;
             this.SizeChanged += GridRoom_SizeChanged;
             this.Loaded += GridRoom_Loaded;
-            this.MouseUp += GridRoom_MouseUp;
+//            this.MouseUp += GridRoom_MouseUp;
 
             m_toolTip = new ToolTip();
             m_lblToolTip = new Label();
