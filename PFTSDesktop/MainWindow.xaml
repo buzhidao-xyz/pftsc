@@ -15,6 +15,7 @@
                    MoveHeight="114"
                    WindowStartupLocation="CenterScreen"
                    WindowState="Maximized"
+                   ResizeMode="NoResize"
                    x:Name="main"
                   
                    mc:Ignorable="d">

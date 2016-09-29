@@ -171,6 +171,8 @@ namespace PFTSDesktop
         /// <param name="e"></param>
         private void btnSysMax_Click(object sender, RoutedEventArgs e)
         {
+            return;
+
             if (this.WindowState == WindowState.Normal)
             {
                 this.WindowState = WindowState.Maximized;
