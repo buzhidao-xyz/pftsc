@@ -22,6 +22,7 @@ namespace PFTSModel.Services
                     System.Data.Linq.Table<btracker> table = db.GetTable<btracker>();
                     var query = from q in table
                                 where q.status == 0
+                                orderby q.in_room_time
                                 select q;
                     return query.ToList<btracker>();
                 }

@@ -179,11 +179,11 @@ namespace PFTSDesktop.common
             string strType = "";
             if (status == 1)
             {
-                strType = "已搜身";
+                strType = "已采集";
             }
             else
             {
-                strType = "未搜身";
+                strType = "未采集";
             }
             return strType;
         }
@@ -210,11 +210,11 @@ namespace PFTSDesktop.common
             string strType = "";
             if (status == 1)
             {
-                strType = "已采集";
+                strType = "已搜身";
             }
             else
             {
-                strType = "未采集";
+                strType = "未搜身";
             }
             return strType;
         }

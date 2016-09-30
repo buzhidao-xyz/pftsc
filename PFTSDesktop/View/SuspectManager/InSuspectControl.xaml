@@ -20,8 +20,8 @@
             </i:Interaction.Triggers>
             <ele:PageDataGridEx.ContextMenu>
                 <ContextMenu StaysOpen="true">
-                    <MenuItem Header="搜  身" Command="{Binding SuspectGatherCommand}"/>
-                    <MenuItem Header="采  集" Command="{Binding SuspectFriskCommand}"/>
+                    <MenuItem Header="搜  身" Command="{Binding SuspectFriskCommand}"/>
+                    <MenuItem Header="采  集" Command="{Binding SuspectGatherCommand}"/>
                     <MenuItem Command="{Binding CheckGoodsCommand}"
                               Header="查看物品"/>
                     <MenuItem Command="{Binding SuspectTransferDlgCommand}"
@@ -35,8 +35,8 @@
                 <DataGridTextColumn Header="性别" Binding="{Binding sex}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="案卷号" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="负责民警" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="搜身状态" Binding="{Binding gather_status,Converter={conver:GatherStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
-                <DataGridTextColumn Header="采集状态" Binding="{Binding frisk_status,Converter={conver:FriskStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="搜身状态" Binding="{Binding frisk_status,Converter={conver:FriskStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="采集状态" Binding="{Binding gather_status,Converter={conver:GatherStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="在监状态" Binding="{Binding status,Converter={conver:SuspectStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="储物柜" Binding="{Binding locker_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="收监日期" Binding="{Binding in_time,StringFormat='yyyy-MM-dd HH:mm'}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>

@@ -535,7 +535,11 @@ namespace PFTSScene
                 img.MouseUp += Img_MouseUp;
                 m_mapBtrackers.Add(btracker.id, btracker);
                 m_mapPeopleImage.Add(btracker.id, img);
-                textMsg.Debug(btracker.name + "进入了房间(" + gr.RoomInfo.name + ")");
+                //[yyyy年MM-dd HH:mm:ss]
+                if (btracker.in_room_time == null) return;
+                string info = string.Format("[{0}]{1}进入了房间{2}", btracker.in_room_time.Value.ToString("yyyy年MM-dd HH:mm:ss"),btracker.name,gr.RoomInfo.name);
+                //textMsg.Debug(btracker.name + "进入了房间(" + gr.RoomInfo.name + ")",false);
+                textMsg.Debug(info, false);
             }
             //}
             //else

@@ -117,7 +117,8 @@ namespace PFTSScene.Tools
                 return;
             }
             m_util = new Tools.GridUtil(this.ActualHeight, this.ActualWidth, m_metaX, m_metaY);
-            m_pointsStack = m_util.Product(m_preCount);
+            int cMin = m_preCount > m_images.Count ? m_preCount : m_images.Count;
+            m_pointsStack = m_util.Product(cMin);
             for (int i = 0;i < m_images.Count;i++)
             {
                 GridUtil.Point p = m_pointsStack[i];
