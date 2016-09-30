@@ -15,6 +15,7 @@
                    MoveHeight="114"
                    WindowStartupLocation="CenterScreen"
                    WindowState="Maximized"
+                   ResizeMode="NoResize"
                    x:Name="main"
                   
                    mc:Ignorable="d">
@@ -31,13 +32,18 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5" />
-            <RowDefinition Height="24" />
-            <RowDefinition Height="90" />
+            <RowDefinition Height="4" />
+            <RowDefinition Height="115" />
+            <RowDefinition Height="0" />
             <RowDefinition/>
-            <RowDefinition Height="27"/>
+            <RowDefinition Height="17"/>
         </Grid.RowDefinitions>
+        <Grid x:Name="gridTopBar" Grid.Row="0" Background="#FF1C1CD2">
+        </Grid>
         <Grid x:Name="gridTitleBar" Grid.Row="1">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images/mainwindow_banner.png"/>
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
@@ -98,7 +104,6 @@
 
         </Grid>
         <Grid Grid.Row="2">
-
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -119,6 +124,9 @@
                 <Rectangle Height="1" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="{DynamicResource rectStyle}"/>
             </StackPanel>
             <Frame Background="White" x:Name="PageContext" Grid.Column="1" BorderBrush="LightBlue" BorderThickness="1" NavigationUIVisibility="Hidden"/>
+        </Grid>
+        <Grid x:Name="gridStatusBar" Grid.Row="4" Background="#FF1C1CD2">
+            
         </Grid>
     </Grid>
 </tmp:WindowTemplet>
