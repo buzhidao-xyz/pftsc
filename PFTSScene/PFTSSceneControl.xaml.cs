@@ -446,13 +446,22 @@ namespace PFTSScene
         /// </summary>
         /// <param name="origin"></param>
         /// <param name="dest"></param>
-        private void PathTo(Grid origin, Grid dest)
+        private void PathTo(Grid origin, FrameworkElement dest)
         {
             var transformStart = origin.TransformToAncestor(this.baseGrid);
             Point pointStart = transformStart.Transform(new Point(origin.ActualWidth / 2, origin.ActualHeight / 2));
 
+            //Point pointEnd;
+            //if (endImg != null)
+            //{
+            //    var transformEnd = dest.TransformToAncestor(this.baseGrid);
+            //    pointEnd = transformEnd.Transform(new Point(endImg.ActualWidth / 2, endImg.ActualHeight / 2));
+            //}
+            //else
+            //{
             var transformEnd = dest.TransformToAncestor(this.baseGrid);
             Point pointEnd = transformEnd.Transform(new Point(dest.ActualWidth / 2, dest.ActualHeight / 2));
+            //}
 
             var arrow = new Tools.Arrow();
             arrow.X1 = pointStart.X;
@@ -629,14 +638,34 @@ namespace PFTSScene
 
         public void PathOut(int btrackerId, bool opt = true)
         {
-            var paths = (new PFTSModel.Services.BTrackerService()).GetPaths(btrackerId);
-            foreach (var p in paths)
+            var service = new PFTSModel.Services.BTrackerService();
+            var btr = service.Get(btrackerId);
+            var paths = service.GetPaths(btrackerId);
+            // 场内
+            if (btr.status == 0 && m_mapPeopleImage.ContainsKey(btrackerId) && paths.Count > 0)
             {
-                int o = p.start_room_id;
-                int d = p.end_room_id;
-                if (m_mapRooms.ContainsKey(o) && m_mapRooms.ContainsKey(d))
+                for (var i = 0;i < paths.Count - 1; i++)
                 {
-                    PathTo(m_mapRooms[o], m_mapRooms[d]);
+                    var p = paths[i];
+                    int o = p.start_room_id;
+                    int d = p.end_room_id;
+                    if (m_mapRooms.ContainsKey(o) && m_mapRooms.ContainsKey(d))
+                    {
+                        PathTo(m_mapRooms[o], m_mapRooms[d]);
+                    }
+                }
+                int oe = paths[paths.Count - 1].start_room_id;
+                PathTo(m_mapRooms[oe], m_mapPeopleImage[btrackerId]);
+            }else
+            {
+                foreach (var p in paths)
+                {
+                    int o = p.start_room_id;
+                    int d = p.end_room_id;
+                    if (m_mapRooms.ContainsKey(o) && m_mapRooms.ContainsKey(d))
+                    {
+                        PathTo(m_mapRooms[o], m_mapRooms[d]);
+                    }
                 }
             }
             if (opt)
@@ -776,7 +805,7 @@ namespace PFTSScene
         {
             public Tools.Arrow ArrowD;
             public Grid RoomOrigin;
-            public Grid RoomDest;
+            public FrameworkElement RoomDest;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
