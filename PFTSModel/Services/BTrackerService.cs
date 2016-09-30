@@ -367,6 +367,7 @@ namespace PFTSModel.Services
                     var optPaths = OptimizationPath(db, bt.room_id.Value, position.room_id.Value);
                     if (optPaths.Count > 0)
                     {
+                        optPaths.Insert(0, bt.room_id.Value);
                         optPaths.Add(position.room_id.Value);
                         for (int i = 0; i < optPaths.Count - 1; i++)
                         {

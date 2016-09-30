@@ -49,22 +49,35 @@
                 <ColumnDefinition Width="180*"/>
                 <ColumnDefinition Width="76*"/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="room1" Grid.Row="9" Grid.Column="15" Grid.ColumnSpan="2" Tag="1">
-                <Image x:Name="imgRfid1" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
-                <Image x:Name="imgCamera1" Tag="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left"/>
-                <!--<tools:GridRoom x:Name="gridRoom1"></tools:GridRoom>-->
+            <Grid Grid.Row="9" Grid.Column="14" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="310*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room1" Grid.Row="0" Grid.Column="1" Tag="1">
+                    <Image x:Name="imgRfid1" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                    <Image x:Name="imgCamera1" Tag="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left"/>
+                    <!--<tools:GridRoom x:Name="gridRoom1"></tools:GridRoom>-->
+                </Grid>
             </Grid>
-            <Grid x:Name="room2" Grid.Row="8" Grid.Column="16" Grid.ColumnSpan="1" Tag="2">
-                <Image x:Name="imgRfid2" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
-                <Image x:Name="imgCamera2" Tag="2" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left"/>
+            <Grid Grid.Row="8" Grid.Column="15" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="230*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room2" Grid.Column="16" Grid.ColumnSpan="1" Tag="2">
+                    <Image x:Name="imgRfid2" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                    <Image x:Name="imgCamera2" Tag="2" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left"/>
+                </Grid>
             </Grid>
+            
             <Grid Grid.Row="7" Grid.Column="16" Grid.ColumnSpan="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*"/>
                         <ColumnDefinition Width="150*"/>
+                        <ColumnDefinition Width="30*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid x:Name="room3" Grid.Column="1" Tag="3">
+                    <Grid x:Name="room3" Grid.Column="0" Tag="3">
                         <Image x:Name="imgRfid3" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
                         <Image x:Name="imgCamera3" Tag="3" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Grid>
@@ -73,34 +86,48 @@
             <Grid Grid.Row="5" Grid.RowSpan="2" Grid.Column="16" Grid.ColumnSpan="1" >
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="160*"/>
+                        <ColumnDefinition Width="150*"/>
+                        <ColumnDefinition Width="30*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid x:Name="room4" Grid.Column="1" Tag="4">
+                    <Grid x:Name="room4" Grid.Column="0" Tag="4">
                         <Image x:Name="imgRfid4" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
                         <Image x:Name="imgCamera4" Tag="4" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="6" Grid.RowSpan="2" Grid.Column="15">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.4*"/>
-                    <ColumnDefinition Width="0.6*"/>
-                </Grid.ColumnDefinitions>
-                <Grid x:Name="room33" Grid.Column="1" Tag="33">
+            <Grid Grid.Row="5" Grid.RowSpan="3" Grid.Column="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.55*"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="room33" Grid.Row="1" Tag="33">
                     <Image x:Name="imgRfid33" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
                     <Image x:Name="imgCamera31" Tag="31" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="room34" Grid.Row="3" Grid.Column="15" Tag="34">
-                <Image x:Name="imgRfid34" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
-                <Image x:Name="imgCamera32" Tag="32" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Grid Grid.Row="3" Grid.Column="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room34" Tag="34">
+                    <Image x:Name="imgRfid34" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                    <Image x:Name="imgCamera32" Tag="32" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                </Grid>
             </Grid>
-            <Grid x:Name="room8" Tag="8" Grid.Row="0" Grid.RowSpan="2" Grid.Column="14" Grid.ColumnSpan="2">
-                <Image x:Name="imgRfid8" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
-                <Image x:Name="imgCamera8" Tag="8" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            
+            <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="14" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.75*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room8" Tag="8">
+                    <Image x:Name="imgRfid8" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                    <Image x:Name="imgCamera8" Tag="8" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                </Grid>
             </Grid>
-
+            
             <Grid x:Name="room29" Tag="29" Grid.Row="8" Grid.Column="13" Grid.ColumnSpan="2">
                 <Image x:Name="imgRfid29" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
                 <Image x:Name="imgCamera27" Tag="27" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
@@ -116,19 +143,37 @@
                 <Image x:Name="imgCamera6" Tag="6" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             </Grid>
 
-            <Grid x:Name="room7" Tag="7" Grid.Row="3" Grid.Column="13" Grid.ColumnSpan="2">
-                <Image x:Name="imgRfid7" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
-                <Image x:Name="imgCamera7" Tag="7" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Grid Grid.Row="3" Grid.Column="13" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.9*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room7" Tag="7">
+                    <Image x:Name="imgRfid7" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                    <Image x:Name="imgCamera7" Tag="7" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+            
+            <Grid Grid.Row="2" Grid.Column="13" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room35" Tag="35">
+                    <Image x:Name="imgRfid35" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                    <Image x:Name="imgCamera33" Tag="33" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                </Grid>
             </Grid>
 
-            <Grid x:Name="room35" Tag="35" Grid.Row="2" Grid.Column="13">
-                <Image x:Name="imgRfid35" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
-                <Image x:Name="imgCamera33" Tag="33" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            </Grid>
-
-            <Grid x:Name="room9" Tag="9" Grid.Row="0" Grid.RowSpan="2" Grid.Column="12" Grid.ColumnSpan="2">
-                <Image x:Name="imgRfid9" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
-                <Image x:Name="imgCamera9" Tag="9" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="12" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.9*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="room9" Tag="9">
+                    <Image x:Name="imgRfid9" Style="{StaticResource ResourceKey=imageRfidStyle}"/>
+                    <Image x:Name="imgCamera9" Tag="9" Grid.Column="1" Style="{StaticResource ResourceKey=imageCameraStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Grid>
             </Grid>
 
             <Grid x:Name="room30" Tag="30" Grid.Row="8" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1">
