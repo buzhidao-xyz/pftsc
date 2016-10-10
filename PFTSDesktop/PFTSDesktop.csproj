@@ -147,6 +147,9 @@
     <Compile Include="View\DeviceManager\VestManagerControl.xaml.cs">
       <DependentUpon>VestManagerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Monitoring\VideoConcat.xaml.cs">
+      <DependentUpon>VideoConcat.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Monitoring\VideoListWindow.xaml.cs">
       <DependentUpon>VideoListWindow.xaml</DependentUpon>
     </Compile>
@@ -289,6 +292,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Monitoring\VideoConcat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Monitoring\VideoListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -403,7 +410,6 @@
     <None Include="lib\HCNetSDKCom\HCAlarm.lib" />
     <None Include="lib\HCNetSDKCom\HCGeneralCfgMgr.lib" />
     <None Include="lib\HCNetSDKCom\HCPreview.lib" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -500,6 +506,7 @@
     <Resource Include="Images\播放.png" />
     <Resource Include="Images\暂停.png" />
     <Content Include="lib\AudioRender.dll" />
+    <Content Include="lib\ffmpeg.exe" />
     <Content Include="lib\HCCore.dll" />
     <Content Include="lib\HCNetSDK.dll" />
     <Content Include="lib\HCNetSDKCom\AnalyzeData.dll" />
