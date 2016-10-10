@@ -8,7 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
     <!--输入组件-->
     <SolidColorBrush x:Key="TextForeground" Color="#666666"></SolidColorBrush>
-    <SolidColorBrush x:Key="CombForeground" Color="#17b38e"></SolidColorBrush>
+    <SolidColorBrush x:Key="CombForeground" Color="#FF1C1CD2"></SolidColorBrush>
     <SolidColorBrush x:Key="TextBackground" Color="#0D234B"></SolidColorBrush>
     <SolidColorBrush x:Key="TextSelectionBrush" Color="#8F8787"></SolidColorBrush>
 
@@ -76,9 +76,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Border Grid.ColumnSpan="2" BorderThickness="1,1,1,1" BorderBrush="#7debd2"/>
+                        <Border Grid.ColumnSpan="2" BorderThickness="1,1,1,1" BorderBrush="#FF1C1CD2"/>
                         <Border Background="{TemplateBinding Background}" x:Name="Bg" Grid.ColumnSpan="2"
-                                BorderThickness="1,1,1,1" BorderBrush="#7debd2" 
+                                BorderThickness="1,1,1,1" BorderBrush="#FF1C1CD2" 
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"  Opacity="0"/>
                       
                         <TextBlock Grid.Column="1" x:Name="FIcon" FontSize="{Binding Path=(local:ControlAttachProperty.FIconSize),RelativeSource={RelativeSource TemplatedParent}}"

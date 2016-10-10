@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Background="#f2f2f2">
@@ -43,7 +44,7 @@
         </StackPanel>
         <tmp:ButtonEX Name="btnAddSuspect" Grid.Row="1" Content="新增嫌疑人" VerticalAlignment="Top"  HorizontalAlignment="Right" Tag="View/SuspectManager/AddSuspectPage.xaml"
                       Margin="0,12,100,0" Width="90" Height="26" Command="{Binding AddSupcetPageCommand}" CommandParameter="{Binding ElementName=btnAddSuspect}"/>
-
-        <ContentControl Content="{Binding Workspace}" Grid.Row="2"/>
+        <Rectangle Name="HorizontalSeparator" Grid.Row="2" Height="2" Margin="5,0,5,0" HorizontalAlignment="Stretch" Fill="#cde8e2"/>
+        <ContentControl Content="{Binding Workspace}" Grid.Row="3"/>
     </Grid>
 </Page>

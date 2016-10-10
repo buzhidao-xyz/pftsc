@@ -42,6 +42,8 @@ namespace PFTSDesktop.ViewModel
         private bool _recover;
         private string _remark;
         private int? status = 0;
+        private string inNo, inName,allNo,allName;
+        private DateTime? inTimeStart, inTimeEnd,allTimeStart,allTimeEnd;
         private ContentControl _workSpace;
         private AllSuspectControl allSuspectControl;
         private InSuspectControl insuspectContrl;
@@ -49,6 +51,14 @@ namespace PFTSDesktop.ViewModel
         private RelayCommand _friskCommand;
         private RelayCommand _videoCommand;
         private RelayCommand _trackCommand;
+        private string _inSuspectName;
+        private string _allSuspectName;
+        private string _inSuspectNo;
+        private string _allSuspectNo;
+        private DateTime? _inTimeStart;
+        private DateTime? _allTimeStart;
+        private DateTime? _inTimeEnd;
+        private DateTime? _allTimeEnd;
         #endregion
 
         public SuspectViewModel()
@@ -316,6 +326,125 @@ namespace PFTSDesktop.ViewModel
                 base.OnPropertyChanged("Workspace");
             }
         }
+
+        public string InSuspectName
+        {
+            get
+            {
+                return _inSuspectName;
+            }
+            set
+            {
+                if (value == _inSuspectName)
+                    return;
+                _inSuspectName = value;
+                base.OnPropertyChanged("InSuspectName");
+            }
+        }
+
+        public string AllSuspectName
+        {
+            get
+            {
+                return _allSuspectName;
+            }
+            set
+            {
+                if (value == _allSuspectName)
+                    return;
+                _allSuspectName = value;
+                base.OnPropertyChanged("AllSuspectName");
+            }
+        }
+
+        public string InSuspectNo
+        {
+            get
+            {
+                return _inSuspectNo;
+            }
+            set
+            {
+                if (value == _inSuspectNo)
+                    return;
+                _inSuspectNo = value;
+                base.OnPropertyChanged("InSuspectNo");
+            }
+        }
+
+        public string AllSuspectNo
+        {
+            get
+            {
+                return _allSuspectNo;
+            }
+            set
+            {
+                if (value == _allSuspectNo)
+                    return;
+                _allSuspectNo = value;
+                base.OnPropertyChanged("AllSuspectNo");
+            }
+        }
+
+        public DateTime? InTimeStart
+        {
+            get
+            {
+                return _inTimeStart;
+            }
+            set
+            {
+                if (value == _inTimeStart)
+                    return;
+                _inTimeStart = value;
+                base.OnPropertyChanged("InTimeStart");
+            }
+        }
+       
+        public DateTime? AllTimeStart
+        {
+            get
+            {
+                return _allTimeStart;
+            }
+            set
+            {
+                if (value == _allTimeStart)
+                    return;
+                _allTimeStart = value;
+                base.OnPropertyChanged("AllTimeStart");
+            }
+        }
+        public DateTime? InTimeEnd
+        {
+            get
+            {
+                return _inTimeEnd;
+            }
+            set
+            {
+                if (value == _inTimeEnd)
+                    return;
+                _inTimeEnd = value;
+                base.OnPropertyChanged("InTimeEnd");
+            }
+        }
+
+        public DateTime? AllTimeEnd
+        {
+            get
+            {
+                return _allTimeEnd;
+            }
+            set
+            {
+                if (value == _allTimeEnd)
+                    return;
+                _allTimeEnd = value;
+                base.OnPropertyChanged("AllTimeEnd");
+            }
+        }
         #endregion
 
         #region command
@@ -476,10 +605,78 @@ namespace PFTSDesktop.ViewModel
                 return _trackCommand;
             }
         }
+
+        /// <summary>
+        /// 重置在监人员搜索条件
+        /// </summary>
+        public ICommand InResetCommand
+        {
+            get
+            {
+                return new RelayCommand(param => this.InReset());
+            }
+        }
+        /// <summary>
+        /// 重置所有嫌犯搜索条件
+        /// </summary>
+        public ICommand AllResetCommand
+        {
+            get
+            {
+                return new RelayCommand(param => this.AllReset());
+            }
+        }
+
+        public ICommand SelectInSuspectCommand
+        {
+            get
+            {
+                return new RelayCommand(param => this.SelectInSuspect());
+            }
+        }
+
+        public ICommand SelectAllSuspectCommand
+        {
+            get
+            {
+                return new RelayCommand(param => this.SelectAllSuspect());
+            }
+        }
         #endregion
 
         #region 方法
+        public void SelectInSuspect()
+        {
+            inName = InSuspectName;
+            inNo = InSuspectNo;
+            inTimeStart = InTimeStart;
+            inTimeEnd = InTimeEnd;
+            initData();
+        }
 
+        public void SelectAllSuspect()
+        {
+            allName = AllSuspectName;
+            allNo = AllSuspectNo;
+            allTimeStart = AllTimeStart;
+            allTimeEnd = AllTimeEnd;
+            initData();
+        }
+        public void InReset()
+        {
+            InSuspectName = "";
+            InSuspectNo = "";
+            InTimeStart =null;
+            InTimeEnd = null;
+        }
+
+        public void AllReset()
+        {
+            AllSuspectName = "";
+            AllSuspectNo = "";
+            AllTimeStart = null;
+            AllTimeEnd =null;
+        }
         public void SuspectTransferDlg(Object obj)
         {
             Remark = _selectedBtracker.remark;
@@ -571,6 +768,8 @@ namespace PFTSDesktop.ViewModel
                     insuspectContrl = new InSuspectControl(); ;
                 Workspace = insuspectContrl;
                 status = 0;
+
+               
             }
             else
             {
@@ -578,6 +777,7 @@ namespace PFTSDesktop.ViewModel
                     allSuspectControl = new AllSuspectControl(); ;
                 Workspace = allSuspectControl;
                 status = null;
+               
             }
             initData();
         }
@@ -621,10 +821,10 @@ namespace PFTSDesktop.ViewModel
             PFTSModel.dev_camera camera = (new PFTSModel.Services.CameraPositionService()).GetByRoomId(SelectedBreacker.room_id.Value);
             if (camera == null)
             {
-                MessageWindow.Show("未检测到该区域的摄像头信息","系统提示");
+                MessageWindow.Show("未检测到该区域的摄像头信息", "系统提示");
                 return;
             }
-            VideoListWindow vw = new VideoListWindow(camera,SelectedBreacker.id);
+            VideoListWindow vw = new VideoListWindow(camera, SelectedBreacker.id);
             vw.Show();
         }
         /// <summary>
@@ -708,19 +908,43 @@ namespace PFTSDesktop.ViewModel
         }
         private void QueryData()
         {
-            Btrackers = _supectService.GetPageByStatus(status, (PageIndex - 1) * PageSize, PageSize);
+            if (status == null)
+            {
+                Btrackers = _supectService.GetPageByStatus(status, allName, allNo, allTimeStart, allTimeEnd, (PageIndex - 1) * PageSize, PageSize);
+            }
+            else
+            {
+                Btrackers = _supectService.GetPageByStatus(status, inName, inNo, inTimeStart, inTimeEnd, (PageIndex - 1) * PageSize, PageSize);
+            }
         }
 
         private void initData()
         {
-            TotalCount = _supectService.GetCount(status);
-            if (TotalCount == 0)
+            if (status == null)
             {
-                Btrackers = new List<view_btracker_info>();
+                TotalCount = _supectService.GetCount(status, allName, allNo, allTimeStart, allTimeEnd);
+                if (TotalCount == 0)
+                {
+                    Btrackers = new List<view_btracker_info>();
+                }
+                else
+                {
+                    Btrackers = _supectService.GetPageByStatus(status, allName, allNo, allTimeStart, allTimeEnd, (PageIndex - 1) * PageSize, PageSize);
+                }
+              
             }
             else
             {
-                Btrackers = _supectService.GetPageByStatus(status, (PageIndex - 1) * PageSize, PageSize);
+                TotalCount = _supectService.GetCount(status, inName, inNo, inTimeStart, inTimeEnd);
+                if (TotalCount == 0)
+                {
+                    Btrackers = new List<view_btracker_info>();
+                }
+                else
+                {
+                    Btrackers = _supectService.GetPageByStatus(status, inName, inNo, inTimeStart, inTimeEnd, (PageIndex - 1) * PageSize, PageSize);
+                }
+                
             }
         }
         #endregion

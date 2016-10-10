@@ -466,7 +466,7 @@ namespace PFTSUITemplate.Controls
             {
                 PageCount = Total / PageSize;
             }
-            PageIndex = PageCount;
+            //PageIndex = PageCount;
             RaisePageChanged();
         }
 

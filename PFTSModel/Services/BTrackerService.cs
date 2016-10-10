@@ -216,12 +216,12 @@ namespace PFTSModel.Services
                 if (s_paths == null)
                 {
                     s_paths = new List<int[]>();
-                    s_paths.Add(new int[] {1,2,33,34,35,36,38,39,41,42,32,31,30,29 });
-                    s_paths.Add(new int[] { 1, 2, 33,34,35,36,37});
-                    s_paths.Add(new int[] { 1, 2, 33,34,35,36,38,39,40});
-                    s_paths.Add(new int[] {37,38,39,40});
-                    s_paths.Add(new int[] {37,38,39,41,42});
-                    s_paths.Add(new int[] {40,41,42});
+                    s_paths.Add(new int[] { 1, 2, 33, 34, 35, 36, 38, 39, 41, 42, 32, 31, 30, 29 });
+                    s_paths.Add(new int[] { 1, 2, 33, 34, 35, 36, 37 });
+                    s_paths.Add(new int[] { 1, 2, 33, 34, 35, 36, 38, 39, 40 });
+                    s_paths.Add(new int[] { 37, 38, 39, 40 });
+                    s_paths.Add(new int[] { 37, 38, 39, 41, 42 });
+                    s_paths.Add(new int[] { 40, 41, 42 });
                 }
                 return s_paths;
             }
@@ -235,7 +235,7 @@ namespace PFTSModel.Services
         // 5 : 37 38 39 41 42
         // 6 : 40 41 42
         // 返回ids
-        private List<int> OptimizationPath(PFTSDbDataContext db, int startRoomId,int endRoomId)
+        private List<int> OptimizationPath(PFTSDbDataContext db, int startRoomId, int endRoomId)
         {
             var pathSs = from q in db.GetTable<path_rfid>()
                          where q.start_room_id == startRoomId
@@ -252,16 +252,16 @@ namespace PFTSModel.Services
             int index = -1;
 
             // 查找最短路径
-            for( var x = 0; x < BTrackerService.SPaths.Count;x++)
+            for (var x = 0; x < BTrackerService.SPaths.Count; x++)
             {
                 var ips = BTrackerService.SPaths[x];
                 int smin = ips.Length, smax = -1;
                 int emin = ips.Length, emax = -1;
                 bool ascTemp = true;    //正向 or 反向
                 int sposTemp, eposTemp;
-                foreach(var ps in pss)
+                foreach (var ps in pss)
                 {
-                    for (var i = 0;i < ips.Length;i++)
+                    for (var i = 0; i < ips.Length; i++)
                     {
                         if (ps.end_room_id == ips[i])
                         {
@@ -270,9 +270,9 @@ namespace PFTSModel.Services
                         }
                     }
                 }
-                foreach(var pe in pes)
+                foreach (var pe in pes)
                 {
-                    for (var i = 0;i < ips.Length; i++)
+                    for (var i = 0; i < ips.Length; i++)
                     {
                         if (pe.start_room_id == ips[i])
                         {
@@ -372,8 +372,8 @@ namespace PFTSModel.Services
                         for (int i = 0; i < optPaths.Count - 1; i++)
                         {
                             var apathq = from q in db.GetTable<path_rfid>()
-                                        where q.start_room_id == optPaths[i] && q.end_room_id == optPaths[i+1]
-                                        select q;
+                                         where q.start_room_id == optPaths[i] && q.end_room_id == optPaths[i + 1]
+                                         select q;
                             path_rfid apath = apathq.SingleOrDefault<path_rfid>();
                             if (apath == null)
                             {
@@ -449,7 +449,8 @@ namespace PFTSModel.Services
             return null;
         }
 
-        public int GetCount(int? status)
+        public int GetCount(int? status, string name, string no, DateTime? timeStart,
+            DateTime? timeEnd)
         {
             try
             {
@@ -468,7 +469,22 @@ namespace PFTSModel.Services
                                 where q.status == status
                                 select q;
                     }
-
+                    if (!string.IsNullOrEmpty(name))
+                    {
+                        query = query.Where(c => c.name.Contains(name));
+                    }
+                    if (!string.IsNullOrEmpty(no))
+                    {
+                        query = query.Where(c => c.number.Contains(no));
+                    }
+                    if (timeStart != null)
+                    {
+                        query = query.Where(c => c.in_time.CompareTo(timeStart) >= 0);
+                    }
+                    if (timeEnd != null)
+                    {
+                        query = query.Where(c => c.in_time.CompareTo(timeEnd) < 0);
+                    }
                     return query.Count();
                 }
             }
@@ -484,29 +500,45 @@ namespace PFTSModel.Services
         /// </summary>
         /// <param name="status">状态，为null查询所有</param>
         /// <returns></returns>
-        public List<view_btracker_info> GetPageByStatus(int? status, int pageIndex, int pageSize)
+        public List<view_btracker_info> GetPageByStatus(int? status, string name, string no, DateTime? timeStart,
+            DateTime? timeEnd, int pageIndex, int pageSize)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
                     System.Data.Linq.Table<view_btracker_info> table = db.GetTable<view_btracker_info>();
-                  
+                    IQueryable<view_btracker_info> query = null;
                     if (status == null)
                     {
-                        var query = from q in table
-                                    select q;
-                        query = query.Skip(pageIndex).Take(pageSize);
-                        return query.ToList();
+                        query = from q in table
+
+                                select q;
                     }
                     else
                     {
-                        var query = from q in table
+                        query = from q in table
                                 where q.status == status
                                 select q;
-                        query = query.Skip(pageIndex).Take(pageSize);
-                        return query.ToList();
                     }
+                    if (!string.IsNullOrEmpty(name))
+                    {
+                        query = query.Where(c => c.name.Contains(name));
+                    }
+                    if (!string.IsNullOrEmpty(no))
+                    {
+                        query = query.Where(c => c.number.Contains(no));
+                    }
+                    if (timeStart != null)
+                    {
+                        query = query.Where(c => c.in_time.CompareTo(timeStart) >= 0);
+                    }
+                    if (timeEnd != null)
+                    {
+                        query = query.Where(c => c.in_time.CompareTo(timeEnd) < 0);
+                    }
+                    query = query.Skip(pageIndex).Take(pageSize);
+                    return query.ToList();
                 }
             }
             catch (Exception e)
