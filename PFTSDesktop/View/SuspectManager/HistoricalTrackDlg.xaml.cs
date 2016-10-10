@@ -22,6 +22,7 @@ namespace PFTSDesktop.View.SuspectManager
     /// </summary>
     public partial class HistoricalTrackDlg : WindowTemplet
     {
+        private btracker m_btracker;
         public HistoricalTrackDlg()
         {
             InitializeComponent();
@@ -32,12 +33,15 @@ namespace PFTSDesktop.View.SuspectManager
             InitializeComponent();
             this.DataContext = SuspectViewModel.GetInstance();
 
+            m_btracker = model;
             // 监控模式
             controlScene.CameraMode = PFTSScene.CameraMode.Hidden;
             controlScene.RFIDMode = PFTSScene.RFIDMode.Hidden;
-
-            controlScene.AddAPeople(model);
-            controlScene.PathOut(model.id,false);
+            controlScene.AddAPeople(m_btracker,false);
+            controlScene.SetPeopleImageLoadedCallback(m_btracker.id, delegate (object sender, EventArgs e)
+             {
+                 controlScene.PathOut(m_btracker.id, false);
+             });
         }
 
         private void MainWindow_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -93,6 +97,10 @@ namespace PFTSDesktop.View.SuspectManager
                 this.btnMax.Visibility = Visibility.Hidden;
             }
 
+        }
+
+        private void main_Loaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

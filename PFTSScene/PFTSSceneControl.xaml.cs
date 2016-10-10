@@ -68,6 +68,7 @@ namespace PFTSScene
         private Dictionary<int, PFTSModel.btracker> m_mapBtrackers = new Dictionary<int, PFTSModel.btracker>();
         private Dictionary<int, Image> m_mapPeopleImage = new Dictionary<int, Image>();
         private List<PFTSModel.btracker> m_listUnloadPeople = new List<PFTSModel.btracker>();
+        private int m_prePathBtrackerId = -1;
 
         private CameraMode m_cameraMode;
         private RFIDMode m_rfidMode;
@@ -451,17 +452,8 @@ namespace PFTSScene
             var transformStart = origin.TransformToAncestor(this.baseGrid);
             Point pointStart = transformStart.Transform(new Point(origin.ActualWidth / 2, origin.ActualHeight / 2));
 
-            //Point pointEnd;
-            //if (endImg != null)
-            //{
-            //    var transformEnd = dest.TransformToAncestor(this.baseGrid);
-            //    pointEnd = transformEnd.Transform(new Point(endImg.ActualWidth / 2, endImg.ActualHeight / 2));
-            //}
-            //else
-            //{
             var transformEnd = dest.TransformToAncestor(this.baseGrid);
             Point pointEnd = transformEnd.Transform(new Point(dest.ActualWidth / 2, dest.ActualHeight / 2));
-            //}
 
             var arrow = new Tools.Arrow();
             arrow.X1 = pointStart.X;
@@ -480,6 +472,18 @@ namespace PFTSScene
             m_paths.Add(ia);
         }
 
+        private void TimeOut(FrameworkElement ele,DateTime tm)
+        {
+            var transform = ele.TransformToAncestor(this.baseGrid);
+            Point point = transform.Transform(new Point(ele.ActualWidth / 2, ele.ActualHeight / 2));
+            var lbl = new Label();
+            lbl.Content = tm.ToString("HH:mm:ss");
+            var w = 60;
+            var h = 30;
+            lbl.Margin = new Thickness(point.X - w/2, point.Y-h/2, this.gridPaths.ActualWidth - point.X-w/2,this.gridPaths.ActualHeight - point.Y-h/2);
+            this.gridPaths.Children.Add(lbl);
+        }
+
         private void RefreshPath(InArrow ia)
         {
             var transformStart = ia.RoomOrigin.TransformToAncestor(this.baseGrid);
@@ -495,12 +499,10 @@ namespace PFTSScene
         }
 
 
-        public void AddAPeople(PFTSModel.btracker btracker)
+        public void AddAPeople(PFTSModel.btracker btracker,bool opt = true)
         {
             if (btracker.room_id == null) return;
             int roomId = btracker.room_id.Value;
-            //if (m_loaded)
-            //{
             if (m_mapGridRooms.ContainsKey(roomId))
             {
                 var gr = m_mapGridRooms[roomId];
@@ -537,24 +539,38 @@ namespace PFTSScene
                 {
                     m_mapPeopleCounts[roomId] = 1;
                 }
-                img.Tag = btracker.id;
-                img.Cursor = Cursors.Hand;
-                img.MouseEnter += Img_MouseEnter;
-                img.MouseLeave += Img_MouseLeave;
-                img.MouseUp += Img_MouseUp;
+                if (opt)
+                {
+                    img.Tag = btracker.id;
+                    img.Cursor = Cursors.Hand;
+                    img.MouseEnter += Img_MouseEnter;
+                    img.MouseLeave += Img_MouseLeave;
+                    img.MouseUp += Img_MouseUp;
+                    //[yyyy年MM-dd HH:mm:ss]
+                    if (btracker.in_room_time == null) return;
+                    string info = string.Format("[{0}]{1}进入了房间{2}", btracker.in_room_time.Value.ToString("yyyy年MM-dd HH:mm:ss"), btracker.name, gr.RoomInfo.name);
+                    //textMsg.Debug(btracker.name + "进入了房间(" + gr.RoomInfo.name + ")",false);
+                    textMsg.Debug(info, false);
+                }
                 m_mapBtrackers.Add(btracker.id, btracker);
                 m_mapPeopleImage.Add(btracker.id, img);
-                //[yyyy年MM-dd HH:mm:ss]
-                if (btracker.in_room_time == null) return;
-                string info = string.Format("[{0}]{1}进入了房间{2}", btracker.in_room_time.Value.ToString("yyyy年MM-dd HH:mm:ss"),btracker.name,gr.RoomInfo.name);
-                //textMsg.Debug(btracker.name + "进入了房间(" + gr.RoomInfo.name + ")",false);
-                textMsg.Debug(info, false);
             }
-            //}
-            //else
-            //{
-            //    m_listUnloadPeople.Add(btracker);
-            //}
+        }
+
+        public void SetPeopleImageLoadedCallback(int btrackerId,EventHandler call)
+        {
+            if (m_mapPeopleImage.ContainsKey(btrackerId))
+            {
+                var img = m_mapPeopleImage[btrackerId];
+                if (img.IsLoaded) call(null, null);
+                else
+                {
+                    img.Loaded += delegate (object sender, RoutedEventArgs e)
+                    {
+                        call(null, null);
+                    };
+                }
+            }
         }
 
         public void RefreshPeople(int id)
@@ -636,6 +652,17 @@ namespace PFTSScene
             }
         }
 
+        public void PrePathOut(int btrackerId)
+        {
+            if (this.IsLoaded)
+            {
+                PathOut(btrackerId, false);
+            }else
+            {
+                m_prePathBtrackerId = btrackerId;
+            }
+        }
+
         public void PathOut(int btrackerId, bool opt = true)
         {
             var service = new PFTSModel.Services.BTrackerService();
@@ -652,11 +679,18 @@ namespace PFTSScene
                     if (m_mapRooms.ContainsKey(o) && m_mapRooms.ContainsKey(d))
                     {
                         PathTo(m_mapRooms[o], m_mapRooms[d]);
+                        TimeOut(m_mapRooms[o], p.start_time);
                     }
                 }
                 int oe = paths[paths.Count - 1].start_room_id;
                 PathTo(m_mapRooms[oe], m_mapPeopleImage[btrackerId]);
-            }else
+                if (paths.Count > 0)
+                {
+                    TimeOut(m_mapRooms[oe], paths[paths.Count - 1].start_time);
+                    TimeOut(m_mapPeopleImage[btrackerId], paths[paths.Count - 1].end_time);
+                }
+            }
+            else
             {
                 foreach (var p in paths)
                 {
@@ -665,20 +699,35 @@ namespace PFTSScene
                     if (m_mapRooms.ContainsKey(o) && m_mapRooms.ContainsKey(d))
                     {
                         PathTo(m_mapRooms[o], m_mapRooms[d]);
+                        TimeOut(m_mapRooms[o], p.start_time);
                     }
+                }
+                if (paths.Count > 0)
+                {
+                    TimeOut(m_mapRooms[paths[paths.Count - 1].end_room_id], paths[paths.Count - 1].end_time);
                 }
             }
             if (opt)
             {
                 gridBack.Visibility = Visibility.Visible;
-                textMsg.Clear();
-                var bt = (new PFTSModel.Services.BTrackerService()).GetInfoById(btrackerId);
-                textMsg.Debug("姓名：" + bt.name, false);
-                textMsg.Debug("性别：" + bt.sex, false);
-                textMsg.Debug("档案号：" + bt.no, false);
-                if (bt.officer_id != null) textMsg.Debug("负责民警：" + bt.officer_name,false);
-                if (bt.vest_id != null) textMsg.Debug("马甲：" + bt.vest_name,false);
             }
+            textMsg.Clear();
+            var bt = (new PFTSModel.Services.BTrackerService()).GetInfoById(btrackerId);
+            textMsg.Debug("姓名：" + bt.name, false);
+            textMsg.Debug("性别：" + bt.sex, false);
+            textMsg.Debug("档案号：" + bt.no, false);
+            if (bt.officer_id != null) textMsg.Debug("负责民警：" + bt.officer_name, false);
+            if (bt.vest_id != null) textMsg.Debug("马甲：" + bt.vest_name, false);
+            if (paths.Count > 0)
+            {
+                textMsg.Debug("入场时间：" + paths[0].start_time.ToString("yyyy-MM-dd HH:mm:ss"), false);
+            }
+            if (btr.status == 0 && m_mapPeopleImage.ContainsKey(btrackerId) && paths.Count > 0)
+            {
+
+            }
+            else if (paths.Count > 0)
+                textMsg.Debug("离场时间：" + paths[paths.Count - 1].end_time.ToString("yyyy-MM-dd HH:mm:ss"), false);
         }
 
         private void MenuPeopleRealVideo_Click(object sender, RoutedEventArgs e)
@@ -773,6 +822,11 @@ namespace PFTSScene
             //    AddAPeople(bt);
             //}
             //m_listUnloadPeople = new List<PFTSModel.btracker>();
+            if (m_prePathBtrackerId >= 0)
+            {
+                PathOut(m_prePathBtrackerId, false);
+                m_prePathBtrackerId = -1;
+            }
         }
 
         public Tools.TextBlockDebug DebugBlock
@@ -810,11 +864,12 @@ namespace PFTSScene
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var p in m_paths)
-            {
-                Grid g = (Grid)p.ArrowD.Parent;
-                g.Children.Remove(p.ArrowD);
-            }
+            //foreach (var p in m_paths)
+            //{
+            //    Grid g = (Grid)p.ArrowD.Parent;
+            //    g.Children.Remove(p.ArrowD);
+            //}
+            this.gridPaths.Children.Clear();
             m_paths = new List<InArrow>();
             gridBack.Visibility = Visibility.Hidden;
             textMsg.Clear();

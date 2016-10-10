@@ -5,7 +5,7 @@
         xmlns:scene="clr-namespace:PFTSScene;assembly=PFTSScene"
         Title="HistoricalTrackDlg"  Width="950" WindowState="Maximized"
         x:Name="main"
-        Height="670" MinWidth="950" MinHeight="670" MouseDoubleClick="MainWindow_OnMouseDoubleClick">
+        Height="670" MinWidth="950" MinHeight="670" MouseDoubleClick="MainWindow_OnMouseDoubleClick" Loaded="main_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -72,7 +72,6 @@
             </tmp:ButtonTemplet>
 
         </Grid>
-
         <scene:PFTSSceneControl x:Name="controlScene" Grid.Row="1"></scene:PFTSSceneControl>
     </Grid>
 </tmp:WindowTemplet>
