@@ -38,7 +38,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="1" Content="新增摄像头" Foreground="White" Margin="0,2,0,0" HorizontalAlignment="Left"/>
+            <Label Grid.Column="1" Content="新增嫌疑人" Foreground="White" Margin="0,2,0,0" HorizontalAlignment="Left"/>
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
                 <tmp:ButtonTemplet x:Name="btnMin" VerticalAlignment="Top" Width="27" Height="22"
                                    Command="{Binding WindowMinCommand}" CommandParameter="{Binding ElementName=main}">
@@ -96,8 +96,8 @@
             <ContentPresenter Grid.Row="2" Grid.Column="3" Content="{Binding ElementName=txtUserName, Path=(Validation.Errors).CurrentItem}"/>
 
             <Label Content="性别：" Grid.Row="3" Grid.Column="1"/>
-            <ComboBox  Grid.Row="3" Grid.Column="2" ItemsSource="{Binding SexOptions, Mode=OneTime}"
-				   SelectedItem="{Binding SuspectModel.Sex, ValidatesOnDataErrors=True}"/>
+            <ComboBox  Grid.Row="3" Grid.Column="2" ItemsSource="{Binding SexOptions, Mode=OneWay}"
+				   SelectedItem="{Binding SuspectModel.Sex}"/>
 
 
             <Label Content="身份证：" Grid.Row="4" Grid.Column="1"/>
