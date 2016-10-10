@@ -258,4 +258,15 @@
       <Column Name="rfid_room_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.view_path_btracker" Member="view_path_btracker">
+    <Type Name="view_path_btracker">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="path_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="btracker_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="start_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="start_room_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="end_room_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

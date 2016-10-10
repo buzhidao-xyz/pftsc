@@ -42,8 +42,6 @@ namespace PFTSDesktop.View.Monitoring
             videoModel.id = 0;
             videoModel.video_name = "实时画面";
             videoList.Add(videoModel);
-            //            m_videoProxy = new PFTSHwCtrl.PFTSVideoProxy("192.168.10.164", 8000, "admin", "Gt123456");
-          
             timer.Tick += new EventHandler(timer_Tick);
         }
 
@@ -88,7 +86,7 @@ namespace PFTSDesktop.View.Monitoring
                 {
                     if (!m_videoProxy.StartRealView())
                     {
-                        MessageBox.Show(m_videoProxy.GetLastError());
+                        MessageBox.Show("暂时无法连接到摄像头，请检查摄像头状态！"); // + m_videoProxy.GetLastError()
                     }
                 }
                 //volumeSlider.Value = 0.5;

@@ -40,6 +40,8 @@ namespace PFTSModel.Services
                     var vr = new video_btracker_r();
                     vr.video_id = vd.id;
                     vr.btracker_id = b.id;
+                    vr.start_time = vd.start_time;
+                    vr.end_time = vd.end_time;
                     vrs.Add(vr);
                 }
                 db.video_btracker_r.InsertAllOnSubmit(vrs);

@@ -428,17 +428,16 @@ namespace PFTSModel.Services
             return false;
         }
 
-        public List<path_rfid> GetPaths(int id)
+        public List<view_path_btracker> GetPaths(int id)
         {
             try
             {
                 using (PFTSDbDataContext db = new PFTSDbDataContext())
                 {
-                    var query = from q in db.GetTable<btracker_path>()
-                                from p in db.GetTable<path_rfid>()
-                                where q.btracker_id == id && q.path_id == p.id
+                    var query = from q in db.GetTable<view_path_btracker>()
+                                where q.btracker_id == id
                                 orderby q.start_time ascending
-                                select p;
+                                select q;
                     return query.ToList();
                 }
             }
