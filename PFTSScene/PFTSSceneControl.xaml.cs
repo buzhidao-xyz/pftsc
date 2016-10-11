@@ -443,17 +443,79 @@ namespace PFTSScene
         }
 
         /// <summary>
+        /// 根据房间的路径经过数量计算位置
+        /// </summary>
+        /// <param name="ele"></param>
+        /// <param name="idx"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        private Point CalculatePathPoint(FrameworkElement ele, int idx = 0, int count = 1)
+        {
+            var transform = ele.TransformToAncestor(this.baseGrid);
+            Point point;// = transform.Transform(new Point(origin.ActualWidth / 2, origin.ActualHeight / 2));
+            var xstep = ele.ActualWidth / 10 > 20.0 ? 20.0 : ele.ActualWidth / 10;
+            var ystep = ele.ActualHeight / 10 > 20.0 ? 20.0 : ele.ActualHeight / 10;
+            if (count % 2 == 0) //偶数
+            {
+                //for (var i = 0;i < idx; i++)
+                {
+                    if (idx % 2 == 0) //左下位置
+                    {
+                        var x = ele.ActualWidth / 2 - (idx / 2 + 1) * xstep;
+                        var y = ele.ActualHeight / 2 + (idx / 2 + 1) * ystep;
+                        x = x <= 0 ? ele.ActualWidth / 2 : x;
+                        y = y >= ele.ActualHeight ? ele.ActualHeight / 2 : y;
+                        point = new Point(x,y);
+                    }
+                    else //右上位置
+                    {
+                        var x = ele.ActualWidth / 2 + (idx / 2 + 1) * xstep;
+                        var y = ele.ActualHeight / 2 - (idx / 2 + 1) * ystep;
+                        x = x >= ele.ActualWidth ? ele.ActualWidth / 2 : x;
+                        y = y <= 0 ? ele.ActualHeight / 2 : y;
+                        point = new Point(x, y);
+                    }
+                }
+            }else //奇数
+            {
+                if (idx == 0)
+                {
+                    point = new Point(ele.ActualWidth / 2, ele.ActualHeight / 2);
+                }
+                else if (idx % 2 == 0) //左下位置
+                {
+                    var x = ele.ActualWidth / 2 - (idx / 2) * xstep;
+                    var y = ele.ActualHeight / 2 + (idx / 2) * ystep;
+                    x = x <= 0 ? ele.ActualWidth / 2 : x;
+                    y = y >= ele.ActualHeight ? ele.ActualHeight / 2 : y;
+                    point = new Point(x, y);
+                }
+                else //右上位置
+                {
+                    var x = ele.ActualWidth / 2 + (idx / 2 + 1) * xstep;
+                    var y = ele.ActualHeight / 2 - (idx / 2 + 1) * ystep;
+                    x = x >= ele.ActualWidth ? ele.ActualWidth / 2 : x;
+                    y = y <= 0 ? ele.ActualHeight / 2 : y;
+                    point = new Point(x, y);
+                }
+            }
+            return transform.Transform(point);
+        }
+
+        /// <summary>
         /// 画不同房间之间的路径（包含方向）
         /// </summary>
         /// <param name="origin"></param>
         /// <param name="dest"></param>
-        private void PathTo(Grid origin, FrameworkElement dest)
+        private void PathTo(Grid origin, FrameworkElement dest,int originIndex = 0,int originCount = 1,int destIndex = 0,int destCount = 1)
         {
-            var transformStart = origin.TransformToAncestor(this.baseGrid);
-            Point pointStart = transformStart.Transform(new Point(origin.ActualWidth / 2, origin.ActualHeight / 2));
+            //var transformStart = origin.TransformToAncestor(this.baseGrid);
+            //Point pointStart = transformStart.Transform(new Point(origin.ActualWidth / 2, origin.ActualHeight / 2));
+            Point pointStart = CalculatePathPoint(origin, originIndex, originCount);
 
-            var transformEnd = dest.TransformToAncestor(this.baseGrid);
-            Point pointEnd = transformEnd.Transform(new Point(dest.ActualWidth / 2, dest.ActualHeight / 2));
+            //var transformEnd = dest.TransformToAncestor(this.baseGrid);
+            //Point pointEnd = transformEnd.Transform(new Point(dest.ActualWidth / 2, dest.ActualHeight / 2));
+            Point pointEnd = CalculatePathPoint(dest, destIndex, destCount);
 
             var arrow = new Tools.Arrow();
             arrow.X1 = pointStart.X;
@@ -472,10 +534,12 @@ namespace PFTSScene
             m_paths.Add(ia);
         }
 
-        private void TimeOut(FrameworkElement ele,DateTime tm)
+        private void TimeOut(FrameworkElement ele, DateTime tm, int idx = 0, int count = 1)
         {
-            var transform = ele.TransformToAncestor(this.baseGrid);
-            Point point = transform.Transform(new Point(ele.ActualWidth / 2, ele.ActualHeight / 2));
+            //var transform = ele.TransformToAncestor(this.baseGrid);
+            //Point point = transform.Transform(new Point(ele.ActualWidth / 2, ele.ActualHeight / 2));
+            Point point = CalculatePathPoint(ele, idx, count);
+
             var lbl = new Label();
             lbl.Content = tm.ToString("HH:mm:ss");
             var w = 60;
@@ -668,6 +732,29 @@ namespace PFTSScene
             var service = new PFTSModel.Services.BTrackerService();
             var btr = service.Get(btrackerId);
             var paths = service.GetPaths(btrackerId);
+            Dictionary<int, int> ocs = new Dictionary<int, int>();
+            Dictionary<int, int> dcs = new Dictionary<int, int>();
+            Dictionary<int, int> oidx = new Dictionary<int, int>();
+            Dictionary<int, int> didx = new Dictionary<int, int>();
+            foreach ( var p in paths)
+            {
+                if (ocs.ContainsKey(p.start_room_id))
+                {
+                    ocs[p.start_room_id]++;
+                }
+                else
+                {
+                    ocs[p.start_room_id] = 1;
+                }
+                if (dcs.ContainsKey(p.end_room_id))
+                {
+                    dcs[p.end_room_id]++;
+                }
+                else
+                {
+                    dcs[p.end_room_id] = 1;
+                }
+            }
             // 场内
             if (btr.status == 0 && m_mapPeopleImage.ContainsKey(btrackerId) && paths.Count > 0)
             {
@@ -678,16 +765,24 @@ namespace PFTSScene
                     int d = p.end_room_id;
                     if (m_mapRooms.ContainsKey(o) && m_mapRooms.ContainsKey(d))
                     {
-                        PathTo(m_mapRooms[o], m_mapRooms[d]);
-                        TimeOut(m_mapRooms[o], p.start_time);
+                        var odx = oidx.ContainsKey(o) ? oidx[o] : 0;
+                        var ddx = didx.ContainsKey(d) ? didx[d] : 0;
+                        var oct = ocs.ContainsKey(o) ? ocs[o] : 1;
+                        var dct = dcs.ContainsKey(d) ? dcs[d] : 1;
+                        if (oidx.ContainsKey(o)) oidx[o]++;
+                        else oidx[o] = 1;
+                        if (didx.ContainsKey(d)) didx[d]++;
+                        else didx[d] = 1;
+                        PathTo(m_mapRooms[o], m_mapRooms[d],odx,oct,ddx,dct);
+                        TimeOut(m_mapRooms[o], p.start_time, odx, oct);
                     }
                 }
                 int oe = paths[paths.Count - 1].start_room_id;
-                PathTo(m_mapRooms[oe], m_mapPeopleImage[btrackerId]);
+                PathTo(m_mapRooms[oe], m_mapPeopleImage[btrackerId],0,1,0,1);
                 if (paths.Count > 0)
                 {
-                    TimeOut(m_mapRooms[oe], paths[paths.Count - 1].start_time);
-                    TimeOut(m_mapPeopleImage[btrackerId], paths[paths.Count - 1].end_time);
+                    TimeOut(m_mapRooms[oe], paths[paths.Count - 1].start_time, 0, 1);
+                    TimeOut(m_mapPeopleImage[btrackerId], paths[paths.Count - 1].end_time, 0, 1);
                 }
             }
             else
@@ -698,13 +793,17 @@ namespace PFTSScene
                     int d = p.end_room_id;
                     if (m_mapRooms.ContainsKey(o) && m_mapRooms.ContainsKey(d))
                     {
-                        PathTo(m_mapRooms[o], m_mapRooms[d]);
-                        TimeOut(m_mapRooms[o], p.start_time);
+                        var odx = oidx.ContainsKey(o) ? oidx[o] : 0;
+                        var ddx = didx.ContainsKey(d) ? didx[d] : 0;
+                        var oct = ocs.ContainsKey(o) ? ocs[o] : 1;
+                        var dct = dcs.ContainsKey(d) ? dcs[d] : 1;
+                        PathTo(m_mapRooms[o], m_mapRooms[d], odx, oct, ddx, dct);
+                        TimeOut(m_mapRooms[o], p.start_time, odx, oct);
                     }
                 }
                 if (paths.Count > 0)
                 {
-                    TimeOut(m_mapRooms[paths[paths.Count - 1].end_room_id], paths[paths.Count - 1].end_time);
+                    TimeOut(m_mapRooms[paths[paths.Count - 1].end_room_id], paths[paths.Count - 1].end_time,0,1);
                 }
             }
             if (opt)
