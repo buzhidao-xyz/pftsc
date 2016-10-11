@@ -76,6 +76,7 @@ namespace PFTSDesktop.View.Monitoring
 
             }
             listBox.ItemsSource = videoList;
+            listBox.SelectedIndex = 0;
             // 实时画面
             if (m_camera != null)
             {

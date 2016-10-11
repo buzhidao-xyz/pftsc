@@ -187,5 +187,19 @@ namespace PFTSDesktop
             }
 
         }
+
+        private void btnZoom_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (rowEdit.Width == new GridLength(150))
+            {
+                rowEdit.Width = new GridLength(0);
+                btnZoom.Content="》";
+            }
+            else
+            {
+                rowEdit.Width = new GridLength(150);
+                btnZoom.Content = "《";
+            }
+        }
     }
 }

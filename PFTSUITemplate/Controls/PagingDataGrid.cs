@@ -399,6 +399,8 @@ namespace PFTSUITemplate.Controls
                     {
                         PageCount = Total / PageSize;
                     }
+                    if (PageIndex > PageCount)
+                        PageIndex = 1;
                 }
             }
             else
