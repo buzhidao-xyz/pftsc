@@ -1,13 +1,16 @@
 ﻿using GFramework.BlankWindow;
+using Microsoft.Win32;
 using PFTSDesktop.common;
 using PFTSDesktop.Model;
 using PFTSModel;
 using PFTSModel.Services;
+using PFTSTools;
 using PFTSUITemplate.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +20,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PFTSDesktop.View.Monitoring
 {
@@ -31,6 +35,8 @@ namespace PFTSDesktop.View.Monitoring
         private int? btracker_id;
         private List<VideoModel> videoList;
         private int camera_id = 0;
+        private string totalTime;
+        private double maxTime;
 
         public VideoListWindow(PFTSModel.dev_camera camera = null, int? btracker_id = null)
         {
@@ -47,8 +53,7 @@ namespace PFTSDesktop.View.Monitoring
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           string aa = GetVideoLength.GetMediaTimeLen("D:\\fff111.mp4");
-            service = new BTrackerService(); 
+            service = new BTrackerService();
             if (btracker_id != null)
             {
                 List<view_btracker_video> videos = service.GetVideoByBtracker(btracker_id.Value);
@@ -59,6 +64,8 @@ namespace PFTSDesktop.View.Monitoring
                         if (entity.camera_id == camera_id)
                         {
                             VideoModel videoModel = videoList.Find(c => c.id == camera_id);
+                            videoModel.video_time += (entity.end_time.Ticks - entity.start_time.Ticks) / 10000;
+                            videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000));
                             videoModel.videos.Add(entity.filename);
                         }
                         else
@@ -66,11 +73,15 @@ namespace PFTSDesktop.View.Monitoring
                             VideoModel videoModel = new VideoModel();
                             videoModel.id = entity.camera_id;
                             videoModel.video_name = entity.video_name;
+                            videoModel.video_time = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000;
                             videoModel.videos = new List<string>();
                             videoModel.videos.Add(entity.filename);
+                            videoModel.videoTimes = new List<TimeSpan>();
+                            videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000));
                             videoList.Add(videoModel);
                         }
                         camera_id = entity.camera_id;
+
                     }
                 }
 
@@ -187,7 +198,7 @@ namespace PFTSDesktop.View.Monitoring
         }
 
 
-
+        private string preTotalTime;
         /// <summary>
         /// 播放视频
         /// </summary>
@@ -196,13 +207,20 @@ namespace PFTSDesktop.View.Monitoring
         private void moviePlayer_MediaOpened(object sender, RoutedEventArgs e)
         {
             //mediaElement.Volume = (double)volumeSlider.Value;
-            positionSlider.Maximum =
-              mediaElement.NaturalDuration.TimeSpan.TotalMilliseconds;
+            positionSlider.Maximum = maxTime;
+            //mediaElement.NaturalDuration.TimeSpan.TotalMilliseconds;
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
-            string totaltime = mediaElement.NaturalDuration.ToString().Substring(0, 8);
-
-            showTime.Text = "00:00:00" + "/" + totaltime;
+            //string totaltime = mediaElement.NaturalDuration.ToString().Substring(0, 8);
+            preTotalTime = mediaElement.NaturalDuration.ToString().Substring(0, 8);
+            if (i == 0)
+            {
+                showTime.Text = "00:00:00" + "/" + totalTime;
+            }
+            else
+            {
+                showTime.Text = preTotalTime + "/" + totalTime;
+            }
         }
 
         /// <summary>
@@ -212,7 +230,18 @@ namespace PFTSDesktop.View.Monitoring
         /// <param name="e"></param>
         private void moviePlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
-            StopMovie();
+            i++;
+            if (i >= videoModel.videos.Count)
+            {
+                i = 0;
+                StopMovie();
+            }
+            else
+            {
+                //mediaElement.Stop();
+                playing = false;
+                PlayMovie(new Uri(videoModel.videos[i], UriKind.Absolute));
+            }
         }
 
         /// <summary>
@@ -226,21 +255,70 @@ namespace PFTSDesktop.View.Monitoring
             TimeSpan ts = new TimeSpan(
               0, 0, 0, 0, (int)positionSlider.Value);
             string currentTime = ts.ToString().Substring(0, 8);
-            string totaltime = mediaElement.NaturalDuration.ToString().Substring(0, 8);
-            showTime.Text = currentTime + "/" + totaltime;
-            mediaElement.Position = ts;
+            //string totaltime = mediaElement.NaturalDuration.ToString().Substring(0, 8);
+            showTime.Text = currentTime + "/" + totalTime;
+            if (i == 0)
+            {
+                mediaElement.Position = ts;
+            }
+            else
+            {
+                TimeSpan temp = new TimeSpan();
+                int index = -1;
+                for (int m = 0; m < videoModel.videoTimes.Count(); m++)
+                {
+                    temp += videoModel.videoTimes[m];
+                    if (ts < temp)
+                    {
+                        index = m;
+                        break;
+                    }
+                }
+
+                if (index != i && index != -1)
+                {
+                    i = index;
+                    playing = false;
+                    PlayMovie(new Uri(videoModel.videos[i], UriKind.Absolute));
+                }
+                TimeSpan length = new TimeSpan();
+                for (int m = 0; m < i; m++)
+                {
+                    length += videoModel.videoTimes[m];
+                }
+                mediaElement.Position = ts - length;
+            }
         }
         /// <summary>
         /// 后退
         /// </summary>
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            // Jump back 5 seconds:
-            mediaElement.Position =
-              mediaElement.Position.Subtract(new TimeSpan(0, 0, 0, 0, 5000));
+            TimeSpan temp = mediaElement.Position.Subtract(new TimeSpan(0, 0, 0, 0, 5000));
+            if (i == 0)
+            {
+                // Jump back 5 seconds:
+                mediaElement.Position =
+                  mediaElement.Position.Subtract(new TimeSpan(0, 0, 0, 0, 5000));
+                positionSlider.Value =
+               mediaElement.Position.TotalMilliseconds;
+            }
+            else
+            {
+                if (temp.TotalSeconds < 0)
+                {
+                    i--;
+                    playing = false;
+                    PlayMovie(new Uri(videoModel.videos[i], UriKind.Absolute));
+                    mediaElement.Position = videoModel.videoTimes[i] + temp;
+                }
+                else
+                {
+                    mediaElement.Position = videoModel.videoTimes[i] + temp;
+                }
+                positionSlider.Value -= 5000;
+            }
 
-            positionSlider.Value =
-                mediaElement.Position.TotalMilliseconds;
         }
 
         /// <summary>
@@ -264,12 +342,34 @@ namespace PFTSDesktop.View.Monitoring
         /// </summary>
         private void forwardButton_Click(object sender, RoutedEventArgs e)
         {
-            // Jump ahead 5 seconds:
-            mediaElement.Position =
-              mediaElement.Position.Add(new TimeSpan(0, 0, 0, 0, 5000));
+            TimeSpan temp = mediaElement.Position.Add(new TimeSpan(0, 0, 0, 0, 5000));
+            if (i == videoModel.videoTimes.Count - 1)
+            {
+                // Jump ahead 5 seconds:
+                mediaElement.Position =
+                  mediaElement.Position.Add(new TimeSpan(0, 0, 0, 0, 5000));
 
-            positionSlider.Value =
-              mediaElement.Position.TotalMilliseconds;
+                positionSlider.Value =
+                  mediaElement.Position.TotalMilliseconds;
+            }
+            else
+            {
+                if (temp.TotalSeconds > mediaElement.NaturalDuration.TimeSpan.TotalMilliseconds)
+                {
+                    i++;
+                    playing = false;
+                    PlayMovie(new Uri(videoModel.videos[i], UriKind.Absolute));
+                    mediaElement.Position = videoModel.videoTimes[i] + temp - mediaElement.NaturalDuration.TimeSpan;
+
+                }
+                else
+                {
+                    mediaElement.Position = videoModel.videoTimes[i] + temp;
+                }
+                positionSlider.Value += 5000;
+            }
+
+
         }
 
         /// <summary>
@@ -284,8 +384,24 @@ namespace PFTSDesktop.View.Monitoring
 
         void timer_Tick(object sender, EventArgs e)
         {
-            positionSlider.Value =
-              mediaElement.Position.TotalMilliseconds;
+            if (i == 0)
+            {
+                positionSlider.Value =
+                  mediaElement.Position.TotalMilliseconds;
+            }
+            else
+            {
+                if (videoModel.id != 0)
+                {
+                    double temp = 0;
+                    for (int m = 0; m < i; m++)
+                    {
+                        temp += videoModel.videoTimes[m].TotalMilliseconds;
+                    }
+                    positionSlider.Value =
+                     temp + mediaElement.Position.TotalMilliseconds;
+                }
+            }
         }
 
         private void PlayMovie()
@@ -323,23 +439,90 @@ namespace PFTSDesktop.View.Monitoring
 
         #endregion
 
-       
-        #endregion
 
+        #endregion
+        VideoModel videoModel;
+        int i = 0;
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            VideoModel model = listBox.SelectedItem as VideoModel;
-            if (model.id == 0)
+            videoModel = listBox.SelectedItem as VideoModel;
+            if (videoModel.id == 0)
             {
                 videoControl.Visibility = Visibility.Visible;
                 moviePlayerGrid.Visibility = Visibility.Hidden;
             }
             else
             {
+                i = 0;
                 videoControl.Visibility = Visibility.Hidden;
                 moviePlayerGrid.Visibility = Visibility.Visible;
-                PlayMovie(new Uri("D:\\fff111.mp4", UriKind.Absolute));
+                totalTime = videoModel.video_Date;
+                maxTime = videoModel.video_time;
+                PlayMovie(new Uri(videoModel.videos[i], UriKind.Absolute));
             }
+        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.DefaultExt = ".mp4"; // Default file extension
+            dlg.Filter = "mp4文件(.mp4)|*.mp4"; // Filter files by extension
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+            string filename = string.Empty;
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                filename = dlg.FileName;
+                videoModel = listBox.SelectedItem as VideoModel;
+                // Result could be true, false, or null
+
+                VideoConcatTool tool = new VideoConcatTool();
+
+                tool.ReportProgress += (idx, total) =>
+                {
+                    pro.Dispatcher.Invoke(new Action<System.Windows.DependencyProperty, object>(pro.SetValue),
+        System.Windows.Threading.DispatcherPriority.Background, ProgressBar.ValueProperty, Math.Round(100 * (double)idx / (double)total, 0));
+                    //pro.Value = 100 * (float)idx / (float)total;
+                };
+
+                tool.Concat(videoModel.videos, filename);
+
+            }
+            else
+            {
+                return;
+            }
+
+        }
+
+        private void listBox_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            object item = GetElementFromPoint((ItemsControl)sender, e.GetPosition((ItemsControl)sender));
+            if (item != null && listBox.SelectedIndex != 0)
+            {
+                listBox.ContextMenu.Opacity = 1;
+            }
+            else
+            {
+                listBox.ContextMenu.Opacity = 0;
+            }
+        }
+        private object GetElementFromPoint(ItemsControl itemsControl, Point point)
+        {
+            UIElement element = itemsControl.InputHitTest(point) as UIElement;
+            while (element != null)
+            {
+                if (element == itemsControl)
+                    return null;
+                object item = itemsControl.ItemContainerGenerator.ItemFromContainer(element);
+                if (!item.Equals(DependencyProperty.UnsetValue))
+                    return item;
+                element = (UIElement)VisualTreeHelper.GetParent(element);
+            }
+            return null;
         }
     }
 }

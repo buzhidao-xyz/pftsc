@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="VideoConcat" Height="300" Width="600" Loaded="Window_Loaded">
     <Grid>
-        <ProgressBar HorizontalAlignment="Left" Height="10" Margin="50,57,0,0" VerticalAlignment="Top" Width="500"/>
+        <ProgressBar Name="pro" HorizontalAlignment="Left" Height="10" Margin="50,57,0,0" VerticalAlignment="Top" Width="500"/>
 
     </Grid>
 </Window>

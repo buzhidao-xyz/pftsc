@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,10 +13,12 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 //using System.Windows.Shapes;
 
 namespace PFTSDesktop.View.Monitoring
 {
+    public delegate void ProgressCallback(int currentIdx, int total);
     /// <summary>
     /// VideoConcat.xaml 的交互逻辑
     /// </summary>
@@ -26,14 +29,16 @@ namespace PFTSDesktop.View.Monitoring
             InitializeComponent();
         }
 
-        public void Concat(IList<string> videos,string outName)
+        public void Concat(IList<string> videos, string outName, ProgressCallback callback)
         {
             string ffmpeg = "ffmpeg.exe";
             string arguments = "";
 
             List<string> temps = new List<string>();
+            int total = videos.Count + 2;
+            int idx = 0;
 
-            foreach(var v in videos)
+            foreach (var v in videos)
             {
                 string tempFile = GetTempFileName(".mpg");
                 File.Delete(tempFile);
@@ -42,16 +47,19 @@ namespace PFTSDesktop.View.Monitoring
                 Process p = Process.Start(psi);
                 p.WaitForExit();
                 temps.Add(tempFile);
+                idx++;
+                callback(idx, total);
             }
             arguments = " /b";
             var coma = "";
             bool start = true;
-            foreach(var t in temps)
+            foreach (var t in temps)
             {
                 if (!start)
                 {
                     coma += "+\"" + t + "\"";
-                }else
+                }
+                else
                 {
                     start = false;
                     coma = "\"" + t + "\"";
@@ -62,11 +70,15 @@ namespace PFTSDesktop.View.Monitoring
             File.Delete(outCtempFile);
             var cmd = "copy /b " + coma + " \"" + outCtempFile + "\"";
             ExcuteXCopyCmd(cmd);
+            idx++;
+            callback(idx, total);
             //combine
             arguments = " -i " + outCtempFile + " -qscale 6 " + outName;
             ProcessStartInfo psie = new ProcessStartInfo(ffmpeg, arguments);
             Process pe = Process.Start(psie);
             pe.WaitForExit();
+            idx++;
+            callback(idx, total);
 
             foreach (var t in temps)
             {
@@ -141,10 +153,15 @@ namespace PFTSDesktop.View.Monitoring
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //List<string> ss = new List<string>();
-            //ss.Add("D:\\pfts_video\\REC-12-20160923165042.mp4");
-            //ss.Add("D:\\pfts_video\\REC-12-20160930095731.mp4");
-            //Concat(ss, "D:\\pfts_video\\test.mp4");
+            List<string> ss = new List<string>();
+            ss.Add("D:\\pfts_video\\REC-12-20160923165042.mp4");
+            ss.Add("D:\\pfts_video\\REC-12-20160930095731.mp4");
+            Concat(ss, "D:\\pfts_video\\test.mp4", delegate(int idx, int count)
+            {
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate() {
+                    pro.Value = (float)(idx / count);
+                });
+            });
         }
     }
 }
