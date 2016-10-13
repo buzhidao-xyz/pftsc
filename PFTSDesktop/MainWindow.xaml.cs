@@ -193,12 +193,12 @@ namespace PFTSDesktop
             if (rowEdit.Width == new GridLength(150))
             {
                 rowEdit.Width = new GridLength(0);
-                btnZoom.Content="》";
+                btnZoom.RenderTransform = new RotateTransform(-90);
             }
             else
             {
                 rowEdit.Width = new GridLength(150);
-                btnZoom.Content = "《";
+                btnZoom.RenderTransform = new RotateTransform(90);
             }
         }
     }
