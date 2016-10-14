@@ -27,6 +27,8 @@ namespace PFTSScene.Tools
 
         }
 
+        public ScrollViewer ScrollView { get; set; }
+
         public void AddText(DebugItem item,bool debug = false)
         {
             Run r = new Run();
@@ -68,6 +70,7 @@ namespace PFTSScene.Tools
             }
             this.Inlines.Add(r);
             this.Inlines.Add(new LineBreak());
+            if (ScrollView != null) ScrollView.ScrollToEnd();
             m_items.Add(item);
         }
 
