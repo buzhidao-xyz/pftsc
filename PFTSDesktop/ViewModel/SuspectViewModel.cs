@@ -819,11 +819,11 @@ namespace PFTSDesktop.ViewModel
         public void SuspectVideo()
         {
             PFTSModel.dev_camera camera = (new PFTSModel.Services.CameraPositionService()).GetByRoomId(SelectedBreacker.room_id.Value);
-            if (camera == null)
-            {
-                MessageWindow.Show("未检测到该区域的摄像头信息", "系统提示");
-                return;
-            }
+            //if (camera == null)
+            //{
+            //    MessageWindow.Show("未检测到该区域的摄像头信息", "系统提示");
+            //    return;
+            //}
             VideoListWindow vw = new VideoListWindow(camera, SelectedBreacker.id);
             vw.Show();
         }

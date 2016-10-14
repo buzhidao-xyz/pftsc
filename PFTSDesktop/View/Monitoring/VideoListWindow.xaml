@@ -114,14 +114,18 @@
                 <ColumnDefinition Width="160"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ListView x:Name="listBox"  HorizontalAlignment="Center" SelectedIndex="-1" Style="{StaticResource DefaultListView}" Width="160" SelectionChanged="listBox_SelectionChanged">
+            <ListView x:Name="listBox"  HorizontalAlignment="Center" SelectedIndex="-1" Style="{StaticResource DefaultListView}" 
+                      Width="160" SelectionChanged="listBox_SelectionChanged" MouseRightButtonDown="listBox_MouseRightButtonDown">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-
                         <TextBlock Text="{Binding Path=video_name}" Margin="0,5,0,5" HorizontalAlignment="Center"></TextBlock>
-                       
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.ContextMenu>
+                    <ContextMenu StaysOpen="true">
+                    <MenuItem Header="导出" Click="MenuItem_Click"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
             </ListView>
             <hwd:PFTSVideoControl x:Name="videoControl" Grid.Column="1"/>
             <Grid Name="moviePlayerGrid" Visibility="Hidden" Grid.Column="1" Margin="0,2,0,0">
@@ -154,5 +158,6 @@
                 </StackPanel>
             </Grid>
         </Grid>
+        <ProgressBar Grid.Row="2" Name="pro" Height="20" HorizontalAlignment="Stretch" Margin="5,0,5,0"/>
     </Grid>
 </blankWindow:BlankWindow>
