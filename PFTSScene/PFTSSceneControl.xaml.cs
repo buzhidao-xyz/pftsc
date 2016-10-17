@@ -137,6 +137,8 @@ namespace PFTSScene
             m_peopleMenu.Items.Add(menuItem2);
             m_peopleMenu.Items.Add(menuItem3);
             m_peopleMenu.Placement = PlacementMode.Top;
+
+            textMsg.ScrollView = scrollView;
         }
 
         #region Dependency Properties
@@ -689,7 +691,7 @@ namespace PFTSScene
                 if (m_mapBtrackers.ContainsKey(id) && m_mapRooms.ContainsKey(roomId))
                 {
                     var bt = m_mapBtrackers[id];
-                    textMsg.Debug(bt.name + "离开了房间("+m_mapGridRooms[roomId].RoomInfo.name+")");
+                    textMsg.Debug(bt.name + "离开了房间("+m_mapGridRooms[roomId].RoomInfo.name+")",false);
                 }
                 m_mapBtrackers.Remove(id);
             }

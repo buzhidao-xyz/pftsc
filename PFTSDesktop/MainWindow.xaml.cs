@@ -69,11 +69,16 @@ namespace PFTSDesktop
 
         private void LoadThread()
         {
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Background, (ThreadStart)delegate ()
             {
                 m_videoRecorder = new PFTSHwCtrl.PFTSVideoRecordProxy();
                 m_recordHolder = new VideoRecordHolder();
                 m_recordHolder.Visibility = Visibility.Hidden;
+#if DEBUG
+                m_recordHolder.Width = this.Width;
+                m_recordHolder.Height = this.Height;
+                m_recordHolder.Visibility = Visibility.Visible;
+#endif
                 m_recordHolder.Show();
                 m_videoRecorder.VideoRecordDelegate += M_videoRecorder_VideoRecordDelegate;
                 m_videoRecorder.LoadRooms();
