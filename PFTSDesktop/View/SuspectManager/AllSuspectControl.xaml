@@ -38,6 +38,7 @@
                 <ContextMenu StaysOpen="true">
                     <MenuItem Command="{Binding CheckGoodsCommand}"
                               Header="查看物品"/>
+                    <MenuItem Header="视频导出" Click="export_click"/>
                     <MenuItem Header="查看视频" Command="{Binding SuspectVideoCommand}"/>
                     <MenuItem Header="历史轨迹" Command="{Binding SuspectTrackCommand}"/>
                 </ContextMenu>
@@ -45,6 +46,7 @@
             <ele:PageDataGridEx.Columns>
                 <DataGridTextColumn Header="姓名" Binding="{Binding name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="性别" Binding="{Binding sex}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
+                <DataGridTextColumn Header="身份证" Binding="{Binding number}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="案卷号" Binding="{Binding no}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="负责民警" Binding="{Binding officer_name}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>
                 <DataGridTextColumn Header="搜身状态" Binding="{Binding gather_status,Converter={conver:GatherStatusConverterToString}}" Width="*" ElementStyle="{DynamicResource dataGridStyle}"/>

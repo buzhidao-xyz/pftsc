@@ -13,6 +13,79 @@ namespace PFTSTools
     {
         public Action<int, int> ReportProgress;
 
+        public void ConcatVideo(IList<string> videos, string outName)
+        {
+            CreateBatFile(videos, outName);
+            Process proc = null;
+            try
+            {
+                string systemPath = System.AppDomain.CurrentDomain.BaseDirectory;
+                string targetDir = string.Format(systemPath);//this is where mybatch.bat lies
+                proc = new Process();
+                proc.StartInfo.WorkingDirectory = targetDir;
+                proc.StartInfo.FileName = "create.bat";
+                proc.StartInfo.Arguments = string.Format("10");//this is argument
+                proc.StartInfo.CreateNoWindow = false;
+                proc.Start();
+                proc.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception Occurred :{0},{1}", ex.Message, ex.StackTrace.ToString());
+            }
+        }
+
+        private void CreateBatFile(IList<string> videos, string outName)
+        { 
+            StringBuilder build = new StringBuilder();
+            string systemPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            string discPath = systemPath.Substring(0, 2);
+            string basePath = systemPath.Substring(3);
+            build.AppendLine(discPath);
+            build.AppendLine("cd " + basePath);
+            int i = 1;
+            string copyFile="";
+            foreach (var v in videos)
+            {
+                if (!File.Exists(v))
+                {
+                    continue;
+                }
+                string tempFile = @"d:\" + i + ".ts";
+                build.AppendLine("ffmpeg -i " + v + " -vcodec copy -acodec copy  -vbsf h264_mp4toannexb " + tempFile);
+                if (i == 1)
+                    copyFile = tempFile;
+                else
+                    copyFile += "|" + tempFile;
+                i++;
+            }
+            build.AppendLine("ffmpeg -i \"concat:" + copyFile + "\" -acodec copy -vcodec copy -absf aac_adtstoasc " + outName);
+            build.AppendLine(@"del d:\*.ts");
+            string fileName = systemPath + "create.bat";
+            System.IO.StreamWriter f2 = null;
+            try
+            {
+                if (System.IO.File.Exists(fileName))
+                {
+                    //Directory.CreateDirectory(Path);
+                    File.Delete(fileName);
+                }
+                System.IO.FileStream f = System.IO.File.Create(fileName);
+                f.Close();
+                f.Dispose();
+                f2 = new System.IO.StreamWriter(fileName, true, System.Text.Encoding.UTF8);
+                f2.WriteLine(build.ToString());
+            }
+            catch
+            {
+
+            }
+            finally
+            { 
+                 f2.Close();
+                 f2.Dispose();
+            }
+        }
         public void Concat(IList<string> videos, string outName)
         {
             string ffmpeg = "ffmpeg.exe";

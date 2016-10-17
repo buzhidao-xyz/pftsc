@@ -1,4 +1,7 @@
 ﻿using PFTSDesktop.ViewModel;
+using PFTSModel;
+using PFTSModel.Services;
+using PFTSTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +56,49 @@ namespace PFTSDesktop.View.SuspectManager
                 element = (UIElement)VisualTreeHelper.GetParent(element);
             }
             return null;
+        }
+
+        private BTrackerService service;
+        private void export_click(object sender, RoutedEventArgs e)
+        {
+            service = new BTrackerService();
+            view_btracker_info model = dataGridSuspect.SelectedItem as view_btracker_info;
+            List<view_btracker_video> videos = service.GetVideoByBtracker(model.id);
+            List<string> videoList = new List<string>();
+            foreach (view_btracker_video entity in videos)
+            {
+                videoList.Add(entity.filename);
+            }
+            if (videoList.Count == 0)
+            {
+                MessageBox.Show("嫌疑犯不存在视频！", "系统提示");
+                return;
+            }
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.DefaultExt = ".mp4"; // Default file extension
+            dlg.Filter = "mp4文件(.mp4)|*.mp4"; // Filter files by extension
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+            string filename = string.Empty;
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                filename = dlg.FileName;
+
+                // Result could be true, false, or null
+
+                VideoConcatTool tool = new VideoConcatTool();
+
+                tool.ConcatVideo(videoList, filename);
+
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

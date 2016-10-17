@@ -65,7 +65,8 @@ namespace PFTSDesktop.View.Monitoring
                         {
                             VideoModel videoModel = videoList.Find(c => c.id == camera_id);
                             videoModel.video_time += (entity.end_time.Ticks - entity.start_time.Ticks) / 10000;
-                            videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000));
+                            long ss = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000;
+                            videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(ss)));
                             videoModel.videos.Add(entity.filename);
                         }
                         else
@@ -77,11 +78,11 @@ namespace PFTSDesktop.View.Monitoring
                             videoModel.videos = new List<string>();
                             videoModel.videos.Add(entity.filename);
                             videoModel.videoTimes = new List<TimeSpan>();
-                            videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000));
+                            long ss = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000;
+                            videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(ss)));
                             videoList.Add(videoModel);
                         }
                         camera_id = entity.camera_id;
-
                     }
                 }
 
@@ -141,6 +142,8 @@ namespace PFTSDesktop.View.Monitoring
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            StopMovie();
+            mediaElement.Close();
         }
 
         /// <summary>
@@ -445,6 +448,7 @@ namespace PFTSDesktop.View.Monitoring
         int i = 0;
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            StopMovie();
             videoModel = listBox.SelectedItem as VideoModel;
             if (videoModel.id == 0)
             {
@@ -463,37 +467,41 @@ namespace PFTSDesktop.View.Monitoring
         }
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.DefaultExt = ".mp4"; // Default file extension
-            dlg.Filter = "mp4文件(.mp4)|*.mp4"; // Filter files by extension
-
-            // Show save file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-            string filename = string.Empty;
-
-            // Process save file dialog box results
-            if (result == true)
+            videoModel = listBox.SelectedItem as VideoModel;
+            if (videoModel.id != 0)
             {
-                // Save document
-                filename = dlg.FileName;
-                videoModel = listBox.SelectedItem as VideoModel;
-                // Result could be true, false, or null
+                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                dlg.DefaultExt = ".mp4"; // Default file extension
+                dlg.Filter = "mp4文件(.mp4)|*.mp4"; // Filter files by extension
 
-                VideoConcatTool tool = new VideoConcatTool();
+                // Show save file dialog box
+                Nullable<bool> result = dlg.ShowDialog();
+                string filename = string.Empty;
 
-                tool.ReportProgress += (idx, total) =>
+                // Process save file dialog box results
+                if (result == true)
                 {
-                    pro.Dispatcher.Invoke(new Action<System.Windows.DependencyProperty, object>(pro.SetValue),
-        System.Windows.Threading.DispatcherPriority.Background, ProgressBar.ValueProperty, Math.Round(100 * (double)idx / (double)total, 0));
-                    //pro.Value = 100 * (float)idx / (float)total;
-                };
+                    // Save document
+                    filename = dlg.FileName;
 
-                tool.Concat(videoModel.videos, filename);
+                    // Result could be true, false, or null
 
-            }
-            else
-            {
-                return;
+                    VideoConcatTool tool = new VideoConcatTool();
+
+                    //        tool.ReportProgress += (idx, total) =>
+                    //        {
+                    //            pro.Dispatcher.Invoke(new Action<System.Windows.DependencyProperty, object>(pro.SetValue),
+                    //System.Windows.Threading.DispatcherPriority.Background, ProgressBar.ValueProperty, Math.Round(100 * (double)idx / (double)total, 0));
+                    //            //pro.Value = 100 * (float)idx / (float)total;
+                    //        };
+
+                    tool.ConcatVideo(videoModel.videos, filename);
+
+                }
+                else
+                {
+                    return;
+                }
             }
 
         }
@@ -501,7 +509,7 @@ namespace PFTSDesktop.View.Monitoring
         private void listBox_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             object item = GetElementFromPoint((ItemsControl)sender, e.GetPosition((ItemsControl)sender));
-            if (item != null && listBox.SelectedIndex != 0)
+            if (item != null)
             {
                 listBox.ContextMenu.Opacity = 1;
             }
