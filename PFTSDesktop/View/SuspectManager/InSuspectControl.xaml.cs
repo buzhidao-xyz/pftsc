@@ -67,7 +67,11 @@ namespace PFTSDesktop.View.SuspectManager
             List<string> videoList = new List<string>();
             foreach (view_btracker_video entity in videos)
             {
-                videoList.Add(entity.filename);
+                 long timeRange = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000;
+                 if (Convert.ToInt32(timeRange) > 20)
+                 {
+                     videoList.Add(entity.filename);
+                 }
             }
             if (videoList.Count == 0)
             {

@@ -64,13 +64,17 @@ namespace PFTSDesktop.View.SuspectManager
             view_btracker_info model = dataGridSuspect.SelectedItem as view_btracker_info;
             List<view_btracker_video> videos = service.GetVideoByBtracker(model.id);
             List<string> videoList = new List<string>();
-            foreach(view_btracker_video entity in videos)
+            foreach (view_btracker_video entity in videos)
             {
-                videoList.Add(entity.filename);
+                long timeRange = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000;
+                if (Convert.ToInt32(timeRange) > 20)
+                {
+                    videoList.Add(entity.filename);
+                }
             }
             if (videoList.Count == 0)
             {
-                MessageBox.Show("嫌疑犯不存在视频！","系统提示");
+                MessageBox.Show("嫌疑犯不存在视频！", "系统提示");
                 return;
             }
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
@@ -86,7 +90,7 @@ namespace PFTSDesktop.View.SuspectManager
             {
                 // Save document
                 filename = dlg.FileName;
-               
+
                 // Result could be true, false, or null
 
                 VideoConcatTool tool = new VideoConcatTool();

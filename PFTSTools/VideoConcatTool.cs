@@ -51,6 +51,12 @@ namespace PFTSTools
                 {
                     continue;
                 }
+
+                System.IO.FileInfo file = new System.IO.FileInfo(v);
+                if (file.Length == 0)
+                {
+                    continue;
+                }
                 string tempFile = @"d:\" + i + ".ts";
                 build.AppendLine("ffmpeg -i " + v + " -vcodec copy -acodec copy  -vbsf h264_mp4toannexb " + tempFile);
                 if (i == 1)

@@ -61,28 +61,31 @@ namespace PFTSDesktop.View.Monitoring
                 {
                     foreach (view_btracker_video entity in videos)
                     {
-                        if (entity.camera_id == camera_id)
+                        long timeRange = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000;
+                        if (Convert.ToInt32(timeRange) > 20)
                         {
-                            VideoModel videoModel = videoList.Find(c => c.id == camera_id);
-                            videoModel.video_time += (entity.end_time.Ticks - entity.start_time.Ticks) / 10000;
-                            long ss = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000;
-                            videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(ss)));
-                            videoModel.videos.Add(entity.filename);
+                            if (entity.camera_id == camera_id)
+                            {
+                                VideoModel videoModel = videoList.Find(c => c.id == camera_id);
+                                videoModel.video_time += (entity.end_time.Ticks - entity.start_time.Ticks) / 10000;
+                                videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(timeRange)));
+                                videoModel.videos.Add(entity.filename);
+                            }
+                            else
+                            {
+                                VideoModel videoModel = new VideoModel();
+                                videoModel.id = entity.camera_id;
+                                videoModel.video_name = entity.video_name;
+                                videoModel.video_time = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000;
+                                videoModel.videos = new List<string>();
+                                videoModel.videos.Add(entity.filename);
+                                videoModel.videoTimes = new List<TimeSpan>();
+
+                                videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(timeRange)));
+                                videoList.Add(videoModel);
+                            }
+                            camera_id = entity.camera_id;
                         }
-                        else
-                        {
-                            VideoModel videoModel = new VideoModel();
-                            videoModel.id = entity.camera_id;
-                            videoModel.video_name = entity.video_name;
-                            videoModel.video_time = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000;
-                            videoModel.videos = new List<string>();
-                            videoModel.videos.Add(entity.filename);
-                            videoModel.videoTimes = new List<TimeSpan>();
-                            long ss = (entity.end_time.Ticks - entity.start_time.Ticks) / 10000 / 1000;
-                            videoModel.videoTimes.Add(new TimeSpan(0, 0, Convert.ToInt32(ss)));
-                            videoList.Add(videoModel);
-                        }
-                        camera_id = entity.camera_id;
                     }
                 }
 
